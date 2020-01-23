@@ -126,18 +126,18 @@ export const animalTypeCountFilter = (petArray) => {
     }, {})
 }
 
-console.log(tests.testAnimalCount() + " testing for animal type count")
+console.log(tests.testAnimalCount() + " for animal type count")
 
-console.log(tests.testAnimalFightByName() + " testing animal fight by name")
+console.log(tests.testAnimalFightByName() + " animal fight by name")
 
 console.log(tests.testDoubleDanger() + " double danger test");
 
-console.log(tests.testFindDanger() + " testing find most danger")
+console.log(tests.testFindDanger() + " find most danger")
 
-console.log(tests.testFindLeastDanger() + " testing find least danger")
+console.log(tests.testFindLeastDanger() + " find least danger")
 
-console.log(tests.testFindDangerAndType() + " test find danger and type");
+console.log(tests.testFindDangerAndType() + " find danger and type");
 
-console.log(tests.testAlphabetizePets() + " test alphabetize pet list")
+console.log(tests.testAlphabetizePets() + " alphabetize pet list")
 
-console.log(tests.testAnimalFight() + " testing animal fight")
+console.log(tests.testAnimalFight() + " animal fight")
