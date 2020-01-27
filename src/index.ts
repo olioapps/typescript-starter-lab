@@ -1,6 +1,5 @@
 import * as tests from "./testing"
 
-
 export const pets = [
     {
         name: "fido",
@@ -39,7 +38,6 @@ export const pets = [
     },
 ]
 
-
 // New Array
 // write a function that returns an alphabetized list of animal names.
 
@@ -51,12 +49,15 @@ export const alphabetizePets = (petArray) => {
     return alphabetizedArray
 }
 
-// take the array of pets and return a single object where the eys are the animal name and the values are the corresponding animal object with their danger level multiplied by 2.
+// take the array of pets and return a single object where the keys are the animal name and the values are the corresponding animal object with their danger level multiplied by 2.
 
 export const doubleDanger = (petArray) => {
-    const object = petArray.reduce(
-        (obj, item) => Object.assign(obj, { [item.name]: (item.dangerLevel) * 2 }), {}
-    )
+    const object = petArray.reduce((acc, item) => {
+        return {
+            ...acc,
+            [item.name]: (item.dangerLevel) * 2,
+        }
+    })
     return object
 }
 
@@ -82,7 +83,7 @@ export const findLeastDanger = (animalArray) => {
 // // 3. Write a function that returns an object containing only type and danger level of the most dangerous animal.
 
 export const findDangerAndType = (animalArray) => {
-    let mostDangerousAnimal = animalArray.reduce(
+    const mostDangerousAnimal = animalArray.reduce(
         (accumalate, element) => {
             return accumalate.dangerLevel < element.dangerLevel ? element : accumalate
         }
@@ -95,7 +96,6 @@ export const findDangerAndType = (animalArray) => {
 // [rido, Dido]
 
 export const animalFight = (num1, num2, animals) => {
-
     const result = animals[num1].dangerLevel > animals[num2].dangerLevel ? animals[num1].name : animals[num2].name
     return result
 }
@@ -110,7 +110,6 @@ export const animalFightByName = (name1, name2, animals) => {
             }
             return false
         })
-
     return animalFight(0, 1, fighters)
 }
 

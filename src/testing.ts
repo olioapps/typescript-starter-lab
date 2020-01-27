@@ -3,7 +3,7 @@ import * as indexStuff from "./index"
 export const testTheThing = (actual, expected) => {
     return actual === expected
         ? "Good test"
-        : "Bad test! Expected: " + expected + " but received: " + actual
+        : `Bad test! Expected: ${expected} but received: ${actual}`
 }
 
 export const testAnimalFightByName = () => {
