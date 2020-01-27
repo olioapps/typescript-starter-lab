@@ -1,13 +1,13 @@
-export const mostDangerous = (Array) => {
+export const mostDangerous = (array) => {
 
-    return Array.reduce((accumulator, element) => {
+    return array.reduce((accumulator, element) => {
        if (element.dangerLevel < accumulator.dangerLevel){
         return accumulator;
        }
        else {
         return element
        }
-   }).name
+   },"").name
 }
 
 export const leastDangerous = (Array) => {
@@ -30,7 +30,8 @@ export const typeAndDangerLevelMostDanger = (Array) => {
          return element
         }
     })
-    return { type: mostDangerAnimal.type, dangerLevel: mostDangerAnimal.dangerLevel }
+    const {type, dangerLevel } = mostDangerAnimal;
+    return { type, dangerLevel }
 }
 
 export const pickWinner = (petArray, num1, num2) => {

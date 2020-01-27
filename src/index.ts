@@ -43,7 +43,9 @@ export const pets = [
 const testMostDangerous = () => {
     const expectedAnimalName = 'rido';
     const actualAnimalName = mostDangerous(pets);
-    return expectedAnimalName === actualAnimalName ? "testMostDangerous TEST PASSED" : "testMostDangerous Test FAILED! actual: " + actualAnimalName + ", expected: " + expectedAnimalName + "."
+    return expectedAnimalName === actualAnimalName
+     ? "testMostDangerous TEST PASSED" 
+     : "testMostDangerous Test FAILED! actual: " + actualAnimalName + ", expected: " + expectedAnimalName + "."
 }
 console.log(testMostDangerous());
 
@@ -60,11 +62,12 @@ const testTypeAndDangerLevelMostDanger = () => {
     const expectedType = 'dog';
     const expectedDangerLevel = 12;
     const actualObject = typeAndDangerLevelMostDanger(pets);
-    if(actualObject.type == expectedType && actualObject.dangerLevel == expectedDangerLevel) {
+    const  { type, dangerLevel } = actualObject; 
+    if( type == expectedType && dangerLevel == expectedDangerLevel) {
         return "testTypeAndDangerLevelMostDanger TEST PASSED";
     }
     else {
-        return "testTypeAndDangerLevelMostDanger TEST FAILED! expected Type: " + expectedType + ", actual Type: " + actualObject.type + ", expected DangerLevel: " + expectedDangerLevel + ", actual DangerLevel: " + actualObject.dangerLevel + ".";
+        return `testTypeAndDangerLevelMostDanger TEST FAILED! expected Type: ${expectedType}, actual Type: ${actualObject.type}, expected DangerLevel: ${expectedDangerLevel}, actual DangerLevel: ${actualObject.dangerLevel}.`;
     }
 }
 console.log(testTypeAndDangerLevelMostDanger());
@@ -119,7 +122,13 @@ const testAlphabetizeName = () => {
     const expectedIndex6 = 'lido'
     const expectedIndex7 = 'rido';
     const expectedArray = alphabetizeName(pets);
-    if(expectedIndex1 == expectedArray[0] && expectedIndex2 == expectedArray[1] && expectedIndex3 == expectedArray[2] && expectedIndex4 == expectedArray[3] && expectedIndex5 == expectedArray[4] && expectedIndex6 == expectedArray[5] && expectedIndex7 == expectedArray[6]){
+    if(expectedIndex1 == expectedArray[0]
+         && expectedIndex2 == expectedArray[1] 
+         && expectedIndex3 == expectedArray[2] 
+         && expectedIndex4 == expectedArray[3] 
+         && expectedIndex5 == expectedArray[4] 
+         && expectedIndex6 == expectedArray[5] 
+         && expectedIndex7 == expectedArray[6]){
         return("testAlphabetizeNames TEST PASSED")
     }
     else {
