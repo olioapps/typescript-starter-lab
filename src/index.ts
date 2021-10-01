@@ -32,9 +32,29 @@ interface User {
 }
 
 interface UserFilter {
-    key: (number | string)
-    operator: string
-    value: (number | string)
+    readonly key: string
+    readonly operator: string
+    readonly value: (number | string)
+}
+
+function evaluatePredicate(predicate: UserFilter, user: User): boolean {
+    let result: boolean = false
+    if (predicate.key === "favoriteColor") {
+        result = (predicate.value === user.favoriteColor)
+    }
+    else if (predicate.key === "age") {
+        switch (predicate.operator) {
+            case "<":
+                result = (user.age < predicate.value)
+                break
+            case ">":
+                result = (user.age > predicate.value)
+                break
+            case "=":
+                result = (user.age == predicate.value)
+        }
+    }
+    return result
 }
 
 class UserAPI {
@@ -70,34 +90,13 @@ class UserAPI {
             return this.getUsers()
         }
         const filteredUsers = this.getUsers().filter((user => {
-            let results: boolean[] = [] 
-            let finalResult: boolean = false         
-            predicates.forEach(predicate => {
-                let result: boolean = false
-                if (predicate.key === "favoriteColor"){
-                    result = (predicate.value === user.favoriteColor)
-                }
-                else if (predicate.key === "age"){
-                    switch(predicate.operator){
-                        case "<":
-                            result = (user.age < predicate.value)
-                            break
-                        case ">":
-                            result = (user.age > predicate.value)
-                            break
-                        case "=":
-                            result = (user.age == predicate.value)
-                    }
-                }
-                results.push(result)
-            })
-            finalResult = results.every((result) => {return(result === true)}) 
-            return finalResult          
+            return predicates.reduce((result, current) => {
+                return (result && evaluatePredicate(current, user))
+            }, true)
         }))
         return filteredUsers
     }
 }
-
 const apiInstance = new UserAPI()
 const user1 = {
     name: "Jon",
@@ -132,7 +131,7 @@ const predicate1: UserFilter = {
 const predicate2: UserFilter = {
     key: "age",
     operator: "<",
-    value: "100"
+    value: "45"
 
 }
 
