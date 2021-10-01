@@ -23,54 +23,119 @@
 
 // show me via console log that the create operation worked
 
+
 interface User {
     readonly id?: string
     readonly name: string
     readonly favoriteColor: string
-    readonly age: number 
+    readonly age: number
 }
 
-class UserAPI{
-    private _userList : Record<string, User> 
-    private _idCounter : number
-    constructor(){
+interface UserFilter {
+    key: (number | string)
+    operator: string
+    value: (number | string)
+}
+
+class UserAPI {
+    private _userList: Record<string, User>
+    private _idCounter: number
+
+    constructor() {
         this._userList = {}
         this._idCounter = 0
     }
-    get userList(){
+
+    getUsers(): User[] {
         return Object.keys(this._userList).map((key => this._userList[key]))
     }
-    addUser = (user: User) => {
+
+    addUser = (user: User): User => {
         this._idCounter += 1
-        const userCopy: User = {...user, id: this._idCounter.toString()}
+        const userCopy: User = { ...user, id: this._idCounter.toString() }
         this._userList[userCopy.id] = userCopy
         return userCopy
     }
-    getSingleUser(id: string){
+
+    getUser = (id: string): User => {
         return this._userList[id]
     }
-    deleteUser(id: string){
+
+    deleteUser = (id: string): void => {
         delete this._userList[id]
+    }
+
+    searchUsers = (predicates: UserFilter[]): User[] => {
+        if (predicates === undefined || predicates.length == 0) {
+            return this.getUsers()
+        }
+        const filteredUsers = this.getUsers().filter((user => {
+            let results: boolean[] = [] 
+            let finalResult: boolean = false         
+            predicates.forEach(predicate => {
+                let result: boolean = false
+                if (predicate.key === "favoriteColor"){
+                    result = (predicate.value === user.favoriteColor)
+                }
+                else if (predicate.key === "age"){
+                    switch(predicate.operator){
+                        case "<":
+                            result = (user.age < predicate.value)
+                            break
+                        case ">":
+                            result = (user.age > predicate.value)
+                            break
+                        case "=":
+                            result = (user.age == predicate.value)
+                    }
+                }
+                results.push(result)
+            })
+            finalResult = results.every((result) => {return(result === true)}) 
+            return finalResult          
+        }))
+        return filteredUsers
     }
 }
 
-const apiInstance = new UserAPI
+const apiInstance = new UserAPI()
 const user1 = {
     name: "Jon",
     favoriteColor: "Blue",
-    age: 22
+    age: 22,
 }
 const user2 = {
     name: "Alex",
     favoriteColor: "Green",
-    age: 50
+    age: 50,
+}
+const user3 = {
+    name: "Sam",
+    favoriteColor: "Blue",
+    age: 45,
 }
 let copy1 = apiInstance.addUser(user1)
 let copy2 = apiInstance.addUser(user2)
-console.log(user1)
-console.log(copy1)
-console.log(apiInstance.userList)
-console.log(apiInstance.getSingleUser('2'))
-console.log(apiInstance.getSingleUser('5'))
-apiInstance.deleteUser('1')
-console.log(apiInstance.userList)
+let copy3 = apiInstance.addUser(user3)
+//console.log(user1)
+//console.log(copy1)
+//console.log(apiInstance.getUsers())
+//console.log(apiInstance.getUser('2'))
+//console.log(apiInstance.getUser('5'))
+//apiInstance.deleteUser('1')
+//console.log(apiInstance.getUsers())
+const predicate1: UserFilter = {
+    key: "favoriteColor",
+    operator: "=",
+    value: "Blue",
+}
+const predicate2: UserFilter = {
+    key: "age",
+    operator: "<",
+    value: "100"
+
+}
+
+const predicates: UserFilter[] = [predicate1, predicate2]
+const searchResult = apiInstance.searchUsers(predicates)
+console.log(searchResult)
