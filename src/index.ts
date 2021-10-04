@@ -89,11 +89,11 @@ class UserAPI {
         if (predicates === undefined || predicates.length == 0) {
             return this.getUsers()
         }
-        const filteredUsers = this.getUsers().filter((user => {
-            return predicates.reduce((result, current) => {
-                return (result && evaluatePredicate(current, user))
-            }, true)
-        }))
+        const filteredUsers = this.getUsers().filter((user => 
+            predicates.reduce((result, current) => 
+                result && evaluatePredicate(current, user)
+            , true)
+        ))
         return filteredUsers
     }
 }
@@ -130,8 +130,8 @@ const predicate1: UserFilter = {
 }
 const predicate2: UserFilter = {
     key: "age",
-    operator: "<",
-    value: "45"
+    operator: ">",
+    value: "20"
 
 }
 
