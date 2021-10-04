@@ -1,140 +1,46 @@
-// create an interface called User
-// with these attributes
-//      id: string, optional
-//      name: string
-//      favoriteColor: string
-//      age: name
+/**
+ * Required External Modules
+ */
 
-// create a es6 class, using Typescript
-// where the methods are arrow operators
-// that has this method:
-// add user
-//      params: user of type User <-- object
-//      returns: user (with an assigned id)
+ import * as dotenv from "dotenv";
+ import express from "express";
+ import cors from "cors";
+ import helmet from "helmet";
+ 
+ dotenv.config();
+ /**
+  * App Variables
+  */
+ 
+  if (!process.env.PORT) {
+     process.exit(1);
+  }
+  
+  const PORT: number = parseInt(process.env.PORT as string, 10);
+  
+  const app = express();
+  
+ 
+ /**
+  *  App Configuration
+  */
+ 
+  app.use(helmet())
+  app.use(cors())
+  app.use(require('body-parser').json())
 
-
-// create an instance of your class
-// invoke the add user method with a user object that has no id
-// the mthod
-//      creates a new copy of the user object, using spread operator, and assigns an id
-//      stores this new instance in a Record of type string, User, that exists as an instance variable (scoped to the class instance), private
-//      returns the new instance
-
-
-// show me via console log that the create operation worked
-
-
-interface User {
-    readonly id?: string
-    readonly name: string
-    readonly favoriteColor: string
-    readonly age: number
-}
-
-interface UserFilter {
-    readonly key: string
-    readonly operator: string
-    readonly value: (number | string)
-}
-
-function evaluatePredicate(predicate: UserFilter, user: User): boolean {
-    let result: boolean = false
-    if (predicate.key === "favoriteColor") {
-        result = (predicate.value === user.favoriteColor)
-    }
-    else if (predicate.key === "age") {
-        switch (predicate.operator) {
-            case "<":
-                result = (user.age < predicate.value)
-                break
-            case ">":
-                result = (user.age > predicate.value)
-                break
-            case "=":
-                result = (user.age == predicate.value)
-        }
-    }
-    return result
-}
-
-class UserAPI {
-    private _userList: Record<string, User>
-    private _idCounter: number
-
-    constructor() {
-        this._userList = {}
-        this._idCounter = 0
-    }
-
-    getUsers(): User[] {
-        return Object.keys(this._userList).map((key => this._userList[key]))
-    }
-
-    addUser = (user: User): User => {
-        this._idCounter += 1
-        const userCopy: User = { ...user, id: this._idCounter.toString() }
-        this._userList[userCopy.id] = userCopy
-        return userCopy
-    }
-
-    getUser = (id: string): User => {
-        return this._userList[id]
-    }
-
-    deleteUser = (id: string): void => {
-        delete this._userList[id]
-    }
-
-    searchUsers = (predicates: UserFilter[]): User[] => {
-        if (predicates === undefined || predicates.length == 0) {
-            return this.getUsers()
-        }
-        const filteredUsers = this.getUsers().filter((user => 
-            predicates.reduce((result, current) => 
-                result && evaluatePredicate(current, user)
-            , true)
-        ))
-        return filteredUsers
-    }
-}
-const apiInstance = new UserAPI()
-const user1 = {
-    name: "Jon",
-    favoriteColor: "Blue",
-    age: 22,
-}
-const user2 = {
-    name: "Alex",
-    favoriteColor: "Green",
-    age: 50,
-}
-const user3 = {
-    name: "Sam",
-    favoriteColor: "Blue",
-    age: 45,
-}
-let copy1 = apiInstance.addUser(user1)
-let copy2 = apiInstance.addUser(user2)
-let copy3 = apiInstance.addUser(user3)
-//console.log(user1)
-//console.log(copy1)
-//console.log(apiInstance.getUsers())
-//console.log(apiInstance.getUser('2'))
-//console.log(apiInstance.getUser('5'))
-//apiInstance.deleteUser('1')
-//console.log(apiInstance.getUsers())
-const predicate1: UserFilter = {
-    key: "favoriteColor",
-    operator: "=",
-    value: "Blue",
-}
-const predicate2: UserFilter = {
-    key: "age",
-    operator: ">",
-    value: "20"
-
-}
-
-const predicates: UserFilter[] = [predicate1, predicate2]
-const searchResult = apiInstance.searchUsers(predicates)
-console.log(searchResult)
+ 
+ /**
+  * Server Activation
+  */
+ 
+  app.listen(PORT, () => {
+     console.log(`Listening on port ${PORT}`);
+   });
+   app.get('/aaron', (req, res) => {
+    res.send({message: 'hello world'})
+  })
+  app.post('/aaron', (req, res) => {
+    res.send('POST request')
+    console.log(req.body)
+  })
