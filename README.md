@@ -3,5 +3,6 @@
 ### Development
 
 ```bash
-npm run dev
+yarn install
+yarn dev
 ```
