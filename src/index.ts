@@ -5,10 +5,12 @@ interface User {
   color: string
 }
 
+type ID = number;
+
 class UserApi {
-  users: User[] = [];
+  users = new Map<ID, User>();
   
-  getUser(id: number): User {
+  getUser(id: ID): User {
 
   }
 
@@ -20,12 +22,12 @@ class UserApi {
 
   }
 
-  deleteUser(id: number): User {
+  deleteUser(id: ID): User {
 
   }
 
-  updateUser(id: number): User {
-    
+  updateUser(id: ID): User {
+
   }
 };
 
