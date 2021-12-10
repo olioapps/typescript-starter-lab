@@ -38,7 +38,7 @@ class UserApi {
     return this.users.delete(id);
   }
 
-  updateUser(id: ID): User {
-
+  updateUser(obj: User): User {
+    
   }
 };
