@@ -41,9 +41,9 @@ class UserApi {
     return userObject
   }
 
-  deleteUser = (id: ID): boolean => {
+  deleteUser = (id: ID): void => {
     if (!id) { throw new Error("Missing User ID") }
-    return this.users.delete(id)
+    if (!this.users.delete(id)) { throw new Error("User not found.")}
   }
 
   updateUser = (newData: User): User => {
