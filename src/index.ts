@@ -34,8 +34,8 @@ class UserApi {
     return this.users.get(id) as User;
   }
 
-  deleteUser(id: ID): User {
-
+  deleteUser(id: ID): Boolean {
+    return this.users.delete(id);
   }
 
   updateUser(id: ID): User {
