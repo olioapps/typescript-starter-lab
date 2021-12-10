@@ -9,7 +9,7 @@ describe("UserApi tests", () => {
   let api = new UserApi()
 
   it("Can initialize a new UserApi", () => {
-
+    
   })
 
   it("Can create a new user", () => {
