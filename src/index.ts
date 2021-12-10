@@ -9,6 +9,12 @@ type ID = number;
 
 class UserApi {
   users = new Map<ID, User>();
+  private static count = 0;
+
+  static generateId(): ID {
+    UserApi.count++;
+    return UserApi.count;
+  }
   
   getUser(id: ID): User | undefined {
     return this.users.get(id)
@@ -23,7 +29,9 @@ class UserApi {
   }
 
   createUser(obj: User): User {
-
+    const id = UserApi.generateId();
+    this.users.set(id, { id, ...obj})
+    return this.users.get(id) as User;
   }
 
   deleteUser(id: ID): User {
@@ -34,4 +42,3 @@ class UserApi {
 
   }
 };
-
