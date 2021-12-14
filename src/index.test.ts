@@ -1,4 +1,4 @@
-import { User, ID, Color, UserApi } from "./index"
+import { User, ID, Color, UserApi } from "./index";
 
 describe("UserApi tests", () => {
   console.log("Starting UserApi test")
@@ -6,14 +6,21 @@ describe("UserApi tests", () => {
   let user1: User
   let user2: User
   let user3: User
-  let api = new UserApi()
+  let api = new UserApi
 
   it("Can initialize a new UserApi", () => {
-    
+    const testApi = new UserApi();
+    expect(testApi).toBeInstanceOf(UserApi);
   })
 
   it("Can create a new user", () => {
-
+    user1 = api.createUser({ name: "Ian", age: 31, favoriteColor: "red" })
+    expect(user1).toEqual({
+      id: 1,
+      name: "Ian",
+      age: 31,
+      favoriteColor: "red"
+    })
   })
 
   it("Can get all users", () => {
