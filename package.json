@@ -16,7 +16,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "7.0.22",
     "nodemon": "1.11.0"
   },
   "devDependencies": {
@@ -24,7 +23,6 @@
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-typescript": "^7.16.0",
     "@types/jest": "^27.0.3",
-    "@types/node": "7.0.22",
     "babel-jest": "^27.4.4",
     "eslint": "4.0.0",
     "eslint-config-airbnb-base": "11.2.0",

@@ -33,11 +33,11 @@ tsc and nodemon should be run in different terminal windows
 yarn tsc --watch
 ```
 ```T2
-nodemon -w dist dist/index.js
+yarn nodemon -w dist dist/ts_playground.js
 ```
 * While not set up in this repo, it is possible to run two child processes in the same terminal with a package like concurrently: https://github.com/open-cli-tools/concurrently#readme
 
 ### Testing
 ```yarn jest --coverage --watch
 ```
-
+* It is not necessary to run nodemon while running tests with jest in this case, as we are not using a server. However, if you are making changes to your typescript file, it is necessary to run tsc.
