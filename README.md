@@ -26,3 +26,18 @@
 yarn install
 yarn dev
 ```
+
+### Notes
+tsc and nodemon should be run in different terminal windows
+```T1
+yarn tsc --watch
+```
+```T2
+nodemon -w dist dist/index.js
+```
+* While not set up in this repo, it is possible to run two child processes in the same terminal with a package like concurrently: https://github.com/open-cli-tools/concurrently#readme
+
+### Testing
+```yarn jest --coverage --watch
+```
+
