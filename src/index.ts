@@ -42,7 +42,7 @@ export class UserApi {
   }
 
   deleteUser = (id: ID): void => {
-    if (!id) { throw new Error("Missing User ID") }
+    if (!id) { throw new Error("Missing User ID.") }
     if (!this.users.delete(id)) { throw new Error("User not found.")}
   }
 
