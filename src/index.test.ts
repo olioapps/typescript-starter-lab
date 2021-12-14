@@ -56,30 +56,12 @@ describe("UserApi tests", () => {
     expect(api.getUsers().length).toEqual(2)
   })
 
-  it("Throws when fetching a user without supplying an ID", () => {
-    try {
-    // @ts-ignore
-      api.getUser()
-    } catch(error: any) {
-      expect(error.message).toEqual("Missing user ID.")
-    }
-  })
-
   it("Throws when creating a user with an already existing ID", () => {
     try {
       // @ts-ignore
       api.createUser({id: 1, name: "Bob", age: 56, favoriteColor: "red"})
     } catch (error: any) {
       expect(error.message).toEqual("User already exists.")
-    }
-  })
-
-  it("Throws when deleting a user without supplying an ID", () => {
-    try{
-      // @ts-ignore
-      api.deleteUser();
-    } catch (error: any) {
-      expect(error.message).toEqual("Missing User ID.")
     }
   })
 
