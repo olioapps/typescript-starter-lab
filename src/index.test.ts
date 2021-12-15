@@ -1,4 +1,4 @@
-import { User, ID, Color, UserApi } from "./index";
+import { User, ApiError, UserApi } from "./index";
 
 describe("UserApi tests", () => {
   console.log("Starting UserApi test")
@@ -91,5 +91,14 @@ describe("UserApi tests", () => {
     } catch (error: any) {
       expect(error.message).toEqual("User not found.")
     }
+  })
+
+  it("Can construct a new ApiError", () => {
+    const error = new ApiError("Test", 404)
+    expect(error).toBeInstanceOf(ApiError)
+    expect(error.message).toEqual("Test")
+    expect(error.status).toEqual(404)
+    console.log(JSON.stringify(error))
+    expect(error.stack).toBeDefined();
   })
 })
