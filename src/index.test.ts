@@ -40,6 +40,11 @@ describe("UserApi tests", () => {
     expect(result).toEqual({ ...user1, id: 1})
   })
 
+  it("returns null if a user cannot be found by ID", () => {
+    const result = api.getUser(99)
+    expect(result).toBeNull()
+  })
+
   it("Can update a user", () => {
     api.updateUser({ id: 1, name: "Ian", age: 31, favoriteColor: "blue"})
 
@@ -58,10 +63,11 @@ describe("UserApi tests", () => {
 
   it("Throws when creating a user with an already existing ID", () => {
     try {
-      // @ts-ignore
-      api.createUser({id: 1, name: "Bob", age: 56, favoriteColor: "red"})
+      api.createUser({id: 2, name: "Bob", age: 56, favoriteColor: "red"})
     } catch (error: any) {
+      expect(error).toBeInstanceOf(ApiError)
       expect(error.message).toEqual("User already exists.")
+      expect(error.status).toEqual(409)
     }
   })
 
@@ -70,7 +76,9 @@ describe("UserApi tests", () => {
       // @ts-ignore
       api.updateUser({ name: "Evan", age: 20 })
     } catch (error: any) {
+      expect(error).toBeInstanceOf(ApiError)
       expect(error.message).toEqual("Missing User ID.")
+      expect(error.status).toEqual(400)
     }
   })
 
@@ -79,17 +87,20 @@ describe("UserApi tests", () => {
       // @ts-ignore
       api.updateUser({ id: 7, name: "Erica" })
     } catch (error: any) {
+      expect(error).toBeInstanceOf(ApiError)
       expect(error.message).toEqual("User not found.")
+      expect(error.status).toEqual(404)
     }
   })
 
   it("Throws when deleting a user that does not exist", () => {
     try{
-
     // @ts-ignore
     api.deleteUser(20)
     } catch (error: any) {
+      expect(error).toBeInstanceOf(ApiError)
       expect(error.message).toEqual("User not found.")
+      expect(error.status).toEqual(404)
     }
   })
 

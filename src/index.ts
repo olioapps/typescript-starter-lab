@@ -32,7 +32,7 @@ export class UserApi {
 
   createUser = (newUser: User): User => {
     if (newUser.id && this.users.get(newUser.id)) {
-      throw new Error("User already exists.")
+      throw new ApiError("User already exists.", 409)
     }
     const id = UserApi.generateId()
     const userObject = { id, ...newUser}
@@ -41,13 +41,13 @@ export class UserApi {
   }
 
   deleteUser = (id: ID): void => {
-    if (!this.users.delete(id)) { throw new Error("User not found.")}
+    if (!this.users.delete(id)) { throw new ApiError("User not found.", 404)}
   }
 
   updateUser = (newData: User): User => {
-    if (!newData.id) { throw new Error("Missing User ID.") }
+    if (!newData.id) { throw new ApiError("Missing User ID.", 400) }
     const existingUser = this.users.get(newData.id)
-    if (!existingUser) { throw new Error("User not found.") }
+    if (!existingUser) { throw new ApiError("User not found.", 404) }
 
     //as PATCH:
     // const updatedUser = { ...existingUser, ...newData }
