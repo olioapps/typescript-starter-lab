@@ -22,12 +22,7 @@ export class UserApi {
   }
 
   getUsers = (): User[]  => {
-    // to replace with iterator
-    const result: User[] = []
-    for (let [id, user] of this.users) {
-      result.push(user)
-    }
-    return result
+    return [...this.users.values()]
   }
 
   createUser = (newUser: User): User => {
