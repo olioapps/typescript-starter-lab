@@ -1,43 +1,24 @@
 # typescript-starter-lab
+* Directions will be given after getting this envrionment set up
 
-// user object has these fields
-// id (optional)
-// name
-// age
-// color
-// -create a class called UserAPI
-// it has a class property called users, which is just a map {}
-// add the following functions to the class, using strict typescript
-// 1. getUser by id (eg. getUser = (id)=  > { return ...})
-// 2. getUsers (returns all users in array)
-// 3. createUser has argument of user object {}. Make sure to assign an id property to the user object
-// 4. deleteUser by id
-// 5. updateUser has argument of user object
-// each of the functions will manipulate / access the users class property
-// use immutability via the spread operator:  { ...user, id: “myID” }
-// show that these operations work by creating an instance of your class, and calling the methods
-// and console logging the output
-// const myApi = new UserApI()
-// myApi.xxx()
-
-### Development
-
-```bash
-yarn install
-yarn dev
+### Testing
+tsc and jest should be run in different terminal windows
+```T1
+yarn tsc --watch
 ```
+```T2
+yarn jest --coverage --watch
+```
+* While not set up in this repo, it is possible to run two child processes in the same terminal with a package like concurrently: https://github.com/open-cli-tools/concurrently#readme
 
-### Notes
-tsc and nodemon should be run in different terminal windows
+* This will allow both tsc and jest to watch for file changes and run tests when changes are detected.
+
+* It is not necessary to run nodemon while running tests with jest in this case, as we are not using a server. However, if you are making changes to your typescript file, it is necessary to run tsc to compile on file changes.
+### Dev
 ```T1
 yarn tsc --watch
 ```
 ```T2
 yarn nodemon -w dist dist/ts_playground.js
 ```
-* While not set up in this repo, it is possible to run two child processes in the same terminal with a package like concurrently: https://github.com/open-cli-tools/concurrently#readme
-
-### Testing
-```yarn jest --coverage --watch
-```
-* It is not necessary to run nodemon while running tests with jest in this case, as we are not using a server. However, if you are making changes to your typescript file, it is necessary to run tsc.
+* Running these two commands in terminals will let tsc watch for changes to any file, and then nodemon will restart and run any compiled code from ts_playground.js
