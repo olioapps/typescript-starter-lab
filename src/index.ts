@@ -1,2 +1,1 @@
-console.log("TEST")
-console.log("HI AARON!")
+//Define class here
