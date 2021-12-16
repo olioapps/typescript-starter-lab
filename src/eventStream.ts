@@ -1,6 +1,7 @@
 type EventType = "screenshot" | "new message" | "view"
 
 export interface StreamEvent {
+interface StreamEvent {
   readonly timestamp: number,
   readonly eventType: EventType
 }
@@ -36,14 +37,16 @@ export const scoreArray = (eventArray: StreamEvent[]): StreamEvent[] => {
   scoreTracker.currentScore = scoreTracker.highScore
 
   for (let i = 0; i < eventArray.length - 5; i++) {
-    //subtract score at pointer
-    scoreTracker.currentScore -= scoreLookup[eventArray[i].eventType]
-    //add score of (index of pointer + 5)
-    scoreTracker.currentScore += scoreLookup[eventArray[i + 5].eventType]
-    //compare and possibly store
-    if (scoreTracker.currentScore > scoreTracker.highScore) {
-      scoreTracker.highScore = scoreTracker.currentScore
-      scoreTracker.highStartIndex = i + 1
+    const scoreArray = (eventArray: StreamEvent[]): StreamEvent[] => {
+    const scores = eventArray.map(streamEvent => {
+      //subtract score at pointer
+      scoreTracker.currentScore -= scoreLookup[eventArray[i].eventType]
+      //add score of (index of pointer + 5)
+      scoreTracker.currentScore += scoreLookup[eventArray[i + 5].eventType]
+      //compare and possibly store
+      if (scoreTracker.currentScore > scoreTracker.highScore) {
+        scoreTracker.highScore = scoreTracker.currentScore
+        scoreTracker.highStartIndex = i + 1
     }
   }
 

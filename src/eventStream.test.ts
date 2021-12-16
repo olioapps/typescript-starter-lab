@@ -61,7 +61,7 @@ describe("Event Stream coding challenge tests", () => {
       { timestamp: 2, eventType: "view" },
       { timestamp: 3, eventType: "view" },
       { timestamp: 4, eventType: "view" },
-      { timestamp: 5, eventType: "view" },
+      { timestamp: 5, eventType: "view" }
     ])
   })
 
