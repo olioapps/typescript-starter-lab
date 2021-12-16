@@ -2,13 +2,8 @@
 import { UserAPI } from "./index"
 
 const users = new UserAPI()
-console.log("USERS", users)
 
 describe('Tests will go here!', () => {
-  it('should pass', () => {
-    expect(true).toBeTruthy()
-  })
-
   it('gets a user by id', () => {
     const result = users.getUserById()
 
