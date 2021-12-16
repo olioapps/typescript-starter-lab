@@ -13,7 +13,7 @@ interface ScoreTracker {
 
 export const scoreArray = (eventArray: StreamEvent[]): StreamEvent[] => {
   const scoreLookup = {
-    "new message": 1, 
+    "new message": 1,
     "view": 2,
     "screenshot": 3
   }
@@ -27,12 +27,12 @@ export const scoreArray = (eventArray: StreamEvent[]): StreamEvent[] => {
 
 
   //look at first five, set to current score and high score
-  scoreTracker.highScore = 
+  scoreTracker.highScore =
     eventArray.slice(0, 5)
-    .reduce((acc, curr) => {
-      acc += scoreLookup[curr.eventType]
-      return acc
-    }, 0)
+      .reduce((acc, curr) => {
+        acc += scoreLookup[curr.eventType]
+        return acc
+      }, 0)
   scoreTracker.currentScore = scoreTracker.highScore
 
   for (let i = 0; i < eventArray.length - 5; i++) {
@@ -46,6 +46,6 @@ export const scoreArray = (eventArray: StreamEvent[]): StreamEvent[] => {
       scoreTracker.highStartIndex = i + 1
     }
   }
-  
+
   return eventArray.slice(scoreTracker.highStartIndex, scoreTracker.highStartIndex + 5)
 }
