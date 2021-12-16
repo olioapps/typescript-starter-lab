@@ -38,28 +38,23 @@ export class UserAPI {
         ]
     }
 
-    public getUserById = () => {
+    public getUserById = (id: number): User => {
         console.log("Get user by id")
-        return 1
     } 
 
-    public getUsers = () => {
+    public getUsers = (): ReadonlyArray<User> => {
         console.log("Get users")
-        return 1
     }
 
-    public createUser = () => {
-        console.log("Create user")
-        return 1
+    public createUser = (user: User): User => {
+        console.log("Create user", user)
     }
 
-    public deleteUserById = () => {
+    public deleteUserById = (id: number): User => {
         console.log("Create user by id")
-        return 1
     }
 
-    public updateUser = () => {
+    public updateUser = (id: number, user: User): User => {
         console.log("Update user")
-        return 1
     }
  }
