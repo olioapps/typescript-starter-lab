@@ -1,5 +1,6 @@
 type EventType = "screenshot" | "new message" | "view"
 
+export interface StreamEvent {
 interface StreamEvent {
   readonly timestamp: number,
   readonly eventType: EventType
@@ -10,6 +11,7 @@ interface ScoreTracker {
   startIndex: number
 }
 
+export const scoreArray = (eventArray: StreamEvent[]): StreamEvent[] => {
 const scoreArray = (eventArray: StreamEvent[]): StreamEvent[] => {
   const scores = eventArray.map(streamEvent => {
     //keep track of highest score so far and starting index of subarray
