@@ -1,8 +1,8 @@
 type EventType = "screenshot" | "new message" | "view"
 
 export interface StreamEvent {
-  timestamp: number,
-  eventType: EventType
+  readonly timestamp: number,
+  readonly eventType: EventType
 }
 
 interface ScoreTracker {
