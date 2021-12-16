@@ -57,7 +57,11 @@ describe("Event Stream coding challenge tests", () => {
     ]
     const result = scoreArray(eventArray)
     expect(result).toEqual([
-
+      { timestamp: 1, eventType: "view" },
+      { timestamp: 2, eventType: "view" },
+      { timestamp: 3, eventType: "view" },
+      { timestamp: 4, eventType: "view" },
+      { timestamp: 5, eventType: "view" }
     ])
   })
 
