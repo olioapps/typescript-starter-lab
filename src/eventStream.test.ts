@@ -116,4 +116,38 @@ describe("Event Stream coding challenge tests", () => {
       { timestamp: 19, eventType: "screenshot" },
     ])
   })
+
+  it('Can find a less obvious subarray', () => {
+    const eventArray: StreamEvent[] = [
+      { timestamp: 1, eventType: "view" },
+      { timestamp: 2, eventType: "new message" },
+      { timestamp: 3, eventType: "view" },
+      { timestamp: 4, eventType: "new message" },
+      { timestamp: 5, eventType: "view" },
+      { timestamp: 6, eventType: "new message" },
+      { timestamp: 7, eventType: "view" },
+      { timestamp: 8, eventType: "view" },
+      { timestamp: 9, eventType: "view" },
+      { timestamp: 10, eventType: "screenshot" },
+      { timestamp: 11, eventType: "view" },
+      { timestamp: 12, eventType: "view" },
+      { timestamp: 13, eventType: "new message" },
+      { timestamp: 14, eventType: "view" },
+      { timestamp: 15, eventType: "view" },
+      { timestamp: 16, eventType: "new message" },
+      { timestamp: 17, eventType: "view" },
+      { timestamp: 18, eventType: "view" },
+      { timestamp: 19, eventType: "new message" },
+      { timestamp: 20, eventType: "new message" },
+      { timestamp: 21, eventType: "view" }
+      ]
+    const result = scoreArray(eventArray)
+    expect(result).toEqual([
+      { timestamp: 7, eventType: "view" },
+      { timestamp: 8, eventType: "view" },
+      { timestamp: 9, eventType: "view" },
+      { timestamp: 10, eventType: "screenshot" },
+      { timestamp: 11, eventType: "view" },
+    ])
+  })
 })
