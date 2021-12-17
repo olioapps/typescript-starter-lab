@@ -88,33 +88,33 @@ describe('Tests will go here!', () => {
       expect(result).toBeInstanceOf(CustomError)
   })
 
-//   it('creates a user', () => {
-//     const newUser = {
-//         id: 4,
-//         name: "Yoda",
-//         age: 10,
-//         color: "Brown",
-//     }
-//     const result = users.createUser(newUser)
+  it('creates a user', () => {
+    const newUser = {
+        id: 4,
+        name: "Yoda",
+        age: 10,
+        color: "Brown",
+    }
+    const result = users.createUser(newUser)
 
-//     expect(result).toStrictEqual({
-//         id: 4,
-//         name: "Yoda",
-//         age: 10,
-//         color: "Brown",
-//     }) 
-//   })
+    expect(result).toStrictEqual({
+        id: 4,
+        name: "Yoda",
+        age: 10,
+        color: "Brown",
+    }) 
+  })
 
-//   it.skip('returns null if user id already exists', () => {
-//       const result = users.createUser({
-//           id: 1,
-//           name: "Michelle",
-//           color: "rainbow",
-//           age: 30,
-//       })
+  it('returns CustomError if user id already exists', () => {
+      const result = users.createUser({
+          id: 1,
+          name: "Michelle",
+          color: "rainbow",
+          age: 30,
+      })
 
-//       expect(result).toStrictEqual(null)
-//   })
+      expect(result).toBeInstanceOf(CustomError)
+  })
 
 //   it.skip('deletes a user by id', () => {
 //     const result = users.deleteUserById(1)

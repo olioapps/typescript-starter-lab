@@ -36,9 +36,15 @@ export class UserAPI {
         return this.users.length === 0 ? new CustomError(500, "No users found.") : this.users
     } 
 
-    // public createUser = (user: User): User | null => {
-    //     console.log("Create user", user)
-    // }
+    public createUser = (user: User): User | CustomError => {
+        const userIdExists = this.users.find(existingUser => existingUser.id === user.id)
+        if (userIdExists) {
+            return new CustomError(500, "User with id already exists.")
+        } else { 
+            new UserAPI([user, ...this.users])
+            return user 
+        }
+    }
 
     // public deleteUserById = (id: number): User | null => {
     //     console.log("Create user by id")
