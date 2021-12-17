@@ -1,6 +1,6 @@
 //Define class here
 
-interface User {
+export interface User {
     readonly id?: number
     readonly name: string
     readonly age: number
@@ -8,7 +8,7 @@ interface User {
 }
 
 export class UserAPI {
-    users: ReadonlyArray<User>
+    private users: ReadonlyArray<User>
 
     constructor() {
         this.users = [
@@ -38,23 +38,23 @@ export class UserAPI {
         ]
     }
 
-    public getUserById = (id: number): User => {
+    public getUserById = (id: number): User | null => {
         console.log("Get user by id")
     } 
 
-    public getUsers = (): ReadonlyArray<User> => {
+    public getUsers = (): ReadonlyArray<User> | null => {
         console.log("Get users")
     }
 
-    public createUser = (user: User): User => {
+    public createUser = (user: User): User | null => {
         console.log("Create user", user)
     }
 
-    public deleteUserById = (id: number): User => {
+    public deleteUserById = (id: number): User | null => {
         console.log("Create user by id")
     }
 
-    public updateUser = (id: number, user: User): User => {
+    public updateUser = (id: number, user: User): User | null => {
         console.log("Update user")
     }
  }

@@ -1,9 +1,14 @@
 //write tests here
-import { UserAPI } from "./index"
+import { User, UserAPI } from "./index"
 
 describe('Tests will go here!', () => {
+    let users: UserAPI
+
+    beforeEach(() => {
+      users = new UserAPI()
+    })
+
   it('gets a user by id', () => {
-    const users = new UserAPI()
     const result = users.getUserById(2)
 
     expect(result).toStrictEqual({
@@ -14,17 +19,13 @@ describe('Tests will go here!', () => {
     }) 
   })
 
-  it.skip('returns no user found if there is no user matching id', () => {
-    const users = new UserAPI()
+  it.skip('returns null if there is no user matching id', () => {
       const result = users.getUserById(10)
 
-      expect(result).toStrictEqual(
-          "No user found."
-      )
+      expect(result).toStrictEqual(null)
   })
 
   it.skip('gets all users', () => {
-    const users = new UserAPI()
     const result = users.getUsers()
 
     expect(result).toStrictEqual([
@@ -54,8 +55,13 @@ describe('Tests will go here!', () => {
     ]) 
   }) 
 
+  it.skip('returns null if no users are found', () => {
+      const result = users.getUserById(10)
+
+      expect(result).toStrictEqual(null)
+  })
+
   it.skip('creates a user', () => {
-    const users = new UserAPI()
     const newUser = {
         id: 4,
         name: "Yoda",
@@ -72,8 +78,18 @@ describe('Tests will go here!', () => {
     }) 
   })
 
+  it.skip('returns null if user id already exists', () => {
+      const result = users.createUser({
+          id: 1,
+          name: "Michelle",
+          color: "rainbow",
+          age: 30,
+      })
+
+      expect(result).toStrictEqual(null)
+  })
+
   it.skip('deletes a user by id', () => {
-    const users = new UserAPI()
     const result = users.deleteUserById(1)
 
     expect(result).toStrictEqual({
@@ -84,8 +100,13 @@ describe('Tests will go here!', () => {
     }) 
   })
 
+  it.skip('returns null if deleted user id does not exist', () => {
+    const result = users.deleteUserById(5)
+
+    expect(result).toStrictEqual(false) 
+  })
+
   it.skip('updates a user by id', () => {
-    const users = new UserAPI()
     const result = users.updateUser(1, { 
         name: "Michelle",
         age: 29,
@@ -98,5 +119,16 @@ describe('Tests will go here!', () => {
         age: 29,
         color: "red",
     }) 
+  })
+
+  it.skip('returns null if user with same id already exists', () => {
+    const result = users.updateUser(1, { 
+        id: 2,
+        name: "Michelle",
+        age: 29,
+        color: "red",
+    })
+
+    expect(result).toStrictEqual(null) 
   })
 })
