@@ -7,54 +7,44 @@ export interface User {
     readonly color: string
 }
 
+export interface ErrorMessage {
+    readonly message: string
+}
+
+export class CustomError extends Error {
+    constructor(status: number, message: string) {
+      super(message);
+      Object.setPrototypeOf(this, CustomError.prototype)
+    }
+}
+
 export class UserAPI {
     private users: ReadonlyArray<User>
 
-    constructor() {
-        this.users = [
-            {
-                id: 1,
-                name: "Michelle",
-                age: 30,
-                color: "rainbow",
-            },
-            {
-                id: 2,
-                name: "Vintage Aaron",
-                age: 35,
-                color: "blue",
-            },
-            {
-                id: 3,
-                name: "Derek",
-                age: 28,
-                color: "green",
-            },
-            {
-                name: "George",
-                age: 32,
-                color: "red",
-            },
-        ]
+    constructor(users: ReadonlyArray<User>) {
+        this.users = users
     }
 
-    public getUserById = (id: number): User | null => {
-        console.log("Get user by id")
+    public getUserById = (id: number): User | CustomError => {
+        const foundUser = this.users.find(user => user.id === id)
+        if (foundUser === undefined) {
+            return new CustomError(500, "No user found.")
+        } else return foundUser  
+    }
+
+    public getUsers = (): ReadonlyArray<User> | CustomError => {
+        return this.users.length === 0 ? new CustomError(500, "No users found.") : this.users
     } 
 
-    public getUsers = (): ReadonlyArray<User> | null => {
-        console.log("Get users")
-    }
+    // public createUser = (user: User): User | null => {
+    //     console.log("Create user", user)
+    // }
 
-    public createUser = (user: User): User | null => {
-        console.log("Create user", user)
-    }
+    // public deleteUserById = (id: number): User | null => {
+    //     console.log("Create user by id")
+    // }
 
-    public deleteUserById = (id: number): User | null => {
-        console.log("Create user by id")
-    }
-
-    public updateUser = (id: number, user: User): User | null => {
-        console.log("Update user")
-    }
+    // public updateUser = (id: number, user: User): User | null => {
+    //     console.log("Update user")
+    // }
  }
