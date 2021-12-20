@@ -12,8 +12,11 @@ export interface ErrorMessage {
 }
 
 export class CustomError extends Error {
+    status: number
+    
     constructor(status: number, message: string) {
       super(message);
+      this.status = status
       Object.setPrototypeOf(this, CustomError.prototype)
     }
 }
@@ -25,30 +28,36 @@ export class UserAPI {
         this.users = users
     }
 
-    public getUserById = (id: number): User | CustomError => {
+    public getUserById = (id: number): User => {
         const foundUser = this.users.find(user => user.id === id)
         if (foundUser === undefined) {
-            return new CustomError(500, "No user found.")
+            throw new CustomError(500, "No user found.")
         } else return foundUser  
     }
 
-    public getUsers = (): ReadonlyArray<User> | CustomError => {
-        return this.users.length === 0 ? new CustomError(500, "No users found.") : this.users
+    public getUsers = (): ReadonlyArray<User> => {
+        if (this.users.length === 0) { 
+            throw new CustomError(500, "No users found.") 
+        } else return this.users
     } 
 
-    public createUser = (user: User): User | CustomError => {
+    public createUser = (user: User): User => {
         const userIdExists = this.users.find(existingUser => existingUser.id === user.id)
         if (userIdExists) {
-            return new CustomError(500, "User with id already exists.")
+            throw new CustomError(500, "User with id already exists.")
         } else { 
             new UserAPI([user, ...this.users])
             return user 
         }
-    }
+    }  
 
-    // public deleteUserById = (id: number): User | null => {
-    //     console.log("Create user by id")
-    // }
+    public deleteUserById = (id: number): User => {
+        const user = this.users.find(existingUser => existingUser.id === id)
+        if (user) {
+            new UserAPI(this.users.filter(user => user.id !== id))
+            return user
+        } else throw new CustomError(500, "No user with that id found.")
+    } 
 
     // public updateUser = (id: number, user: User): User | null => {
     //     console.log("Update user")
