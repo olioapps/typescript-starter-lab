@@ -38,11 +38,7 @@ export class UserAPI {
     }
 
     public getUsers = (): ReadonlyArray<User> => {
-        if (this.users.length === 0) { 
-            throw new CustomError(404, "No users found.") 
-        } else {
-            return this.users
-        }
+        return this.users
     } 
 
     public createUser = (user: User): User => {

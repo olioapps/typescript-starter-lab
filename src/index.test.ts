@@ -86,19 +86,6 @@ describe('Tests will go here!', () => {
     ]) 
   }) 
 
-  it('returns CustomError if no users are found', () => {
-    const noUsers = new UserAPI([])
-    expect(() => noUsers.getUsers()).toThrow()
-
-    try {
-      noUsers.getUsers()
-    } catch (error: any) {
-        expect(error).toBeInstanceOf(CustomError)
-        expect(error.message).toBe("No users found.")
-        expect(error.status).toEqual(404)
-    }
-  })
-
   it('creates a user', () => {
     const newUser = {
         id: 4,
