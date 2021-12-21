@@ -43,6 +43,7 @@ export class UserAPI {
 
     public createUser = (user: User): User => {
         const userIdExists = this.users.find(existingUser => existingUser.id === user.id)
+
         if (userIdExists) {
             throw new CustomError(500, "User with id already exists.")
         } else { 
@@ -53,13 +54,22 @@ export class UserAPI {
 
     public deleteUserById = (id: number): User => {
         const user = this.users.find(existingUser => existingUser.id === id)
+        
         if (user) {
             new UserAPI(this.users.filter(user => user.id !== id))
             return user
         } else throw new CustomError(500, "No user with that id found.")
     } 
 
-    // public updateUser = (id: number, user: User): User | null => {
-    //     console.log("Update user")
-    // }
+    public updateUser = (id: number, updatedUser: User): User => {
+        let existingUser = this.users.find(existingUser => existingUser.id === id)
+
+        if (existingUser) {
+            if (existingUser.name === updatedUser.name) {
+                existingUser = { ...updatedUser }
+                return { id, ...existingUser }
+            } else 
+            throw new CustomError(500, "Different user with same id already exists.")
+        } else throw new CustomError(500, "No user found by that id.");
+    }
  }

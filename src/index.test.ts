@@ -157,29 +157,56 @@ describe('Tests will go here!', () => {
       } 
   })  
 
-//   it.skip('updates a user by id', () => {
-//     const result = users.updateUser(1, { 
-//         name: "Michelle",
-//         age: 29,
-//         color: "red",
-//     })
+  it('updates a user by id', () => {
+    const result = users.updateUser(1, { 
+        name: "Michelle",
+        age: 29,
+        color: "red",
+    })
 
-//     expect(result).toStrictEqual({
-//         id: 1,
-//         name: "Michelle",
-//         age: 29,
-//         color: "red",
-//     }) 
-//   })
+    expect(result).toStrictEqual({
+        id: 1,
+        name: "Michelle",
+        age: 29,
+        color: "red",
+    }) 
+  })
 
-//   it.skip('returns null if user with same id already exists', () => {
-//     const result = users.updateUser(1, { 
-//         id: 2,
-//         name: "Michelle",
-//         age: 29,
-//         color: "red",
-//     })
+  it('returns CustomError if user with same id but different name already exists', () => {
+    const updatedUser = {
+        id: 1,
+        name: "John",
+        age: 29,
+        color: "red",
+    }
+    
+    expect(() => users.updateUser(1, updatedUser)).toThrow()
 
-//     expect(result).toStrictEqual(null) 
-//   })
+    try {
+        users.updateUser(1, updatedUser)
+      } catch (error: any) {
+          expect(error).toBeInstanceOf(CustomError)
+          expect(error.message).toBe("Different user with same id already exists.")
+          expect(error.status).toEqual(500)
+      } 
+  })
+
+  it('returns CustomError if user by id does not exist', () => {
+    const updatedUser = {
+        id: 10,
+        name: "Michelle",
+        age: 29,
+        color: "red",
+    }
+    
+    expect(() => users.updateUser(10, updatedUser)).toThrow()
+
+    try {
+        users.updateUser(10, updatedUser)
+      } catch (error: any) {
+          expect(error).toBeInstanceOf(CustomError)
+          expect(error.message).toBe("No user found by that id.")
+          expect(error.status).toEqual(500)
+      } 
+  })
 })
