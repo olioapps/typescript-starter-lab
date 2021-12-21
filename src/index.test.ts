@@ -52,7 +52,7 @@ describe('Tests will go here!', () => {
       } catch (error: any) {
           expect(error).toBeInstanceOf(CustomError)
           expect(error.message).toBe("No user found.")
-          expect(error.status).toEqual(500)
+          expect(error.status).toEqual(404)
       }
   }) 
 
@@ -95,7 +95,7 @@ describe('Tests will go here!', () => {
     } catch (error: any) {
         expect(error).toBeInstanceOf(CustomError)
         expect(error.message).toBe("No users found.")
-        expect(error.status).toEqual(500)
+        expect(error.status).toEqual(404)
     }
   })
 
@@ -130,7 +130,7 @@ describe('Tests will go here!', () => {
     } catch (error: any) {
         expect(error).toBeInstanceOf(CustomError)
         expect(error.message).toBe("User with id already exists.")
-        expect(error.status).toEqual(500)
+        expect(error.status).toEqual(405)
     } 
   })
 
@@ -153,7 +153,7 @@ describe('Tests will go here!', () => {
       } catch (error: any) {
           expect(error).toBeInstanceOf(CustomError)
           expect(error.message).toBe("No user with that id found.")
-          expect(error.status).toEqual(500)
+          expect(error.status).toEqual(404)
       } 
   })  
 
@@ -187,7 +187,7 @@ describe('Tests will go here!', () => {
       } catch (error: any) {
           expect(error).toBeInstanceOf(CustomError)
           expect(error.message).toBe("Different user with same id already exists.")
-          expect(error.status).toEqual(500)
+          expect(error.status).toEqual(405)
       } 
   })
 
@@ -206,7 +206,8 @@ describe('Tests will go here!', () => {
       } catch (error: any) {
           expect(error).toBeInstanceOf(CustomError)
           expect(error.message).toBe("No user found by that id.")
-          expect(error.status).toEqual(500)
+          expect(error.status).toEqual(404)
       } 
   })
 })
+ 

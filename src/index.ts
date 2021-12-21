@@ -31,13 +31,13 @@ export class UserAPI {
     public getUserById = (id: number): User => {
         const foundUser = this.users.find(user => user.id === id)
         if (foundUser === undefined) {
-            throw new CustomError(500, "No user found.")
+            throw new CustomError(404, "No user found.")
         } else return foundUser  
     }
 
     public getUsers = (): ReadonlyArray<User> => {
         if (this.users.length === 0) { 
-            throw new CustomError(500, "No users found.") 
+            throw new CustomError(404, "No users found.") 
         } else return this.users
     } 
 
@@ -45,7 +45,7 @@ export class UserAPI {
         const userIdExists = this.users.find(existingUser => existingUser.id === user.id)
 
         if (userIdExists) {
-            throw new CustomError(500, "User with id already exists.")
+            throw new CustomError(405, "User with id already exists.")
         } else { 
             new UserAPI([user, ...this.users])
             return user 
@@ -54,11 +54,11 @@ export class UserAPI {
 
     public deleteUserById = (id: number): User => {
         const user = this.users.find(existingUser => existingUser.id === id)
-        
+
         if (user) {
             new UserAPI(this.users.filter(user => user.id !== id))
             return user
-        } else throw new CustomError(500, "No user with that id found.")
+        } else throw new CustomError(404, "No user with that id found.")
     } 
 
     public updateUser = (id: number, updatedUser: User): User => {
@@ -69,7 +69,7 @@ export class UserAPI {
                 existingUser = { ...updatedUser }
                 return { id, ...existingUser }
             } else 
-            throw new CustomError(500, "Different user with same id already exists.")
-        } else throw new CustomError(500, "No user found by that id.");
+            throw new CustomError(405, "Different user with same id already exists.")
+        } else throw new CustomError(404, "No user found by that id.");
     }
  }
