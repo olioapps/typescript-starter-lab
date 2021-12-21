@@ -151,12 +151,31 @@ describe('Tests will go here!', () => {
         color: "red",
     })
 
-    expect(result).toStrictEqual({
-        id: 1,
-        name: "Michelle",
-        age: 29,
-        color: "red",
-    }) 
+    expect(result).toStrictEqual([
+        {
+            id: 1,
+            name: "Michelle",
+            age: 29,
+            color: "red",
+        },
+        {
+            id: 2,
+            name: "Vintage Aaron",
+            age: 35,
+            color: "blue",
+        },
+        {
+            id: 3,
+            name: "Derek",
+            age: 28,
+            color: "green",
+        },
+        {
+            name: "George",
+            age: 32,
+            color: "red",
+        },
+    ]) 
   })
 
   it('returns CustomError if user with same id but different name already exists', () => {

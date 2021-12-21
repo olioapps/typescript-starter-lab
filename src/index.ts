@@ -61,15 +61,23 @@ export class UserAPI {
         } else throw new CustomError(404, "No user with that id found.")
     } 
 
-    public updateUser = (id: number, updatedUser: User): User => {
-        let existingUser = this.users.find(existingUser => existingUser.id === id)
+    public updateUser = (id: number, updatedUser: User): ReadonlyArray<User> => {
+        let targetUser = this.users.find(existingUser => existingUser.id === id)
 
-        if (existingUser) {
-            if (existingUser.name === updatedUser.name) {
-                existingUser = { ...updatedUser }
-                return { id, ...existingUser }
-            } else 
-            throw new CustomError(405, "Different user with same id already exists.")
-        } else throw new CustomError(404, "No user found by that id.");
+        if (targetUser) {
+            return this.users.map(user => {
+                    if (user.id === id) {
+                        if (user.name === updatedUser.name) {
+                            return { id, ...updatedUser }
+                        } else {
+                            throw new CustomError(405, "Different user with same id already exists.")
+                        }
+                } else {
+                    return user
+                }
+          })
+        } else {
+            throw new CustomError(404, "No user found by that id.")
+        }
     }
- }
+}
