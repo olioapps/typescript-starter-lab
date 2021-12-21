@@ -30,15 +30,19 @@ export class UserAPI {
 
     public getUserById = (id: number): User => {
         const foundUser = this.users.find(user => user.id === id)
-        if (foundUser === undefined) {
+        if (!foundUser) {
             throw new CustomError(404, "No user found.")
-        } else return foundUser  
+        } else {
+            return foundUser  
+        }
     }
 
     public getUsers = (): ReadonlyArray<User> => {
         if (this.users.length === 0) { 
             throw new CustomError(404, "No users found.") 
-        } else return this.users
+        } else {
+            return this.users
+        }
     } 
 
     public createUser = (user: User): User => {
@@ -47,7 +51,7 @@ export class UserAPI {
         if (userIdExists) {
             throw new CustomError(405, "User with id already exists.")
         } else { 
-            new UserAPI([user, ...this.users])
+            this.users = [user, ...this.users]
             return user 
         }
     }  
@@ -56,7 +60,7 @@ export class UserAPI {
         const user = this.users.find(existingUser => existingUser.id === id)
 
         if (user) {
-            new UserAPI(this.users.filter(user => user.id !== id))
+            this.users = this.users.filter(user => user.id !== id)
             return user
         } else throw new CustomError(404, "No user with that id found.")
     } 
