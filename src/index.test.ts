@@ -150,8 +150,15 @@ describe('Tests will go here!', () => {
         age: 29,
         color: "red",
     })
-
-    expect(result).toStrictEqual([
+    
+    expect(result).toStrictEqual({
+        id: 1,
+        name: "Michelle",
+        age: 29,
+        color: "red",
+    })
+    
+    expect(users.getUsers()).toStrictEqual([
         {
             id: 1,
             name: "Michelle",

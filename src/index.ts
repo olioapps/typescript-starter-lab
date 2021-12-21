@@ -61,11 +61,11 @@ export class UserAPI {
         } else throw new CustomError(404, "No user with that id found.")
     } 
 
-    public updateUser = (id: number, updatedUser: User): ReadonlyArray<User> => {
+    public updateUser = (id: number, updatedUser: User): User => {
         let targetUser = this.users.find(existingUser => existingUser.id === id)
 
         if (targetUser) {
-            return this.users.map(user => {
+            this.users = this.users.map(user => {
                     if (user.id === id) {
                         if (user.name === updatedUser.name) {
                             return { id, ...updatedUser }
@@ -75,7 +75,8 @@ export class UserAPI {
                 } else {
                     return user
                 }
-          })
+            })
+            return { id, ...updatedUser }
         } else {
             throw new CustomError(404, "No user found by that id.")
         }
