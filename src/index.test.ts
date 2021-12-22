@@ -1,11 +1,37 @@
 //write tests here
-import { User, UserAPI } from "./index"
+import { CustomError, UserAPI } from "./index"
 
 describe('Tests will go here!', () => {
     let users: UserAPI
 
     beforeEach(() => {
-      users = new UserAPI()
+      users = new UserAPI(
+        [
+            {
+                id: 1,
+                name: "Michelle",
+                age: 30,
+                color: "rainbow",
+            },
+            {
+                id: 2,
+                name: "Vintage Aaron",
+                age: 35,
+                color: "blue",
+            },
+            {
+                id: 3,
+                name: "Derek",
+                age: 28,
+                color: "green",
+            },
+            {
+                name: "George",
+                age: 32,
+                color: "red",
+            },
+        ]
+      ) 
     })
 
   it('gets a user by id', () => {
@@ -17,15 +43,20 @@ describe('Tests will go here!', () => {
         age: 35,
         color: "blue",
     }) 
-  })
+  }) 
 
-  it.skip('returns null if there is no user matching id', () => {
-      const result = users.getUserById(10)
+  it('returns an error if there is no user matching id', () => {
+      expect(() => users.getUserById(10)).toThrow()
+      try {
+           users.getUserById(10)
+      } catch (error: any) {
+          expect(error).toBeInstanceOf(CustomError)
+          expect(error.message).toBe("No user found.")
+          expect(error.status).toEqual(404)
+      }
+  }) 
 
-      expect(result).toStrictEqual(null)
-  })
-
-  it.skip('gets all users', () => {
+  it('gets all users', () => {
     const result = users.getUsers()
 
     expect(result).toStrictEqual([
@@ -55,13 +86,7 @@ describe('Tests will go here!', () => {
     ]) 
   }) 
 
-  it.skip('returns null if no users are found', () => {
-      const result = users.getUserById(10)
-
-      expect(result).toStrictEqual(null)
-  })
-
-  it.skip('creates a user', () => {
+  it('creates a user', () => {
     const newUser = {
         id: 4,
         name: "Yoda",
@@ -78,18 +103,25 @@ describe('Tests will go here!', () => {
     }) 
   })
 
-  it.skip('returns null if user id already exists', () => {
-      const result = users.createUser({
-          id: 1,
-          name: "Michelle",
-          color: "rainbow",
-          age: 30,
-      })
+  it('returns CustomError if user id already exists', () => {
+    const newUser = {
+        id: 1,
+        name: "Michelle",
+        color: "rainbow",
+        age: 30,
+    }
 
-      expect(result).toStrictEqual(null)
+    expect(() => users.createUser(newUser)).toThrow()
+      try {
+      users.createUser(newUser)
+    } catch (error: any) {
+        expect(error).toBeInstanceOf(CustomError)
+        expect(error.message).toBe("User with id already exists.")
+        expect(error.status).toEqual(405)
+    } 
   })
 
-  it.skip('deletes a user by id', () => {
+  it('deletes a user by id', () => {
     const result = users.deleteUserById(1)
 
     expect(result).toStrictEqual({
@@ -98,37 +130,97 @@ describe('Tests will go here!', () => {
         age: 30,
         color: "rainbow",
     }) 
-  })
+  }) 
 
-  it.skip('returns null if deleted user id does not exist', () => {
-    const result = users.deleteUserById(5)
+  it('returns CustomError if deleted user id does not exist', () => {
+    expect(() => users.deleteUserById(10)).toThrow()
+    
+    try {
+        users.deleteUserById(10)
+      } catch (error: any) {
+          expect(error).toBeInstanceOf(CustomError)
+          expect(error.message).toBe("No user with that id found.")
+          expect(error.status).toEqual(404)
+      } 
+  })  
 
-    expect(result).toStrictEqual(false) 
-  })
-
-  it.skip('updates a user by id', () => {
+  it('updates a user by id', () => {
     const result = users.updateUser(1, { 
         name: "Michelle",
         age: 29,
         color: "red",
     })
-
+    
     expect(result).toStrictEqual({
         id: 1,
         name: "Michelle",
         age: 29,
         color: "red",
-    }) 
+    })
+    
+    expect(users.getUsers()).toStrictEqual([
+        {
+            id: 1,
+            name: "Michelle",
+            age: 29,
+            color: "red",
+        },
+        {
+            id: 2,
+            name: "Vintage Aaron",
+            age: 35,
+            color: "blue",
+        },
+        {
+            id: 3,
+            name: "Derek",
+            age: 28,
+            color: "green",
+        },
+        {
+            name: "George",
+            age: 32,
+            color: "red",
+        },
+    ]) 
   })
 
-  it.skip('returns null if user with same id already exists', () => {
-    const result = users.updateUser(1, { 
-        id: 2,
+  it('returns CustomError if user with same id but different name already exists', () => {
+    const updatedUser = {
+        id: 1,
+        name: "John",
+        age: 29,
+        color: "red",
+    }
+    
+    expect(() => users.updateUser(1, updatedUser)).toThrow()
+
+    try {
+        users.updateUser(1, updatedUser)
+      } catch (error: any) {
+          expect(error).toBeInstanceOf(CustomError)
+          expect(error.message).toBe("Different user with same id already exists.")
+          expect(error.status).toEqual(405)
+      } 
+  })
+
+  it('returns CustomError if user by id does not exist', () => {
+    const updatedUser = {
+        id: 10,
         name: "Michelle",
         age: 29,
         color: "red",
-    })
+    }
+    
+    expect(() => users.updateUser(10, updatedUser)).toThrow()
 
-    expect(result).toStrictEqual(null) 
+    try {
+        users.updateUser(10, updatedUser)
+      } catch (error: any) {
+          expect(error).toBeInstanceOf(CustomError)
+          expect(error.message).toBe("No user found by that id.")
+          expect(error.status).toEqual(404)
+      } 
   })
 })
+ 
