@@ -1,4 +1,4 @@
-//Define class here
+// Define class here
 
 export interface User {
     readonly id?: number
@@ -80,5 +80,58 @@ export class UserAPI {
         } else {
             throw new CustomError(404, "No user found by that id.")
         }
+    }
+}
+
+// 
+// 
+// EVENT API
+
+export interface Event {
+    readonly timestamp: number
+    readonly eventType: "new message" | "view" | "screenshot"
+}
+
+export class EventScoreAPI {
+    private score: number
+    private eventArr: ReadonlyArray<Event>
+
+    constructor(eventArr: ReadonlyArray<Event>) {
+        this.eventArr = eventArr
+        this.score = 0
+    }
+
+    public calcHighestScoreArrSequence = (): ReadonlyArray<Event> => {
+        let tempCount: number = 0
+        let highestScoreArr: ReadonlyArray<Event> = []
+
+        if (this.eventArr.length <= 5) {
+            highestScoreArr = this.eventArr
+            return highestScoreArr
+        } else {
+            this.eventArr.map((event, i) => {
+                const { eventType } = event
+                if (eventType === "screenshot") {
+                    tempCount += 3
+                    } else if (eventType === "view") {
+                        tempCount += 2
+                    } else tempCount += 1
+            
+                if (i > 4) {
+                    if (eventType[i - 1] === "screenshot") {
+                        tempCount - 3
+                    } else if (eventType[i - 1] === "view") {
+                        tempCount - 2
+                    } else tempCount - 1
+                }
+
+                if (tempCount > this.score) {
+                    highestScoreArr = this.eventArr.slice(i - 4, i + 1)
+                    return highestScoreArr
+                }
+            })
+
+        }
+        return highestScoreArr
     }
 }
