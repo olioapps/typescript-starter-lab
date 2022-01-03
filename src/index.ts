@@ -106,10 +106,9 @@ export class EventScoreAPI {
         let highestScoreArr: ReadonlyArray<Event> = []
 
         if (this.eventArr.length <= 5) {
-            highestScoreArr = this.eventArr
-            return highestScoreArr
+            return this.eventArr
         } else {
-            this.eventArr.map((event, i) => {
+            this.eventArr.forEach((event, i) => {
                 const { eventType } = event
                 if (eventType === "screenshot") {
                     tempCount += 3

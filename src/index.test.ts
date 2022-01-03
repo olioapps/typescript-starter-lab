@@ -259,6 +259,64 @@ describe('EventScore API', () => {
         ])
     })
 
+    it('Returns an empty array if there are no events', () => {
+        const events = new EventScoreAPI([])
+
+        const result = events.calcHighestScoreArrSequence()
+
+        expect(result).toStrictEqual([])
+    })
+
+    it('Returns an array of five events if the array length is five', () => {
+        const events = new EventScoreAPI([
+            {
+                timestamp: 123123123,
+                eventType: "new message",
+            },
+            {
+                timestamp: 123123124,
+                eventType: "new message",
+            },
+            {
+                timestamp: 123123125,
+                eventType: "new message",
+            },
+            {
+                timestamp: 123123124,
+                eventType: "new message",
+            },
+            {
+                timestamp: 123123125,
+                eventType: "new message",
+            },
+        ])
+
+        const result = events.calcHighestScoreArrSequence()
+
+        expect(result).toStrictEqual([
+            {
+                timestamp: 123123123,
+                eventType: "new message",
+            },
+            {
+                timestamp: 123123124,
+                eventType: "new message",
+            },
+            {
+                timestamp: 123123125,
+                eventType: "new message",
+            },
+            {
+                timestamp: 123123124,
+                eventType: "new message",
+            },
+            {
+                timestamp: 123123125,
+                eventType: "new message",
+            },
+        ])
+    })
+
     it('Returns a subarray - no greater than 5 contiguous elements - where the total event type score is the highest', () => {
         const events = new EventScoreAPI([
             {
