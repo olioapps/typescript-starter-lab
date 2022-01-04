@@ -372,12 +372,12 @@ describe('EventScore API', () => {
 
         expect(result).toStrictEqual([
             {
-                timestamp: 123123125,
-                eventType: "screenshot",
+                timestamp: 123123124,
+                eventType: "view",
             },
             {
                 timestamp: 123123125,
-                eventType: "new message",
+                eventType: "screenshot",
             },
             {
                 timestamp: 123123125,

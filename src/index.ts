@@ -110,26 +110,33 @@ export class EventScoreAPI {
         } else {
             this.eventArr.forEach((event, i) => {
                 const { eventType } = event
+                
                 if (eventType === "screenshot") {
                     tempCount += 3
-                    } else if (eventType === "view") {
-                        tempCount += 2
-                    } else tempCount += 1
-            
+                } else if (eventType === "view") {
+                    tempCount += 2 
+                } else {
+                    tempCount += 1
+                }
+
                 if (i > 4) {
-                    if (eventType[i - 1] === "screenshot") {
-                        tempCount - 3
-                    } else if (eventType[i - 1] === "view") {
-                        tempCount - 2
-                    } else tempCount - 1
+                    const eventTypeToSubtract = this.eventArr[i - 5].eventType
+
+                    if (eventTypeToSubtract === "screenshot") {
+                        tempCount -= 3
+                    } else if (eventTypeToSubtract === "view") {
+                        tempCount -= 2
+                    } else {
+                        tempCount -= 1
+                    }
                 }
 
                 if (tempCount > this.score) {
+                    this.score = tempCount
                     highestScoreArr = this.eventArr.slice(i - 4, i + 1)
                     return highestScoreArr
                 }
             })
-
         }
         return highestScoreArr
     }
