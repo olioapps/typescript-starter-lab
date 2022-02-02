@@ -1,52 +1,72 @@
-import { Event, Score } from "./models"
+import { Event } from "./models"
 
-// scoreEvents = (events): score => {} 
-
-const scoreFirstFiveSubarrays = (eventTypeConvertedToScore: Score[]): number => { 
-  let sum: number = 0 
-  for (let i = 0; i < 5; i++) {
-    sum += eventTypeConvertedToScore[i].score
-  }
-  return sum
+interface ScoreMeta {
+  highScore: number;
+  trailingScore: number;
+  highScoreIdx: number;
+  cachedScores: number[];
 }
 
-const scoreRemainingSubarrays = (eventTypeConvertedToScore: Score[], subarraySumToCompare: number, trackSubarrayIndices: Record<string, number>, originalSubarraySum: number) => {
-  for (let i = 5; i < eventTypeConvertedToScore.length; i++) { 
-    subarraySumToCompare += eventTypeConvertedToScore[i].score - eventTypeConvertedToScore[i-5].score
-    trackSubarrayIndices[subarraySumToCompare] = i
-    originalSubarraySum = Math.max(originalSubarraySum, subarraySumToCompare)
+export const scoreEvent = (event: Event) => {
+  switch (event.eventType) {
+    case 'screenshot':
+      return 3;
+    case 'view':
+      return 2;
+    case 'new message':
+      return 1;
+    default:
+      return 0
   }
-  return { trackSubarrayIndices, originalSubarraySum }
 }
 
-export function scoreEventStream(eventStream: Event[]): Event[] {
-
-  if (eventStream.length < 5) { //     if (eventStream.length < 5) return eventStream
-    return eventStream
-  } else {
-    let trackSubarrayIndices: Record<string, number> = {} // it's confusing that the score is the key, and not the index of the event
-
-    const eventTypeConvertedToScore = eventStream.map((event: Event): Score =>
-    event.eventType === 'new message' 
-      ? {score: 1} 
-      : event.eventType === 'view' 
-        ? {score: 2} 
-        : {score: 3} 
-    ) 
-
-    let originalSubarraySum = scoreFirstFiveSubarrays(eventTypeConvertedToScore)
-    trackSubarrayIndices[originalSubarraySum] = 4 // we have { [firstScore]: 4 }
-    let subarraySumToCompare: number = originalSubarraySum // firstScore
-
-    const {
-        trackSubarrayIndices: destructuredTrackSubarrayIndices,
-        originalSubarraySum: destructuredOriginalSubarraySum,
-      } = scoreRemainingSubarrays(eventTypeConvertedToScore, subarraySumToCompare, trackSubarrayIndices, originalSubarraySum)
-
-    const finalHighScoreSubarray: Event[] = eventStream.slice(
-      (destructuredTrackSubarrayIndices[destructuredOriginalSubarraySum]-4), 
-      (destructuredTrackSubarrayIndices[destructuredOriginalSubarraySum]+1),)
-
-      return finalHighScoreSubarray
+export const scoreEventStream = (eventStream: Event[], subArrayLength = 5): Event[] => {
+  if (eventStream.length <= subArrayLength ) {
+    return eventStream;
   }
-}       
+
+  const subArrayOffset = subArrayLength - 1;
+  const initialScoreMeta: ScoreMeta = {
+    highScore: 0,
+    trailingScore: 0,
+    highScoreIdx: subArrayOffset,
+    cachedScores: []
+  }
+
+  const scoreMeta: ScoreMeta = eventStream.reduce((acc, event, i) => {
+    //score the initial subArray of events, caching scores as we go
+    const score = scoreEvent(event);
+    if (i < subArrayLength) {
+      return {
+        ...acc,
+        highScore: acc.highScore += score,
+        trailingScore: acc.trailingScore += score,
+        cachedScores: [...acc.cachedScores, score]
+      }
+    }
+
+    /* 
+      as we continue iterating over the eventSteam, we shift cachedScores -- dropping the oldest score -- 
+      and push the current score into it (via desctructure and spread operations).
+
+      each iteration, we check the trailingScore against the highScore
+
+      if newTrailingScore > highScore, then update the high score and highScoreIdx
+      
+    */   
+    const [droppedScore, ...newCache] = [...acc.cachedScores, score];
+    const newTrailingScore = acc.trailingScore - droppedScore + score;
+
+    return {
+      ...acc,
+      cachedScores: newCache,
+      trailingScore: newTrailingScore,
+      ...(newTrailingScore > acc.highScore && { highScore: newTrailingScore, highScoreIdx: i}),
+    }
+  }, initialScoreMeta);
+
+  const startIdx = scoreMeta.highScoreIdx - subArrayOffset;
+
+  return eventStream.slice(startIdx, scoreMeta.highScoreIdx + 1)
+}   
+   
