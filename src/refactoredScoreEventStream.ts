@@ -1,58 +1,72 @@
 import { Event } from "./models"
 
-const scoreFirstFiveSubarrays = (eventStream: Event[]): number => { 
-  let sum: number = 0 
-  for (let i=0; i < 5; i++) {
-    eventStream[i].eventType === 'new message' 
-      ? sum += 1 
-      : eventStream[i].eventType === 'view' 
-        ? sum += 2 
-        : sum += 3
-  }
-  return sum
+interface ScoreMeta {
+  highScore: number;
+  trailingScore: number;
+  highScoreIdx: number;
+  cachedScores: number[];
 }
 
-const scoreRemainingSubarrays = (eventStreamSlice: Event[], subarraySum: number) => {
-  let highScoreFinalIndex = 4 // update?  
-  let subarraySumToCompare = subarraySum  
-  for (let i = 5; i < eventStreamSlice.length; i++) { 
-      let lastEventValue = 0
-      eventStreamSlice[i].eventType === 'new message' 
-        ? subarraySumToCompare += 1 
-        : eventStreamSlice[i].eventType === 'view' 
-          ? subarraySumToCompare += 2 
-          : subarraySumToCompare += 3
+export const scoreEvent = (event: Event) => {
+  switch (event.eventType) {
+    case 'screenshot':
+      return 3;
+    case 'view':
+      return 2;
+    case 'new message':
+      return 1;
+    default:
+      return 0
+  }
+}
 
-        eventStreamSlice[i-5].eventType === 'new message' 
-        ? lastEventValue += 1 
-        : eventStreamSlice[i-5].eventType === 'view' 
-          ? lastEventValue += 2 
-          : lastEventValue += 3
-        subarraySumToCompare -= lastEventValue
+export const scoreEventStream = (eventStream: Event[], subArrayLength = 5): Event[] => {
+  if (eventStream.length <= subArrayLength ) {
+    return eventStream;
+  }
 
-    if (subarraySumToCompare > subarraySum) {
-      highScoreFinalIndex = i
+  const subArrayOffset = subArrayLength - 1;
+  const initialScoreMeta: ScoreMeta = {
+    highScore: 0,
+    trailingScore: 0,
+    highScoreIdx: subArrayOffset,
+    cachedScores: []
+  }
+
+  const scoreMeta: ScoreMeta = eventStream.reduce((acc, event, i) => {
+    //score the initial subArray of events, caching saved values as we go
+    const score = scoreEvent(event);
+    if (i < subArrayLength) {
+      return {
+        ...acc,
+        highScore: acc.highScore += score,
+        trailingScore: acc.trailingScore += score,
+        cachedScores: [...acc.cachedScores, score]
+      }
     }
-    subarraySum = Math.max(subarraySum, subarraySumToCompare)
-  }
-  return highScoreFinalIndex
-}
 
-export function scoreEventStream(eventStream: Event[]): Event[] {
+    /* 
+      as we continue iterating over the eventSteam, we shift cachedScores, 
+      and push the current score into it (via desctructure and spread operations).
 
-  if (eventStream.length < 5) { 
-    return eventStream
-  } else {
+      each iteration, we check the trailingScore against the highScore
 
-    let subarraySum = scoreFirstFiveSubarrays(eventStream) 
+      if newTrailingScore > highScore, then update the high score and highScoreIdx
+      
+    */   
+    const [droppedScore, ...newCache] = [...acc.cachedScores, score];
+    const newTrailingScore = acc.trailingScore - droppedScore + score;
 
-    const index = scoreRemainingSubarrays(eventStream, subarraySum)
+    return {
+      ...acc,
+      cachedScores: newCache,
+      trailingScore: newTrailingScore,
+      ...(newTrailingScore > acc.highScore && { highScore: newTrailingScore, highScoreIdx: i}),
+    }
+  }, initialScoreMeta);
 
-    const highScoreSubarrayFirstIndex = index - 4 
-    const highScoreSubarrayLastIndex = index + 1
+  const startIdx = scoreMeta.highScoreIdx - subArrayOffset;
 
-    const finalHighScoreSubarray: Event[] = eventStream.slice(highScoreSubarrayFirstIndex, highScoreSubarrayLastIndex)
-
-    return finalHighScoreSubarray
-  }
-}       
+  return eventStream.slice(startIdx, scoreMeta.highScoreIdx + 1)
+}   
+   
