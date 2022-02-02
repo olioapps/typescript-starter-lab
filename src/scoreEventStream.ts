@@ -1,5 +1,7 @@
 import { Event, Score } from "./models"
 
+// scoreEvents = (events): score => {} 
+
 const scoreFirstFiveSubarrays = (eventTypeConvertedToScore: Score[]): number => { 
   let sum: number = 0 
   for (let i = 0; i < 5; i++) {
@@ -14,16 +16,15 @@ const scoreRemainingSubarrays = (eventTypeConvertedToScore: Score[], subarraySum
     trackSubarrayIndices[subarraySumToCompare] = i
     originalSubarraySum = Math.max(originalSubarraySum, subarraySumToCompare)
   }
-  return { subarraySumToCompare, trackSubarrayIndices, originalSubarraySum }
+  return { trackSubarrayIndices, originalSubarraySum }
 }
 
 export function scoreEventStream(eventStream: Event[]): Event[] {
-  if (eventStream.length === 0) {
-    return []
-  } else if (eventStream.length < 5) {
+
+  if (eventStream.length < 5) { //     if (eventStream.length < 5) return eventStream
     return eventStream
   } else {
-    let trackSubarrayIndices: Record<string, number> = {} 
+    let trackSubarrayIndices: Record<string, number> = {} // it's confusing that the score is the key, and not the index of the event
 
     const eventTypeConvertedToScore = eventStream.map((event: Event): Score =>
     event.eventType === 'new message' 
@@ -34,13 +35,18 @@ export function scoreEventStream(eventStream: Event[]): Event[] {
     ) 
 
     let originalSubarraySum = scoreFirstFiveSubarrays(eventTypeConvertedToScore)
-    trackSubarrayIndices[originalSubarraySum] = 4
-    let subarraySumToCompare: number = originalSubarraySum
+    trackSubarrayIndices[originalSubarraySum] = 4 // we have { [firstScore]: 4 }
+    let subarraySumToCompare: number = originalSubarraySum // firstScore
 
-    const { trackSubarrayIndices: destructuredTrackSubarrayIndices, originalSubarraySum: destructuredOriginalSubarraySum } = scoreRemainingSubarrays(eventTypeConvertedToScore, subarraySumToCompare, trackSubarrayIndices, originalSubarraySum)    
+    const {
+        trackSubarrayIndices: destructuredTrackSubarrayIndices,
+        originalSubarraySum: destructuredOriginalSubarraySum,
+      } = scoreRemainingSubarrays(eventTypeConvertedToScore, subarraySumToCompare, trackSubarrayIndices, originalSubarraySum)
+
     const finalHighScoreSubarray: Event[] = eventStream.slice(
       (destructuredTrackSubarrayIndices[destructuredOriginalSubarraySum]-4), 
       (destructuredTrackSubarrayIndices[destructuredOriginalSubarraySum]+1),)
+
       return finalHighScoreSubarray
   }
 }       
