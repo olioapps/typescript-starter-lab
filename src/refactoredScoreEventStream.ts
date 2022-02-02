@@ -46,7 +46,7 @@ export const scoreEventStream = (eventStream: Event[], subArrayLength = 5): Even
     }
 
     /* 
-      as we continue iterating over the eventSteam, we shift cachedScores, 
+      as we continue iterating over the eventSteam, we shift cachedScores -- dropping the oldest score -- 
       and push the current score into it (via desctructure and spread operations).
 
       each iteration, we check the trailingScore against the highScore
