@@ -1,7 +1,5 @@
 import { Event, Score } from "./models"
 
-// scoreEvents = (events): score => {} 
-
 const scoreFirstFiveSubarrays = (eventTypeConvertedToScore: Score[]): number => { 
   let sum: number = 0 
   for (let i = 0; i < 5; i++) {
@@ -21,10 +19,10 @@ const scoreRemainingSubarrays = (eventTypeConvertedToScore: Score[], subarraySum
 
 export function scoreEventStream(eventStream: Event[]): Event[] {
 
-  if (eventStream.length < 5) { //     if (eventStream.length < 5) return eventStream
+  if (eventStream.length < 5) { 
     return eventStream
   } else {
-    let trackSubarrayIndices: Record<string, number> = {} // it's confusing that the score is the key, and not the index of the event
+    let trackSubarrayIndices: Record<string, number> = {} 
 
     const eventTypeConvertedToScore = eventStream.map((event: Event): Score =>
     event.eventType === 'new message' 
@@ -35,8 +33,8 @@ export function scoreEventStream(eventStream: Event[]): Event[] {
     ) 
 
     let originalSubarraySum = scoreFirstFiveSubarrays(eventTypeConvertedToScore)
-    trackSubarrayIndices[originalSubarraySum] = 4 // we have { [firstScore]: 4 }
-    let subarraySumToCompare: number = originalSubarraySum // firstScore
+    trackSubarrayIndices[originalSubarraySum] = 4 
+    let subarraySumToCompare: number = originalSubarraySum 
 
     const {
         trackSubarrayIndices: destructuredTrackSubarrayIndices,
