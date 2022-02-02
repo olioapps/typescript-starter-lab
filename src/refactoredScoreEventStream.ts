@@ -34,7 +34,7 @@ export const scoreEventStream = (eventStream: Event[], subArrayLength = 5): Even
   }
 
   const scoreMeta: ScoreMeta = eventStream.reduce((acc, event, i) => {
-    //score the initial subArray of events, caching saved values as we go
+    //score the initial subArray of events, caching scores as we go
     const score = scoreEvent(event);
     if (i < subArrayLength) {
       return {
