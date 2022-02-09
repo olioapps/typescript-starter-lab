@@ -8,7 +8,10 @@ const scoreFirstFiveSubarrays = (eventTypeConvertedToScore: Score[]): number => 
   return sum
 }
 
-const scoreRemainingSubarrays = (eventTypeConvertedToScore: Score[], subarraySumToCompare: number, trackSubarrayIndices: Record<string, number>, originalSubarraySum: number) => {
+const scoreRemainingSubarrays = (
+    eventTypeConvertedToScore: Score[], 
+    subarraySumToCompare: number,
+    trackSubarrayIndices: Record<string, number>, originalSubarraySum: number) => {
   for (let i = 5; i < eventTypeConvertedToScore.length; i++) { 
     subarraySumToCompare += eventTypeConvertedToScore[i].score - eventTypeConvertedToScore[i-5].score
     trackSubarrayIndices[subarraySumToCompare] = i
