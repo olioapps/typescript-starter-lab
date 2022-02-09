@@ -1,6 +1,5 @@
 import { Event } from "./models"
-   //add tests to helper functions 
-  //check typing throughout 
+
 const sumArray = (eventArray: any): number => {
   return eventArray.reduce((sum: number, event: Event): number => {
     return event.eventType === "new message" 
