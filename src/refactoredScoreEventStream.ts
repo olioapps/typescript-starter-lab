@@ -1,20 +1,20 @@
 import { Event } from "./models"
    //add tests to helper functions 
   //check typing throughout 
-const sumArray = (eventArray: any) => {
+const sumArray = (eventArray: any): number => {
   return eventArray.reduce((sum: number, event: Event): number => {
-    return event.eventType === 'new message' 
+    return event.eventType === "new message" 
       ? (sum += 1)
-      : event.eventType === 'view' 
+      : event.eventType === "view" 
         ? (sum += 2)
         : (sum += 3)
   }, 0)
 }
 
 const scoreEventType = (event: Event, sum: number): number => {
-  event.eventType === 'new message' 
+  event.eventType === "new message" 
   ? sum += 1 
-  : event.eventType === 'view' 
+  : event.eventType === "view" 
     ? sum += 2 
     : sum += 3
 
@@ -30,7 +30,7 @@ const scoreRemainingSubarrays = (
   eventStream: Event[],
   subarraySum: number,
 ): number => { 
-  let highScoreFinalIndex = 4 // update?  
+  let highScoreFinalIndex = 4 
   let subarraySumToCompare = subarraySum  
   for (let i = 5; i < eventStream.length; i++) { 
     let lastEventValue = 0
