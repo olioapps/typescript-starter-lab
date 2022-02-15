@@ -1,26 +1,20 @@
 import { Event } from "./models"
 
-const sumArray = (eventArray: any): number => {
-  return eventArray.reduce((sum: number, event: Event): number => {
-    return event.eventType === "new message" 
-      ? (sum += 1)
-      : event.eventType === "view" 
-        ? (sum += 2)
-        : (sum += 3)
-  }, 0)
-}
-
-const scoreEventType = (
-  event: Event, 
-  sum: number
-): number => {
-  event.eventType === "new message" 
-  ? sum += 1 
-  : event.eventType === "view" 
-    ? sum += 2 
-    : sum += 3
+const scoreEventType = (sum: number, event: Event) => {
+  const { eventType } = event
+  eventType === "new message" 
+    ? sum += 1
+    : eventType === "view" 
+      ? sum += 2
+      : sum += 3
 
   return sum
+}
+
+const sumArray = (eventArray: any): number => {
+  return eventArray.reduce((sum: number, event: Event): number => {
+    return scoreEventType(sum, event)
+  }, 0)
 }
 
 const scoreFirstFiveSubarrays = (eventStream: Event[]): number => {  
@@ -37,9 +31,9 @@ const scoreRemainingSubarrays = (
   for (let i = 5; i < eventStream.length; i++) { 
     let lastEventValue: number = 0
 
-    subarraySumToCompare = scoreEventType(eventStream[i], subarraySumToCompare)
+    subarraySumToCompare = scoreEventType(subarraySumToCompare, eventStream[i])
 
-    lastEventValue = scoreEventType(eventStream[i-5], lastEventValue)
+    lastEventValue = scoreEventType(lastEventValue, eventStream[i-5])
 
     subarraySumToCompare -= lastEventValue
 
