@@ -11,7 +11,7 @@ const scoreEventType = (sum: number, event: Event) => {
   return sum
 }
 
-const sumArray = (eventArray: any): number => {
+const sumArray = (eventArray: Event[]): number => {
   return eventArray.reduce((sum: number, event: Event): number => {
     return scoreEventType(sum, event)
   }, 0)
