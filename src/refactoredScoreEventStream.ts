@@ -22,25 +22,26 @@ const scoreFirstFiveSubarrays = (eventStream: Event[]): number => {
   return sumArray(firstFiveElements)
 }
 
-const scoreRemainingSubarrays = (
+const gethighScoreFinalIndex = (
   eventStream: Event[],
-  subarraySum: number,
+  subarraySumA: number,
 ): number => { 
   let highScoreFinalIndex: number = 4 
-  let subarraySumToCompare: number = subarraySum  
+  let subarraySumB: number = subarraySumA 
+   
   for (let i = 5; i < eventStream.length; i++) { 
     let lastEventValue: number = 0
 
-    subarraySumToCompare = scoreEventType(subarraySumToCompare, eventStream[i])
+    subarraySumB = scoreEventType(subarraySumB, eventStream[i])
 
     lastEventValue = scoreEventType(lastEventValue, eventStream[i-5])
 
-    subarraySumToCompare -= lastEventValue
+    subarraySumB -= lastEventValue
 
-    if (subarraySumToCompare > subarraySum) {
+    if (subarraySumB > subarraySumA) {
       highScoreFinalIndex = i
     }
-    subarraySum = Math.max(subarraySum, subarraySumToCompare)
+    subarraySumA = Math.max(subarraySumA, subarraySumB)
   }
   return highScoreFinalIndex
 }
@@ -52,7 +53,7 @@ export function scoreEventStream(eventStream: Event[]): Event[] {
   } else {
     let subarraySum = scoreFirstFiveSubarrays(eventStream) 
 
-    const index: number = scoreRemainingSubarrays(eventStream, subarraySum)
+    const index: number = gethighScoreFinalIndex(eventStream, subarraySum)
     const highScoreSubarrayFirstIndex: number = index - 4 
     const highScoreSubarrayLastIndex: number = index + 1
 
