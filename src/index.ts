@@ -20,7 +20,6 @@ class UserAPI {
     console.log(`returns users which included ${name}`);
   }
 }
-
 const users = new UserAPI();
 users.addUser("minoka");
 users.getUserById(3);
