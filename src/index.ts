@@ -1,8 +1,14 @@
 //Define class here
 console.log("hello there!");
 
-class UserAPI {
-  constructor() {}
+class User {
+  //constructor for creating each user object for later
+  constructor() {
+    this.id;
+    this.name;
+    this.age;
+    this.favoriteColor;
+  }
   // these are the methods needed for basic CRUD
   addUser(name) {
     console.log(`inside addUser ${name}`);
@@ -20,7 +26,8 @@ class UserAPI {
     console.log(`returns users which included ${name}`);
   }
 }
-const users = new UserAPI();
+
+const users = new User();
 users.addUser("minoka");
 users.getUserById(3);
 users.getUsers();
