@@ -1,5 +1,10 @@
 //Define class here
-console.log("hello there!");
+const mockUsers = [
+  { id: 1, name: "minoka", age: 31, favoriteColor: "green" },
+  { id: 2, name: "ted", age: 23, favoriteColor: "black" },
+  { id: 3, name: "ron", age: 41, favoriteColor: "blue" },
+  { id: 4, name: "tim", age: 27, favoriteColor: "red" },
+];
 
 class UserAPI {
   // these are the methods needed for basic CRUD
