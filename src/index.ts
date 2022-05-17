@@ -29,7 +29,6 @@ class UserAPI {
     console.log(`returns users which included ${name}`);
   }
 }
-
 const userObject = { name: "minoka", age: 31, favoriteColor: "green" };
 
 const users = new UserAPI();
