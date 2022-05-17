@@ -2,13 +2,6 @@
 console.log("hello there!");
 
 class UserAPI {
-  //constructor for creating each user object for later
-  constructor() {
-    this.id;
-    this.name;
-    this.favoriteColor;
-    this.age;
-  }
   // these are the methods needed for basic CRUD
   addUser(user) {
     console.log(`adds a new user with the name ${user.name}`);
