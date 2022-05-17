@@ -1,9 +1,9 @@
 //Define class here
 const mockUsers = [
-  { id: 1, name: "minoka", age: 31, favoriteColor: "green" },
-  { id: 2, name: "ted", age: 23, favoriteColor: "black" },
-  { id: 3, name: "ron", age: 41, favoriteColor: "blue" },
-  { id: 4, name: "tim", age: 27, favoriteColor: "red" },
+  { id: 0, name: "minoka", age: 31, favoriteColor: "green" },
+  { id: 1, name: "ted", age: 23, favoriteColor: "black" },
+  { id: 2, name: "ron", age: 41, favoriteColor: "blue" },
+  { id: 3, name: "tim", age: 27, favoriteColor: "red" },
 ];
 
 class UserAPI {
@@ -12,7 +12,9 @@ class UserAPI {
   }
   // these are the methods needed for basic CRUD
   addUser(user) {
-    console.log(`adds a new user with the name ${user.name}`);
+    const newUser = { id: this.list.length, ...user };
+    this.list.push(newUser);
+    return newUser;
   }
   getUserById(id) {
     console.log(`looking for user with Id of ${id}`);
@@ -34,7 +36,8 @@ const userObject = { name: "minoka", age: 31, favoriteColor: "green" };
 
 const users = new UserAPI(mockUsers);
 console.log(users.list);
-users.addUser(userObject);
+const response = users.addUser(userObject);
+console.log("response", response);
 users.getUserById(3);
 users.updateUserById(3);
 users.getUsers();
