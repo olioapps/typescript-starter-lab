@@ -17,7 +17,8 @@ class UserAPI {
     return newUser;
   }
   getUserById(id) {
-    console.log(`looking for user with Id of ${id}`);
+    const targetUser = this.list.filter((item) => item.id === id);
+    return targetUser;
   }
   updateUserById(id) {
     console.log(`updates user with Id${id}`);
@@ -35,10 +36,8 @@ class UserAPI {
 const userObject = { name: "minoka", age: 31, favoriteColor: "green" };
 
 const users = new UserAPI(mockUsers);
-console.log(users.list);
-const response = users.addUser(userObject);
-console.log("response", response);
-users.getUserById(3);
+console.log("addUser", users.addUser(userObject));
+console.log("getUserById", users.getUserById(3));
 users.updateUserById(3);
 users.getUsers();
 users.deleteUserById(1);
