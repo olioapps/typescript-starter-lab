@@ -8,8 +8,9 @@ const mockUsers = [
 
 class UserAPI {
   constructor(users) {
-    this.list = users;
+    this.list = users || [];
   }
+  //random id generator
   randomId = () => {
     return Math.random().toString(24).slice(2);
   };
@@ -46,7 +47,13 @@ const users = new UserAPI(mockUsers);
 console.log("addUser:", users.addUser(userObject));
 console.log("getUserById:", users.getUserById(3));
 console.log("getUserById error:", users.getUserById(5));
-users.updateUserById(3);
-users.getUsers();
-users.deleteUserById(1);
-users.searchUserByName("mino");
+
+const emptyUsers = new UserAPI();
+emptyUsers.addUser(userObject);
+emptyUsers.addUser(userObject);
+emptyUsers.addUser(userObject);
+console.log("emptyUsers", emptyUsers);
+// users.updateUserById(3);
+// users.getUsers();
+// users.deleteUserById(1);
+// users.searchUserByName("mino");
