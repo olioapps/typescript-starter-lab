@@ -7,6 +7,9 @@ const mockUsers = [
 ];
 
 class UserAPI {
+  constructor(users) {
+    this.list = users;
+  }
   // these are the methods needed for basic CRUD
   addUser(user) {
     console.log(`adds a new user with the name ${user.name}`);
@@ -29,7 +32,8 @@ class UserAPI {
 }
 const userObject = { name: "minoka", age: 31, favoriteColor: "green" };
 
-const users = new UserAPI();
+const users = new UserAPI(mockUsers);
+console.log(users.list);
 users.addUser(userObject);
 users.getUserById(3);
 users.updateUserById(3);
