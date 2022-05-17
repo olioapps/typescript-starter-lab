@@ -17,11 +17,11 @@ class UserAPI {
     return newUser;
   }
   getUserById(id) {
-    const targetUser = this.list.filter((user) => user.id === id);
-    if (!targetUser[0]) {
+    const targetUser = this.list.find((user) => user.id === id);
+    if (!targetUser) {
       return "there is no one found with that id";
     } else {
-      return targetUser[0];
+      return targetUser;
     }
   }
   updateUserById(id) {
