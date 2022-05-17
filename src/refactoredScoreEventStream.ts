@@ -11,7 +11,7 @@ const scoreEventType = (sum: number, event: Event) => {
   return sum
 }
 
-const sumArray = (eventArray: Event[]): number => {
+const newArray = (eventArray: Event[]): number => {
   return eventArray.reduce((sum: number, event: Event): number => {
     return scoreEventType(sum, event)
   }, 0)
@@ -19,7 +19,7 @@ const sumArray = (eventArray: Event[]): number => {
 
 const scoreFirstFiveSubarrays = (eventStream: Event[]): number => {  
   const firstFiveElements = eventStream.slice(0, 4)
-  return sumArray(firstFiveElements)
+  return newArray(firstFiveElements)
 }
 
 const gethighScoreFinalIndex = (

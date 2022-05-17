@@ -7,7 +7,7 @@ it("Test 1: Empty Event stream", () => {
   expect(result).toStrictEqual([])
 })
 
-it("Test 2: Event stream with less than 5 events", () => {
+it("Test testing: Event stream with less than 5 events", () => {
   const testArray: Event[] = [
     { timestamp: 123123123, eventType: "view", },  
     { timestamp: 123123124, eventType: "new message", },
