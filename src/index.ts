@@ -19,7 +19,7 @@ class UserAPI {
   getUserById(id) {
     const targetUser = this.list.find((user) => user.id === id);
     if (!targetUser) {
-      return "there is no one found with that id";
+      return new Error("There are no users found with that id.");
     } else {
       return targetUser;
     }
