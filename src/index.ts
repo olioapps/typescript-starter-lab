@@ -18,7 +18,11 @@ class UserAPI {
   }
   getUserById(id) {
     const targetUser = this.list.filter((item) => item.id === id);
-    return targetUser;
+    if (!targetUser.name) {
+      return "there is no one found with that id";
+    } else {
+      return targetUser;
+    }
   }
   updateUserById(id) {
     console.log(`updates user with Id${id}`);
@@ -38,6 +42,7 @@ const userObject = { name: "minoka", age: 31, favoriteColor: "green" };
 const users = new UserAPI(mockUsers);
 console.log("addUser", users.addUser(userObject));
 console.log("getUserById", users.getUserById(3));
+console.log("getUserById error", users.getUserById(5));
 users.updateUserById(3);
 users.getUsers();
 users.deleteUserById(1);
