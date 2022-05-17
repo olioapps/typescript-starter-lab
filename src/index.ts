@@ -10,9 +10,12 @@ class UserAPI {
   constructor(users) {
     this.list = users;
   }
+  randomId = () => {
+    return Math.random().toString(24).slice(2);
+  };
   // these are the methods needed for basic CRUD
   addUser(user) {
-    const newUser = { id: this.list.length, ...user };
+    const newUser = { id: this.randomId(), ...user };
     this.list.push(newUser);
     return newUser;
   }
