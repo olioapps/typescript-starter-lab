@@ -16,27 +16,22 @@ class UserAPI {
   }
 
   addUser(user) {
-    try {
-      if (!user.name)
-        throw new Error("You need to at least have a name to add a user")
-      const newUser = { id: this.randomId(), ...user }
-      this.list.push(newUser)
-      return newUser
-    } catch (err) {
-      err.status = 406
-      console.log(err.message)
+    if (!user.name) {
+      throw new Error("you need to at least have a name to add a user")
     }
+    const newUser = { id: this.randomId(), ...user }
+    this.list.push(newUser)
+    return newUser
   }
+
   getUserById(id) {
     const targetUser = this.list.find((user) => user.id === id)
-    try {
-      if (!targetUser) throw new Error("There are no users found with that id.")
-      return targetUser
-    } catch (err) {
-      err.status = 404
-      console.log(err.message)
+    if (!targetUser) {
+      throw new Error("There are no users found with that id.")
     }
+    return targetUser
   }
+
   updateUserById(updatedUser) {
     try {
       if (!updatedUser.id)
@@ -54,12 +49,15 @@ class UserAPI {
       console.log(err.message)
     }
   }
+
   getUsers() {
     console.log("returns an array of users")
   }
+
   deleteUserById(id) {
     console.log(`deletes user with id ${id}`)
   }
+
   searchUserByName(name) {
     console.log(`returns users which included ${name}`)
   }
@@ -84,13 +82,22 @@ const updatingUserObjectErrorWithId = {
 }
 
 const users = new UserAPI(mockUsers)
-// console.log("addUser:", users.addUser(userObject))
-// console.log("addUser error:", users.addUser({}))
-// console.log("-------------------------------------")
+console.log("-------------------------------------")
+console.log("addUser:", users.addUser(userObject))
+try {
+  users.addUser({})
+} catch (err) {
+  console.log(err.message)
+}
+console.log("-------------------------------------")
 
-// console.log("getUserById:", users.getUserById("3"))
-// console.log("getUserById error:", users.getUserById("5"))
-// console.log("-------------------------------------")
+console.log("getUserById:", users.getUserById(3))
+try {
+  users.getUserById(5)
+} catch (err) {
+  console.log(err.message)
+}
+console.log("-------------------------------------")
 
 // const emptyUsers = new UserAPI([])
 // emptyUsers.addUser(userObject)
