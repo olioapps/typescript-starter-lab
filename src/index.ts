@@ -47,11 +47,8 @@ class UserAPI {
         }
         return user
       })
-
       this.list = updatedList
-      const targetUser = this.list.find((user) => user.id === updatedUser.id)
-      if (!targetUser) throw new Error("There are no users found with that id.")
-      return targetUser
+      return this.getUserById(updatedUser.id)
     } catch (err) {
       err.status = 400
       console.log(err.message)
