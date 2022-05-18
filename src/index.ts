@@ -47,7 +47,7 @@ class UserAPI {
       })
 
       this.list = updatedList
-      const targetUser = this.list.find((user) => user.id === id)
+      const targetUser = this.list.find((user) => user.id === updatedUser.id)
       if (!targetUser) throw new Error("There are no users found with that id.")
       return targetUser
     } catch (err) {
@@ -101,8 +101,11 @@ const users = new UserAPI(mockUsers)
 // console.log("-------------------------------------")
 
 console.log(users.updateUserById(updatingUserObject))
+console.log("-------------------------------------")
 console.log(users.updateUserById(updatingUserObjectError))
+console.log("-------------------------------------")
 console.log(users.updateUserById(updatingUserObjectErrorWithId))
+console.log("-------------------------------------")
 // users.getUsers();›
 // users.deleteUserById(1);
 // users.searchUserByName("mino");
