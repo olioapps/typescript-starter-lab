@@ -16,28 +16,20 @@ class UserAPI {
   }
   // these are the methods needed for basic CRUD
   addUser(user) {
-    try {
-      if (!user.name) {
-        throw new Error("you need to at least have a name to add a user")
-      }
-      const newUser = { id: this.randomId(), ...user }
-      this.list.push(newUser)
-      return newUser
-    } catch (err) {
-      console.log(err.message)
+    if (!user.name) {
+      throw new Error("you need to at least have a name to add a user")
     }
+    const newUser = { id: this.randomId(), ...user }
+    this.list.push(newUser)
+    return newUser
   }
 
   getUserById(id) {
     const targetUser = this.list.find((user) => user.id === id)
-    try {
-      if (!targetUser) {
-        throw new Error("There are no users found with that id.")
-      }
-      return targetUser
-    } catch (err) {
-      console.log(err.message)
+    if (!targetUser) {
+      throw new Error("There are no users found with that id.")
     }
+    return targetUser
   }
 
   updateUserById(id) {
@@ -59,12 +51,21 @@ class UserAPI {
 const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
 
 const users = new UserAPI(mockUsers)
+console.log("-------------------------------------")
 console.log("addUser:", users.addUser(userObject))
-console.log("addUser error:", users.addUser({}))
+try {
+  users.addUser({})
+} catch (err) {
+  console.log(err.message)
+}
 console.log("-------------------------------------")
 
 console.log("getUserById:", users.getUserById(3))
-console.log("getUserById error:", users.getUserById(5))
+try {
+  users.getUserById(5)
+} catch (err) {
+  console.log(err.message)
+}
 console.log("-------------------------------------")
 
 const emptyUsers = new UserAPI([])
