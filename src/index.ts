@@ -24,6 +24,7 @@ class UserAPI {
       return newUser
     } catch (err) {
       err.status = 406
+      console.log(err.message)
     }
   }
   getUserById(id) {
@@ -33,6 +34,7 @@ class UserAPI {
       return targetUser
     } catch (err) {
       err.status = 404
+      console.log(err.message)
     }
   }
   updateUserById(updatedUser) {
