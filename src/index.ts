@@ -52,7 +52,7 @@ class UserAPI {
       return targetUser
     } catch (err) {
       err.status = 400
-      console.log(err)
+      console.log(err.message)
     }
   }
   getUsers() {
