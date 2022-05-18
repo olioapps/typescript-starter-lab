@@ -17,33 +17,41 @@ class UserAPI {
   // these are the methods needed for basic CRUD
   addUser(user) {
     try {
-      if (!user.name)
+      if (!user.name) {
         throw new Error("you need to at least have a name to add a user")
+      }
       const newUser = { id: this.randomId(), ...user }
       this.list.push(newUser)
       return newUser
     } catch (err) {
-      err.status = 406
+      console.log(err.message)
     }
   }
+
   getUserById(id) {
     const targetUser = this.list.find((user) => user.id === id)
     try {
-      if (!targetUser) throw new Error("There are no users found with that id.")
+      if (!targetUser) {
+        throw new Error("There are no users found with that id.")
+      }
       return targetUser
     } catch (err) {
-      err.status = 404
+      console.log(err.message)
     }
   }
+
   updateUserById(id) {
     console.log(`updates user with Id${id}`)
   }
+
   getUsers() {
     console.log("returns an array of users")
   }
+
   deleteUserById(id) {
     console.log(`deletes user with id ${id}`)
   }
+
   searchUserByName(name) {
     console.log(`returns users which included ${name}`)
   }
@@ -52,7 +60,7 @@ const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
 
 const users = new UserAPI(mockUsers)
 console.log("addUser:", users.addUser(userObject))
-console.log("addUser error:", users.addUser({}))›
+console.log("addUser error:", users.addUser({}))
 console.log("-------------------------------------")
 
 console.log("getUserById:", users.getUserById(3))
