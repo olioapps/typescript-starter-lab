@@ -33,21 +33,17 @@ class UserAPI {
   }
 
   updateUserById(updatedUser) {
-    try {
-      if (!updatedUser.id)
-        throw new Error("We can not update a user without an id")
-      const updatedList = this.list.map((user) => {
-        if (user.id === updatedUser.id) {
-          return { ...user, ...updatedUser }
-        }
-        return user
-      })
-      this.list = updatedList
-      return this.getUserById(updatedUser.id)
-    } catch (err) {
-      err.status = 400
-      console.log(err.message)
+    if (!updatedUser.id) {
+      throw new Error("We can not update a user without an id")
     }
+    const updatedList = this.list.map((user) => {
+      if (user.id === updatedUser.id) {
+        return { ...user, ...updatedUser }
+      }
+      return user
+    })
+    this.list = updatedList
+    return this.getUserById(updatedUser.id)
   }
 
   getUsers() {
@@ -82,36 +78,35 @@ const updatingUserObjectErrorWithId = {
 }
 
 const users = new UserAPI(mockUsers)
-console.log("-------------------------------------")
-console.log("addUser:", users.addUser(userObject))
-try {
-  users.addUser({})
-} catch (err) {
-  console.log(err.message)
-}
-console.log("-------------------------------------")
-
-console.log("getUserById:", users.getUserById(3))
-try {
-  users.getUserById(5)
-} catch (err) {
-  console.log(err.message)
-}
-console.log("-------------------------------------")
-
-// const emptyUsers = new UserAPI([])
-// emptyUsers.addUser(userObject)
-// emptyUsers.addUser(userObject)
-// emptyUsers.addUser(userObject)
-// console.log("emptyUsers", emptyUsers)
+// ---TEST FOR FIRST TWO METHODS
+// console.log("-------------------------------------")
+// console.log("addUser:", users.addUser(userObject))
+// try {
+//   users.addUser({})
+// } catch (err) {
+//   console.log(err.message)
+// }
 // console.log("-------------------------------------")
 
+// console.log("getUserById:", users.getUserById(3))
+// try {
+//   users.getUserById(5)
+// } catch (err) {
+//   console.log(err.message)
+// }
+console.log("-------------------------------------")
+// ---TEST FOR UPDATING USER BY ID METHODS
 console.log(users.updateUserById(updatingUserObject))
 console.log("-------------------------------------")
-console.log(users.updateUserById(updatingUserObjectError))
+try {
+  users.updateUserById(updatingUserObjectError)
+} catch (err) {
+  console.log(err.message)
+}
 console.log("-------------------------------------")
-console.log(users.updateUserById(updatingUserObjectErrorWithId))
+try {
+  users.updateUserById(updatingUserObjectErrorWithId)
+} catch (err) {
+  console.log(err.message)
+}
 console.log("-------------------------------------")
-// users.getUsers();›
-// users.deleteUserById(1);
-// users.searchUserByName("mino");
