@@ -52,16 +52,19 @@ const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
 
 const users = new UserAPI(mockUsers)
 console.log("addUser:", users.addUser(userObject))
-console.log("addUser error:", users.addUser({}))
+console.log("addUser error:", users.addUser({}))›
+console.log("-------------------------------------")
+
 console.log("getUserById:", users.getUserById(3))
 console.log("getUserById error:", users.getUserById(5))
+console.log("-------------------------------------")
 
-const emptyUsers = new UserAPI()
+const emptyUsers = new UserAPI([])
 emptyUsers.addUser(userObject)
 emptyUsers.addUser(userObject)
 emptyUsers.addUser(userObject)
 console.log("emptyUsers", emptyUsers)
 // users.updateUserById(3);
-// users.getUsers();
+// users.getUsers();›
 // users.deleteUserById(1);
 // users.searchUserByName("mino");
