@@ -84,7 +84,7 @@ console.log("emptyUsers", emptyUsers)
 console.log("-------------------------------------")
 // This should delete tim from the mock users list.
 console.log(users)
-users.deleteUserById("3")
+console.log(users.deleteUserById("3"))
 console.log(users)
 // This will throw an error because tim is already deleted.
 try {
