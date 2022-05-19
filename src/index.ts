@@ -1,4 +1,5 @@
 //@ts-nocheck
+import { mockUsers } from "./mockdata"
 export default class UserAPI {
   constructor(users) {
     this.list = users || []
@@ -60,7 +61,7 @@ export default class UserAPI {
   }
 }
 
-// const users = new UserAPI(mockUsers)
+const users = new UserAPI(mockUsers)
 // //---TEST FOR FIRST TWO METHODS
 // console.log("-------------------------------------")
 // console.log("addUser:", users.addUser(userObject))
