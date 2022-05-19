@@ -78,22 +78,22 @@ const updatingUserObjectErrorWithId = {
 }
 
 const users = new UserAPI(mockUsers)
-// ---TEST FOR FIRST TWO METHODS
-// console.log("-------------------------------------")
-// console.log("addUser:", users.addUser(userObject))
-// try {
-//   users.addUser({})
-// } catch (err) {
-//   console.log(err.message)
-// }
-// console.log("-------------------------------------")
+//---TEST FOR FIRST TWO METHODS
+console.log("-------------------------------------")
+console.log("addUser:", users.addUser(userObject))
+try {
+  users.addUser({})
+} catch (err) {
+  console.log(err.message)
+}
+console.log("-------------------------------------")
 
-// console.log("getUserById:", users.getUserById(3))
-// try {
-//   users.getUserById(5)
-// } catch (err) {
-//   console.log(err.message)
-// }
+console.log("getUserById:", users.getUserById("3"))
+try {
+  users.getUserById(5)
+} catch (err) {
+  console.log(err.message)
+}
 console.log("-------------------------------------")
 // ---TEST FOR UPDATING USER BY ID METHODS
 console.log(users.updateUserById(updatingUserObject))
