@@ -67,8 +67,10 @@ const users = new UserAPI(mockUsers)
 //   console.log(err.message)
 // }
 // console.log("-------------------------------------")
+const emptyUsers = new UserAPI()
 console.log("-------------------------------------")
-console.log(users.getUsers())
+console.log('list: 'users.getUsers())
+console.log('empty list: ', emptyUsers.getUsers())
 console.log("-------------------------------------")
 
 // users.updateUserById(3);
