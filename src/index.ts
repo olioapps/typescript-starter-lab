@@ -52,7 +52,12 @@ export default class UserAPI {
   }
 
   searchUserByName(name) {
-    console.log(`returns users which included ${name}`)
+    const filteredUserArray  = this.list.filter((user) => {
+      if (user.name.toLowerCase().includes(name.toLowerCase())){
+        return user
+      }
+    })
+    return filteredUserArray
   }
 }
 
@@ -110,4 +115,18 @@ try {
 } catch (err) {
   console.log(err.message)
 }
+console.log("-------------------------------------")
+// TEST FOR SEARCHING USER BY NAME 
+console.log("-------------------------------------")
+console.log('should return 2 users: ', users.searchUserByName('Mino'))
+
+console.log("-------------------------------------")
+console.log('should return 1 user: ', users.searchUserByName('tEd'))
+
+console.log("-------------------------------------")
+console.log('should return 3 users: ', users.searchUserByName('o'))
+
+console.log("-------------------------------------")
+console.log('should return empty array: ', users.searchUserByName('benjamin'))
+
 console.log("-------------------------------------")
