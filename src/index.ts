@@ -41,8 +41,10 @@ class UserAPI {
   }
 
   deleteUserById(id) {
+    const deletedUser = this.getUserById(id)
     const newUsersList = this.list.filter((user) => user.id !== id)
     this.list = newUsersList
+    return deletedUser
   }
 
   searchUserByName(name) {
@@ -84,3 +86,9 @@ console.log("-------------------------------------")
 console.log(users)
 users.deleteUserById("3")
 console.log(users)
+// This will throw an error because tim is already deleted.
+try {
+  users.deleteUserById("3")
+} catch (err) {
+  console.log(err.message)
+}
