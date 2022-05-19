@@ -47,7 +47,7 @@ class UserAPI {
   }
 
   getUsers() {
-    console.log("returns an array of users")
+    return this.list
   }
 
   deleteUserById(id) {
@@ -87,13 +87,20 @@ try {
   console.log(err.message)
 }
 console.log("-------------------------------------")
-
 console.log("getUserById:", users.getUserById("3"))
 try {
   users.getUserById(5)
 } catch (err) {
   console.log(err.message)
 }
+// ---TEST FOR GET USERS
+console.log("-------------------------------------")
+const emptyUsers = new UserAPI()
+console.log("-------------------------------------")
+console.log('list: 'users.getUsers())
+console.log('empty list: ', emptyUsers.getUsers())
+console.log("-------------------------------------")
+
 console.log("-------------------------------------")
 // ---TEST FOR UPDATING USER BY ID METHODS
 console.log(users.updateUserById(updatingUserObject))
