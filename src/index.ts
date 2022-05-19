@@ -58,7 +58,12 @@ class UserAPI {
   }
 
   searchUserByName(name) {
-    console.log(`returns users which included ${name}`)
+    const filteredUserArray  = this.list.filter((user) => {
+      if(user.name.includes(name)){
+        return user
+      }
+    })
+    return filteredUserArray
   }
 }
 const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
@@ -138,5 +143,9 @@ console.log("-------------------------------------")
 // TEST FOR SEARCHING USER BY NAME 
 console.log("-------------------------------------")
 console.log(users.searchUserByName('mino'))
+console.log("-------------------------------------")
 console.log(users.searchUserByName('ted'))
+console.log("-------------------------------------")
+console.log(users.searchUserByName('o'))
+console.log("-------------------------------------")
 console.log(users.searchUserByName('benjamin'))
