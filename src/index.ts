@@ -117,3 +117,20 @@ try {
   console.log(err.message)
 }
 console.log("-------------------------------------")
+// ---TEST FOR EMPTY ARGUMENTS ON METHODS
+console.log("-------------------------------------")
+try{
+  users.addUser()
+}catch(err){
+  console.log(err)
+}
+try{
+  users.getUserById()
+}catch(err){
+  console.log(err)
+}
+try{
+  users.updateUserById()
+}catch(err){
+  console.log(err)
+}
