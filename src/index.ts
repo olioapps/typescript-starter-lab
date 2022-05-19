@@ -25,7 +25,7 @@ class UserAPI {
   }
 
   getUserById(id) {
-    const targetUser = this.list.find((user) => user.id === id)
+    const targetUser = this.list.find(user => user.id === id)
     if (!targetUser) {
       throw new Error("There are no users found with that id.")
     }
@@ -51,7 +51,10 @@ class UserAPI {
   }
 
   deleteUserById(id) {
-    console.log(`deletes user with id ${id}`)
+    const deletedUser = this.getUserById(id)
+    const newUsersList = this.list.filter(user => user.id !== id)
+    this.list = newUsersList
+    return deletedUser
   }
 
   searchUserByName(name) {
@@ -89,7 +92,7 @@ try {
 console.log("-------------------------------------")
 console.log("getUserById:", users.getUserById("3"))
 try {
-  users.getUserById(5)
+  users.getUserById("5")
 } catch (err) {
   console.log(err.message)
 }
@@ -113,6 +116,21 @@ try {
 console.log("-------------------------------------")
 try {
   users.updateUserById(updatingUserObjectErrorWithId)
+} catch (err) {
+  console.log(err.message)
+}
+console.log("-------------------------------------")
+
+// ---TEST FOR DELETE USER BY ID
+console.log("-------------------------------------")
+// This should delete tim from the mock users list.
+console.log(users)
+console.log(users.deleteUserById("3"))
+console.log(users)
+// This will throw an error because tim is already deleted.
+console.log("-------------------------------------")
+try {
+  users.deleteUserById("3")
 } catch (err) {
   console.log(err.message)
 }
