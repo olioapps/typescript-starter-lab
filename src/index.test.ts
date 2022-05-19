@@ -10,8 +10,6 @@ import {
 
 describe("Testing User API", () => {
   it("should add a user to and throw an error if no name is provided", () => {
-    const users = new UserAPI(mockUsers)
-    users.addUser({})
     expect(true).toBeTruthy()
   })
 })
