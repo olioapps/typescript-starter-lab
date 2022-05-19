@@ -63,9 +63,6 @@ class UserAPI {
         return user
       }
     })
-    if(filteredUserArray.length === 0){
-      throw new Error('There where no users that match your search')
-    }
     return filteredUserArray
   }
 }
