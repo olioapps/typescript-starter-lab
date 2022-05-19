@@ -1,15 +1,11 @@
-//write tests here
+// @ts-nocheck
 import UserAPI from "./index"
-import {
-  mockUsers,
-  userObject,
-  updatingUserObject,
-  updatingUserObjectError,
-  updatingUserObjectErrorWithId,
-} from "./mockdata"
+import { mockUsers } from "./mockdata"
 
-describe("Testing User API", () => {
-  it("should add a user to and throw an error if no name is provided", () => {
+describe("Tests will go here!", () => {
+  it("should add a user", () => {
+    const users = new UserAPI(mockUsers)
+
     expect(true).toBeTruthy()
   })
 })

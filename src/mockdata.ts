@@ -1,3 +1,4 @@
+// @ts-nocheck
 const mockUsers = [
   { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
   { id: "1", name: "ted", age: 23, favoriteColor: "black" },
