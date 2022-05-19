@@ -1,11 +1,19 @@
 // @ts-nocheck
 import UserAPI from "./index"
-import { mockUsers } from "./mockdata"
+import {
+  mockUsers,
+  userObject,
+  updatingUserObject,
+  updatingUserObjectError,
+  updatingUserObjectErrorWithId,
+} from "./mockdata"
 
 describe("Tests will go here!", () => {
-  it("should add a user", () => {
+  it("should make an instance of the UserAPI class and add a user, new user object should have an id.", () => {
     const users = new UserAPI(mockUsers)
+    const newUser = users.addUser(userObject)
 
-    expect(true).toBeTruthy()
+    expect(users.list).toHaveLength(5)
+    expect(newUser).toEqual({ id: expect.any(String), ...userObject })
   })
 })
