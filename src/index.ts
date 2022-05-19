@@ -128,8 +128,10 @@ console.log(users)
 console.log(users.deleteUserById("3"))
 console.log(users)
 // This will throw an error because tim is already deleted.
+console.log("-------------------------------------")
 try {
   users.deleteUserById("3")
 } catch (err) {
   console.log(err.message)
 }
+console.log("-------------------------------------")
