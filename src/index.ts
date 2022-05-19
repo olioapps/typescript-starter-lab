@@ -59,7 +59,7 @@ class UserAPI {
 
   searchUserByName(name) {
     const filteredUserArray  = this.list.filter((user) => {
-      if(user.name.includes(name)){
+      if(user.name.toLowerCase().includes(name.toLowerCase())){
         return user
       }
     })
@@ -145,9 +145,9 @@ try {
 console.log("-------------------------------------")
 // TEST FOR SEARCHING USER BY NAME 
 console.log("-------------------------------------")
-console.log(users.searchUserByName('mino'))
+console.log(users.searchUserByName('Mino'))
 console.log("-------------------------------------")
-console.log(users.searchUserByName('ted'))
+console.log(users.searchUserByName('tEd'))
 console.log("-------------------------------------")
 console.log(users.searchUserByName('o'))
 console.log("-------------------------------------")
