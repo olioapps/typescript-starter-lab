@@ -41,7 +41,8 @@ class UserAPI {
   }
 
   deleteUserById(id) {
-    console.log(`deletes user with id ${id}`)
+    const newUsersList = this.list.filter((user) => user.id !== id)
+    this.list = newUsersList
   }
 
   searchUserByName(name) {
@@ -79,4 +80,7 @@ console.log("emptyUsers", emptyUsers)
 // users.searchUserByName("mino");
 // ---TEST FOR DELETE USER BY ID
 console.log("-------------------------------------")
+// This should delete tim from the mock users list.
+console.log(users)
+users.deleteUserById("3")
 console.log(users)
