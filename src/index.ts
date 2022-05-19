@@ -37,7 +37,7 @@ class UserAPI {
   }
 
   getUsers() {
-    console.log("returns an array of users")
+    return this.list
   }
 
   deleteUserById(id) {
@@ -51,28 +51,26 @@ class UserAPI {
 const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
 
 const users = new UserAPI(mockUsers)
+// console.log("-------------------------------------")
+// console.log("addUser:", users.addUser(userObject))
+// try {
+//   users.addUser({})
+// } catch (err) {
+//   console.log(err.message)
+// }
+// console.log("-------------------------------------")
+
+// console.log("getUserById:", users.getUserById(3))
+// try {
+//   users.getUserById(5)
+// } catch (err) {
+//   console.log(err.message)
+// }
+// console.log("-------------------------------------")
 console.log("-------------------------------------")
-console.log("addUser:", users.addUser(userObject))
-try {
-  users.addUser({})
-} catch (err) {
-  console.log(err.message)
-}
+console.log(users.getUsers())
 console.log("-------------------------------------")
 
-console.log("getUserById:", users.getUserById(3))
-try {
-  users.getUserById(5)
-} catch (err) {
-  console.log(err.message)
-}
-console.log("-------------------------------------")
-
-const emptyUsers = new UserAPI([])
-emptyUsers.addUser(userObject)
-emptyUsers.addUser(userObject)
-emptyUsers.addUser(userObject)
-console.log("emptyUsers", emptyUsers)
 // users.updateUserById(3);
 // users.getUsers();›
 // users.deleteUserById(1);
