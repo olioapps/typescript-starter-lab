@@ -63,6 +63,9 @@ class UserAPI {
         return user
       }
     })
+    if(filteredUserArray.length === 0){
+      throw new Error('There where no users that match your search')
+    }
     return filteredUserArray
   }
 }
@@ -148,4 +151,9 @@ console.log(users.searchUserByName('ted'))
 console.log("-------------------------------------")
 console.log(users.searchUserByName('o'))
 console.log("-------------------------------------")
-console.log(users.searchUserByName('benjamin'))
+try{
+  console.log(users.searchUserByName('benjamin'))
+}catch(err){
+  console.log(err.message)
+}
+console.log("-------------------------------------")
