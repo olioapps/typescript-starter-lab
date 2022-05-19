@@ -25,7 +25,7 @@ class UserAPI {
   }
 
   getUserById(id) {
-    const targetUser = this.list.find((user) => user.id === id)
+    const targetUser = this.list.find(user => user.id === id)
     if (!targetUser) {
       throw new Error("There are no users found with that id.")
     }
@@ -42,7 +42,7 @@ class UserAPI {
 
   deleteUserById(id) {
     const deletedUser = this.getUserById(id)
-    const newUsersList = this.list.filter((user) => user.id !== id)
+    const newUsersList = this.list.filter(user => user.id !== id)
     this.list = newUsersList
     return deletedUser
   }
