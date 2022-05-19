@@ -135,3 +135,8 @@ try {
   console.log(err.message)
 }
 console.log("-------------------------------------")
+// TEST FOR SEARCHING USER BY NAME 
+console.log("-------------------------------------")
+console.log(users.searchUserByName('mino'))
+console.log(users.searchUserByName('ted'))
+console.log(users.searchUserByName('benjamin'))
