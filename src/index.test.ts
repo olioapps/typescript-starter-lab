@@ -15,5 +15,8 @@ describe("Tests will go here!", () => {
 
     expect(users.list).toHaveLength(5)
     expect(newUser).toEqual({ id: expect.any(String), ...userObject })
+    expect(() => users.addUser({})).toThrow(
+      "you need to at least have a name to add a user"
+    )
   })
 })
