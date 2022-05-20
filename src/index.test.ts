@@ -40,4 +40,11 @@ describe("Tests will go here!", () => {
       "There are no users found with that id."
     )
   })
+  it("should get a list of all the users", () => {
+    const users = new UserAPI(mockUsers)
+    const allUsers = users.getUsers()
+    console.log("allUsers", allUsers)
+
+    expect(allUsers).toHaveLength(5)
+  })
 })

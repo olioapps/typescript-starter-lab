@@ -61,7 +61,7 @@ export default class UserAPI {
   }
 }
 
-const users = new UserAPI(mockUsers)
+// const users = new UserAPI(mockUsers)
 // //---TEST FOR FIRST TWO METHODS
 // console.log("-------------------------------------")
 // console.log("addUser:", users.addUser(userObject))
