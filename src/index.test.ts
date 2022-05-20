@@ -112,4 +112,22 @@ describe("Tests will go here!", () => {
       expect(err.message).toEqual("There are no users found with that id.")
     }
   })
+
+  it("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
+    const emptyArray = users.searchUserByName("not a real search")
+
+    expect(emptyArray).toEqual([])
+
+    const firstSearch = users.searchUserByName("Mino")
+
+    expect(firstSearch).toHaveLength(2)
+
+    const secondSearch = users.searchUserByName("tEd")
+
+    expect(secondSearch).toHaveLength(1)
+
+    const thirdSearch = users.searchUserByName("o")
+
+    expect(thirdSearch).toHaveLength(3)
+  })
 })
