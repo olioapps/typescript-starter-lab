@@ -9,17 +9,10 @@ import {
 } from "./mockdata"
 
 describe("Tests will go here!", () => {
-  let users
-
-  beforeEach(() => {
-    users = new UserAPI(mockUsers)
-  })
-
-  afterEach(() => {
-    users = null
-  })
+  beforeEach(() => {})
 
   it("should make an instance of the UserAPI class and add a user, new user object should have an id.", () => {
+    const users = new UserAPI(mockUsers)
     const newUser = users.addUser(userObject)
 
     expect(users.list).toHaveLength(5)
@@ -36,6 +29,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should get the correct user that matches their id and throw an error if there is no one with that id", () => {
+    const users = new UserAPI(mockUsers)
     const targetUser1 = users.getUserById("1")
     const targetUser2 = users.getUserById("3")
 
@@ -63,6 +57,7 @@ describe("Tests will go here!", () => {
   })
 
   it.skip("should get a list of all the users, or an empty array other wise", () => {
+    const users = new UserAPI(mockUsers)
     const emptyusers = new UserAPI()
     // NEED HELP: it seems like test 1 is affecting this test. its adding one more user using the user object. its happening on line 18.
     expect(users.getUsers()).toHaveLength(4)
@@ -70,6 +65,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should update the users but return an error if user is not found or if the object doesn't have an id ", () => {
+    const users = new UserAPI(mockUsers)
     const updatedUser = users.updateUserById(updatingUserObject)
 
     expect(updatedUser).toEqual({
@@ -93,6 +89,7 @@ describe("Tests will go here!", () => {
   })
 
   it.skip("should be able to delete a user, and it should return the delete user.", () => {
+    const users = new UserAPI(mockUsers)
     expect(users.list).toHaveLength(4)
 
     const deletedUser = users.deleteUserById("3")
@@ -114,6 +111,7 @@ describe("Tests will go here!", () => {
   })
 
   it.skip("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
+    const users = new UserAPI(mockUsers)
     const emptyArray = users.searchUserByName("not a real search")
 
     expect(emptyArray).toEqual([])
