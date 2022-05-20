@@ -10,19 +10,29 @@ import {
 
 describe("Tests will go here!", () => {
   let users
+
   beforeEach(() => {
     users = new UserAPI(mockUsers)
   })
-  afterEach(() => {})
+
+  afterEach(() => {
+    users = null
+  })
+
   it("should make an instance of the UserAPI class and add a user, new user object should have an id.", () => {
     const newUser = users.addUser(userObject)
 
     expect(users.list).toHaveLength(5)
     expect(newUser).toEqual({ id: expect.any(String), ...userObject })
-    expect(() => users.addUser({})).toThrow(
-      "you need to at least have a name to add a user"
-    )
+    try {
+      users.addUser({})
+    } catch (err) {
+      expect(err.message).toEqual(
+        "you need to at least have a name to add a user"
+      )
+    }
   })
+
   it("should get the correct user that matches their id and throw an error if there is no one with that id", () => {
     const targetUser1 = users.getUserById("1")
     const targetUser2 = users.getUserById("3")
@@ -33,22 +43,30 @@ describe("Tests will go here!", () => {
       id: "1",
       name: "ted",
     })
+
     expect(targetUser2).toEqual({
       id: "3",
       name: "tim",
       age: 27,
       favoriteColor: "red",
     })
-    expect(() => users.getUserById("this is not a real id")).toThrow(
-      "There are no users found with that id."
-    )
+
+    try {
+      users.addUser({})
+    } catch (err) {
+      expect(err.message).toEqual(
+        "you need to at least have a name to add a user"
+      )
+    }
   })
+
   it("should get a list of all the users, or an empty array other wise", () => {
     const emptyusers = new UserAPI()
-    // NEED HELP: it seems like test 1 is affecting this test. its adding one more user using the user object.
+    // NEED HELP: it seems like test 1 is affecting this test. its adding one more user using the user object. its happening on line 18.
     expect(users.getUsers()).toHaveLength(4)
     expect(emptyusers.getUsers()).toEqual([])
   })
+
   it("should update the users but return an error if user is not found or if the object doesn't have an id ", () => {
     const updatedUser = users.updateUserById(updatingUserObject)
 
@@ -69,7 +87,8 @@ describe("Tests will go here!", () => {
       expect(err.message).toEqual("There are no users found with that id.")
     }
   })
+
   it("should be able to delete a user, and it should return the delete user.", () => {
-    const users = new UserAPI(mockUsers)
+    console.log("users", users)
   })
 })
