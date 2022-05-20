@@ -33,7 +33,7 @@ describe("Tests will go here!", () => {
       expect(err.message).toEqual("Cannot read property 'name' of undefined")
     }
 
-    expect(() => users.addUser()).toThrow(new Error(""))
+    expect(() => users.addUser()).toThrow(new Error(expect.any(String)))
   })
 
   it("should get the correct user that matches their id and throw an error if there is no one with that id", () => {
