@@ -15,7 +15,7 @@ export default class UserAPI {
     return Math.random().toString(24).slice(2)
   }
 
-  addUser(user: Person) {
+  addUser(user: Person): Person | Error {
     if (!user.name) {
       throw new Error("you need to at least have a name to add a user")
     }
@@ -24,7 +24,7 @@ export default class UserAPI {
     return newUser
   }
 
-  getUserById(id: string) {
+  getUserById(id: string): Person | Error {
     const targetUser = this.list.find(user => user.id === id)
     if (!targetUser) {
       throw new Error("There are no users found with that id.")
@@ -32,7 +32,7 @@ export default class UserAPI {
     return targetUser
   }
 
-  updateUserById(updatedUser: Person) {
+  updateUserById(updatedUser: Person): Person {
     if (!updatedUser.id) {
       throw new Error("We can not update a user without an id")
     }
@@ -46,18 +46,18 @@ export default class UserAPI {
     return this.getUserById(updatedUser.id)
   }
 
-  getUsers() {
+  getUsers(): Array<Person> {
     return this.list
   }
 
-  deleteUserById(id: string) {
+  deleteUserById(id: string): Person | Error {
     const deletedUser = this.getUserById(id)
     const newUsersList = this.list.filter(user => user.id !== id)
     this.list = newUsersList
     return deletedUser
   }
 
-  searchUserByName(name: string) {
+  searchUserByName(name: string): Array<Person> {
     const filteredUserArray = this.list.filter(user => {
       if (user.name.toLowerCase().includes(name.toLowerCase())) {
         return user
