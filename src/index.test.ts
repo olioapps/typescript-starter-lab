@@ -26,6 +26,14 @@ describe("Tests will go here!", () => {
         "you need to at least have a name to add a user"
       )
     }
+
+    try {
+      users.addUser()
+    } catch (err) {
+      expect(err.message).toEqual("Cannot read property 'name' of undefined")
+    }
+
+    expect(() => users.addUser([]).toThrow(error))
   })
 
   it("should get the correct user that matches their id and throw an error if there is no one with that id", () => {
@@ -47,13 +55,7 @@ describe("Tests will go here!", () => {
       favoriteColor: "red",
     })
 
-    try {
-      users.addUser({})
-    } catch (err) {
-      expect(err.message).toEqual(
-        "you need to at least have a name to add a user"
-      )
-    }
+    expect(() => users.getUsersById().toThrow(error))
   })
 
   it("should get a list of all the users, or an empty array other wise", () => {
