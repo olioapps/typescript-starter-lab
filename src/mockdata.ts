@@ -1,10 +1,12 @@
 // @ts-nocheck
-const mockUsers = [
-  { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
-  { id: "1", name: "ted", age: 23, favoriteColor: "black" },
-  { id: "2", name: "ron", age: 41, favoriteColor: "blue" },
-  { id: "3", name: "tim", age: 27, favoriteColor: "red" },
-]
+const mockUsers = () => {
+  return [
+    { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
+    { id: "1", name: "ted", age: 23, favoriteColor: "black" },
+    { id: "2", name: "ron", age: 41, favoriteColor: "blue" },
+    { id: "3", name: "tim", age: 27, favoriteColor: "red" },
+  ]
+}
 
 const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
 
