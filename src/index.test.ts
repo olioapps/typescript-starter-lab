@@ -18,22 +18,30 @@ describe("Tests will go here!", () => {
     expect(users.list).toHaveLength(5)
 
     expect(newUser).toEqual({ id: expect.any(String), ...userObject })
+  })
+
+  it("should show the correct error message, will fail if no errors are thrown", () => {
+    const users = new UserAPI(mockUsers())
 
     try {
       users.addUser({})
+      throw new Error("it should not reach this line of code")
     } catch (err) {
       expect(err.message).toEqual(
         "you need to at least have a name to add a user"
       )
     }
+  })
+
+  it("should show the correct error message, will fail if no errors are thrown", () => {
+    const users = new UserAPI(mockUsers())
 
     try {
       users.addUser()
+      throw new Error("it should not reach this line of code")
     } catch (err) {
       expect(err.message).toEqual("Cannot read property 'name' of undefined")
     }
-
-    expect(() => users.addUser()).toThrow(new Error(expect.any(String)))
   })
 
   it("should get the correct user that matches their id and throw an error if there is no one with that id", () => {
