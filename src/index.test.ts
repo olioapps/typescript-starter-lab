@@ -63,7 +63,7 @@ describe("Tests will go here!", () => {
   it("should get a list of all the users, or an empty array other wise", () => {
     const emptyusers = new UserAPI()
     // NEED HELP: it seems like test 1 is affecting this test. its adding one more user using the user object. its happening on line 18.
-    expect(users.getUsers()).toHaveLength(4)
+    expect(users.getUsers()).toHaveLength(5)
     expect(emptyusers.getUsers()).toEqual([])
   })
 
@@ -89,6 +89,23 @@ describe("Tests will go here!", () => {
   })
 
   it("should be able to delete a user, and it should return the delete user.", () => {
-    console.log("users", users)
+    expect(users.list).toHaveLength(5)
+
+    const deletedUser = users.deleteUserById("3")
+
+    expect(deletedUser).toEqual({
+      age: 27,
+      favoriteColor: "red",
+      id: "3",
+      name: "tim",
+    })
+
+    expect(users.list).toHaveLength(4)
+
+    try {
+      users.deleteUserById("3")
+    } catch (err) {
+      expect(err.message).toEqual("There are no users found with that id.")
+    }
   })
 })
