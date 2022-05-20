@@ -41,10 +41,11 @@ describe("Tests will go here!", () => {
     )
   })
   it("should get a list of all the users", () => {
-    const users = new UserAPI(mockUsers)
-    const allUsers = users.getUsers()
-    console.log("allUsers", allUsers)
+    const usersForGetUsers = new UserAPI(mockUsers)
 
-    expect(allUsers).toHaveLength(5)
+    const emptyusers = new UserAPI()
+    // NEED HELP: it seems like test 1 is affecting this test. its adding one more user using the user object.
+    expect(usersForGetUsers.getUsers()).toHaveLength(5)
+    expect(emptyusers.getUsers()).toEqual([])
   })
 })
