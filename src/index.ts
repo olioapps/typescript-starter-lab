@@ -1,8 +1,8 @@
 interface Person {
-  id?: string
-  name: string
-  age?: number
-  favoriteColor?: string
+  readonly id?: string
+  readonly name: string
+  readonly age?: number
+  readonly favoriteColor?: string
 }
 
 export default class UserAPI {
