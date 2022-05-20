@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { mockUsers } from "./mockdata"
+
 export default class UserAPI {
   constructor(users) {
     this.list = users || []
