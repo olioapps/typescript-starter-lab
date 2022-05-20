@@ -23,7 +23,9 @@ describe("Tests will go here!", () => {
     const newUser = users.addUser(userObject)
 
     expect(users.list).toHaveLength(5)
+
     expect(newUser).toEqual({ id: expect.any(String), ...userObject })
+
     try {
       users.addUser({})
     } catch (err) {
@@ -76,11 +78,13 @@ describe("Tests will go here!", () => {
       age: 100,
       favoriteColor: "red",
     })
+
     try {
       users.updateUserById(updatingUserObjectError)
     } catch (err) {
       expect(err.message).toEqual("We can not update a user without an id")
     }
+
     try {
       users.updateUserById(updatingUserObjectErrorWithId)
     } catch (err) {
