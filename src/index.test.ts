@@ -25,7 +25,7 @@ describe("Tests will go here!", () => {
 
     try {
       users.addUser({})
-      throw new Error("it should not reach this line of code")
+      expect(() => users.addUser({})).toThrow()
     } catch (err) {
       expect(err.message).toEqual(
         "you need to at least have a name to add a user"
@@ -38,7 +38,7 @@ describe("Tests will go here!", () => {
 
     try {
       users.addUser()
-      throw new Error("it should not reach this line of code")
+      expect(() => users.addUser({})).toThrow()
     } catch (err) {
       expect(err.message).toEqual("Cannot read property 'name' of undefined")
     }
