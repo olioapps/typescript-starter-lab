@@ -91,12 +91,20 @@ describe("Tests will go here!", () => {
       age: 100,
       favoriteColor: "red",
     })
+  })
+
+  it("should throw the correct error message if unable to update a user", () => {
+    const users = new UserAPI(mockUsers())
 
     try {
-      users.updateUserById(updatingUserObjectError)
+      expect(() => users.updateUserById(updatingUserObjectError)).toThrow()
     } catch (err) {
       expect(err.message).toEqual("We can not update a user without an id")
     }
+  })
+
+  it("should throw the correct error message if unable to update a user", () => {
+    const users = new UserAPI(mockUsers())
 
     try {
       users.updateUserById(updatingUserObjectErrorWithId)
