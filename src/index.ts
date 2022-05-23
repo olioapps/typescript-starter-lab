@@ -10,7 +10,7 @@ export default class UserAPI {
   constructor(users: Array<Person>) {
     this.list = users || []
   }
-  //random id generator
+
   randomId = (): string => {
     return Math.random().toString(24).slice(2)
   }
