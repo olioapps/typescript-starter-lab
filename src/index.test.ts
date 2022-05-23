@@ -127,19 +127,20 @@ describe("Tests will go here!", () => {
     })
 
     expect(users.list).toHaveLength(3)
+  })
+
+  it("should return an error if user isnt found with that id", () => {
+    const users = new UserAPI(mockUsers())
 
     try {
-      users.deleteUserById("3")
+      expect(() => users.deleteUserById("not a real user id")).toThrow()
     } catch (err) {
       expect(err.message).toEqual("There are no users found with that id.")
     }
   })
 
-  it("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
+  it("should an array of users with any part of the their name matching the input argument.", () => {
     const users = new UserAPI(mockUsers())
-    const emptyArray = users.searchUserByName("not a real search")
-
-    expect(emptyArray).toEqual([])
 
     const firstSearch = users.searchUserByName("Mino")
 
@@ -152,5 +153,12 @@ describe("Tests will go here!", () => {
     const thirdSearch = users.searchUserByName("o")
 
     expect(thirdSearch).toHaveLength(2)
+  })
+
+  it("should return an empty array because no users match the search input", () => {
+    const users = new UserAPI(mockUsers())
+    const emptyArray = users.searchUserByName("not a real search")
+
+    expect(emptyArray).toEqual([])
   })
 })
