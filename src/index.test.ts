@@ -24,8 +24,8 @@ describe("Tests will go here!", () => {
     const users = new UserAPI(mockUsers())
 
     try {
-      users.addUser({})
       expect(() => users.addUser({})).toThrow()
+      users.addUser({})
     } catch (err) {
       expect(err.message).toEqual(
         "you need to at least have a name to add a user"
@@ -37,8 +37,8 @@ describe("Tests will go here!", () => {
     const users = new UserAPI(mockUsers())
 
     try {
-      users.addUser()
       expect(() => users.addUser({})).toThrow()
+      users.addUser()
     } catch (err) {
       expect(err.message).toEqual("Cannot read property 'name' of undefined")
     }
