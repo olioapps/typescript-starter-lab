@@ -1,12 +1,6 @@
-//Define class here
-const mockUsers = [
-  { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
-  { id: "1", name: "ted", age: 23, favoriteColor: "black" },
-  { id: "2", name: "ron", age: 41, favoriteColor: "blue" },
-  { id: "3", name: "tim", age: 27, favoriteColor: "red" },
-]
+//@ts-nocheck
 
-class UserAPI {
+export default class UserAPI {
   constructor(users) {
     this.list = users || []
   }
@@ -36,7 +30,7 @@ class UserAPI {
     if (!updatedUser.id) {
       throw new Error("We can not update a user without an id")
     }
-    const updatedList = this.list.map((user) => {
+    const updatedList = this.list.map(user => {
       if (user.id === updatedUser.id) {
         return { ...user, ...updatedUser }
       }
@@ -58,99 +52,11 @@ class UserAPI {
   }
 
   searchUserByName(name) {
-    const filteredUserArray  = this.list.filter((user) => {
-      if (user.name.toLowerCase().includes(name.toLowerCase())){
+    const filteredUserArray = this.list.filter(user => {
+      if (user.name.toLowerCase().includes(name.toLowerCase())) {
         return user
       }
     })
     return filteredUserArray
   }
 }
-const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
-const updatingUserObject = {
-  id: "0",
-  name: "minoka",
-  age: 100,
-  favoriteColor: "red",
-}
-const updatingUserObjectError = {
-  name: "minoka",
-  age: 100,
-  favoriteColor: "red",
-}
-const updatingUserObjectErrorWithId = {
-  id: "124324614614331461346",
-  name: "minoka",
-  age: 100,
-  favoriteColor: "red",
-}
-
-const users = new UserAPI(mockUsers)
-//---TEST FOR FIRST TWO METHODS
-console.log("-------------------------------------")
-console.log("addUser:", users.addUser(userObject))
-try {
-  users.addUser({})
-} catch (err) {
-  console.log(err.message)
-}
-console.log("-------------------------------------")
-console.log("getUserById:", users.getUserById("3"))
-try {
-  users.getUserById("5")
-} catch (err) {
-  console.log(err.message)
-}
-// ---TEST FOR GET USERS
-console.log("-------------------------------------")
-const emptyUsers = new UserAPI()
-console.log("-------------------------------------")
-console.log('list: 'users.getUsers())
-console.log('empty list: ', emptyUsers.getUsers())
-console.log("-------------------------------------")
-
-console.log("-------------------------------------")
-// ---TEST FOR UPDATING USER BY ID METHODS
-console.log(users.updateUserById(updatingUserObject))
-console.log("-------------------------------------")
-try {
-  users.updateUserById(updatingUserObjectError)
-} catch (err) {
-  console.log(err.message)
-}
-console.log("-------------------------------------")
-try {
-  users.updateUserById(updatingUserObjectErrorWithId)
-} catch (err) {
-  console.log(err.message)
-}
-console.log("-------------------------------------")
-
-// ---TEST FOR DELETE USER BY ID
-console.log("-------------------------------------")
-// This should delete tim from the mock users list.
-console.log(users)
-console.log(users.deleteUserById("3"))
-console.log(users)
-// This will throw an error because tim is already deleted.
-console.log("-------------------------------------")
-try {
-  users.deleteUserById("3")
-} catch (err) {
-  console.log(err.message)
-}
-console.log("-------------------------------------")
-// TEST FOR SEARCHING USER BY NAME 
-console.log("-------------------------------------")
-console.log('should return 2 users: ', users.searchUserByName('Mino'))
-
-console.log("-------------------------------------")
-console.log('should return 1 user: ', users.searchUserByName('tEd'))
-
-console.log("-------------------------------------")
-console.log('should return 3 users: ', users.searchUserByName('o'))
-
-console.log("-------------------------------------")
-console.log('should return empty array: ', users.searchUserByName('benjamin'))
-
-console.log("-------------------------------------")
