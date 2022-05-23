@@ -62,6 +62,16 @@ describe("Tests will go here!", () => {
     })
   })
 
+  it("should throw an Error if no users is found with that id", () => {
+    const users = new UserAPI(mockUsers())
+
+    try {
+      expect(() => users.getUserById("not a real user")).toThrow()
+    } catch (err) {
+      expect(err.message).toEqual("Cannot read property 'name' of undefined")
+    }
+  })
+
   it("should get a list of all the users, or an empty array other wise", () => {
     const users = new UserAPI(mockUsers())
     const emptyusers = new UserAPI()
