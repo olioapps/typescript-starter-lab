@@ -6,8 +6,8 @@ interface Person {
 }
 
 export default class UserAPI {
-  list: Array<Person>
-  constructor(users: Array<Person>) {
+  list: ReadonlyArray<Person>
+  constructor(users: ReadonlyArray<Person>) {
     this.list = users || []
   }
 
@@ -20,7 +20,7 @@ export default class UserAPI {
       throw new Error("you need to at least have a name to add a user")
     }
     const newUser = { id: this.randomId(), ...user }
-    this.list.push(newUser)
+    this.list = [...this.list, newUser]
     return newUser
   }
 
@@ -46,7 +46,7 @@ export default class UserAPI {
     return this.getUserById(updatedUser.id)
   }
 
-  getUsers(): Array<Person> | [] {
+  getUsers(): ReadonlyArray<Person> | [] {
     return this.list
   }
 
@@ -57,7 +57,7 @@ export default class UserAPI {
     return deletedUser
   }
 
-  searchUserByName(name: string): Array<Person> | [] {
+  searchUserByName(name: string): ReadonlyArray<Person> | [] {
     const filteredUserArray = this.list.filter(user => {
       if (user.name.toLowerCase().includes(name.toLowerCase())) {
         return user
