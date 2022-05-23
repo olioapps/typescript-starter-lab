@@ -18,9 +18,13 @@ describe("Tests will go here!", () => {
     expect(users.list).toHaveLength(5)
 
     expect(newUser).toEqual({ id: expect.any(String), ...userObject })
+  })
+
+  it("should show the correct error message, will fail if no errors are thrown", () => {
+    const users = new UserAPI(mockUsers())
 
     try {
-      users.addUser({})
+      expect(() => users.addUser({})).toThrow()
     } catch (err) {
       expect(err.message).toEqual(
         "you need to at least have a name to add a user"
@@ -28,7 +32,17 @@ describe("Tests will go here!", () => {
     }
   })
 
-  it("should get the correct user that matches their id and throw an error if there is no one with that id", () => {
+  it("should show the correct error message, will fail if no errors are thrown", () => {
+    const users = new UserAPI(mockUsers())
+
+    try {
+      expect(() => users.addUser({})).toThrow()
+    } catch (err) {
+      expect(err.message).toEqual("Cannot read property 'name' of undefined")
+    }
+  })
+
+  it("should get the correct user that matches their id", () => {
     const users = new UserAPI(mockUsers())
     const targetUser1 = users.getUserById("1")
     const targetUser2 = users.getUserById("3")
@@ -46,14 +60,6 @@ describe("Tests will go here!", () => {
       age: 27,
       favoriteColor: "red",
     })
-
-    try {
-      users.addUser({})
-    } catch (err) {
-      expect(err.message).toEqual(
-        "you need to at least have a name to add a user"
-      )
-    }
   })
 
   it("should get a list of all the users, or an empty array other wise", () => {
