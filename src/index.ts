@@ -32,7 +32,7 @@ export default class UserAPI {
   }
 
   getUserById(id: string): Person {
-    // const targetUser = this.list.find(user => user.id === id)
+    const targetUser = this.list[id]
     if (!targetUser) {
       throw new Error("There are no users found with that id.")
     }

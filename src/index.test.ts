@@ -5,7 +5,7 @@ import { mockUsers, userObject, updatingUserObject } from "./mockdata"
 describe("Tests will go here!", () => {
   beforeEach(() => {})
 
-  it.only("should make an instance of the UserAPI class and add a user, new user object should have an id.", () => {
+  it("should make an instance of the UserAPI class and add a user, new user object should have an id.", () => {
     const users = new UserAPI(mockUsers)
     const newUser = users.addUser(userObject)
     console.log("users", users.getUsers())
@@ -15,7 +15,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should show the correct error message, will fail if no errors are thrown", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
 
     try {
       expect(() => users.addUser({})).toThrow()
@@ -27,7 +27,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should show the correct error message, will fail if no errors are thrown", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
 
     try {
       expect(() => users.addUser({})).toThrow()
@@ -36,8 +36,8 @@ describe("Tests will go here!", () => {
     }
   })
 
-  it("should get the correct user that matches their id", () => {
-    const users = new UserAPI(mockUsers())
+  it.only("should get the correct user that matches their id", () => {
+    const users = new UserAPI(mockUsers)
     const targetUser1 = users.getUserById("1")
     const targetUser2 = users.getUserById("3")
 
@@ -57,7 +57,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should get a list of all the users, or an empty array other wise", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
     const emptyusers = new UserAPI()
 
     expect(users.getUsers()).toHaveLength(4)
@@ -66,7 +66,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should update the users but return an error if user is not found or if the object doesn't have an id ", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
     const validId = "0"
     const noID = ""
     const notValidId = "not a valid Id"
@@ -93,7 +93,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should be able to delete a user, and it should return the delete user.", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
     expect(users.list).toHaveLength(4)
 
     const deletedUser = users.deleteUserById("3")
@@ -115,7 +115,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
     const emptyArray = users.searchUserByName("not a real search")
 
     expect(emptyArray).toEqual([])
