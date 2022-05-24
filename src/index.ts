@@ -59,16 +59,18 @@ export default class UserAPI {
   deleteUserById(id: string): Person {
     const deletedUser = this.getUserById(id)
     delete this.list[id]
+
     this.list = { ...this.list }
     return deletedUser
   }
 
   searchUserByName(name: string): ReadonlyArray<Person> | [] {
-    // const filteredUserArray = this.list.filter(user => {
-    //   if (user.name.toLowerCase().includes(name.toLowerCase())) {
-    //     return user
-    //   }
-    // })
-    // return filteredUserArray
+    const filteredUserArray = []
+    for (const [key, value] of Object.entries(this.list)) {
+      if (this.list[key].name.toLowerCase().includes(name.toLowerCase())) {
+        filteredUserArray.push(value)
+      }
+    }
+    return filteredUserArray
   }
 }
