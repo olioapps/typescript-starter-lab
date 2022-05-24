@@ -1,5 +1,11 @@
 interface Person {
-  readonly id?: string
+  readonly id: string
+  readonly name: string
+  readonly age?: number
+  readonly favoriteColor?: string
+}
+
+interface UserFormMeta {
   readonly name: string
   readonly age?: number
   readonly favoriteColor?: string
@@ -15,7 +21,7 @@ export default class UserAPI {
     return Math.random().toString(24).slice(2)
   }
 
-  addUser(user: Person): Person {
+  addUser(user: UserFormMeta): Person {
     if (!user.name) {
       throw new Error("you need to at least have a name to add a user")
     }
