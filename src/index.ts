@@ -12,9 +12,9 @@ interface UserFormMeta {
 }
 
 export default class UserAPI {
-  list: ReadonlyArray<Person>
-  constructor(users: ReadonlyArray<Person>) {
-    this.list = users || []
+  list: Record<string, Person>
+  constructor(users: Record<string, Person>) {
+    this.list = users || {}
   }
 
   randomId = (): string => {
@@ -25,13 +25,14 @@ export default class UserAPI {
     if (!user.name) {
       throw new Error("you need to at least have a name to add a user")
     }
-    const newUser = { id: this.randomId(), ...user }
-    this.list = [...this.list, newUser]
+    const id = this.randomId()
+    const newUser = { id, ...user }
+    this.list = { ...this.list, [id]: newUser }
     return newUser
   }
 
   getUserById(id: string): Person {
-    const targetUser = this.list.find(user => user.id === id)
+    // const targetUser = this.list.find(user => user.id === id)
     if (!targetUser) {
       throw new Error("There are no users found with that id.")
     }
@@ -42,33 +43,37 @@ export default class UserAPI {
     if (!id) {
       throw new Error("We can not update a user without an id")
     }
-    const updatedList = this.list.map(user => {
-      if (user.id === id) {
-        return { ...user, ...updatedUser }
-      }
-      return user
-    })
-    this.list = updatedList
+    // const updatedList = this.list.map(user => {
+    //   if (user.id === id) {
+    //     return { ...user, ...updatedUser }
+    //   }
+    //   return user
+    // })
+    // this.list = updatedList
     return this.getUserById(id)
   }
 
   getUsers(): ReadonlyArray<Person> | [] {
-    return this.list
+    let usersArray: Array<Person> = []
+    for (let id in this.list) {
+      usersArray.push(this.list[id])
+    }
+    return usersArray
   }
 
   deleteUserById(id: string): Person {
-    const deletedUser = this.getUserById(id)
-    const newUsersList = this.list.filter(user => user.id !== id)
-    this.list = newUsersList
-    return deletedUser
+    // const deletedUser = this.getUserById(id)
+    // const newUsersList = this.list.filter(user => user.id !== id)
+    // this.list = newUsersList
+    // return deletedUser
   }
 
   searchUserByName(name: string): ReadonlyArray<Person> | [] {
-    const filteredUserArray = this.list.filter(user => {
-      if (user.name.toLowerCase().includes(name.toLowerCase())) {
-        return user
-      }
-    })
-    return filteredUserArray
+    // const filteredUserArray = this.list.filter(user => {
+    //   if (user.name.toLowerCase().includes(name.toLowerCase())) {
+    //     return user
+    //   }
+    // })
+    // return filteredUserArray
   }
 }

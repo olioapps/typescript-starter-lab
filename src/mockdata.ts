@@ -1,11 +1,16 @@
-// @ts-nocheck
-const mockUsers = () => {
-  return [
-    { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
-    { id: "1", name: "ted", age: 23, favoriteColor: "black" },
-    { id: "2", name: "ron", age: 41, favoriteColor: "blue" },
-    { id: "3", name: "tim", age: 27, favoriteColor: "red" },
-  ]
+export interface Person {
+  readonly id: string
+  readonly name: string
+  readonly age?: number
+  readonly favoriteColor?: string
+}
+export type Users = Record<string, Person>
+
+const mockUsers: Users = {
+  "0": { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
+  "1": { id: "1", name: "ted", age: 23, favoriteColor: "black" },
+  "2": { id: "2", name: "ron", age: 41, favoriteColor: "blue" },
+  "3": { id: "3", name: "tim", age: 27, favoriteColor: "red" },
 }
 
 const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
