@@ -8,7 +8,6 @@ describe("Tests will go here!", () => {
   it("should make an instance of the UserAPI class and add a user, new user object should have an id.", () => {
     const users = new UserAPI(mockUsers)
     const newUser = users.addUser(userObject)
-    console.log("users", users.getUsers())
     expect(users.getUsers()).toHaveLength(5)
 
     expect(newUser).toEqual({ id: expect.any(String), ...userObject })
