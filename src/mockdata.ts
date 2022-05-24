@@ -1,10 +1,4 @@
-export interface Person {
-  readonly id: string
-  readonly name: string
-  readonly age?: number
-  readonly favoriteColor?: string
-}
-export type Users = Record<string, Person>
+import { Users } from "./interfaces"
 
 const mockUsers: Users = {
   "0": { id: "0", name: "minoka", age: 31, favoriteColor: "green" },

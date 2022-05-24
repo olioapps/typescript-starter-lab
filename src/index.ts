@@ -1,15 +1,4 @@
-interface Person {
-  readonly id: string
-  readonly name: string
-  readonly age?: number
-  readonly favoriteColor?: string
-}
-
-interface UserFormMeta {
-  readonly name: string
-  readonly age?: number
-  readonly favoriteColor?: string
-}
+import { Person, UserFormMeta } from "./interfaces"
 
 export default class UserAPI {
   list: Record<string, Person>
