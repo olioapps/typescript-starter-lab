@@ -11,29 +11,9 @@ const mockUsers = () => {
 const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
 
 const updatingUserObject = {
-  id: "0",
   name: "minoka",
   age: 100,
   favoriteColor: "red",
 }
 
-const updatingUserObjectError = {
-  name: "minoka",
-  age: 100,
-  favoriteColor: "red",
-}
-
-const updatingUserObjectErrorWithId = {
-  id: "124324614614331461346",
-  name: "minoka",
-  age: 100,
-  favoriteColor: "red",
-}
-
-export {
-  mockUsers,
-  userObject,
-  updatingUserObject,
-  updatingUserObjectError,
-  updatingUserObjectErrorWithId,
-}
+export { mockUsers, userObject, updatingUserObject }

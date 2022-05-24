@@ -1,12 +1,6 @@
 // @ts-nocheck
 import UserAPI from "./index"
-import {
-  mockUsers,
-  userObject,
-  updatingUserObject,
-  updatingUserObjectError,
-  updatingUserObjectErrorWithId,
-} from "./mockdata"
+import { mockUsers, userObject, updatingUserObject } from "./mockdata"
 
 describe("Tests will go here!", () => {
   beforeEach(() => {})
@@ -73,7 +67,10 @@ describe("Tests will go here!", () => {
 
   it("should update the users but return an error if user is not found or if the object doesn't have an id ", () => {
     const users = new UserAPI(mockUsers())
-    const updatedUser = users.updateUserById(updatingUserObject)
+    const validId = "0"
+    const noID = ""
+    const notValidId = "not a valid Id"
+    const updatedUser = users.updateUserById(validId, updatingUserObject)
 
     expect(updatedUser).toEqual({
       id: "0",
@@ -83,13 +80,13 @@ describe("Tests will go here!", () => {
     })
 
     try {
-      users.updateUserById(updatingUserObjectError)
+      users.updateUserById(noID, updatingUserObject)
     } catch (err) {
       expect(err.message).toEqual("We can not update a user without an id")
     }
 
     try {
-      users.updateUserById(updatingUserObjectErrorWithId)
+      users.updateUserById(notValidId, updatingUserObject)
     } catch (err) {
       expect(err.message).toEqual("There are no users found with that id.")
     }

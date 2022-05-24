@@ -38,18 +38,18 @@ export default class UserAPI {
     return targetUser
   }
 
-  updateUserById(updatedUser: Person): Person {
-    if (!updatedUser.id) {
+  updateUserById(id: string, updatedUser: Partial<UserFormMeta>): Person {
+    if (!id) {
       throw new Error("We can not update a user without an id")
     }
     const updatedList = this.list.map(user => {
-      if (user.id === updatedUser.id) {
+      if (user.id === id) {
         return { ...user, ...updatedUser }
       }
       return user
     })
     this.list = updatedList
-    return this.getUserById(updatedUser.id)
+    return this.getUserById(id)
   }
 
   getUsers(): ReadonlyArray<Person> | [] {
