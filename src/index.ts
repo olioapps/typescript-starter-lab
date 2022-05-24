@@ -40,16 +40,11 @@ export default class UserAPI {
   }
 
   updateUserById(id: string, updatedUser: Partial<UserFormMeta>): Person {
-    if (!id) {
+    if (!this.getUserById(id) || !id) {
       throw new Error("We can not update a user without an id")
     }
-    // const updatedList = this.list.map(user => {
-    //   if (user.id === id) {
-    //     return { ...user, ...updatedUser }
-    //   }
-    //   return user
-    // })
-    // this.list = updatedList
+    const newUpdatedUser = { ...this.list[id], ...updatedUser }
+    const newList = { ...(this.list[id] = newUpdatedUser) }
     return this.getUserById(id)
   }
 
@@ -62,10 +57,10 @@ export default class UserAPI {
   }
 
   deleteUserById(id: string): Person {
-    // const deletedUser = this.getUserById(id)
-    // const newUsersList = this.list.filter(user => user.id !== id)
-    // this.list = newUsersList
-    // return deletedUser
+    const deletedUser = this.getUserById(id)
+    delete this.list[id]
+    this.list = { ...this.list }
+    return deletedUser
   }
 
   searchUserByName(name: string): ReadonlyArray<Person> | [] {

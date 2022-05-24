@@ -36,7 +36,7 @@ describe("Tests will go here!", () => {
     }
   })
 
-  it.only("should get the correct user that matches their id", () => {
+  it("should get the correct user that matches their id", () => {
     const users = new UserAPI(mockUsers)
     const targetUser1 = users.getUserById("1")
     const targetUser2 = users.getUserById("3")
@@ -94,7 +94,7 @@ describe("Tests will go here!", () => {
 
   it("should be able to delete a user, and it should return the delete user.", () => {
     const users = new UserAPI(mockUsers)
-    expect(users.list).toHaveLength(4)
+    expect(users.getUsers()).toHaveLength(4)
 
     const deletedUser = users.deleteUserById("3")
 
@@ -105,7 +105,7 @@ describe("Tests will go here!", () => {
       name: "tim",
     })
 
-    expect(users.list).toHaveLength(3)
+    expect(users.getUsers()).toHaveLength(3)
 
     try {
       users.deleteUserById("3")
@@ -114,7 +114,7 @@ describe("Tests will go here!", () => {
     }
   })
 
-  it("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
+  it.only("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
     const users = new UserAPI(mockUsers)
     const emptyArray = users.searchUserByName("not a real search")
 
