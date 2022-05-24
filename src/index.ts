@@ -50,10 +50,11 @@ export default class UserAPI {
 
   getUsers(): ReadonlyArray<Person> | [] {
     let usersArray: Array<Person> = []
-    for (let id in this.list) {
-      usersArray.push(this.list[id])
+    const userArray = []
+    for (const [key, value] of Object.entries(this.list)) {
+      userArray.push(value)
     }
-    return usersArray
+    return userArray
   }
 
   deleteUserById(id: string): Person {

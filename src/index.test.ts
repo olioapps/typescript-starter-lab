@@ -114,7 +114,7 @@ describe("Tests will go here!", () => {
     }
   })
 
-  it.only("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
+  it("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
     const users = new UserAPI(mockUsers)
     const emptyArray = users.searchUserByName("not a real search")
 
