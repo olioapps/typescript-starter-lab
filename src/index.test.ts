@@ -131,4 +131,11 @@ describe("Tests will go here!", () => {
 
     expect(thirdSearch).toHaveLength(2)
   })
+  it("should return a number with the average age of all the users", () => {
+    const users = new UserAPI(mockUsers)
+
+    const averageAge = users.getAverageAge()
+
+    expect(averageAge).toEqual(30.5)
+  })
 })
