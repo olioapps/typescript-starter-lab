@@ -1,6 +1,11 @@
 // @ts-nocheck
 import UserAPI from "./index"
-import { mockUsers, userObject, updatingUserObject } from "./mockdata"
+import {
+  mockUsers,
+  mockUsers2,
+  userObject,
+  updatingUserObject,
+} from "./mockdata"
 
 describe("Tests will go here!", () => {
   beforeEach(() => {})
@@ -137,5 +142,11 @@ describe("Tests will go here!", () => {
     const averageAge = users.getAverageAge()
 
     expect(averageAge).toEqual(30.5)
+
+    const users2 = new UserAPI(mockUsers2)
+
+    const averageAge2 = users2.getAverageAge()
+
+    expect(averageAge2).toEqual(31.666666666666668)
   })
 })
