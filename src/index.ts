@@ -55,15 +55,13 @@ export default class UserAPI {
   }
 
   getUsers(): ReadonlyArray<Person> | [] {
-    let usersArray: Array<Person> = []
+    const usersArray: Array<Person> = Object.entries(this.list).map(
+      ([key, value]) => {
+        return value
+      }
+    )
 
-    const userArray = []
-
-    for (const [key, value] of Object.entries(this.list)) {
-      userArray.push(value)
-    }
-
-    return userArray
+    return usersArray
   }
 
   deleteUserById(id: string): Person {
