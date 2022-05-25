@@ -1,9 +1,9 @@
-import { Person, UserFormMeta } from "./interfaces"
+import { Person, UserFormMeta, Users } from "./interfaces"
 
 export default class UserAPI {
-  list: Record<string, Person>
+  list: Users
 
-  constructor(users: Record<string, Person>) {
+  constructor(users: Users) {
     this.list = users || {}
   }
 
