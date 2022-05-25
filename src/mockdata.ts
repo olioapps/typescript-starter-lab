@@ -1,4 +1,4 @@
-import { Users } from "./interfaces"
+import { Users, UserFormMeta } from "./interfaces"
 
 const mockUsers: Users = {
   "0": { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
@@ -7,9 +7,13 @@ const mockUsers: Users = {
   "3": { id: "3", name: "tim", age: 27, favoriteColor: "red" },
 }
 
-const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
+const userObject: UserFormMeta = {
+  name: "minoka",
+  age: 31,
+  favoriteColor: "green",
+}
 
-const updatingUserObject = {
+const updatingUserObject: UserFormMeta = {
   name: "minoka",
   age: 100,
   favoriteColor: "red",
