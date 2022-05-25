@@ -36,27 +36,22 @@ export default class UserAPI {
     if (!id) {
       throw new Error("We can not update a user without an id")
     }
+    const foundUser = this.getUserById(id)
 
-    this.getUserById(id)
-    const newUpdatedUser = { ...this.list[id], ...updatedUser }
+    if (!foundUser) {
+      throw new Error("There are no users found with that id.")
+    }
 
-    const newUpdatedUserList: Array<{ [id: string]: Person }> = Object.entries(
-      this.list
-    ).map(([key, value]) => {
-      if (key === id) {
-        return { [key]: newUpdatedUser }
-      }
+    const newUpdatedUser = { ...foundUser, ...updatedUser }
+    const updatedUserList = { ...this.list, [id]: newUpdatedUser }
 
-      return { [key]: value }
-    })
-
-    this.list = Object.assign({}, ...newUpdatedUserList)
+    this.list = updatedUserList
     return newUpdatedUser
   }
 
   getUsers(): ReadonlyArray<Person> | [] {
-    const usersArray: Array<Person> = Object.entries(this.list).map(
-      ([key, value]) => {
+    const usersArray: ReadonlyArray<Person> = Object.values(this.list).map(
+      (value: Person) => {
         return value
       }
     )
@@ -65,22 +60,22 @@ export default class UserAPI {
   }
 
   deleteUserById(id: string): Person {
-    const deletedUser = this.getUserById(id)
+    if (!this.getUserById(id)) {
+      throw new Error("There are no users found with that id.")
+    }
 
-    delete this.list[id]
+    const { [id]: deletedUser, ...rest } = this.list
+    this.list = rest
 
-    this.list = { ...this.list }
     return deletedUser
   }
 
   searchUserByName(name: string): ReadonlyArray<Person> | [] {
-    const filteredUserArray = []
-
-    for (const [key, value] of Object.entries(this.list)) {
-      if (this.list[key].name.toLowerCase().includes(name.toLowerCase())) {
-        filteredUserArray.push(value)
-      }
-    }
+    const filteredUserArray: ReadonlyArray<Person> = Object.values(
+      this.list
+    ).filter((value: Person) =>
+      value.name.toLowerCase().includes(name.toLowerCase())
+    )
 
     return filteredUserArray
   }
