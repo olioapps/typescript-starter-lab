@@ -79,7 +79,7 @@ export default class UserAPI {
 
     return filteredUserArray
   }
-  getAverageAge() {
+  getAverageAge(): number {
     const ageOnlyArray: number[] = Object.values(this.list)
 
       .filter((users: Person) => users.age)
@@ -94,10 +94,13 @@ export default class UserAPI {
         }
       })
 
-    const averageAge =
+    const averageAge: number =
       ageOnlyArray.reduce((prev: number, current: number) => prev + current) /
       ageOnlyArray.length
 
     return averageAge
+  }
+  getAllFavoriteColors(): string[] {
+    return []
   }
 }

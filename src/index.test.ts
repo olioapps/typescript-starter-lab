@@ -149,4 +149,11 @@ describe("Tests will go here!", () => {
 
     expect(averageAge2).toEqual(31.666666666666668)
   })
+  it("should get a array of all the favorite foods of all the users. no duplicates", () => {
+    const users = new UserAPI(mockUsers)
+
+    const arrayOfFavoriteColors = users.getAllFavoriteColors()
+
+    expect(arrayOfFavoriteColors).toEqual(["green", "black", "blue", "red"])
+  })
 })
