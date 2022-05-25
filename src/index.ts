@@ -40,10 +40,13 @@ export default class UserAPI {
     this.getUserById(id)
     const newUpdatedUser = { ...this.list[id], ...updatedUser }
 
-    const newUpdatedUserList = Object.entries(this.list).map(([key, value]) => {
+    const newUpdatedUserList: Array<{ [id: string]: Person }> = Object.entries(
+      this.list
+    ).map(([key, value]) => {
       if (key === id) {
         return { [key]: newUpdatedUser }
       }
+
       return { [key]: value }
     })
 
