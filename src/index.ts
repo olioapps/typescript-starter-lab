@@ -80,20 +80,22 @@ export default class UserAPI {
     return filteredUserArray
   }
   getAverageAge() {
-    const ageArray = Object.values(this.list).filter(users => users.age)
+    const ageOnlyArray: number[] = Object.values(this.list)
 
-    const ageOnlyArray = ageArray.map((users: Person) => {
-      if (users.age) {
-        const age = users.age
-        return age
-      } else {
-        //some how this only work if i return 0 the type for .map is number | undefined.
-        return 0
-      }
-    })
+      .filter((users: Person) => users.age)
+
+      .map((users: Person) => {
+        if (users.age) {
+          const age = users.age
+          return age
+        } else {
+          //some how this only work if i return 0 the type for .map is number | undefined.
+          return 0
+        }
+      })
 
     const averageAge =
-      ageOnlyArray.reduce((prev, current) => prev + current) /
+      ageOnlyArray.reduce((prev: number, current: number) => prev + current) /
       ageOnlyArray.length
 
     return averageAge
