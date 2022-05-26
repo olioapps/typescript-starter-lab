@@ -79,6 +79,7 @@ export default class UserAPI {
 
     return filteredUserArray
   }
+
   getAverageAge(): number {
     const ageOnlyArray: number[] = Object.values(this.list)
 
@@ -100,7 +101,35 @@ export default class UserAPI {
 
     return averageAge
   }
-  getAllFavoriteColors(): string[] {
-    return []
+
+  getAllFavoriteColors() {
+    const allColors = Object.values(this.list).filter(
+      (users: Person) => users.favoriteColor
+    )
+    //cant figure out a way to type this section. err message  "No overload matches this call."
+    //@ts-ignore
+    const onlyColors: string[] = allColors.reduce(
+      //@ts-ignore
+      (prev: string[], current: Person) => {
+        const newArray = [...prev, current.favoriteColor]
+        return newArray
+      },
+      []
+    )
+
+    return onlyColors
+  }
+  getFavoriteColorByName() {
+    const allColors = Object.values(this.list).filter(
+      (users: Person) => users.favoriteColor
+    )
+
+    const favoriteColorByName = allColors.reduce((prev, current: Person) => {
+      const updatedObject = { ...prev, [current.name]: current.favoriteColor }
+      return updatedObject
+    }, {})
+    console.log(favoriteColorByName)
+
+    return favoriteColorByName
   }
 }
