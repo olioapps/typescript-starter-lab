@@ -1,39 +1,28 @@
-// @ts-nocheck
-const mockUsers = () => {
-  return [
-    { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
-    { id: "1", name: "ted", age: 23, favoriteColor: "black" },
-    { id: "2", name: "ron", age: 41, favoriteColor: "blue" },
-    { id: "3", name: "tim", age: 27, favoriteColor: "red" },
-  ]
+import { Users, UserFormMeta } from "./interfaces"
+
+const mockUsers: Users = {
+  "0": { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
+  "1": { id: "1", name: "ted", age: 23, favoriteColor: "black" },
+  "2": { id: "2", name: "ron", age: 41, favoriteColor: "blue" },
+  "3": { id: "3", name: "tim", age: 27, favoriteColor: "red" },
+}
+const mockUsers2: Users = {
+  "0": { id: "0", name: "minoka", age: 31, favoriteColor: "green" },
+  "1": { id: "1", name: "ted", age: 23, favoriteColor: "black" },
+  "2": { id: "2", name: "ron", age: 41, favoriteColor: "blue" },
+  "3": { id: "3", name: "tim", favoriteColor: "red" },
 }
 
-const userObject = { name: "minoka", age: 31, favoriteColor: "green" }
+const userObject: UserFormMeta = {
+  name: "minoka",
+  age: 31,
+  favoriteColor: "green",
+}
 
-const updatingUserObject = {
-  id: "0",
+const updatingUserObject: UserFormMeta = {
   name: "minoka",
   age: 100,
   favoriteColor: "red",
 }
 
-const updatingUserObjectError = {
-  name: "minoka",
-  age: 100,
-  favoriteColor: "red",
-}
-
-const updatingUserObjectErrorWithId = {
-  id: "124324614614331461346",
-  name: "minoka",
-  age: 100,
-  favoriteColor: "red",
-}
-
-export {
-  mockUsers,
-  userObject,
-  updatingUserObject,
-  updatingUserObjectError,
-  updatingUserObjectErrorWithId,
-}
+export { mockUsers, mockUsers2, userObject, updatingUserObject }

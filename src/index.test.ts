@@ -2,26 +2,24 @@
 import UserAPI from "./index"
 import {
   mockUsers,
+  mockUsers2,
   userObject,
   updatingUserObject,
-  updatingUserObjectError,
-  updatingUserObjectErrorWithId,
 } from "./mockdata"
 
 describe("Tests will go here!", () => {
   beforeEach(() => {})
 
   it("should make an instance of the UserAPI class and add a user, new user object should have an id.", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
     const newUser = users.addUser(userObject)
-
-    expect(users.list).toHaveLength(5)
+    expect(users.getUsers()).toHaveLength(5)
 
     expect(newUser).toEqual({ id: expect.any(String), ...userObject })
   })
 
   it("should show the correct error message, will fail if no errors are thrown", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
 
     try {
       expect(() => users.addUser({})).toThrow()
@@ -33,7 +31,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should show the correct error message, will fail if no errors are thrown", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
 
     try {
       expect(() => users.addUser({})).toThrow()
@@ -43,7 +41,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should get the correct user that matches their id", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
     const targetUser1 = users.getUserById("1")
     const targetUser2 = users.getUserById("3")
 
@@ -73,7 +71,7 @@ describe("Tests will go here!", () => {
   })
 
   it("should get a list of all the users, or an empty array other wise", () => {
-    const users = new UserAPI(mockUsers())
+    const users = new UserAPI(mockUsers)
     const emptyusers = new UserAPI()
 
     expect(users.getUsers()).toHaveLength(4)
@@ -82,8 +80,11 @@ describe("Tests will go here!", () => {
   })
 
   it("should update the users but return an error if user is not found or if the object doesn't have an id ", () => {
-    const users = new UserAPI(mockUsers())
-    const updatedUser = users.updateUserById(updatingUserObject)
+    const users = new UserAPI(mockUsers)
+    const validId = "0"
+    const noID = ""
+    const notValidId = "not a valid Id"
+    const updatedUser = users.updateUserById(validId, updatingUserObject)
 
     expect(updatedUser).toEqual({
       id: "0",
@@ -97,7 +98,7 @@ describe("Tests will go here!", () => {
     const users = new UserAPI(mockUsers())
 
     try {
-      expect(() => users.updateUserById(updatingUserObjectError)).toThrow()
+      users.updateUserById(noID, updatingUserObject)
     } catch (err) {
       expect(err.message).toEqual("We can not update a user without an id")
     }
@@ -107,15 +108,15 @@ describe("Tests will go here!", () => {
     const users = new UserAPI(mockUsers())
 
     try {
-      users.updateUserById(updatingUserObjectErrorWithId)
+      users.updateUserById(notValidId, updatingUserObject)
     } catch (err) {
       expect(err.message).toEqual("There are no users found with that id.")
     }
   })
 
   it("should be able to delete a user, and it should return the delete user.", () => {
-    const users = new UserAPI(mockUsers())
-    expect(users.list).toHaveLength(4)
+    const users = new UserAPI(mockUsers)
+    expect(users.getUsers()).toHaveLength(4)
 
     const deletedUser = users.deleteUserById("3")
 
@@ -126,11 +127,7 @@ describe("Tests will go here!", () => {
       name: "tim",
     })
 
-    expect(users.list).toHaveLength(3)
-  })
-
-  it("should return an error if user isnt found with that id", () => {
-    const users = new UserAPI(mockUsers())
+    expect(users.getUsers()).toHaveLength(3)
 
     try {
       expect(() => users.deleteUserById("not a real user id")).toThrow()
@@ -139,8 +136,11 @@ describe("Tests will go here!", () => {
     }
   })
 
-  it("should an array of users with any part of the their name matching the input argument.", () => {
-    const users = new UserAPI(mockUsers())
+  it("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
+    const users = new UserAPI(mockUsers)
+    const emptyArray = users.searchUserByName("not a real search")
+
+    expect(emptyArray).toEqual([])
 
     const firstSearch = users.searchUserByName("Mino")
 
@@ -154,11 +154,60 @@ describe("Tests will go here!", () => {
 
     expect(thirdSearch).toHaveLength(2)
   })
+  it("should return a number with the average age of all the users", () => {
+    const users = new UserAPI(mockUsers)
 
-  it("should return an empty array because no users match the search input", () => {
-    const users = new UserAPI(mockUsers())
-    const emptyArray = users.searchUserByName("not a real search")
+    const averageAge = users.getAverageAge()
 
-    expect(emptyArray).toEqual([])
+    expect(averageAge).toEqual(30.5)
+
+    const users2 = new UserAPI(mockUsers2)
+
+    const averageAge2 = users2.getAverageAge()
+
+    expect(averageAge2).toEqual(31.666666666666668)
+  })
+
+  it("should get a array of all the favorite colors of all the users", () => {
+    const users = new UserAPI(mockUsers)
+    users.addUser(userObject)
+    users.addUser(userObject)
+    users.addUser(userObject)
+
+    const arrayOfFavoriteColors = users.getAllFavoriteColors()
+
+    expect(arrayOfFavoriteColors).toEqual(
+      new Set(["green", "black", "blue", "red"])
+    )
+  })
+
+  it("should get the favorite color count of each Color.", () => {
+    const users = new UserAPI(mockUsers)
+    users.addUser(userObject)
+    users.addUser(userObject)
+    users.addUser(userObject)
+    users.addUser({ name: "ted" })
+    users.addUser({ name: "ted" })
+    users.addUser({ name: "ted" })
+
+    const objectOfFavoriteColors = users.getFavoriteColorCount()
+    expect(objectOfFavoriteColors).toEqual({
+      green: 4,
+      blue: 1,
+      black: 1,
+      red: 1,
+    })
+  })
+  it("should return all user stats in an object", () => {
+    const users = new UserAPI(mockUsers)
+    users.addUser(userObject)
+    const userMeta = users.getUserMeta()
+
+    expect(userMeta).toEqual({
+      colorCount: { green: 2, black: 1, blue: 1, red: 1 },
+      allColors: new Set(["green", "black", "blue", "red"]),
+      averageAge: 30.6,
+      totalUsers: 5,
+    })
   })
 })
