@@ -1,20 +1,10 @@
-interface Person {
-  readonly id: string
-  readonly name: string
-  readonly age?: number
-  readonly favoriteColor?: string
-}
-
-interface UserFormMeta {
-  readonly name: string
-  readonly age?: number
-  readonly favoriteColor?: string
-}
+import { Person, UserFormMeta, Users } from "./interfaces"
 
 export default class UserAPI {
-  list: ReadonlyArray<Person>
-  constructor(users: ReadonlyArray<Person>) {
-    this.list = users || []
+  list: Users
+
+  constructor(users: Users) {
+    this.list = users || {}
   }
 
   randomId = (): string => {
@@ -25,16 +15,20 @@ export default class UserAPI {
     if (!user.name) {
       throw new Error("you need to at least have a name to add a user")
     }
-    const newUser = { id: this.randomId(), ...user }
-    this.list = [...this.list, newUser]
+
+    const id = this.randomId()
+    const newUser = { id, ...user }
+    this.list = { ...this.list, [id]: newUser }
     return newUser
   }
 
   getUserById(id: string): Person {
-    const targetUser = this.list.find(user => user.id === id)
+    const targetUser = this.list[id]
+
     if (!targetUser) {
       throw new Error("There are no users found with that id.")
     }
+
     return targetUser
   }
 
@@ -42,33 +36,110 @@ export default class UserAPI {
     if (!id) {
       throw new Error("We can not update a user without an id")
     }
-    const updatedList = this.list.map(user => {
-      if (user.id === id) {
-        return { ...user, ...updatedUser }
-      }
-      return user
-    })
-    this.list = updatedList
-    return this.getUserById(id)
+    const foundUser = this.getUserById(id)
+
+    if (!foundUser) {
+      throw new Error("There are no users found with that id.")
+    }
+
+    const newUpdatedUser = { ...foundUser, ...updatedUser }
+    const updatedUserList = { ...this.list, [id]: newUpdatedUser }
+
+    this.list = updatedUserList
+    return newUpdatedUser
   }
 
   getUsers(): ReadonlyArray<Person> | [] {
-    return this.list
+    const usersArray: ReadonlyArray<Person> = Object.values(this.list).map(
+      (value: Person) => {
+        return value
+      }
+    )
+
+    return usersArray
   }
 
   deleteUserById(id: string): Person {
-    const deletedUser = this.getUserById(id)
-    const newUsersList = this.list.filter(user => user.id !== id)
-    this.list = newUsersList
+    if (!this.getUserById(id)) {
+      throw new Error("There are no users found with that id.")
+    }
+
+    const { [id]: deletedUser, ...rest } = this.list
+    this.list = rest
+
     return deletedUser
   }
 
   searchUserByName(name: string): ReadonlyArray<Person> | [] {
-    const filteredUserArray = this.list.filter(user => {
-      if (user.name.toLowerCase().includes(name.toLowerCase())) {
-        return user
-      }
-    })
+    const filteredUserArray: ReadonlyArray<Person> = Object.values(
+      this.list
+    ).filter((value: Person) =>
+      value.name.toLowerCase().includes(name.toLowerCase())
+    )
+
     return filteredUserArray
+  }
+
+  getAverageAge(): number {
+    const ageOnlyArray = Object.values(this.list).reduce(
+      (acc, person: Person) => {
+        if (person.age) {
+          return [...acc, person.age]
+        }
+        return acc
+      },
+      [] as number[]
+    )
+
+    const averageAge: number =
+      ageOnlyArray.reduce((prev: number, current: number) => prev + current) /
+      ageOnlyArray.length
+
+    return averageAge
+  }
+
+  getAllFavoriteColors() {
+    let onlyColors = new Set()
+
+    Object.values(this.list)
+      .filter((users: Person) => users.favoriteColor)
+      .map((users: Person) => {
+        onlyColors.add(users.favoriteColor)
+      })
+
+    return onlyColors
+  }
+
+  getFavoriteColorCount(): Record<string, number> {
+    const colorCount = Object.values(this.list).reduce(
+      (acc, person: Person) => {
+        if (acc[person?.favoriteColor as string]) {
+          const newColorCount = acc[person.favoriteColor as string] + 1
+
+          return {
+            ...acc,
+            [person.favoriteColor as string]: newColorCount,
+          }
+        } else if (person.favoriteColor) {
+          return { ...acc, [person.favoriteColor]: 1 }
+        }
+
+        return acc
+      },
+      {} as Record<string, number>
+    )
+
+    return colorCount
+  }
+
+  getUserMeta(): Record<string, any> {
+    const userMeta = {
+      colorCount: this.getFavoriteColorCount(),
+      allColors: this.getAllFavoriteColors(),
+      averageAge: this.getAverageAge(),
+      totalUsers: Object.keys(this.list).length,
+    }
+
+    return userMeta
   }
 }
