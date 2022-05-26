@@ -79,4 +79,67 @@ export default class UserAPI {
 
     return filteredUserArray
   }
+
+  getAverageAge(): number {
+    const ageOnlyArray = Object.values(this.list).reduce(
+      (acc, person: Person) => {
+        if (person.age) {
+          return [...acc, person.age]
+        }
+        return acc
+      },
+      [] as number[]
+    )
+
+    const averageAge: number =
+      ageOnlyArray.reduce((prev: number, current: number) => prev + current) /
+      ageOnlyArray.length
+
+    return averageAge
+  }
+
+  getAllFavoriteColors() {
+    let onlyColors = new Set()
+
+    Object.values(this.list)
+      .filter((users: Person) => users.favoriteColor)
+      .map((users: Person) => {
+        onlyColors.add(users.favoriteColor)
+      })
+
+    return onlyColors
+  }
+
+  getFavoriteColorCount(): Record<string, number> {
+    const colorCount = Object.values(this.list).reduce(
+      (acc, person: Person) => {
+        if (acc[person?.favoriteColor as string]) {
+          const newColorCount = acc[person.favoriteColor as string] + 1
+
+          return {
+            ...acc,
+            [person.favoriteColor as string]: newColorCount,
+          }
+        } else if (person.favoriteColor) {
+          return { ...acc, [person.favoriteColor]: 1 }
+        }
+
+        return acc
+      },
+      {} as Record<string, number>
+    )
+
+    return colorCount
+  }
+
+  getUserMeta(): Record<string, any> {
+    const userMeta = {
+      colorCount: this.getFavoriteColorCount(),
+      allColors: this.getAllFavoriteColors(),
+      averageAge: this.getAverageAge(),
+      totalUsers: Object.keys(this.list).length,
+    }
+
+    return userMeta
+  }
 }

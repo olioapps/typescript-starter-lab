@@ -1,6 +1,11 @@
 // @ts-nocheck
 import UserAPI from "./index"
-import { mockUsers, userObject, updatingUserObject } from "./mockdata"
+import {
+  mockUsers,
+  mockUsers2,
+  userObject,
+  updatingUserObject,
+} from "./mockdata"
 
 describe("Tests will go here!", () => {
   beforeEach(() => {})
@@ -130,5 +135,61 @@ describe("Tests will go here!", () => {
     const thirdSearch = users.searchUserByName("o")
 
     expect(thirdSearch).toHaveLength(2)
+  })
+  it("should return a number with the average age of all the users", () => {
+    const users = new UserAPI(mockUsers)
+
+    const averageAge = users.getAverageAge()
+
+    expect(averageAge).toEqual(30.5)
+
+    const users2 = new UserAPI(mockUsers2)
+
+    const averageAge2 = users2.getAverageAge()
+
+    expect(averageAge2).toEqual(31.666666666666668)
+  })
+
+  it("should get a array of all the favorite colors of all the users", () => {
+    const users = new UserAPI(mockUsers)
+    users.addUser(userObject)
+    users.addUser(userObject)
+    users.addUser(userObject)
+
+    const arrayOfFavoriteColors = users.getAllFavoriteColors()
+
+    expect(arrayOfFavoriteColors).toEqual(
+      new Set(["green", "black", "blue", "red"])
+    )
+  })
+
+  it("should get the favorite color count of each Color.", () => {
+    const users = new UserAPI(mockUsers)
+    users.addUser(userObject)
+    users.addUser(userObject)
+    users.addUser(userObject)
+    users.addUser({ name: "ted" })
+    users.addUser({ name: "ted" })
+    users.addUser({ name: "ted" })
+
+    const objectOfFavoriteColors = users.getFavoriteColorCount()
+    expect(objectOfFavoriteColors).toEqual({
+      green: 4,
+      blue: 1,
+      black: 1,
+      red: 1,
+    })
+  })
+  it("should return all user stats in an object", () => {
+    const users = new UserAPI(mockUsers)
+    users.addUser(userObject)
+    const userMeta = users.getUserMeta()
+
+    expect(userMeta).toEqual({
+      colorCount: { green: 2, black: 1, blue: 1, red: 1 },
+      allColors: new Set(["green", "black", "blue", "red"]),
+      averageAge: 30.6,
+      totalUsers: 5,
+    })
   })
 })
