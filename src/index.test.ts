@@ -62,6 +62,16 @@ describe("Tests will go here!", () => {
     })
   })
 
+  it("should throw an Error if no users is found with that id", () => {
+    const users = new UserAPI(mockUsers())
+
+    try {
+      expect(() => users.getUserById("not a real user")).toThrow()
+    } catch (err) {
+      expect(err.message).toEqual("Cannot read property 'name' of undefined")
+    }
+  })
+
   it("should get a list of all the users, or an empty array other wise", () => {
     const users = new UserAPI(mockUsers())
     const emptyusers = new UserAPI()
@@ -81,12 +91,20 @@ describe("Tests will go here!", () => {
       age: 100,
       favoriteColor: "red",
     })
+  })
+
+  it("should throw the correct error message if unable to update a user", () => {
+    const users = new UserAPI(mockUsers())
 
     try {
-      users.updateUserById(updatingUserObjectError)
+      expect(() => users.updateUserById(updatingUserObjectError)).toThrow()
     } catch (err) {
       expect(err.message).toEqual("We can not update a user without an id")
     }
+  })
+
+  it("should throw the correct error message if unable to update a user", () => {
+    const users = new UserAPI(mockUsers())
 
     try {
       users.updateUserById(updatingUserObjectErrorWithId)
@@ -109,19 +127,20 @@ describe("Tests will go here!", () => {
     })
 
     expect(users.list).toHaveLength(3)
+  })
+
+  it("should return an error if user isnt found with that id", () => {
+    const users = new UserAPI(mockUsers())
 
     try {
-      users.deleteUserById("3")
+      expect(() => users.deleteUserById("not a real user id")).toThrow()
     } catch (err) {
       expect(err.message).toEqual("There are no users found with that id.")
     }
   })
 
-  it("should return empty array or an array of users with any part of the their name matching the input argument.", () => {
+  it("should an array of users with any part of the their name matching the input argument.", () => {
     const users = new UserAPI(mockUsers())
-    const emptyArray = users.searchUserByName("not a real search")
-
-    expect(emptyArray).toEqual([])
 
     const firstSearch = users.searchUserByName("Mino")
 
@@ -134,5 +153,12 @@ describe("Tests will go here!", () => {
     const thirdSearch = users.searchUserByName("o")
 
     expect(thirdSearch).toHaveLength(2)
+  })
+
+  it("should return an empty array because no users match the search input", () => {
+    const users = new UserAPI(mockUsers())
+    const emptyArray = users.searchUserByName("not a real search")
+
+    expect(emptyArray).toEqual([])
   })
 })
