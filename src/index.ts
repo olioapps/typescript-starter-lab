@@ -106,26 +106,29 @@ export default class UserAPI {
       .map((users: Person) => {
         onlyColors.add(users.favoriteColor)
       })
+    console.log("onlyColors", onlyColors)
 
     return onlyColors
   }
 
-  getFavoriteColorCount(): object {
+  getFavoriteColorCount(): Record<string, number> {
     const colorCount = Object.values(this.list).reduce(
-      (acc: object, person: Person) => {
-        if (`${person.favoriteColor}` in acc) {
-          //@ts-ignore
-          ++acc[person.favoriteColor]
+      (acc, person: Person) => {
+        if (acc[person?.favoriteColor as string]) {
+          const newColorCount = acc[person.favoriteColor as string] + 1
 
-          return acc
+          return {
+            ...acc,
+            [person.favoriteColor as string]: newColorCount,
+          }
         } else if (person.favoriteColor) {
           return { ...acc, [person.favoriteColor]: 1 }
         }
 
         return acc
       },
-      {}
-    ) as object
+      {} as Record<string, number>
+    )
 
     return colorCount
   }
