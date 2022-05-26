@@ -106,7 +106,6 @@ export default class UserAPI {
       .map((users: Person) => {
         onlyColors.add(users.favoriteColor)
       })
-    console.log("onlyColors", onlyColors)
 
     return onlyColors
   }
@@ -131,5 +130,15 @@ export default class UserAPI {
     )
 
     return colorCount
+  }
+  getUserMeta() {
+    const userMeta = {
+      colorCount: this.getFavoriteColorCount(),
+      allColors: this.getAllFavoriteColors(),
+      averageAge: this.getAverageAge(),
+      totalUsers: Object.keys(this.list).length,
+    }
+
+    return userMeta
   }
 }

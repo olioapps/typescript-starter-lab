@@ -180,4 +180,16 @@ describe("Tests will go here!", () => {
       red: 1,
     })
   })
+  it("should return all user stats in an object", () => {
+    const users = new UserAPI(mockUsers)
+    users.addUser(userObject)
+    const userMeta = users.getUserMeta()
+
+    expect(userMeta).toEqual({
+      colorCount: { green: 2, black: 1, blue: 1, red: 1 },
+      allColors: new Set(["green", "black", "blue", "red"]),
+      averageAge: 30.6,
+      totalUsers: 5,
+    })
+  })
 })
