@@ -163,15 +163,21 @@ describe("Tests will go here!", () => {
     )
   })
 
-  it("should get the favorite color by each name.", () => {
+  it("should get the favorite color count of each Color.", () => {
     const users = new UserAPI(mockUsers)
+    users.addUser(userObject)
+    users.addUser(userObject)
+    users.addUser(userObject)
+    users.addUser({ name: "ted" })
+    users.addUser({ name: "ted" })
+    users.addUser({ name: "ted" })
 
-    const objectOfFavoriteColors = users.getFavoriteColorByName()
+    const objectOfFavoriteColors = users.getFavoriteColorCount()
     expect(objectOfFavoriteColors).toEqual({
-      minoka: "green",
-      ron: "blue",
-      ted: "black",
-      tim: "red",
+      green: 4,
+      blue: 1,
+      black: 1,
+      red: 1,
     })
   })
 })

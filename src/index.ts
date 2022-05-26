@@ -110,21 +110,23 @@ export default class UserAPI {
     return onlyColors
   }
 
-  getFavoriteColorByName(): {} {
-    const allColors = Object.values(this.list).filter(
-      (users: Person) => users.favoriteColor
-    )
+  getFavoriteColorCount(): object {
+    const colorCount = Object.values(this.list).reduce(
+      (acc: object, person: Person) => {
+        if (`${person.favoriteColor}` in acc) {
+          //@ts-ignore
+          ++acc[person.favoriteColor]
 
-    const favoriteColorByName: Object = allColors.reduce(
-      (prev, current: Person) => {
-        const updatedObject = { ...prev, [current.name]: current.favoriteColor }
-        return updatedObject
+          return acc
+        } else if (person.favoriteColor) {
+          return { ...acc, [person.favoriteColor]: 1 }
+        }
+
+        return acc
       },
       {}
-    )
+    ) as object
 
-    console.log("", favoriteColorByName)
-
-    return favoriteColorByName
+    return colorCount
   }
 }
