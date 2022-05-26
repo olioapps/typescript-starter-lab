@@ -81,19 +81,15 @@ export default class UserAPI {
   }
 
   getAverageAge(): number {
-    const ageOnlyArray: number[] = Object.values(this.list)
-
-      .filter((users: Person) => users.age)
-
-      .map((users: Person) => {
-        if (users.age) {
-          const age = users.age
-          return age
-        } else {
-          //some how this only work if i return 0 the type for .map is number | undefined.
-          return 0
+    const ageOnlyArray = Object.values(this.list).reduce(
+      (acc, person: Person) => {
+        if (person.age) {
+          return [...acc, person.age]
         }
-      })
+        return acc
+      },
+      [] as number[]
+    )
 
     const averageAge: number =
       ageOnlyArray.reduce((prev: number, current: number) => prev + current) /
@@ -103,32 +99,31 @@ export default class UserAPI {
   }
 
   getAllFavoriteColors() {
-    const allColors = Object.values(this.list).filter(
-      (users: Person) => users.favoriteColor
-    )
-    //cant figure out a way to type this section. err message  "No overload matches this call."
-    //@ts-ignore
-    const onlyColors: string[] = allColors.reduce(
-      //@ts-ignore
-      (prev: string[], current: Person) => {
-        const newArray = [...prev, current.favoriteColor]
-        return newArray
-      },
-      []
-    )
+    let onlyColors = new Set()
+
+    Object.values(this.list)
+      .filter((users: Person) => users.favoriteColor)
+      .map((users: Person) => {
+        onlyColors.add(users.favoriteColor)
+      })
 
     return onlyColors
   }
-  getFavoriteColorByName() {
+
+  getFavoriteColorByName(): {} {
     const allColors = Object.values(this.list).filter(
       (users: Person) => users.favoriteColor
     )
 
-    const favoriteColorByName = allColors.reduce((prev, current: Person) => {
-      const updatedObject = { ...prev, [current.name]: current.favoriteColor }
-      return updatedObject
-    }, {})
-    console.log(favoriteColorByName)
+    const favoriteColorByName: Object = allColors.reduce(
+      (prev, current: Person) => {
+        const updatedObject = { ...prev, [current.name]: current.favoriteColor }
+        return updatedObject
+      },
+      {}
+    )
+
+    console.log("", favoriteColorByName)
 
     return favoriteColorByName
   }

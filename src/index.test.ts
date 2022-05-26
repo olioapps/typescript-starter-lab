@@ -152,10 +152,15 @@ describe("Tests will go here!", () => {
 
   it("should get a array of all the favorite foods of all the users", () => {
     const users = new UserAPI(mockUsers)
+    users.addUser(userObject)
+    users.addUser(userObject)
+    users.addUser(userObject)
 
     const arrayOfFavoriteColors = users.getAllFavoriteColors()
 
-    expect(arrayOfFavoriteColors).toEqual(["green", "black", "blue", "red"])
+    expect(arrayOfFavoriteColors).toEqual(
+      new Set(["green", "black", "blue", "red"])
+    )
   })
 
   it("should get the favorite color by each name.", () => {
