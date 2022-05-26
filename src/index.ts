@@ -131,6 +131,7 @@ export default class UserAPI {
 
     return colorCount
   }
+
   getUserMeta(): Record<string, any> {
     const userMeta = {
       colorCount: this.getFavoriteColorCount(),
