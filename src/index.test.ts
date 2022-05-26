@@ -150,7 +150,7 @@ describe("Tests will go here!", () => {
     expect(averageAge2).toEqual(31.666666666666668)
   })
 
-  it("should get a array of all the favorite foods of all the users", () => {
+  it("should get a array of all the favorite colors of all the users", () => {
     const users = new UserAPI(mockUsers)
     users.addUser(userObject)
     users.addUser(userObject)
