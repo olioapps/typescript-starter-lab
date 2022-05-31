@@ -40,11 +40,12 @@ the region represents the highest scoring 'consecutive' events in the given Even
 'Screenshots': 3 </br>
 
 ## Shapes:
+
 __EventStream__: represented by an array of __Event__
 
-__Event__:
-	timestamp: a number </br>
-	eventType: can be “screenshot”, or “new message”, or “view”
+__Event__: </br>
+- timestamp: a number </br>
+- eventType: can be “screenshot”, or “new message”, or “view”
 
 ## Example input:
 
