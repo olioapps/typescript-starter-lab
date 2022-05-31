@@ -1,6 +1,5 @@
-# typescript-starter-lab
-* Directions will be given after getting this envrionment set up
-
+# typescript-starter-lab puzzler: Event Stream
+# ENV SETUP
 ### Testing
 tsc and jest should be run in different terminal windows
 ```T1
@@ -22,3 +21,69 @@ yarn tsc --watch
 yarn nodemon -w dist dist/ts_playground.js
 ```
 * Running these two commands in terminals will let tsc watch for changes to any file, and then nodemon will restart and run any compiled code from ts_playground.js
+
+# PUZZLER INSTRUCTIONS
+
+### Requirements
+Provide a function (or class) that takes an EventStream (see 'Shapes' section below)
+And returns the region (subarray) of the original array
+With the highest “score”
+
+The region.length should be 5
+the region represents the highest scoring 'consecutive' events in the given EventStream
+
+* Scoring: (event: value)
+'Messages': 1
+'Views': 2
+'Screenshots': 3
+
+* Shapes:
+EventStream: represented by an array of Event
+
+Event:
+	timestamp: a number
+	eventType: can be “screenshot”, or “new message”, or “view”
+
+* Example input:
+```
+[
+	{
+		timestamp: 123123123,
+		eventType: “new message”,
+	},
+	{
+		timestamp: 123123124,
+		eventType: “new message”,
+	}
+	{
+		timestamp: 123123125,
+		eventType: “new message”,
+	}
+	{
+		timestamp: 123123125,
+		eventType: “view”,
+	}
+	{
+		timestamp: 123123125,
+		eventType: “view”,
+	}
+	{
+		timestamp: 123123125,
+		eventType: “screenshot”,
+	}
+	{
+		timestamp: 123123125,
+		eventType: “screenshot”,
+	}
+	{
+		timestamp: 123123125,
+		eventType: “message”,
+	}
+	…
+	…
+	{
+		timestamp: 123123125,
+		eventType: “message”,
+	}
+]
+```
