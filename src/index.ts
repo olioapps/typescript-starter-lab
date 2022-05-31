@@ -1,1 +1,1 @@
-//Define class here
+//Define class/functions here
