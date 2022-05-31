@@ -24,7 +24,8 @@ yarn nodemon -w dist dist/ts_playground.js
 
 # PUZZLER INSTRUCTIONS
 
-### Requirements
+## Requirements
+
 Provide a function (or class) that takes an EventStream (see 'Shapes' section below)
 And returns the region (subarray) of the original array
 With the highest “score”
@@ -32,19 +33,21 @@ With the highest “score”
 The region.length should be 5
 the region represents the highest scoring 'consecutive' events in the given EventStream
 
-* Scoring: (event: value)
-'Messages': 1
-'Views': 2
-'Screenshots': 3
+## Scoring: (event: value)
+ 
+'Messages': 1 </br>
+'Views': 2 </br>
+'Screenshots': 3 </br>
 
-* Shapes:
-EventStream: represented by an array of Event
+## Shapes:
+__EventStream__: represented by an array of __Event__
 
-Event:
-	timestamp: a number
+__Event__:
+	timestamp: a number </br>
 	eventType: can be “screenshot”, or “new message”, or “view”
 
-* Example input:
+## Example input:
+
 ```
 [
 	{
