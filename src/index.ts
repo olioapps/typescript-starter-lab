@@ -22,12 +22,15 @@ class UserAPI {
   addUser(user: IUser) {
     const result = (this.users).find( ( { name, favColor, age }: IUser) => (name === user.name && favColor === user.favColor && age === user.age))
     try {
-      if (result) {
-        throw "User is already in the database"
+      if (user.id) {
+        throw "Error: User Id is set by database. Please resubmit without pre-existing value."
+      } else if (result) {
+        throw "Error: A user with those properties already exists in the database."
       } 
     } catch (error) {
       return error
     }
+
     const { name, favColor, age } = user
     const newUser = this.createUser(name, favColor, age)
     this.users.push(newUser)
@@ -40,7 +43,7 @@ class UserAPI {
       if (foundUser) {
         return foundUser
       }
-      throw "Error: No user found"
+      throw "Error: No user found."
     }
     catch (error) {
       return (error)
@@ -67,11 +70,18 @@ class UserAPI {
 
 const x = new UserAPI()
 const user = {
-  id: 5,
   name: "andy",
   favColor: "blue",
   age: 247
 }
-console.log("AddUser:", x.addUser(user))
-console.log("Get User:", x.getUserById(2))
-console.log("AddUser:", x.addUser(user))
+const user2 = {
+  id: 5,
+  name: "andy",
+  favColor: "blue",
+  age: 200
+}
+console.log("ADD:", x.addUser(user))
+console.log("ADD:", x.addUser(user2))
+
+console.log("GET:", x.getUserById(1))
+console.log("GET:", x.getUserById(2))
