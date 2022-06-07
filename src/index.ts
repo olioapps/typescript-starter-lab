@@ -23,9 +23,9 @@ class UserAPI {
     const result = (this.users).find( ( { name, favColor, age }: IUser) => (name === user.name && favColor === user.favColor && age === user.age))
     try {
       if (user.id) {
-        throw "Error: User Id is set by database. Please resubmit without pre-existing value."
+        throw new SyntaxError("Please resubmit without pre-exisitng ID field.")
       } else if (result) {
-        throw "Error: A user with those properties already exists in the database."
+        throw new Error("A user with those properties already exists in the database.")
       } 
     } catch (error) {
       return error
@@ -43,10 +43,10 @@ class UserAPI {
       if (foundUser) {
         return foundUser
       }
-      throw "Error: No user found."
+      throw new ReferenceError("No user found.")
     }
     catch (error) {
-      return (error)
+      return error
     }
   }
 
@@ -74,6 +74,11 @@ const user = {
   favColor: "blue",
   age: 247
 }
+const userDuplicate = {
+  name: "andy",
+  favColor: "blue",
+  age: 247
+}
 const user2 = {
   id: 5,
   name: "andy",
@@ -81,6 +86,7 @@ const user2 = {
   age: 200
 }
 console.log("ADD:", x.addUser(user))
+console.log("ADD:", x.addUser(userDuplicate))
 console.log("ADD:", x.addUser(user2))
 
 console.log("GET:", x.getUserById(1))
