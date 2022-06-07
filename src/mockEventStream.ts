@@ -39,22 +39,6 @@ export const firstMockEventStream: Array<Event> = [
     },
 ]
 export const secondMockEventStream: Array<Event> = [
-    {
-        timestamp: 123123123,
-		eventType: "new message",
-	},
-	{
-        timestamp: 123123124,
-		eventType: "new message",
-	},
-	{
-        timestamp: 123123125,
-		eventType: "new message",
-	},
-	{
-        timestamp: 123123125,
-		eventType: "view",
-	},
 	{
         timestamp: 123123125,
 		eventType: "view",
@@ -66,25 +50,9 @@ export const secondMockEventStream: Array<Event> = [
 	{
         timestamp: 123123125,
 		eventType: "screenshot",
-	},
-	{
-        timestamp: 123123125,
-		eventType: "new message",
-	},
-	{
-        timestamp: 123123125,
-		eventType: "new message",
-    },
-    {
-        timestamp: 123123125,
-		eventType: "view",
-	},
-	{
-        timestamp: 123123125,
-		eventType: "view",
 	},
 ]
-export const thirdMockEvenStream: Array<Event> = [
+export const thirdMockEventStream: Array<Event> = [
     {
         timestamp: 123123125,
 		eventType: "screenshot",
@@ -165,7 +133,7 @@ export const fourthMockEventStream: Array<Event> = [
     },
     {
         timestamp: 123123124,
-		eventType: "new message",
+		eventType: "screenshot",
 	},
 	{
         timestamp: 123123125,
@@ -177,7 +145,7 @@ export const fourthMockEventStream: Array<Event> = [
 	},
 	{
         timestamp: 123123125,
-		eventType: "view",
+		eventType: "screenshot",
     },
     {
         timestamp: 123123124,
