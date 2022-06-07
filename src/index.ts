@@ -1,32 +1,37 @@
-class User {
+interface IUser {
+  id?: number
   name: string
   favColor: string
   age: number
-    
-  constructor(name: string, color: string, age: number) {
-    this.name = name
-    this.favColor = color
-    this.age = age
-  }
 }
 
 class UserAPI {
-  users: Array<User>
+  private users: Array<IUser>
+  private nextId: number
 
   constructor() {
     this.users = []
+    this.nextId = 0
   } 
 
   private assignId() {
-
+    this.nextId++
+    return this.nextId
   }
 
-  addUser(user: User) {
-
+  addUser(user: IUser) {
+    const {name, favColor, age} = user
+    const newUser = this.createUser(name, favColor, age)
+    this.users.push(newUser)
+    return newUser
   }
 
   getUserById(id: number) {
-
+    const foundUser = this.users.find( user => user.id === id) 
+    if (foundUser) {
+      return foundUser
+    }
+    return "No user found"
   }
 
   getUsers() {
@@ -40,6 +45,18 @@ class UserAPI {
   searchUserByName(name: string) {
 
   }
-
+  
+  private createUser(name: string, favColor: string, age: number): IUser {
+    const id = this.assignId()
+    return { id, name, favColor, age };
+}
 }
 
+const x = new UserAPI()
+const user = {
+  name: "andy",
+  favColor: "blue",
+  age: 247
+}
+console.log(x.addUser(user))
+console.log(x.getUserById(1))
