@@ -1,5 +1,12 @@
+interface User {
+  name: string
+  favoriteColor: string
+  age: number
+  id?: number
+}
+
 class UserAPI {
-  users: Array<{ name: string, color: string, age: number, id?: number }>
+  users: Array<User>
   currentId: number
 
   constructor() {
@@ -12,7 +19,7 @@ class UserAPI {
     return this.currentId - 1;
   }
 
-  addUser(user: { name: string, color: string, age: number, id?: number }) {
+  addUser(user: User) {
     user.id = this.assignId();
     this.users.push(user);
   }
@@ -43,21 +50,21 @@ const x = new UserAPI();
 
 const user = {
   name: "Daniel",
-  color: "purple",
+  favoriteColor: "purple",
   age: 33
 };
 x.addUser(user);
-console.log(`Describe(id: 0) - Expect(User {'Daniel', 'purple', 33, 0})`);
+console.log(`Describe(getUserById(0)) - Expect(User {'Daniel', 'purple', 33, 0})`);
 console.log("Result: ", x.getUserById(0));
 
 const userTwo = {
   name: "Bob",
-  color: "green",
+  favoriteColor: "green",
   age: 102
 };
 x.addUser(userTwo);
-console.log(`Describe(id: 1) - Expect(User {'Bob', 'green', 102, 1})`);
+console.log(`Describe(getUserById(1)) - Expect(User {'Bob', 'green', 102, 1})`);
 console.log("Result: ", x.getUserById(1));
 
-console.log(`Describe(id: 2) - Expect("User not found")`);
+console.log(`Describe(getUserById(2)) - Expect("User not found")`);
 console.log("Result: ", x.getUserById(2));
