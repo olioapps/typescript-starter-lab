@@ -1,19 +1,5 @@
-class User {
-  name: string
-  favoriteColor: string
-  age: number
-  id?: number
-
-  constructor(name: string, favoriteColor: string, age: number) {
-    this.name = name
-    this.favoriteColor = favoriteColor
-    this.age = age
-  }
-}
-
-
 class UserAPI {
-  users: Array<User>
+  users: Array<{ name: string, color: string, age: number, id?: number }>
   currentId: number
 
   constructor() {
@@ -26,7 +12,7 @@ class UserAPI {
     return this.currentId - 1;
   }
 
-  addUser(user: User) {
+  addUser(user: { name: string, color: string, age: number, id?: number }) {
     user.id = this.assignId();
     this.users.push(user);
   }
@@ -55,14 +41,21 @@ class UserAPI {
 
 const x = new UserAPI();
 
-const user = new User("Daniel", "purple", 33);
+const user = {
+  name: "Daniel",
+  color: "purple",
+  age: 33
+};
 x.addUser(user);
 console.log(`Describe(id: 0) - Expect(User {'Daniel', 'purple', 33, 0})`);
 console.log("Result: ", x.getUserById(0));
 
-const userTwo = new User("Bob", "green", 102);
+const userTwo = {
+  name: "Bob",
+  color: "green",
+  age: 102
+};
 x.addUser(userTwo);
-
 console.log(`Describe(id: 1) - Expect(User {'Bob', 'green', 102, 1})`);
 console.log("Result: ", x.getUserById(1));
 
