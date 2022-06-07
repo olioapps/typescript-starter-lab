@@ -1,9 +1,9 @@
-//Define class here
 class User {
-  name: string;
-  favoriteColor: string;
-  age: number;
-  id: number;
+  name: string
+  favoriteColor: string
+  age: number
+  id: number
+
   constructor(name: string, favoriteColor: string, age: number, id: number) {
     this.name = name;
     this.favoriteColor = favoriteColor;
@@ -13,7 +13,7 @@ class User {
 }
 
 class UserAPI {
-  users: Array<User>;
+  users: Array<User>
 
   constructor() {
     this.users = [];
@@ -43,7 +43,3 @@ class UserAPI {
 
   }
 }
-
-// const x = new UserAPI();
-// const user = new User("Daniel", "purple", 33, 0);
-// x.addUser(user);
