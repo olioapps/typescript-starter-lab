@@ -17,7 +17,7 @@ class UserAPI {
     this.users = [];
   } 
 
-  assignId() {
+  private assignId() {
 
   }
 
