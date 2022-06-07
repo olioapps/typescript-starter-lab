@@ -5,10 +5,10 @@ class User {
   id: number
 
   constructor(name: string, favoriteColor: string, age: number, id: number) {
-    this.name = name;
-    this.favoriteColor = favoriteColor;
-    this.age = age;
-    this.id = id;
+    this.name = name
+    this.favoriteColor = favoriteColor
+    this.age = age
+    this.id = id
   }
 }
 
@@ -16,7 +16,7 @@ class UserAPI {
   users: Array<User>
 
   constructor() {
-    this.users = [];
+    this.users = []
   }
 
   #assignId() {
