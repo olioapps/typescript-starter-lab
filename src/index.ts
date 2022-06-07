@@ -20,16 +20,14 @@ class UserAPI {
   }
 
   addUser(user: IUser) {
+    if (user.id) {
+      throw new SyntaxError("Please resubmit without pre-exisitng ID field.")
+    } 
+
     const result = (this.users).find( ( { name, favColor, age }: IUser) => (name === user.name && favColor === user.favColor && age === user.age))
-    try {
-      if (user.id) {
-        throw new SyntaxError("Please resubmit without pre-exisitng ID field.")
-      } else if (result) {
-        throw new Error("A user with those properties already exists in the database.")
-      } 
-    } catch (error) {
-      return error
-    }
+    if (result) {
+      throw new Error("A user with those properties already exists in the database.")
+    } 
 
     const { name, favColor, age } = user
     const newUser = this.createUser(name, favColor, age)
@@ -38,16 +36,11 @@ class UserAPI {
   }
 
   getUserById(id: number) {
-    try {
-      const foundUser = this.users.find( user => user.id === id) 
-      if (foundUser) {
-        return foundUser
-      }
-      throw new ReferenceError("No user found.")
+    const foundUser = this.users.find( user => user.id === id) 
+    if (foundUser) {
+      return foundUser
     }
-    catch (error) {
-      return error
-    }
+    throw new ReferenceError("No user found.")
   }
 
   getUsers() {
@@ -65,7 +58,7 @@ class UserAPI {
   private createUser(name: string, favColor: string, age: number): IUser {
     const id = this.assignId()
     return { id, name, favColor, age }
-}
+  }
 }
 
 const x = new UserAPI()
@@ -85,9 +78,29 @@ const user2 = {
   favColor: "blue",
   age: 200
 }
-console.log("ADD:", x.addUser(user))
-console.log("ADD:", x.addUser(userDuplicate))
-console.log("ADD:", x.addUser(user2))
 
-console.log("GET:", x.getUserById(1))
-console.log("GET:", x.getUserById(2))
+try {
+  console.log("ADD:", x.addUser(user))
+} catch (error: any) {
+  console.log(error.name,":", error.message)}
+
+try {
+  console.log("ADD:", x.addUser(userDuplicate))
+} catch (error: any) {
+  console.log(error.name,":", error.message)}
+
+try {
+  console.log("ADD:", x.addUser(user2))
+} catch (error: any) {
+  console.log(error.name,":", error.message)}
+
+try {
+  console.log("GET:", x.getUserById(1))
+} catch (error: any) {
+  console.log(error.name,":", error.message)}
+
+try {
+  console.log("GET:", x.getUserById(2))
+} catch (error: any) {
+  console.log(error.name,":", error.message)
+}
