@@ -48,7 +48,7 @@ class UserAPI {
   
   private createUser(name: string, favColor: string, age: number): IUser {
     const id = this.assignId()
-    return { id, name, favColor, age };
+    return { id, name, favColor, age }
 }
 }
 
