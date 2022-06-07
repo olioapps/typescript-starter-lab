@@ -2,7 +2,8 @@ class User {
   name: string
   favColor: string
   age: number
-    constructor(name: string, color: string, age: number) {
+    
+  constructor(name: string, color: string, age: number) {
     this.name = name;
     this.favColor = color;
     this.age = age;
@@ -10,10 +11,10 @@ class User {
 }
 
 class UserAPI {
-  users: Array<User>;
+  users: Array<User>
 
   constructor() {
-    this.users = []
+    this.users = [];
   } 
 
   assignId() {
