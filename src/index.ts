@@ -21,14 +21,22 @@ class UserAPI {
 
   addUser(user: User) {
     try {
-      if (this.getUserById(Number(user.id)) === "ERROR: User not found") {
+      if (!user.hasOwnProperty("id")) {
+        const existingUser = this.users.find(
+          x => x.name === user.name
+            && x.favoriteColor === user.favoriteColor
+            && x.age === user.age)
+        if (existingUser !== undefined) {
+          throw "ERROR: User with these properties already exists"
+        }
         user.id = this.assignId()
         this.users.push(user)
         return user
       } else {
-        throw "ERROR: A user with that Id already exists"
+        throw "ERROR: Id incorrectly provided by input user"
       }
-    } catch (error) {
+    }
+    catch (error) {
       return error
     }
   }
@@ -88,32 +96,30 @@ console.log(`Expect: User {name: 'Bob', favoriteColor: 'green', age: 102, id: 2}
 console.log("Result:", x.getUserById(2))
 console.log("------------------------------------------")
 
-const userTwoDuplicate = {
+const userTwoDuplicateId = {
   name: "Steve",
   favoriteColor: "yellow",
   age: 17,
   id: 2
 }
-console.log("Test: Should attempt to add a user with an already existing Id of 2, but fail as a user with Id of 2 already exists")
-console.log("Input:", userTwoDuplicate)
+console.log("Test: Should fail as an Id is provided, Only objects without Ids present will be added")
+console.log("Input:", userTwoDuplicateId)
 console.log(`Describe: x.addUser(userTwoDuplicate)`)
-console.log(`Expect: "ERROR: A user with that Id already exists"`)
-console.log("Result:", x.addUser(userTwoDuplicate))
+console.log(`Expect: "ERROR: Id incorrectly provided by input user"`)
+console.log("Result:", x.addUser(userTwoDuplicateId))
 console.log("------------------------------------------")
 
 
-const userThree = {
-  name: "Jack",
-  favoriteColor: "orange",
-  age: 65,
-  id: 9
+const userTwoDuplicateUserProps = {
+  name: "Bob",
+  favoriteColor: "green",
+  age: 102
 }
-
-console.log("Test: Should add a user object that already has an Id of 9, but add the user with the next incremental Id")
-console.log("Input:", userThree)
-console.log(`Describe: x.addUser(userThree)`)
-console.log(`Expect: User {name: 'Jack', favoriteColor: 'orange', age: 65, id: 3}`)
-console.log("Result:", x.addUser(userThree))
+console.log("Test: Should attempt to add a user with identical properties of userTwo, but fail as they match")
+console.log("Input:", userTwoDuplicateUserProps)
+console.log(`Describe: x.addUser(userTwoDuplicateUserProps)`)
+console.log(`Expect: "ERROR: User with these properties already exists"`)
+console.log("Result:", x.addUser(userTwoDuplicateUserProps))
 console.log("------------------------------------------")
 
 console.log("Test: Should attempt to locate a user by an Id that doesn't exist in the x object")
