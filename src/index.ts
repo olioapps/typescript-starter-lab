@@ -2,33 +2,42 @@ class User {
   name: string
   favoriteColor: string
   age: number
-  id: number
+  id?: number
 
-  constructor(name: string, favoriteColor: string, age: number, id: number) {
+  constructor(name: string, favoriteColor: string, age: number) {
     this.name = name
     this.favoriteColor = favoriteColor
     this.age = age
-    this.id = id
   }
 }
 
+
 class UserAPI {
   users: Array<User>
+  currentId: number
 
   constructor() {
     this.users = []
+    this.currentId = 0
   }
 
   private assignId() {
-
+    this.currentId++;
+    return this.currentId - 1;
   }
 
   addUser(user: User) {
-
+    user.id = this.assignId();
+    this.users.push(user);
   }
 
   getUserById(id: number) {
-
+    const user = this.users.find(x => x.id === id);
+    if (user !== undefined) {
+      return user;
+    } else {
+      return "User not found";
+    }
   }
 
   getUsers() {
@@ -43,3 +52,19 @@ class UserAPI {
 
   }
 }
+
+const x = new UserAPI();
+
+const user = new User("Daniel", "purple", 33);
+x.addUser(user);
+console.log(`Describe(id: 0) - Expect(User {'Daniel', 'purple', 33, 0})`);
+console.log("Result: ", x.getUserById(0));
+
+const userTwo = new User("Bob", "green", 102);
+x.addUser(userTwo);
+
+console.log(`Describe(id: 1) - Expect(User {'Bob', 'green', 102, 1})`);
+console.log("Result: ", x.getUserById(1));
+
+console.log(`Describe(id: 2) - Expect("User not found")`);
+console.log("Result: ", x.getUserById(2));
