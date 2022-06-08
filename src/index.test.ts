@@ -12,7 +12,7 @@ describe('Tests will go here!', () => {
     expect(true).toBeTruthy()
   })
 
-  it('should fail return the correct array region', () => {
+  it('should return the correct array region', () => {
     const highestScoringRegion = getHighestScoringRegion(firstMockEventStream)
     const expected = [
       { timestamp: 123123125, eventType: 'new message' },
@@ -24,7 +24,7 @@ describe('Tests will go here!', () => {
     expect(highestScoringRegion).toEqual(expected)
   })
 
-  it('should fail return the correct array region', () => {
+  it('should return the correct array region', () => {
     const highestScoringRegion = getHighestScoringRegion(secondMockEventStream)
     const expected = [
       { timestamp: 123123125, eventType: 'view' },
@@ -34,7 +34,7 @@ describe('Tests will go here!', () => {
     expect(highestScoringRegion).toEqual(expected)
   })
   
-  it('should fail return the correct array region', () => {
+  it('should return the correct array region', () => {
     const highestScoringRegion = getHighestScoringRegion(thirdMockEventStream)
     const expected = [
       { timestamp: 123123125, eventType: 'screenshot' },
@@ -46,7 +46,7 @@ describe('Tests will go here!', () => {
     expect(highestScoringRegion).toEqual(expected)
   })
   
-  it('should fail return the correct array region', () => {
+  it('should return the correct array region', () => {
     const highestScoringRegion = getHighestScoringRegion(fourthMockEventStream)
     const expected = [
       { timestamp: 123123125, eventType: 'view' },
