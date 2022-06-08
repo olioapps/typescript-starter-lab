@@ -34,3 +34,19 @@ describe('Adding new user to UserAPI object', () => {
   })
 
 })
+
+describe('Finding user by Id', () => {
+
+  const x = new UserAPI()
+
+  it("should return a user with the Id of 1", () => {
+    expect(x.getUserById("1")).toEqual({ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" })
+  })
+
+  it("should fail to find user with non-existent Id", () => {
+    expect(() => {
+      x.getUserById("3")
+    }).toThrow("User was not found")
+  })
+
+})
