@@ -64,3 +64,22 @@ describe('UserAPI.getUsers()', () => {
   })
 
 })
+
+describe('UserAPI.getUsers()', () => {
+
+  const x = new UserAPI()
+
+  it("should return empty array", () => {
+    expect(x.getUsers()).toEqual([])
+  })
+
+  it("should return array of two users", () => {
+    const userOne = x.addUser({ name: 'Larry', favoriteColor: 'gray', age: 544 })
+    const userTwo = x.addUser({ name: 'Daniel', favoriteColor: 'green', age: 33 })
+    expect(x.getUsers()).toEqual([
+      userOne,
+      userTwo
+    ])
+  })
+
+})
