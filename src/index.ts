@@ -5,7 +5,7 @@ interface IUser {
   age: number
 }
 
-class UserAPI {
+export class UserAPI {
   private _users: Array<IUser>
   private _nextId: number
 
