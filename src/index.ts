@@ -6,22 +6,22 @@ interface User {
 }
 
 class UserAPI {
-  private users: Array<User>
-  private currentId: number
+  private _users: Array<User>
+  private _currentId: number
 
   constructor() {
-    this.users = []
-    this.currentId = 1
+    this._users = []
+    this._currentId = 1
   }
 
   private assignId() {
-    this.currentId++
-    return this.currentId - 1
+    this._currentId++
+    return this._currentId - 1
   }
 
   addUser(user: User) {
     if (!user.hasOwnProperty("id")) {
-      const existingUser = this.users.find(
+      const existingUser = this._users.find(
         x => x.name === user.name
           && x.favoriteColor === user.favoriteColor
           && x.age === user.age)
@@ -29,7 +29,7 @@ class UserAPI {
         throw new Error("User with these properties already exists")
       }
       user.id = this.assignId()
-      this.users.push(user)
+      this._users.push(user)
       return user
     } else {
       throw new Error("Id incorrectly provided by input user")
@@ -37,7 +37,7 @@ class UserAPI {
   }
 
   getUserById(id: number) {
-    const user = this.users.find(x => x.id === id)
+    const user = this._users.find(x => x.id === id)
     if (user !== undefined) {
       return user
     } else {
