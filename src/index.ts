@@ -40,4 +40,3 @@ export const getHighestScoringRegion = (eventStream: Array<Event>): Array<Event>
 
   return eventStream.slice(index, index + 5)
 }
-
