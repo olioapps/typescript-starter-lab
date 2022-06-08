@@ -2,18 +2,33 @@ interface User {
   name: string
   favoriteColor: string
   age: number
-  id?: number
+  id?: string
 }
 
 class UserAPI {
   private _users: Array<User>
 
   constructor() {
-    this._users = []
-  }
-
-  private assignId() {
-    return Date.now()
+    this._users = [
+      {
+        name: 'Larry',
+        favoriteColor: 'gray',
+        age: 544,
+        id: "1"
+      },
+      {
+        name: 'Tom',
+        favoriteColor: 'pink',
+        age: 4,
+        id: "2"
+      },
+      {
+        name: 'Phil',
+        favoriteColor: 'red',
+        age: 44,
+        id: "3"
+      }
+    ]
   }
 
   addUser(user: User) {
@@ -25,7 +40,7 @@ class UserAPI {
       if (existingUser !== undefined) {
         throw new Error("User with these properties already exists")
       }
-      user.id = this.assignId()
+      user.id = Date.now().toString()
       this._users.push(user)
       return user
     } else {
@@ -33,7 +48,7 @@ class UserAPI {
     }
   }
 
-  getUserById(id: number) {
+  getUserById(id: string) {
     const user = this._users.find(x => x.id === id)
     if (user !== undefined) {
       return user
@@ -43,14 +58,14 @@ class UserAPI {
   }
 
   getUsers() {
-    if ((!this._users) || Array.isArray(this._users) === false) {
+    if (!this._users) {
       throw new Error("There is an issue with the users array")
     } else {
       return this._users
     }
   }
 
-  deleteUserById(id: number) {
+  deleteUserById(id: string) {
     const userIndex = this._users.findIndex(x => x.id === id)
     if (userIndex > 0) {
       const deletedUser = this._users[userIndex]
@@ -88,10 +103,10 @@ const user = {
   age: 33,
 }
 console.log(`Test:
-Should add a user object to UserAPI object x, and assign an Id of DateNow()
+Should add a user object to UserAPI object x, and assign an Id of Date.now().toString()
 `)
 console.log(`Expect:
-{name: 'Daniel', favoriteColor: 'purple', age: 33, id: 1}
+{name: 'Daniel', favoriteColor: 'purple', age: 33, id: Date.now().toString()}
 `)
 console.log("Result:")
 try {
@@ -111,7 +126,7 @@ console.log(`Test:
 Should add a user to UserAPI object x, and assign an Id
 `)
 console.log(`Expect:
-{name: 'Bob', favoriteColor: 'green', age: 102, id: DateNow()}
+{name: 'Bob', favoriteColor: 'green', age: 102, id: Date.now().toString()}
 `)
 console.log("Result:")
 try {
@@ -127,7 +142,7 @@ const userTwoDuplicateId = {
   name: "Steve",
   favoriteColor: "yellow",
   age: 17,
-  id: 2
+  id: "2"
 }
 console.log(`Test:
 Error when adding object that contains an id
@@ -174,11 +189,11 @@ console.log(`Test:
 Should successfully find user based on id
 `)
 console.log(`Expect:
-{name: 'Jenny', favoriteColor: 'yellow', age: 99, id: ${addedUserForIdTest.id}}
+{name: 'Jenny', favoriteColor: 'yellow', age: 99, id: "${addedUserForIdTest.id}"}
 `)
 console.log("Result")
 try {
-  console.log(x.getUserById(Number(addedUserForIdTest.id)))
+  console.log(x.getUserById(addedUserForIdTest.id as string))
 } catch (e: any) {
   console.log(e.message)
 }
@@ -193,7 +208,7 @@ User was not found
 `)
 console.log("Result")
 try {
-  console.log(x.getUserById(9))
+  console.log(x.getUserById("9"))
 } catch (e: any) {
   console.log(e.message)
 }
@@ -242,7 +257,7 @@ DELETE: User with id:${addedUserForDeleteTest.id} is removed from following
 `, x.getUsers())
 console.log("Result:")
 try {
-  console.log("Deleted:", x.deleteUserById(Number(addedUserForDeleteTest.id)))
+  console.log("Deleted:", x.deleteUserById(addedUserForDeleteTest.id as string))
   console.log("Remaining:", x.getUsers())
 } catch (e: any) {
   console.log(e.message)
@@ -258,7 +273,7 @@ DELETE: User was not found
 `)
 console.log("Result")
 try {
-  x.deleteUserById(7)
+  x.deleteUserById("7")
   console.log(x.getUsers())
 } catch (e: any) {
   console.log(e.message)
