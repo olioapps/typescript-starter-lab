@@ -49,17 +49,18 @@ class UserAPI {
   }
 
   get_Users() {
-    if (this._users.length > 0) {
-      return this._users
+    if (this._users === null || this._users === undefined) {
+      throw new Error(`User Dataset not found`)
     }
-    throw new Error(`No users to return`)
+    return this._users
   }
 
   deleteUserById(id: number) {
-    const indexOfUser = this._users.findIndex( user => user.id === id) 
+    const indexOfUser = this._users.findIndex( user => user.id === id)
+    const user = this.getUserById(id) 
     if (indexOfUser > -1) {
       this._users.splice(indexOfUser,1)
-      return `Deleted user id ${id}`
+      return user
     } else{
       throw new ReferenceError(`No user found with id ${id}.`)
     }  
@@ -68,7 +69,7 @@ class UserAPI {
   searchUserByName(name: string) {
     const users = this._users.filter( user => user.name.toLowerCase() === name.toLowerCase())
     
-    if (users.length > 0) {
+    if (users.length) {
       return users
     } 
     throw new ReferenceError(`No user found with name ${name}`)
@@ -76,7 +77,7 @@ class UserAPI {
 
   search_UsersByFavoriteColor(color: string) {
     const users = this._users.filter( user => user.favColor.toLowerCase() === color.toLowerCase())
-    if (users.length > 0) {
+    if (users.length) {
       return users
     } 
     throw new ReferenceError(`No users favorite color is ${color}`)
