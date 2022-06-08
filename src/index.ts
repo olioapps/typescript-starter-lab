@@ -8,28 +8,10 @@ interface User {
 class UserAPI {
   private _users: Array<User>
 
-  constructor() {
-    this._users = [
-      {
-        name: 'Larry',
-        favoriteColor: 'gray',
-        age: 544,
-        id: "1"
-      },
-      {
-        name: 'Tom',
-        favoriteColor: 'pink',
-        age: 4,
-        id: "2"
-      },
-      {
-        name: 'Phil',
-        favoriteColor: 'red',
-        age: 44,
-        id: "3"
-      }
-    ]
+  constructor(users: Array<User> = []) {
+    this._users = users
   }
+
 
   addUser(user: User) {
     if (!user.hasOwnProperty("id")) {
@@ -94,8 +76,12 @@ class UserAPI {
     }
   }
 }
-
-const x = new UserAPI()
+const seedData = [
+  { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
+  { name: 'Tom', favoriteColor: 'pink', age: 4, id: "2" },
+  { name: 'Phil', favoriteColor: 'red', age: 44, id: "3" }
+]
+const x = new UserAPI(seedData)
 
 const user = {
   name: "Daniel",
@@ -184,7 +170,7 @@ console.log(`Test:
 Should successfully find user based on id
 `)
 console.log(`Expect:
-{name: 'Jenny', favoriteColor: 'yellow', age: 99, id: "1"}
+{name: 'Larry', favoriteColor: 'gray', age: 544, id: "1"}
 `)
 console.log("Result")
 try {
@@ -214,7 +200,7 @@ console.log(`Test:
 Returns all users in the array
 `)
 console.log(`Expect:
-Three users
+Five users
 `)
 console.log("Result")
 try {
@@ -273,7 +259,7 @@ console.log("-------------------------------------------------------------------
 
 
 const userTwoDuplicateName = {
-  name: "Bob",
+  name: "Jenny",
   favoriteColor: "black",
   age: 33,
 }
