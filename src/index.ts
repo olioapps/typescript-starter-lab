@@ -1,18 +1,28 @@
 //Define class/functions here
 
+import { firstMockEventStream } from './mockEventStream'
 export interface Event {
   timestamp: number
   eventType: 'screenshot' | 'view' | 'new message'
 }
 
-const findScore = (eventStream: Array<Event>): number => {
+export const scoreEvent = (event: Event): number => {
+  const { eventType } = event
+  switch (eventType) {
+    case "new message":
+      return 1
+    case "view":
+      return 2
+    case "screenshot":
+      return 3
+    default:
+      return 0
+  }
+}
+
+export const findRegionScore = (eventStream: Array<Event>): number => {
   const score = eventStream.reduce((acc, event) => {
-    if (event.eventType === 'screenshot') {
-      return acc + 3
-    } else if (event.eventType === 'view') {
-      return acc + 2
-    }
-    return acc + 1
+    return acc + scoreEvent(event)
   }, 0)
 
   return score
@@ -22,12 +32,13 @@ export const getHighestScoringRegion = (eventStream: Array<Event>): Array<Event>
   
   const eventStreamScore: number[]= eventStream.reduce((acc, next, index): any => {
     const eventRegion = eventStream.slice(index, index + 5)
-    return [...acc, findScore(eventRegion) ] 
+    return [...acc, findRegionScore(eventRegion) ] 
   }, [])
 
   const max: number = Math.max(...eventStreamScore)
-  const index = eventStreamScore.indexOf(max as number)
+  const index: number = eventStreamScore.indexOf(max)
 
   return eventStream.slice(index, index + 5)
 }
 
+getHighestScoringRegion(firstMockEventStream)

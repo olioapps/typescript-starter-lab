@@ -2,9 +2,11 @@ import {
   firstMockEventStream,
   secondMockEventStream,
   thirdMockEventStream,
-  fourthMockEventStream
+  fourthMockEventStream,
+  firstMockRegion,
+  secondMockRegion,
 } from './mockEventStream'
-import { getHighestScoringRegion } from "./index"
+import { getHighestScoringRegion, findRegionScore, scoreEvent } from "./index"
 
 
 describe('Tests will go here!', () => {
@@ -58,4 +60,30 @@ describe('Tests will go here!', () => {
     expect(highestScoringRegion).toEqual(expected)
   })
 
+  it('should give the correct score for each region', () => {
+    const regionScore = findRegionScore(firstMockRegion)
+    expect(regionScore).toEqual(8)
+  })
+
+  it('should give the correct score for each region', () => {
+    const regionScore = findRegionScore(secondMockRegion)
+    expect(regionScore).toEqual(9)
+  })
+  it('should give the correct score for each region', () => {
+    const regionScore = findRegionScore(
+      [
+        { timestamp: 123123125, eventType: 'new message' },
+        { timestamp: 123123125, eventType: 'view' },
+        { timestamp: 123123125, eventType: 'screenshot' },
+      ])
+    expect(regionScore).toEqual(6)
+  })
+  it('return the correct score value from each event', () => {
+    expect(scoreEvent({ timestamp: 123123125, eventType: 'view' })).toEqual(2)
+
+    expect(scoreEvent({ timestamp: 123123125, eventType: 'screenshot' })).toEqual(3)
+    
+    expect(scoreEvent({ timestamp: 123123125, eventType: 'new message' })).toEqual(1)
+    
+  })
 })

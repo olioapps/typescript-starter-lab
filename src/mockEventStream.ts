@@ -164,3 +164,47 @@ export const fourthMockEventStream: Array<Event> = [
 		eventType: "view",
 	},
 ]
+export const firstMockRegion: Array<Event> = [
+	{
+        timestamp: 123123125,
+		eventType: "new message",
+	},
+	{
+        timestamp: 123123125,
+		eventType: "view",
+	},
+	{
+        timestamp: 123123125,
+		eventType: "screenshot",
+    },
+    {
+        timestamp: 123123124,
+		eventType: "new message",
+	},
+	{
+        timestamp: 123123125,
+		eventType: "new message",
+	},
+]
+export const secondMockRegion: Array<Event> = [
+	{
+        timestamp: 123123125,
+		eventType: "screenshot",
+    },
+    {
+        timestamp: 123123124,
+		eventType: "new message",
+	},
+	{
+        timestamp: 123123125,
+		eventType: "new message",
+	},
+	{
+        timestamp: 123123125,
+		eventType: "view",
+	},
+	{
+        timestamp: 123123125,
+		eventType: "view",
+	},
+]
