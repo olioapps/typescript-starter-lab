@@ -8,8 +8,8 @@ interface IUser {
 class UserAPI {
   private _users: Array<IUser>
 
-  constructor() {
-    this._users = [{ id: "1", name: "andy", favColor: "blue", age: 247 }]
+  constructor(seedData: Array<IUser> = []) {
+    this._users = seedData
   } 
 
   addUser(user: IUser) {
@@ -79,8 +79,8 @@ class UserAPI {
 ////////////////////////////////////////////////////////////////////////////////////////
 
 
-const x = new UserAPI()
-
+const seedData = [{ id: "1", name: "andy", favColor: "blue", age: 247 }]
+const x = new UserAPI(seedData)
 const user2 = {
   name: "Andy",
   favColor: "Green",
