@@ -1,5 +1,4 @@
 import { Event } from "./index"
-
 export const firstMockEventStream: Array<Event> = [
 	{
 		timestamp: 123123123,

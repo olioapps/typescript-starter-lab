@@ -69,6 +69,7 @@ describe('Tests will go here!', () => {
     const regionScore = findRegionScore(secondMockRegion)
     expect(regionScore).toEqual(9)
   })
+  
   it('should give the correct score for each region', () => {
     const regionScore = findRegionScore(
       [
@@ -78,6 +79,7 @@ describe('Tests will go here!', () => {
       ])
     expect(regionScore).toEqual(6)
   })
+
   it('return the correct score value from each event', () => {
     expect(scoreEvent({ timestamp: 123123125, eventType: 'view' })).toEqual(2)
 
