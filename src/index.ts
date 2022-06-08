@@ -1,6 +1,4 @@
 //Define class/functions here
-
-import { firstMockEventStream } from './mockEventStream'
 export interface Event {
   timestamp: number
   eventType: 'screenshot' | 'view' | 'new message'

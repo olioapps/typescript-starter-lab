@@ -9,7 +9,7 @@ import {
 import { getHighestScoringRegion, findRegionScore, scoreEvent } from "./index"
 
 
-describe('Tests will go here!', () => {
+describe('testing all functions for getting the highest scoring region of event stream', () => {
   it('should return the first highest scoring region array when there is a tie', () => {
     const firstHighestScoringRegion = getHighestScoringRegion(firstMockEventStream)
     const firstExpected = [
@@ -20,6 +20,7 @@ describe('Tests will go here!', () => {
       { timestamp: 123123125, eventType: 'screenshot' },
     ]
     expect(firstHighestScoringRegion).toEqual(firstExpected)
+
     const secondHighestScoringRegion = getHighestScoringRegion(thirdMockEventStream)
     const secondExpected = [
       { timestamp: 123123125, eventType: 'screenshot' },
@@ -79,6 +80,5 @@ describe('Tests will go here!', () => {
     expect(scoreEvent({ timestamp: 123123125, eventType: 'screenshot' })).toEqual(3)
     
     expect(scoreEvent({ timestamp: 123123125, eventType: 'new message' })).toEqual(1)
-    
   })
 })
