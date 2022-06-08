@@ -46,15 +46,38 @@ class UserAPI {
   }
 
   getUsers() {
-
+    if (this._users.length > 0) {
+      return this._users;
+    } else {
+      throw new Error("There are no users present")
+    }
   }
 
   deleteUserById(id: number) {
-
+    const userIndex = this._users.findIndex(x => x.id === id)
+    if (userIndex > 0) {
+      this._users.splice(userIndex, 1)
+    } else {
+      throw new Error("User was not found")
+    }
   }
 
   searchUserByName(name: string) {
+    const userResult = this._users.filter(x => x.name.toLowerCase() === name.toLowerCase())
+    if (userResult.length > 0) {
+      return userResult
+    } else {
+      throw new Error("User(s) not found")
+    }
+  }
 
+  searchUsersByFavoriteColor(color: string) {
+    const userResult = this._users.filter(x => x.favoriteColor.toLowerCase() === color.toLowerCase())
+    if (userResult.length > 0) {
+      return userResult
+    } else {
+      throw new Error("User(s) not found")
+    }
   }
 }
 
@@ -167,6 +190,202 @@ User was not found
 console.log("Result")
 try {
   console.log(x.getUserById(9))
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+
+console.log(`Test:
+Returns all users in the array
+`)
+console.log(`Expect:
+Two users
+`)
+console.log("Result")
+try {
+  console.log(x.getUsers())
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+const y = new UserAPI();
+console.log(`Test:
+Returns error if no users in array
+`)
+console.log(`Expect:
+There are no users present
+`)
+console.log("Result")
+try {
+  console.log(y.getUsers())
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+
+console.log(`Test:
+Removes user from the UserAPI array
+`)
+console.log(`Expect:
+User with id:2 is removed from following
+`, x.getUsers())
+console.log("Result")
+try {
+  x.deleteUserById(2)
+  console.log(x.getUsers())
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+
+console.log(`Test:
+Errors if user isn't found when removing from array
+`)
+console.log(`Expect:
+User was not found
+`)
+console.log("Result")
+try {
+  x.deleteUserById(7)
+  console.log(x.getUsers())
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+
+const userTwoDuplicateName = {
+  name: "Bob",
+  favoriteColor: "black",
+  age: 33,
+}
+x.addUser(userTwoDuplicateName);
+console.log(`Test:
+Should find single user named Bob
+`)
+console.log(`Expect:
+Single user named Bob
+`)
+console.log("Result")
+try {
+  console.log(x.searchUserByName("Bob"))
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+const userOneDuplicateName = {
+  name: "Daniel",
+  favoriteColor: "black",
+  age: 33,
+}
+x.addUser(userOneDuplicateName)
+console.log(`Test:
+Should find two users named Daniel
+`)
+console.log(`Expect:
+Two users with Daniel as name
+`)
+console.log("Result")
+try {
+  console.log(x.searchUserByName("Daniel"))
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+console.log(`Test:
+Should find two users named Daniel, when searching daniel (lowercase)
+`)
+console.log(`Expect:
+Two users with Daniel as name
+`)
+console.log("Result")
+try {
+  console.log(x.searchUserByName("daniel"))
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+
+console.log(`Test:
+Should find no users with name Robert
+`)
+console.log(`Expect:
+User(s) not found
+`)
+console.log("Result")
+try {
+  console.log(x.searchUserByName("Robert"))
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+console.log(`Test:
+Search for users based on favorite color
+`)
+console.log(`Expect:
+Single user with favorite color purple
+`)
+console.log("Result")
+try {
+  console.log(x.searchUsersByFavoriteColor("purple"))
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+const userFavoriteColorPurple = {
+  name: "Robert",
+  favoriteColor: "purple",
+  age: 56,
+}
+x.addUser(userFavoriteColorPurple)
+console.log(`Test:
+Search for users based on favorite color
+`)
+console.log(`Expect:
+Two users with favorite color purple
+`)
+console.log("Result")
+try {
+  console.log(x.searchUsersByFavoriteColor("purple"))
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+
+console.log(`Test:
+Search for users based on favorite color
+`)
+console.log(`Expect:
+Two users with favorite color purple when searching PUrPle
+`)
+console.log("Result")
+try {
+  console.log(x.searchUsersByFavoriteColor("PUrPle"))
+} catch (e: any) {
+  console.log(e.message)
+}
+console.log("--------------------------------------------------------------------")
+
+
+console.log(`Test:
+Search for users based on favorite color
+`)
+console.log(`Expect:
+Zero users with favorite color magenta - User(s) not found
+`)
+console.log("Result")
+try {
+  console.log(x.searchUsersByFavoriteColor("magenta"))
 } catch (e: any) {
   console.log(e.message)
 }
