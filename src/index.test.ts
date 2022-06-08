@@ -10,7 +10,7 @@ describe('Create UserAPI object', () => {
 
 })
 
-describe('Adding new user to UserAPI object', () => {
+describe('UserAPI.addUser()', () => {
 
   const x = new UserAPI()
   const user = { name: 'Daniel', favoriteColor: 'purple', age: 33 }
@@ -35,7 +35,7 @@ describe('Adding new user to UserAPI object', () => {
 
 })
 
-describe('Finding user by Id', () => {
+describe('UserAPI.getUserById()', () => {
 
   const x = new UserAPI()
 
@@ -47,6 +47,20 @@ describe('Finding user by Id', () => {
     expect(() => {
       x.getUserById("3")
     }).toThrow("User was not found")
+  })
+
+})
+
+describe('UserAPI.getUsers()', () => {
+
+  const x = new UserAPI()
+  const userToAdd = x.addUser({ name: 'Daniel', favoriteColor: 'green', age: 33 })
+
+  it("should return array of two users", () => {
+    expect(x.getUsers()).toEqual([
+      { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
+      userToAdd
+    ])
   })
 
 })
