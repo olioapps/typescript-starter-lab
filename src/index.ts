@@ -8,11 +8,13 @@ interface IUser {
 export class UserAPI {
   private _users: Array<IUser>
 
-  constructor() {
-    this._users = [{ id: "1", name: "andy", favColor: "blue", age: 247 }]
+  constructor(users: Array<IUser> = []) {
+    this._users = users
   } 
 
   addUser(user: IUser) {
+    console.log(user);
+    
     if (user.id) {
       throw new SyntaxError("Please resubmit without pre-exisitng ID field.")
     } 
@@ -37,7 +39,7 @@ export class UserAPI {
     throw new ReferenceError(`No user found with id ${id}.`)
   }
 
-  get_Users() {
+  getUsers() {
     if (this._users === null || this._users === undefined) {
       throw new Error(`User Dataset not found`)
     }
@@ -79,8 +81,6 @@ export class UserAPI {
 ////////////////////////////////////////////////////////////////////////////////////////
 
 
-const x = new UserAPI()
-
 const user2 = {
   name: "Andy",
   favColor: "Green",
@@ -103,36 +103,47 @@ const userWithId = {
   age: 200
 }
 
+const seedUsers = [{ 
+  id: "1", 
+  name: "andy", 
+  favColor: "blue", 
+  age: 247 
+}]
 
-try {
-  console.log("GETALL:", x.get_Users())
-} catch (error: any) {
-  console.log("GETALL:", error.name,":", error.message)
-}
+const x = new UserAPI(seedUsers)
+x.addUser(user2)
 
-try {
-  console.log("ADD:", x.addUser(user2))
-} catch (error: any) {
-  console.log("ADD:", error.name,":", error.message)
-}
+/*
 
-try {
-  console.log("ADD:", x.addUser(user3))
-} catch (error: any) {
-  console.log("ADD:", error.name,":", error.message)
-}
+// try {
+//   console.log("GETALL:", x.getUsers())
+// } catch (error: any) {
+//   console.log("GETALL:", error.name,":", error.message)
+// }
 
-try {
-  console.log("ADD:", x.addUser(userDuplicate))
-} catch (error: any) {
-  console.log("ADD:", error.name,":", error.message)
-}
+// try {
+//   console.log("ADD:", x.addUser(user2))
+// } catch (error: any) {
+//   console.log("ADD:", error.name,":", error.message)
+// }
 
-try {
-  console.log("ADD:", x.addUser(userWithId))
-} catch (error: any) {
-  console.log("ADD:", error.name,":", error.message)
-}
+// try {
+//   console.log("ADD:", x.addUser(user3))
+// } catch (error: any) {
+//   console.log("ADD:", error.name,":", error.message)
+// }
+
+// try {
+//   console.log("ADD:", x.addUser(userDuplicate))
+// } catch (error: any) {
+//   console.log("ADD:", error.name,":", error.message)
+// }
+
+// try {
+//   console.log("ADD:", x.addUser(userWithId))
+// } catch (error: any) {
+//   console.log("ADD:", error.name,":", error.message)
+// }
 
 try {
   console.log("GET:", x.getUserById("1"))
@@ -147,7 +158,7 @@ try {
 }
 
 try {
-  console.log("GETALL:", x.get_Users())
+  console.log("GETALL:", x.getUsers())
 } catch (error: any) {
   console.log("GETALL:", error.name,":", error.message)
 }
@@ -187,3 +198,4 @@ try {
 } catch (error: any) {
   console.log("DELETE:", error.name,":", error.message)
 }
+*/
