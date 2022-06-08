@@ -12,7 +12,7 @@ describe('Create UserAPI object', () => {
 
 describe('UserAPI.addUser()', () => {
 
-  const x = new UserAPI()
+  const x = new UserAPI([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
   const user = { name: 'Daniel', favoriteColor: 'purple', age: 33 }
 
   it("should return seed object and new user", () => {
@@ -37,7 +37,7 @@ describe('UserAPI.addUser()', () => {
 
 describe('UserAPI.getUserById()', () => {
 
-  const x = new UserAPI()
+  const x = new UserAPI([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
 
   it("should return a user with the Id of 1", () => {
     expect(x.getUserById("1")).toEqual({ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" })
@@ -53,7 +53,7 @@ describe('UserAPI.getUserById()', () => {
 
 describe('UserAPI.getUsers()', () => {
 
-  const x = new UserAPI()
+  const x = new UserAPI([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
   const userToAdd = x.addUser({ name: 'Daniel', favoriteColor: 'green', age: 33 })
 
   it("should return array of two users", () => {
