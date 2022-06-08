@@ -7,16 +7,13 @@ interface User {
 
 class UserAPI {
   private _users: Array<User>
-  private _currentId: number
 
   constructor() {
     this._users = []
-    this._currentId = 1
   }
 
   private assignId() {
-    this._currentId++
-    return this._currentId - 1
+    return Date.now()
   }
 
   addUser(user: User) {
@@ -46,17 +43,19 @@ class UserAPI {
   }
 
   getUsers() {
-    if (this._users.length > 0) {
-      return this._users;
+    if ((!this._users) || Array.isArray(this._users) === false) {
+      throw new Error("There is an issue with the users array")
     } else {
-      throw new Error("There are no users present")
+      return this._users
     }
   }
 
   deleteUserById(id: number) {
     const userIndex = this._users.findIndex(x => x.id === id)
     if (userIndex > 0) {
+      const deletedUser = this._users[userIndex]
       this._users.splice(userIndex, 1)
+      return deletedUser
     } else {
       throw new Error("User was not found")
     }
@@ -64,7 +63,7 @@ class UserAPI {
 
   searchUserByName(name: string) {
     const userResult = this._users.filter(x => x.name.toLowerCase() === name.toLowerCase())
-    if (userResult.length > 0) {
+    if (userResult.length) {
       return userResult
     } else {
       throw new Error("User(s) not found")
@@ -73,7 +72,7 @@ class UserAPI {
 
   searchUsersByFavoriteColor(color: string) {
     const userResult = this._users.filter(x => x.favoriteColor.toLowerCase() === color.toLowerCase())
-    if (userResult.length > 0) {
+    if (userResult.length) {
       return userResult
     } else {
       throw new Error("User(s) not found")
@@ -89,7 +88,7 @@ const user = {
   age: 33,
 }
 console.log(`Test:
-Should add a user object to UserAPI object x, and assign an Id of 1
+Should add a user object to UserAPI object x, and assign an Id of DateNow()
 `)
 console.log(`Expect:
 {name: 'Daniel', favoriteColor: 'purple', age: 33, id: 1}
@@ -109,10 +108,10 @@ const userTwo = {
   age: 102
 }
 console.log(`Test:
-Should add a user to UserAPI object x, and assign an Id of 2
+Should add a user to UserAPI object x, and assign an Id
 `)
 console.log(`Expect:
-{name: 'Bob', favoriteColor: 'green', age: 102, id: 2}
+{name: 'Bob', favoriteColor: 'green', age: 102, id: DateNow()}
 `)
 console.log("Result:")
 try {
@@ -166,15 +165,20 @@ try {
 }
 console.log("--------------------------------------------------------------------")
 
+const addedUserForIdTest = x.addUser({
+  name: "Jenny",
+  favoriteColor: "yellow",
+  age: 99
+})
 console.log(`Test:
 Should successfully find user based on id
 `)
 console.log(`Expect:
-{name: 'Bob', favoriteColor: 'green', age: 102, id: 2}
+{name: 'Jenny', favoriteColor: 'yellow', age: 99, id: ${addedUserForIdTest.id}}
 `)
 console.log("Result")
 try {
-  console.log(x.getUserById(2))
+  console.log(x.getUserById(Number(addedUserForIdTest.id)))
 } catch (e: any) {
   console.log(e.message)
 }
@@ -200,7 +204,7 @@ console.log(`Test:
 Returns all users in the array
 `)
 console.log(`Expect:
-Two users
+Three users
 `)
 console.log("Result")
 try {
@@ -210,12 +214,12 @@ try {
 }
 console.log("--------------------------------------------------------------------")
 
-const y = new UserAPI();
+const y = new UserAPI()
 console.log(`Test:
-Returns error if no users in array
+Returns empty array if no users in array
 `)
 console.log(`Expect:
-There are no users present
+[]
 `)
 console.log("Result")
 try {
@@ -225,17 +229,21 @@ try {
 }
 console.log("--------------------------------------------------------------------")
 
-
+const addedUserForDeleteTest = x.addUser({
+  name: "James",
+  favoriteColor: "white",
+  age: 99
+})
 console.log(`Test:
 Removes user from the UserAPI array
 `)
 console.log(`Expect:
-User with id:2 is removed from following
+DELETE: User with id:${addedUserForDeleteTest.id} is removed from following
 `, x.getUsers())
-console.log("Result")
+console.log("Result:")
 try {
-  x.deleteUserById(2)
-  console.log(x.getUsers())
+  console.log("Deleted:", x.deleteUserById(Number(addedUserForDeleteTest.id)))
+  console.log("Remaining:", x.getUsers())
 } catch (e: any) {
   console.log(e.message)
 }
@@ -246,7 +254,7 @@ console.log(`Test:
 Errors if user isn't found when removing from array
 `)
 console.log(`Expect:
-User was not found
+DELETE: User was not found
 `)
 console.log("Result")
 try {
@@ -263,16 +271,16 @@ const userTwoDuplicateName = {
   favoriteColor: "black",
   age: 33,
 }
-x.addUser(userTwoDuplicateName);
+x.addUser(userTwoDuplicateName)
 console.log(`Test:
-Should find single user named Bob
+Should find single user named Jenny
 `)
 console.log(`Expect:
-Single user named Bob
+Single user named Jenny
 `)
 console.log("Result")
 try {
-  console.log(x.searchUserByName("Bob"))
+  console.log(x.searchUserByName("Jenny"))
 } catch (e: any) {
   console.log(e.message)
 }
