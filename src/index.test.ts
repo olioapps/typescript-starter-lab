@@ -8,8 +8,8 @@ import {
 } from './mockEventStream'
 import { getHighestScoringRegion, findRegionScore, scoreEvent } from "./index"
 
-
 describe('testing all functions for getting the highest scoring region of event stream', () => {
+  
   it('should return the first highest scoring region array when there is a tie', () => {
     const firstHighestScoringRegion = getHighestScoringRegion(firstMockEventStream)
     const firstExpected = [
