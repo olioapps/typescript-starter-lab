@@ -180,20 +180,15 @@ try {
 }
 console.log("--------------------------------------------------------------------")
 
-const addedUserForIdTest = x.addUser({
-  name: "Jenny",
-  favoriteColor: "yellow",
-  age: 99
-})
 console.log(`Test:
 Should successfully find user based on id
 `)
 console.log(`Expect:
-{name: 'Jenny', favoriteColor: 'yellow', age: 99, id: "${addedUserForIdTest.id}"}
+{name: 'Jenny', favoriteColor: 'yellow', age: 99, id: "1"}
 `)
 console.log("Result")
 try {
-  console.log(x.getUserById(addedUserForIdTest.id as string))
+  console.log(x.getUserById("1"))
 } catch (e: any) {
   console.log(e.message)
 }
@@ -244,20 +239,16 @@ try {
 }
 console.log("--------------------------------------------------------------------")
 
-const addedUserForDeleteTest = x.addUser({
-  name: "James",
-  favoriteColor: "white",
-  age: 99
-})
+
 console.log(`Test:
 Removes user from the UserAPI array
 `)
 console.log(`Expect:
-DELETE: User with id:${addedUserForDeleteTest.id} is removed from following
+DELETE: User with id:2 is removed from following
 `, x.getUsers())
 console.log("Result:")
 try {
-  console.log("Deleted:", x.deleteUserById(addedUserForDeleteTest.id as string))
+  console.log("Deleted:", x.deleteUserById("2"))
   console.log("Remaining:", x.getUsers())
 } catch (e: any) {
   console.log(e.message)
