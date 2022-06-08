@@ -1,5 +1,5 @@
 interface IUser {
-  id?: number
+  id?: string
   name: string
   favColor: string
   age: number
@@ -7,41 +7,30 @@ interface IUser {
 
 export class UserAPI {
   private _users: Array<IUser>
-  private _nextId: number
 
   constructor() {
-    this._users = []
-    this._nextId = 0
+    this._users = [{ id: "1", name: "andy", favColor: "blue", age: 247 }]
   } 
-
-  private assignId() {
-    this._nextId++
-    return this._nextId
-  }
-  
-  private createUser(name: string, favColor: string, age: number): IUser {
-    const id = this.assignId()
-    return { id, name, favColor, age }
-  }
 
   addUser(user: IUser) {
     if (user.id) {
       throw new SyntaxError("Please resubmit without pre-exisitng ID field.")
     } 
-
+    
+    user.id = Date.now().toString()
     const result = (this._users).find( ( { name, favColor, age }: IUser) => (name === user.name && favColor === user.favColor && age === user.age))
+    
     if (result) {
       throw new Error("A user with those properties already exists in the database.")
     } 
-
-    const { name, favColor, age } = user
-    const newUser = this.createUser(name, favColor, age)
-    this._users.push(newUser)
-    return newUser
+    
+    this._users.push(user)
+    return user
   }
 
-  getUserById(id: number) {
+  getUserById(id: string) {
     const foundUser = this._users.find( user => user.id === id) 
+    
     if (foundUser) {
       return foundUser
     }
@@ -55,9 +44,10 @@ export class UserAPI {
     return this._users
   }
 
-  deleteUserById(id: number) {
+  deleteUserById(id: string) {
     const indexOfUser = this._users.findIndex( user => user.id === id)
-    const user = this.getUserById(id) 
+    const user = this.getUserById(id)
+    
     if (indexOfUser > -1) {
       this._users.splice(indexOfUser,1)
       return user
@@ -90,11 +80,7 @@ export class UserAPI {
 
 
 const x = new UserAPI()
-const user = {
-  name: "andy",
-  favColor: "blue",
-  age: 247
-}
+
 const user2 = {
   name: "Andy",
   favColor: "Green",
@@ -111,22 +97,17 @@ const userDuplicate = {
   age: 247
 }
 const userWithId = {
-  id: 5,
+  id: "5",
   name: "andy",
   favColor: "blue",
   age: 200
 }
 
+
 try {
   console.log("GETALL:", x.get_Users())
 } catch (error: any) {
   console.log("GETALL:", error.name,":", error.message)
-}
-
-try {
-  console.log("ADD:", x.addUser(user))
-} catch (error: any) {
-  console.log("ADD:", error.name,":", error.message)
 }
 
 try {
@@ -154,13 +135,13 @@ try {
 }
 
 try {
-  console.log("GET:", x.getUserById(1))
+  console.log("GET:", x.getUserById("1"))
 } catch (error: any) {
   console.log("GET:", error.name,":", error.message)
 }
 
 try {
-  console.log("GET:", x.getUserById(100))
+  console.log("GET:", x.getUserById("100"))
 } catch (error: any) {
   console.log("GET:", error.name,":", error.message)
 }
@@ -196,13 +177,13 @@ try {
 }
 
 try {
-  console.log("DELETE:", x.deleteUserById(1))
+  console.log("DELETE:", x.deleteUserById("1"))
 } catch (error: any) {
   console.log("DELETE:", error.name,":", error.message)
 }
 
 try {
-  console.log("DELETE:", x.deleteUserById(1))
+  console.log("DELETE:", x.deleteUserById("1"))
 } catch (error: any) {
   console.log("DELETE:", error.name,":", error.message)
 }
