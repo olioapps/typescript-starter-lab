@@ -120,3 +120,27 @@ describe('UserAPI.searchUserByName()', () => {
   })
 
 })
+
+describe('UserAPI.searchUsersByFavoriteColor()', () => {
+
+  const x = new UserAPI([
+    { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
+    { name: 'Daniel', favoriteColor: 'yellow', age: 33, id: "2" },
+    { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" },
+    { name: 'Daniel', favoriteColor: 'red', age: 48, id: "4" }
+  ])
+
+  it("should return array of two users with same fav (ignore letter case)", () => {
+    expect(x.searchUsersByFavoriteColor("YeLlOw")).toEqual([
+      { name: 'Daniel', favoriteColor: 'yellow', age: 33, id: "2" },
+      { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" },
+    ])
+  })
+
+  it("should fail to find user with favorite color orange", () => {
+    expect(() => {
+      x.searchUsersByFavoriteColor("Orange")
+    }).toThrow("User(s) not found")
+  })
+
+})
