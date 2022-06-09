@@ -9,7 +9,7 @@ export class UserAPI {
   private _users: Array<User>
 
   constructor(users: Array<User> = []) {
-    this._users = users
+    this._users = [...users]
   }
 
   addUser(user: User) {
@@ -21,9 +21,11 @@ export class UserAPI {
       if (existingUser !== undefined) {
         throw new Error("User with these properties already exists")
       }
-      user.id = Date.now().toString()
-      this._users.push(user)
-      return user
+      let userToAdd = { ...user }
+      userToAdd.id = Date.now().toString()
+      let newArray = [...this._users, { ...userToAdd }]
+      this._users = [...newArray]
+      return { ...userToAdd }
     } else {
       throw new Error("Id incorrectly provided by input user")
     }
@@ -32,7 +34,7 @@ export class UserAPI {
   getUserById(id: string) {
     const user = this._users.find(x => x.id === id)
     if (user !== undefined) {
-      return user
+      return { ...user }
     } else {
       throw new Error("User was not found")
     }
@@ -42,16 +44,17 @@ export class UserAPI {
     if (!this._users) {
       throw new Error("There is an issue with the users array")
     } else {
-      return this._users
+      return [...this._users]
     }
   }
 
   deleteUserById(id: string) {
     const userIndex = this._users.findIndex(x => x.id === id)
     if (userIndex >= 0) {
-      const deletedUser = this._users[userIndex]
-      this._users.splice(userIndex, 1)
-      return deletedUser
+      const userToDelete = { ...this._users[userIndex] }
+      let newArray = [...this._users.filter(x => x.id !== id)]
+      this._users = [...newArray]
+      return { ...userToDelete }
     } else {
       throw new Error("User was not found")
     }
@@ -60,7 +63,7 @@ export class UserAPI {
   searchUserByName(name: string) {
     const userResult = this._users.filter(x => x.name.toLowerCase() === name.toLowerCase())
     if (userResult.length) {
-      return userResult
+      return [...userResult]
     } else {
       throw new Error("User(s) not found")
     }
@@ -69,7 +72,7 @@ export class UserAPI {
   searchUsersByFavoriteColor(color: string) {
     const userResult = this._users.filter(x => x.favoriteColor.toLowerCase() === color.toLowerCase())
     if (userResult.length) {
-      return userResult
+      return [...userResult]
     } else {
       throw new Error("User(s) not found")
     }
