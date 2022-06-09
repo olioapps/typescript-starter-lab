@@ -9,6 +9,27 @@ describe('new UserAPI()', () => {
   })
 })
 
+describe('UserAPI.getUsers()', () => {
+
+  it("should return empty object", () => {
+    const x = new UserAPI()
+    expect(x.getUsers())
+      .toEqual({})
+  })
+
+  it("should return array of two users", () => {
+    const x = new UserAPI({
+      ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 },
+      ["2"]: { name: 'Jenny', favoriteColor: 'yellow', age: 129 }
+    })
+    expect(x.getUsers())
+      .toEqual({
+        ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 },
+        ["2"]: { name: 'Jenny', favoriteColor: 'yellow', age: 129 }
+      })
+  })
+})
+
 describe('UserAPI.addUser()', () => {
 
   it("should return the new user", () => {
@@ -65,26 +86,7 @@ describe('UserAPI.getUserById()', () => {
   })
 })
 
-// describe('UserAPI.getUsers()', () => {
 
-//   it("should return empty array", () => {
-//     const x = new UserAPI()
-//     expect(x.getUsers())
-//       .toEqual([])
-//   })
-
-//   it("should return array of two users", () => {
-//     const x = new UserAPI([
-//       { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
-//       { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" }
-//     ])
-//     expect(x.getUsers())
-//       .toEqual([
-//         { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
-//         { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" }
-//       ])
-//   })
-// })
 
 // describe('UserAPI.deleteUserById()', () => {
 
