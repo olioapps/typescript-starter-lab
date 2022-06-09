@@ -12,7 +12,7 @@ describe('new UserAPI()', () => {
 describe('UserAPI.addUser()', () => {
 
   it("should return the new user", () => {
-    const x = new UserAPI()
+    const x = new UserAPI({ ["1"]: { name: 'Larry', favoriteColor: 'red', age: 99 } })
     jest.spyOn(Date, "now").mockReturnValue(new Date(1587893830000).getTime())
 
     expect(x.addUser({ name: 'Daniel', favoriteColor: 'purple', age: 33 }))
@@ -20,38 +20,29 @@ describe('UserAPI.addUser()', () => {
 
     expect(x.getUsers())
       .toEqual({
+        ["1"]: { name: 'Larry', favoriteColor: 'red', age: 99 },
         ["1587893830000"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 }
       })
 
-    jest.spyOn(Date, "now").mockReturnValue(new Date(1587893830001).getTime())
-
-    expect(x.addUser({ name: 'Bob', favoriteColor: 'red', age: 43 }))
-      .toEqual({ name: 'Bob', favoriteColor: 'red', age: 43 })
-
-    expect(x.getUsers())
-      .toEqual({
-        ["1587893830000"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 },
-        ["1587893830001"]: { name: 'Bob', favoriteColor: 'red', age: 43 }
-      })
   })
 
-  // it("should fail to add user if Id is provided", () => {
-  //   const x = new UserAPI()
-  //   const userWithId = { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" }
-  //   expect(() => { x.addUser(userWithId) })
-  //     .toThrow("Id incorrectly provided by input user")
-  //   expect(x.getUsers())
-  //     .toEqual([])
-  // })
+  it("should fail to add user if Id is provided", () => {
+    const x = new UserAPI()
+    const userWithId = { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" }
+    expect(() => { x.addUser(userWithId) })
+      .toThrow("Id incorrectly provided by input user")
+    expect(x.getUsers())
+      .toEqual({})
+  })
 
-  // it("should fail to add user if user with same props exists", () => {
-  //   const x = new UserAPI([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
-  //   const userDuplicate = { name: 'Larry', favoriteColor: 'gray', age: 544 }
-  //   expect(() => { x.addUser(userDuplicate) })
-  //     .toThrow("User with these properties already exists")
-  //   expect(x.getUsers())
-  //     .toEqual([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
-  // })
+  it("should fail to add user if user with same props exists", () => {
+    const x = new UserAPI({ ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 } })
+    const userDuplicate = { name: 'Daniel', favoriteColor: 'purple', age: 33 }
+    expect(() => { x.addUser(userDuplicate) })
+      .toThrow("User with these properties already exists")
+    expect(x.getUsers())
+      .toEqual({ ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 } })
+  })
 
 })
 
