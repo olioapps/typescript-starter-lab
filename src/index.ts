@@ -23,7 +23,7 @@ export class UserAPI {
       }
       let userToAdd = { ...user }
       userToAdd.id = Date.now().toString()
-      let newArray = [...this._users, { ...userToAdd }]
+      const newArray = [...this._users, { ...userToAdd }]
       this._users = [...newArray]
       return { ...userToAdd }
     } else {
@@ -52,7 +52,7 @@ export class UserAPI {
     const userIndex = this._users.findIndex(x => x.id === id)
     if (userIndex >= 0) {
       const userToDelete = { ...this._users[userIndex] }
-      let newArray = [...this._users.filter(x => x.id !== id)]
+      const newArray = [...this._users.filter(x => x.id !== id)]
       this._users = [...newArray]
       return { ...userToDelete }
     } else {
