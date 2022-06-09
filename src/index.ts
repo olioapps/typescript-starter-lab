@@ -48,7 +48,7 @@ export class UserAPI {
 
   deleteUserById(id: string) {
     const userIndex = this._users.findIndex(x => x.id === id)
-    if (userIndex > 0) {
+    if (userIndex >= 0) {
       const deletedUser = this._users[userIndex]
       this._users.splice(userIndex, 1)
       return deletedUser

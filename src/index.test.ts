@@ -69,3 +69,30 @@ describe('UserAPI.getUsers()', () => {
   })
 
 })
+
+describe('UserAPI.deleteUserById()', () => {
+
+  const x = new UserAPI([
+    { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
+    { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" },
+    { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" }
+  ])
+
+  it("should delete one user and return deleted user", () => {
+    expect(x.deleteUserById('1')).toEqual({ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" })
+  })
+
+  it("should return array of two remaining users", () => {
+    expect(x.getUsers()).toEqual([
+      { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" },
+      { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" }
+    ])
+  })
+
+  it("should fail to find user with now non-existent Id", () => {
+    expect(() => {
+      x.deleteUserById("1")
+    }).toThrow("User was not found")
+  })
+
+})
