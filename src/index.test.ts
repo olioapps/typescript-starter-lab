@@ -46,24 +46,24 @@ describe('UserAPI.addUser()', () => {
 
 })
 
-// describe('UserAPI.getUserById()', () => {
+describe('UserAPI.getUserById()', () => {
 
-//   it("should return a user with the Id of 1", () => {
-//     const x = new UserAPI([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
-//     expect(x.getUserById("1"))
-//       .toEqual({ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" })
-//     expect(x.getUsers())
-//       .toEqual([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
-//   })
+  it("should return a user with the Id of 1", () => {
+    const x = new UserAPI({ ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 } })
+    expect(x.getUserById("1"))
+      .toEqual({ name: 'Daniel', favoriteColor: 'purple', age: 33 })
+    expect(x.getUsers())
+      .toEqual({ ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 } })
+  })
 
-//   it("should fail to find user with non-existent Id", () => {
-//     const x = new UserAPI([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
-//     expect(() => { x.getUserById("3") })
-//       .toThrow("User was not found")
-//     expect(x.getUsers())
-//       .toEqual([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
-//   })
-// })
+  it("should fail to find user with non-existent Id", () => {
+    const x = new UserAPI({ ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 } })
+    expect(() => { x.getUserById("3") })
+      .toThrow("User was not found")
+    expect(x.getUsers())
+      .toEqual({ ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 } })
+  })
+})
 
 // describe('UserAPI.getUsers()', () => {
 

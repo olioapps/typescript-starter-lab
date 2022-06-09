@@ -27,14 +27,13 @@ export class UserAPI {
     return { ...copyOfUsers[id] }
   }
 
-  // getUserById(id: string) {
-  //   const user = this._users.find(x => x.id === id)
-  //   if (user !== undefined) {
-  //     return { ...user }
-  //   } else {
-  //     throw new Error("User was not found")
-  //   }
-  // }
+  getUserById(id: string) {
+    if (this._users[id]) {
+      return { ...this._users[id] }
+    } else {
+      throw new Error("User was not found")
+    }
+  }
 
   getUsers() {
     if (!this._users) {
