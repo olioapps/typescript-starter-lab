@@ -8,7 +8,7 @@ import {
 } from './mockEventStream'
 import { getHighestScoringRegion, findRegionScore, scoreEvent } from "./index"
 
-describe('Event scoring function tests.', () => {
+describe('ScoreEventStream', () => {
   
   describe('getHighestScoringRegion', () => {
 
