@@ -17,8 +17,8 @@ export class UserAPI {
     if (user.hasOwnProperty("id")) {
       throw new Error("Id incorrectly provided by input user")
     }
-    Object.values(copyOfUsers).map((entry) => {
-      if (entry.name === user.name && entry.favoriteColor === user.favoriteColor && entry.age === user.age) {
+    Object.values(copyOfUsers).map((userObj) => {
+      if (userObj.name.toLowerCase() === user.name.toLowerCase() && userObj.favoriteColor.toLowerCase() === user.favoriteColor.toLowerCase() && userObj.age === user.age) {
         throw new Error("User with these properties already exists")
       }
     })
@@ -43,26 +43,28 @@ export class UserAPI {
     }
   }
 
-  // deleteUserById(id: string) {
-  //   const userIndex = this._users.findIndex(x => x.id === id)
-  //   if (userIndex >= 0) {
-  //     const userToDelete = { ...this._users[userIndex] }
-  //     const newArray = [...this._users.filter(x => x.id !== id)]
-  //     this._users = [...newArray]
-  //     return { ...userToDelete }
-  //   } else {
-  //     throw new Error("User was not found")
-  //   }
-  // }
+  deleteUserById(id: string) {
+    if (!this._users[id]) {
+      throw new Error("User was not found")
+    } else {
+      const userToDelete = { ...this._users[id] }
+      const updatedArray = { ...this._users }
+      delete updatedArray[id]
+      this._users = { ...updatedArray }
+      return userToDelete
+    }
 
-  // searchUserByName(name: string) {
-  //   const userResult = this._users.filter(x => x.name.toLowerCase() === name.toLowerCase())
-  //   if (userResult.length) {
-  //     return [...userResult]
-  //   } else {
-  //     throw new Error("User(s) not found")
-  //   }
-  // }
+  }
+
+  searchUserByName(name: string) {
+    const copyOfUsers = { ...this._users }
+    const userResult = Object.values(copyOfUsers).filter(x => x.name === name)
+    if (userResult.length) {
+      return [...userResult]
+    } else {
+      throw new Error("User(s) not found")
+    }
+  }
 
   // searchUsersByFavoriteColor(color: string) {
   //   const userResult = this._users.filter(x => x.favoriteColor.toLowerCase() === color.toLowerCase())
