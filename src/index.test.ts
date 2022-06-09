@@ -53,20 +53,6 @@ describe('UserAPI.getUserById()', () => {
 
 describe('UserAPI.getUsers()', () => {
 
-  const x = new UserAPI([{ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" }])
-  const userToAdd = x.addUser({ name: 'Daniel', favoriteColor: 'green', age: 33 })
-
-  it("should return array of two users", () => {
-    expect(x.getUsers()).toEqual([
-      { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
-      userToAdd
-    ])
-  })
-
-})
-
-describe('UserAPI.getUsers()', () => {
-
   const x = new UserAPI()
 
   it("should return empty array", () => {
