@@ -128,42 +128,29 @@ describe('UserAPI() objects and method ', () => {
     })
   })
 
-  // describe('UserAPI.searchUserByName()', () => {
+  describe('UserAPI.searchUserByName()', () => {
 
-  //   it("should return array of two DaNIeL users (ignore letter case)", () => {
-  //     const users = new UserAPI([
-  //       { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
-  //       { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" },
-  //       { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" },
-  //       { name: 'Daniel', favoriteColor: 'red', age: 48, id: "4" }
-  //     ])
-  //     expect(users.searchUserByName("DaNIeL")).toEqual([
-  //       { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" },
-  //       { name: 'Daniel', favoriteColor: 'red', age: 48, id: "4" }
-  //     ])
-  //     expect(users.getUsers())
-  //       .toEqual([
-  //         { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
-  //         { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" },
-  //         { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" },
-  //         { name: 'Daniel', favoriteColor: 'red', age: 48, id: "4" }
-  //       ])
-  //   })
+    it("should return array of two DaNIeL users (ignore letter case)", () => {
+      const users = new UserAPI({
+        ["1"]: { name: 'Daniel', favoriteColor: 'gray', age: 544 },
+        ["2"]: { name: 'Daniel', favoriteColor: 'purple', age: 33 },
+        ["3"]: { name: 'Jenny', favoriteColor: 'yellow', age: 88 }
+      })
+      expect(users.searchUserByName("DaNIeL")).toEqual([
+        { name: 'Daniel', favoriteColor: 'gray', age: 544 },
+        { name: 'Daniel', favoriteColor: 'purple', age: 33 }
+      ])
+    })
 
-  //   it("should fail to find user with name Billy", () => {
-  //     const users = new UserAPI([
-  //       { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
-  //       { name: 'Daniel', favoriteColor: 'red', age: 48, id: "2" }
-  //     ])
-  //     expect(() => { users.searchUserByName("Billy") })
-  //       .toThrow("User(s) not found")
-  //     expect(users.getUsers())
-  //       .toEqual([
-  //         { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
-  //         { name: 'Daniel', favoriteColor: 'red', age: 48, id: "2" }
-  //       ])
-  //   })
-  // })
+    it("should fail to find user with name Billy", () => {
+      const users = new UserAPI({
+        ["1"]: { name: 'Daniel', favoriteColor: 'gray', age: 544 },
+        ["2"]: { name: 'Jenny', favoriteColor: 'yellow', age: 33 }
+      })
+      expect(() => { users.searchUserByName("Billy") })
+        .toThrow("User(s) not found")
+    })
+  })
 
   // describe('UserAPI.searchUsersByFavoriteColor()', () => {
 

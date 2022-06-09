@@ -58,7 +58,7 @@ export class UserAPI {
 
   searchUserByName(name: string) {
     const copyOfUsers = { ...this._users }
-    const userResult = Object.values(copyOfUsers).filter(x => x.name === name)
+    const userResult = Object.values(copyOfUsers).filter(x => x["name"].toLowerCase() === name.toLowerCase())
     if (userResult.length) {
       return [...userResult]
     } else {
