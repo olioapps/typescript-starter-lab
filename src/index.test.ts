@@ -96,3 +96,27 @@ describe('UserAPI.deleteUserById()', () => {
   })
 
 })
+
+describe('UserAPI.searchUserByName()', () => {
+
+  const x = new UserAPI([
+    { name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" },
+    { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" },
+    { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" },
+    { name: 'Daniel', favoriteColor: 'red', age: 48, id: "4" }
+  ])
+
+  it("should return array of two DaNIeL users (ignore letter case)", () => {
+    expect(x.searchUserByName("DaNIeL")).toEqual([
+      { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" },
+      { name: 'Daniel', favoriteColor: 'red', age: 48, id: "4" }
+    ])
+  })
+
+  it("should fail to find user with name Billy", () => {
+    expect(() => {
+      x.searchUserByName("Billy")
+    }).toThrow("User(s) not found")
+  })
+
+})
