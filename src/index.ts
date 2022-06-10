@@ -66,22 +66,13 @@ export class UserAPI {
     }
   }
 
-  // searchUsersByFavoriteColor(color: string) {
-  //   const userResult = this._users.filter(x => x.favoriteColor.toLowerCase() === color.toLowerCase())
-  //   if (userResult.length) {
-  //     return [...userResult]
-  //   } else {
-  //     throw new Error("User(s) not found")
-  //   }
-  // }
+  searchUsersByFavoriteColor(color: string) {
+    const copyOfUsers = { ...this._users }
+    const userResult = Object.values(copyOfUsers).filter(x => x["favoriteColor"].toLowerCase() === color.toLowerCase())
+    if (userResult.length) {
+      return [...userResult]
+    } else {
+      throw new Error("User(s) not found")
+    }
+  }
 }
-
-const x = new UserAPI()
-x.addUser({ name: 'Larry', favoriteColor: 'gray', age: 544 })
-x.addUser({ name: 'Larry', favoriteColor: 'grey', age: 51 })
-x.addUser({ name: 'Larry', favoriteColor: 'grey', age: 542 })
-x.addUser({ name: 'Larry', favoriteColor: 'grey', age: 541 })
-x.addUser({ name: 'Larry', favoriteColor: 'grey', age: 54 })
-// console.log(x.getUsers())
-x.addUser({ name: 'Bob', favoriteColor: 'gray', age: 544 })
-// console.log(x.getUsers())
