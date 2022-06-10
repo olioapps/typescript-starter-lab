@@ -79,13 +79,3 @@ export class UserAPI {
     throw new ReferenceError(`No users favorite color is ${color}`)
   }
 }
-
-
-const seedUsers: Record<string, IUser> = {
-  "1": { id: "1", name: "andy", favColor: "blue", age: 247 },
-  "2": { id: "2", name: "Andy",  favColor: "purple", age: 150 },
-  "3": { id: "3", name: "Sarah", favColor: "Blue", age: 200} 
-}
-const userAPI = new UserAPI(seedUsers)
-console.log("Delete", userAPI.deleteUserById("1"));
-
