@@ -49,7 +49,7 @@ export class UserAPI {
     if (this._users === null || this._users === undefined) {
       throw new Error(`User Dataset not found`)
     }
-    return this._users
+    return Object.values(this._users)
   }
 
   deleteUserById(id: string) {
