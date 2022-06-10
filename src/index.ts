@@ -1,15 +1,15 @@
-interface IUser {
+export interface IUser {
   id?: string
   name: string
   favColor: string
   age: number
 }
 
-class UserAPI {
+export class UserAPI {
   private _users: Array<IUser>
 
   constructor(seedData: Array<IUser> = []) {
-    this._users = seedData
+    this._users = [...seedData]
   } 
 
   addUser(user: IUser) {
@@ -24,7 +24,7 @@ class UserAPI {
       throw new Error("A user with those properties already exists in the database.")
     } 
     
-    this._users.push(user)
+    this._users = [...this._users, user]
     return user
   }
 
@@ -37,7 +37,7 @@ class UserAPI {
     throw new ReferenceError(`No user found with id ${id}.`)
   }
 
-  get_Users() {
+  getUsers() {
     if (this._users === null || this._users === undefined) {
       throw new Error(`User Dataset not found`)
     }
@@ -45,11 +45,11 @@ class UserAPI {
   }
 
   deleteUserById(id: string) {
-    const indexOfUser = this._users.findIndex( user => user.id === id)
-    const user = this.getUserById(id)
+    const user = this._users.filter( user => user.id === id)
     
-    if (indexOfUser > -1) {
-      this._users.splice(indexOfUser,1)
+    if (user.length) {
+      const newUserState = this._users.filter( user => user.id != id)
+      this._users = [...newUserState]
       return user
     } else{
       throw new ReferenceError(`No user found with id ${id}.`)
@@ -65,125 +65,11 @@ class UserAPI {
     throw new ReferenceError(`No user found with name ${name}`)
   }
 
-  search_UsersByFavoriteColor(color: string) {
+  searchUsersByFavoriteColor(color: string) {
     const users = this._users.filter( user => user.favColor.toLowerCase() === color.toLowerCase())
     if (users.length) {
       return users
     } 
     throw new ReferenceError(`No users favorite color is ${color}`)
   }
-  
-}
-
-
-////////////////////////////////////////////////////////////////////////////////////////
-
-
-const seedData = [{ id: "1", name: "andy", favColor: "blue", age: 247 }]
-const x = new UserAPI(seedData)
-const user2 = {
-  name: "Andy",
-  favColor: "Green",
-  age: 200
-} 
-const user3 = {
-  name: "Sarah",
-  favColor: "Blue",
-  age: 200
-} 
-const userDuplicate = {
-  name: "andy",
-  favColor: "blue",
-  age: 247
-}
-const userWithId = {
-  id: "5",
-  name: "andy",
-  favColor: "blue",
-  age: 200
-}
-
-
-try {
-  console.log("GETALL:", x.get_Users())
-} catch (error: any) {
-  console.log("GETALL:", error.name,":", error.message)
-}
-
-try {
-  console.log("ADD:", x.addUser(user2))
-} catch (error: any) {
-  console.log("ADD:", error.name,":", error.message)
-}
-
-try {
-  console.log("ADD:", x.addUser(user3))
-} catch (error: any) {
-  console.log("ADD:", error.name,":", error.message)
-}
-
-try {
-  console.log("ADD:", x.addUser(userDuplicate))
-} catch (error: any) {
-  console.log("ADD:", error.name,":", error.message)
-}
-
-try {
-  console.log("ADD:", x.addUser(userWithId))
-} catch (error: any) {
-  console.log("ADD:", error.name,":", error.message)
-}
-
-try {
-  console.log("GET:", x.getUserById("1"))
-} catch (error: any) {
-  console.log("GET:", error.name,":", error.message)
-}
-
-try {
-  console.log("GET:", x.getUserById("100"))
-} catch (error: any) {
-  console.log("GET:", error.name,":", error.message)
-}
-
-try {
-  console.log("GETALL:", x.get_Users())
-} catch (error: any) {
-  console.log("GETALL:", error.name,":", error.message)
-}
-
-try {
-  console.log("SEARCH:", x.searchUserByName("Andy"))
-} catch (error: any) {
-  console.log("SEARCH:", error.name,":", error.message)
-}
-
-try {
-  console.log("SEARCH:", x.searchUserByName("Jessica"))
-} catch (error: any) {
-  console.log("SEARCH:", error.name,":", error.message)
-}
-
-try {
-  console.log("SEARCH COLOR:", x.search_UsersByFavoriteColor("Blue"))
-} catch (error: any) {
-  console.log("SEARCH COLOR:", error.name,":", error.message)
-}
-
-try {
-  console.log("SEARCH COLOR:", x.search_UsersByFavoriteColor("Pink"))
-} catch (error: any) {
-  console.log("SEARCH COLOR:", error.name,":", error.message)
-}
-
-try {
-  console.log("DELETE:", x.deleteUserById("1"))
-} catch (error: any) {
-  console.log("DELETE:", error.name,":", error.message)
-}
-
-try {
-  console.log("DELETE:", x.deleteUserById("1"))
-} catch (error: any) {
-  console.log("DELETE:", error.name,":", error.message)
 }
