@@ -53,7 +53,7 @@ export class UserAPI {
       const updatedArray = { ...this._users }
       delete updatedArray[id]
       this._users = { ...updatedArray }
-      return userToDelete
+      return { ...userToDelete }
     }
   }
 
