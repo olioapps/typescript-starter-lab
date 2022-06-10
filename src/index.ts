@@ -55,7 +55,6 @@ export class UserAPI {
       this._users = { ...updatedArray }
       return userToDelete
     }
-
   }
 
   searchUserByName(name: string) {
