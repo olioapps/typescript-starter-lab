@@ -50,16 +50,14 @@ export class UserAPI {
   }
 
   deleteUserById(id: string) {
-    const user = this._users[id]
-    
-    if (user) {
+    if (this._users[id]) {
       const newUserState = {...this._users}
+      const user = newUserState[id]
       delete newUserState[id]
       this._users = {...newUserState}
       return user
-    } else{
-      throw new ReferenceError(`No user found with id ${id}.`)
-    }  
+    } 
+    throw new ReferenceError(`No user found with id ${id}.`)
   }
 
   searchUserByName(name: string) {
