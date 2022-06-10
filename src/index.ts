@@ -12,32 +12,33 @@ export class UserAPI {
     this._users = {...seedData}
   } 
 
-  addUser(userToAdd: IUser): IUser{
-    if (userToAdd.id) {
+  private _assignId(): string {
+    const id = Date.now().toString() + Math.floor(Math.random()*100)
+    return id
+  }
+  
+  addUser(user: IUser): IUser{
+    if (user.id) {
       throw new SyntaxError("Please resubmit without pre-exisitng ID field.")
     } 
-    let user = {...userToAdd}
-    const result = (Object.values(this._users)).filter( existingUser => (
+    const result = (Object.values(this._users)).some( existingUser => (
       existingUser.name.toLowerCase() === user.name.toLowerCase() && 
       existingUser.favColor.toLowerCase() === user.favColor.toLowerCase() && 
       existingUser.age === user.age
     ))
     
-    if (result.length) {
+    if (result) {
       throw new Error("A user with those properties already exists in the database.")
     } 
-    const id = Date.now().toString() + Math.floor(Math.random()*100)
-    user.id = id
-    let newUsersState: any = {...this._users}
-    newUsersState[id] = user
-    this._users = {...newUsersState}
-    return user
+
+    const newUser = {...user, id: this._assignId()}
+    this._users = {...this._users, [newUser.id]: newUser}
+    return newUser
   }
 
   getUserById(id: string): IUser{
-    const foundUser = Object.values(this._users).find( user => user.id === id) 
-    if (foundUser) {
-      return foundUser
+    if (this._users[id]) {
+      return this._users[id]
     }
     throw new ReferenceError(`No user found with id ${id}.`)
   }
@@ -51,11 +52,9 @@ export class UserAPI {
 
   deleteUserById(id: string): IUser {
     if (this._users[id]) {
-      const newUserState = {...this._users}
-      const user = newUserState[id]
-      delete newUserState[id]
-      this._users = {...newUserState}
-      return user
+      const { [id]: deletedUser, ...rest } = this._users
+      this._users = {...rest}
+      return deletedUser
     } 
     throw new ReferenceError(`No user found with id ${id}.`)
   }
