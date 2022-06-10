@@ -18,21 +18,18 @@ export class UserAPI {
     } 
     let user = {...userToAdd}
     const result = (Object.values(this._users)).filter( existingUser => (
-          existingUser.name.toLowerCase() === user.name.toLowerCase() && 
-          existingUser.favColor.toLowerCase() === user.favColor.toLowerCase() && 
-          existingUser.age === user.age
-        )
-
-    )
+      existingUser.name.toLowerCase() === user.name.toLowerCase() && 
+      existingUser.favColor.toLowerCase() === user.favColor.toLowerCase() && 
+      existingUser.age === user.age
+    ))
     
     if (result.length) {
-        throw new Error("A user with those properties already exists in the database.")
-      } 
+      throw new Error("A user with those properties already exists in the database.")
+    } 
     const id = Date.now().toString() + Math.floor(Math.random()*100)
     user.id = id
     let newUsersState: any = {...this._users}
     newUsersState[id] = user
-
     this._users = {...newUsersState}
     return user
   }
@@ -80,51 +77,4 @@ export class UserAPI {
     } 
     throw new ReferenceError(`No users favorite color is ${color}`)
   }
-  
 }
-
-// const seedUsers: object = {    
-//   "1": { 
-//     id: "1", 
-//     name: "andy", 
-//     favColor: "blue", 
-//     age: 247 
-//   },
-//   "2": { 
-//     id: "2", 
-//       name: "Dan", 
-//       favColor: "blue", 
-//       age: 150 
-//   }
-// }
-// const x = new UserAPI(seedUsers)
-
-
-// const user2 = {
-//   name: "Andy",
-//   favColor: "Green",
-//   age: 200
-// } 
-
-// const user3 = {
-//   name: "Sarah",
-//   favColor: "Blue",
-//   age: 200
-// } 
-
-
-// console.log("ADD USER2", x.addUser(user2))
-// // console.log("GET USERS #2",x.getUsers());
-// console.log("ADD USER3", x.addUser(user3))
-// console.log("GET USERS #3",x.getUsers());
-// try {
-//   console.log("ADD USER3", x.addUser(user3))
-// } catch (error) {
-//   console.log(error);
-// }
-// console.log("GET USERS #3",x.getUsers());
-
-
-
-
-

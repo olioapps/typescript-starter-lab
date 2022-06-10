@@ -4,7 +4,6 @@ const seedUsers: object = {
   "2": { id: "2", name: "Andy",  favColor: "purple", age: 150 },
   "3": { id: "3", name: "Sarah", favColor: "Blue", age: 200} 
 }
-
 const userAPI = new UserAPI(seedUsers)
 
 describe(UserAPI, () => {
@@ -36,25 +35,27 @@ describe(UserAPI, () => {
       const actual = () => {userAPI.addUser(userDuplicate)}
       expect(actual).toThrow(Error)
     })
-    // it("addUser() throws error supplied with pre-existing user.id", () => {
-    //   const userWithId: any = seedUsers["1"]
+    it("addUser() throws error supplied with pre-existing user.id", () => {
+      const userWithId = { id: "1", name: "andy", favColor: "blue", age: 247 }
 
-    //   const actual = () => {userAPI.addUser(userWithId)}
-    //   expect(actual).toThrow(Error)
-    // })
+      const actual = () => {userAPI.addUser(userWithId)}
+      expect(actual).toThrow(Error)
+    })
   })
+
   describe('getUserById()', () => {
-    // it('getUserById() returns expected user', () => {
-    //   const actual = userAPI.getUserById("2")
-    //   const expected = seedUsers[1]
-    //   expect(actual).toEqual(expected)
-    // })
+    it('getUserById() returns expected user', () => {
+      const actual = userAPI.getUserById("2")
+      const expected = { id: "2", name: "Andy",  favColor: "purple", age: 150 }
+      expect(actual).toEqual(expected)
+    })
   
     it('getUserById() throws error if user with id is not found', () => {
       const actual = () => userAPI.getUserById("100")
       expect(actual).toThrow(ReferenceError)
     })
   })
+
   describe('deleteUserById()', () => {
     it('deleteUserById() deletes user with given id', () => {
       const userAPI = new UserAPI(seedUsers)
@@ -72,6 +73,7 @@ describe(UserAPI, () => {
       expect(actual).toThrow(ReferenceError)
     })
   })
+
   describe('searchUserbyName()', () => {
     it('searchUserByName() returns all instances of given name, independant of capitals', () => {
       const actual = userAPI.searchUserByName("Andy")
@@ -87,6 +89,7 @@ describe(UserAPI, () => {
       expect(actual).toThrow(ReferenceError)
     })
   })
+
   describe('searchUserFavoriteColor()', () => {
     it('searchUserByFavoriteColor() returns all instances users with given fav color, independant of capitals', () => {
       const userAPI = new UserAPI(seedUsers)
