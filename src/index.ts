@@ -16,16 +16,12 @@ export class UserAPI {
     if (user.hasOwnProperty("id")) {
       throw new Error("Id incorrectly provided by input user")
     }
-    Object.values(this._users).map((userObj) => {
-      if (userObj.name.toLowerCase() === user.name.toLowerCase() && userObj.favoriteColor.toLowerCase() === user.favoriteColor.toLowerCase() && userObj.age === user.age) {
-        throw new Error("User with these properties already exists")
-      }
-    })
-    const copyOfAPIUsers: { [key: string]: IUser } = { ...this._users }
-    const newUser: IUser = { ...user, id: id }
-    copyOfAPIUsers[id] = { ...newUser }
+    if (Object.values(this._users).some(x => x.name.toLowerCase() === user.name.toLowerCase() && x.favoriteColor.toLowerCase() === x.favoriteColor.toLowerCase() && x.age === user.age)) {
+      throw new Error("User with these properties already exists")
+    }
+    const copyOfAPIUsers = { ...this._users, [id]: { ...user, id: id } }
     this._users = { ...copyOfAPIUsers }
-    return { ...newUser }
+    return { ...user, id: id }
   }
 
   getUserById(id: string): IUser {
@@ -40,7 +36,7 @@ export class UserAPI {
     if (!this._users) {
       throw new Error("There is an issue with the users object")
     } else {
-      return Object.values({ ...this._users })
+      return Object.values(this._users)
     }
   }
 
@@ -48,17 +44,14 @@ export class UserAPI {
     if (!this._users[id]) {
       throw new Error("User was not found")
     } else {
-      const userToDelete: IUser = { ...this._users[id] }
-      const updatedArray: { [key: string]: IUser } = { ...this._users }
-      delete updatedArray[id]
+      const { [id]: userToDelete, ...updatedArray } = this._users
       this._users = { ...updatedArray }
       return { ...userToDelete }
     }
   }
 
   searchUserByName(name: string): Array<IUser> {
-    const copyOfUsers: { [key: string]: IUser } = { ...this._users }
-    const userResult: Array<IUser> = Object.values(copyOfUsers).filter(x => x["name"].toLowerCase() === name.toLowerCase())
+    const userResult: Array<IUser> = Object.values(this._users).filter(x => x["name"].toLowerCase() === name.toLowerCase())
     if (userResult.length) {
       return [...userResult]
     } else {
@@ -67,8 +60,7 @@ export class UserAPI {
   }
 
   searchUsersByFavoriteColor(color: string): Array<IUser> {
-    const copyOfUsers: { [key: string]: IUser } = { ...this._users }
-    const userResult: Array<IUser> = Object.values(copyOfUsers).filter(x => x["favoriteColor"].toLowerCase() === color.toLowerCase())
+    const userResult = Object.values(this._users).filter(x => x["favoriteColor"].toLowerCase() === color.toLowerCase())
     if (userResult.length) {
       return [...userResult]
     } else {
