@@ -6,9 +6,9 @@ export interface IUser {
 }
 
 export class UserAPI {
-  private _users: object
+  private _users: Record<string, IUser>
 
-  constructor(seedData: object = {}) {
+  constructor(seedData: Record<string, IUser> = {}) {
     this._users = {...seedData}
   } 
 
@@ -50,11 +50,12 @@ export class UserAPI {
   }
 
   deleteUserById(id: string) {
-    const user = Object.values(this._users).filter( user => user.id === id)
+    const user = this._users[id]
     
-    if (user.length) {
-      const newUserState = Object.values(this._users).filter( user => user.id != id)
-      this._users = [...newUserState]
+    if (user) {
+      const newUserState = {...this._users}
+      delete newUserState[id]
+      this._users = {...newUserState}
       return user
     } else{
       throw new ReferenceError(`No user found with id ${id}.`)
@@ -78,3 +79,13 @@ export class UserAPI {
     throw new ReferenceError(`No users favorite color is ${color}`)
   }
 }
+
+
+const seedUsers: Record<string, IUser> = {
+  "1": { id: "1", name: "andy", favColor: "blue", age: 247 },
+  "2": { id: "2", name: "Andy",  favColor: "purple", age: 150 },
+  "3": { id: "3", name: "Sarah", favColor: "Blue", age: 200} 
+}
+const userAPI = new UserAPI(seedUsers)
+console.log("Delete", userAPI.deleteUserById("1"));
+
