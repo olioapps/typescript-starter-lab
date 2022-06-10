@@ -12,7 +12,7 @@ export class UserAPI {
     this._users = {...seedData}
   } 
 
-  addUser(userToAdd: IUser) {
+  addUser(userToAdd: IUser): IUser{
     if (userToAdd.id) {
       throw new SyntaxError("Please resubmit without pre-exisitng ID field.")
     } 
@@ -34,7 +34,7 @@ export class UserAPI {
     return user
   }
 
-  getUserById(id: string) {
+  getUserById(id: string): IUser{
     const foundUser = Object.values(this._users).find( user => user.id === id) 
     if (foundUser) {
       return foundUser
@@ -42,14 +42,14 @@ export class UserAPI {
     throw new ReferenceError(`No user found with id ${id}.`)
   }
 
-  getUsers() {
+  getUsers(): Array<IUser>{
     if (this._users === null || this._users === undefined) {
       throw new Error(`User Dataset not found`)
     }
     return Object.values(this._users)
   }
 
-  deleteUserById(id: string) {
+  deleteUserById(id: string): IUser {
     if (this._users[id]) {
       const newUserState = {...this._users}
       const user = newUserState[id]
@@ -60,7 +60,7 @@ export class UserAPI {
     throw new ReferenceError(`No user found with id ${id}.`)
   }
 
-  searchUserByName(name: string) {
+  searchUserByName(name: string): Array<IUser>{
     const users = Object.values(this._users).filter( user => user.name.toLowerCase() === name.toLowerCase())
     
     if (users.length) {
@@ -69,7 +69,7 @@ export class UserAPI {
     throw new ReferenceError(`No user found with name ${name}`)
   }
 
-  searchUsersByFavoriteColor(color: string) {
+  searchUsersByFavoriteColor(color: string): Array<IUser>{
     const users = Object.values(this._users).filter( user => user.favColor.toLowerCase() === color.toLowerCase())
     if (users.length) {
       return users
