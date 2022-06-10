@@ -12,7 +12,7 @@ describe('UserAPI() objects and method ', () => {
     it("should return empty object", () => {
       const users = new UserAPI()
       const actual = users.getUsers()
-      const expected = {}
+      const expected = new Array
       expect(expected).toEqual(actual)
     })
 
@@ -22,20 +22,20 @@ describe('UserAPI() objects and method ', () => {
         ["2"]: { name: 'Jenny', favoriteColor: 'yellow', age: 129, id: "2" }
       })
       const actual = users.getUsers()
-      const expected = {
-        ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33, id: "1" },
-        ["2"]: { name: 'Jenny', favoriteColor: 'yellow', age: 129, id: "2" }
-      }
+      const expected = [
+        { name: 'Daniel', favoriteColor: 'purple', age: 33, id: "1" },
+        { name: 'Jenny', favoriteColor: 'yellow', age: 129, id: "2" }
+      ]
       expect(expected).toEqual(actual)
     })
   })
 
   describe('UserAPI.getUsers()', () => {
 
-    it("should return empty object", () => {
+    it("should return empty array of objects", () => {
       const users = new UserAPI()
       const actual = users.getUsers()
-      const expected = {}
+      const expected = new Array
       expect(expected).toEqual(actual)
     })
 
@@ -45,10 +45,10 @@ describe('UserAPI() objects and method ', () => {
         ["2"]: { name: 'Jenny', favoriteColor: 'yellow', age: 129, id: "2" }
       })
       const actual = users.getUsers()
-      const expected = {
-        ["1"]: { name: 'Daniel', favoriteColor: 'purple', age: 33, id: "1" },
-        ["2"]: { name: 'Jenny', favoriteColor: 'yellow', age: 129, id: "2" }
-      }
+      const expected = [
+        { name: 'Daniel', favoriteColor: 'purple', age: 33, id: "1" },
+        { name: 'Jenny', favoriteColor: 'yellow', age: 129, id: "2" }
+      ]
       expect(expected).toEqual(actual)
     })
   })
@@ -60,14 +60,14 @@ describe('UserAPI() objects and method ', () => {
 
     it("should successfully add and return new user", () => {
       user = users.addUser({ name: 'Daniel', favoriteColor: 'purple', age: 33 })
-      const actual = users.getUsers()
-      const expected = { [`${user.id}`]: user }
+      const actual = user
+      const expected = { name: 'Daniel', favoriteColor: 'purple', age: 33, id: user.id }
       expect(expected).toEqual(actual)
     })
 
-    it("should return the new list of users", () => {
+    it("should return the updated list of users", () => {
       const actual = users.getUsers()
-      const expected = { [`${user.id}`]: user }
+      const expected = [user]
       expect(expected).toEqual(actual)
     })
 
@@ -116,10 +116,10 @@ describe('UserAPI() objects and method ', () => {
 
     it("should return an array of remaining users", () => {
       const actual = users.getUsers()
-      const expected = {
-        ["2"]: { name: 'Daniel', favoriteColor: 'purple', age: 33, id: "2" },
-        ["3"]: { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" }
-      }
+      const expected = [
+        { name: 'Daniel', favoriteColor: 'purple', age: 33, id: "2" },
+        { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" }
+      ]
       expect(expected).toEqual(actual)
     })
 

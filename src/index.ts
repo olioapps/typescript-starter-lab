@@ -41,7 +41,7 @@ export class UserAPI {
     if (!this._users) {
       throw new Error("There is an issue with the users object")
     } else {
-      return { ...this._users }
+      return Object.values({ ...this._users })
     }
   }
 
