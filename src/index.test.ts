@@ -1,4 +1,4 @@
-import { UserAPI, User } from "./index"
+import { UserAPI, IUser } from "./index"
 
 describe('UserAPI() objects and method ', () => {
 
@@ -56,7 +56,7 @@ describe('UserAPI() objects and method ', () => {
   describe('UserAPI.addUser()', () => {
 
     const users = new UserAPI()
-    let user = <User>{}
+    let user = <IUser>{}
 
     it("should successfully add and return new user", () => {
       user = users.addUser({ name: 'Daniel', favoriteColor: 'purple', age: 33 })
