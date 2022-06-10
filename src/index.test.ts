@@ -35,6 +35,7 @@ describe(UserAPI, () => {
       const actual = () => {userAPI.addUser(userDuplicate)}
       expect(actual).toThrow(Error)
     })
+    
     it("addUser() throws error supplied with pre-existing user.id", () => {
       const userWithId = { id: "1", name: "andy", favColor: "blue", age: 247 }
 
@@ -42,7 +43,7 @@ describe(UserAPI, () => {
       expect(actual).toThrow(Error)
     })
   })
-
+  
   describe('getUserById()', () => {
     it('getUserById() returns expected user', () => {
       const actual = userAPI.getUserById("2")
@@ -55,7 +56,7 @@ describe(UserAPI, () => {
       expect(actual).toThrow(ReferenceError)
     })
   })
-
+  
   describe('deleteUserById()', () => {
     it('deleteUserById() deletes user with given id', () => {
       const userAPI = new UserAPI(seedUsers)
@@ -67,13 +68,13 @@ describe(UserAPI, () => {
       ]
       expect(actual).toEqual(expected)
     })
-
+    
     it('deleteUserById() throws error if user is not found', () => {
       const actual =  () => {userAPI.deleteUserById("100")}
       expect(actual).toThrow(ReferenceError)
     })
   })
-
+  
   describe('searchUserbyName()', () => {
     it('searchUserByName() returns all instances of given name, independant of capitals', () => {
       const actual = userAPI.searchUserByName("Andy")
@@ -83,13 +84,13 @@ describe(UserAPI, () => {
       ]
       expect(actual).toEqual(expected)
     })
-
+    
     it('searchUserByName() throws error if no user is found', () => {
       const actual =  () => userAPI.searchUserByName("Jessica")
       expect(actual).toThrow(ReferenceError)
     })
   })
-
+  
   describe('searchUserFavoriteColor()', () => {
     it('searchUserByFavoriteColor() returns all instances users with given fav color, independant of capitals', () => {
       const userAPI = new UserAPI(seedUsers)
@@ -100,7 +101,7 @@ describe(UserAPI, () => {
       ]
       expect(actual).toEqual(expected)
     })
-
+    
     it('searchUserByFavoriteColor() throws error if no user is found with given fav color', () => {
       const actual =  () => userAPI.searchUsersByFavoriteColor("Pink")
       expect(actual).toThrow(ReferenceError)
