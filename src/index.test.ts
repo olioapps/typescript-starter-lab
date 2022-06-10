@@ -66,7 +66,6 @@ describe('UserAPI() objects and method ', () => {
       expect(() => { users.addUser(userDuplicate) })
         .toThrow("User with these properties already exists")
     })
-
   })
 
   describe('UserAPI.getUserById()', () => {
