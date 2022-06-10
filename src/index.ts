@@ -2,29 +2,31 @@ interface User {
   name: string
   favoriteColor: string
   age: number
+  id?: string
 }
 
 export class UserAPI {
-  private _users: { [key: string]: { name: string, favoriteColor: string, age: number } }
+  private _users: { [key: string]: { name: string, favoriteColor: string, age: number, id: string } }
 
-  constructor(users: { [key: string]: { name: string, favoriteColor: string, age: number } } = {}) {
+  constructor(users: { [key: string]: { name: string, favoriteColor: string, age: number, id: string } } = {}) {
     this._users = { ...users }
   }
 
   addUser(user: User) {
     const id = Date.now().toString()
-    let copyOfUsers = { ...this._users }
+    let copyOfAPIUsers = { ...this._users }
     if (user.hasOwnProperty("id")) {
       throw new Error("Id incorrectly provided by input user")
     }
-    Object.values(copyOfUsers).map((userObj) => {
+    Object.values(copyOfAPIUsers).map((userObj) => {
       if (userObj.name.toLowerCase() === user.name.toLowerCase() && userObj.favoriteColor.toLowerCase() === user.favoriteColor.toLowerCase() && userObj.age === user.age) {
         throw new Error("User with these properties already exists")
       }
     })
-    copyOfUsers[id] = { ...user }
-    this._users = { ...copyOfUsers }
-    return { ...copyOfUsers[id] }
+    const newUser = { ...user, id: id }
+    copyOfAPIUsers[id] = { ...newUser }
+    this._users = { ...copyOfAPIUsers }
+    return { ...newUser }
   }
 
   getUserById(id: string) {
