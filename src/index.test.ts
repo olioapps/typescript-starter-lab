@@ -98,8 +98,12 @@ describe('UserAPI() class and methods', () => {
       { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" }
     ])
 
-    it("should delete one user and return deleted user", () => {
-      users.deleteUserById('1')
+    it("should delete user and return deleted user", () => {
+      expect(users.deleteUserById('1'))
+        .toEqual({ name: 'Larry', favoriteColor: 'gray', age: 544, id: "1" })
+    })
+
+    it("should confirm that user has been deleted", () => {
       expect(users.getUsers())
         .toEqual([
           { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" },
@@ -122,7 +126,7 @@ describe('UserAPI() class and methods', () => {
       { name: 'Daniel', favoriteColor: 'red', age: 48, id: "4" }
     ])
 
-    it("should return array of two DaNIeL users (ignore letter case)", () => {
+    it("should ignore letter case", () => {
       expect(users.searchUserByName("DaNIeL")).toEqual([
         { name: 'Daniel', favoriteColor: 'green', age: 33, id: "2" },
         { name: 'Daniel', favoriteColor: 'red', age: 48, id: "4" }
@@ -145,15 +149,18 @@ describe('UserAPI() class and methods', () => {
     ])
 
     it("should return array of two same fav color users (ignore letter case)", () => {
-      expect(users.searchUsersByFavoriteColor("YeLlOw"))
-        .toEqual([
-          { name: 'Daniel', favoriteColor: 'yellow', age: 33, id: "2" },
-          { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" },
-        ])
+      const actual = users.searchUsersByFavoriteColor("YeLlOw")
+      const expected = [
+        { name: 'Daniel', favoriteColor: 'yellow', age: 33, id: "2" },
+        { name: 'Jenny', favoriteColor: 'yellow', age: 88, id: "3" },
+      ]
+      expect(actual)
+        .toEqual(expected)
     })
 
     it("should fail to find user with favorite color orange", () => {
-      expect(() => { users.searchUsersByFavoriteColor("Orange") })
+      const actual = () => { users.searchUsersByFavoriteColor("Orange") }
+      expect(actual)
         .toThrow("User(s) not found")
     })
   })
