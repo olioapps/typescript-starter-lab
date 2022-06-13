@@ -1,54 +1,57 @@
 import { UserAPI, IUser } from './index'
-const seedUsers: Array<IUser> = [
-  { id: "1", name: "andy", favColor: "blue", age: 247 },
-  { id: "2", name: "Andy",  favColor: "purple", age: 150 },
-  { id: "3", name: "Sarah", favColor: "Blue", age: 200} 
-]
-const userAPI = new UserAPI(seedUsers)
-
+const seedUsers: Record<string, IUser> = {
+  "1": { id: "1", name: "andy", favColor: "blue", age: 247 },
+  "2": { id: "2", name: "Andy",  favColor: "purple", age: 150 },
+  "3": { id: "3", name: "Sarah", favColor: "Blue", age: 200} 
+}
 
 describe(UserAPI, () => {
+  const userAPI = new UserAPI(seedUsers)
+
   it('check that UserAPI is initialized', () => {
     expect(userAPI).toBeInstanceOf(UserAPI)
   })
 
   describe('getUser()', () => {
+    const userAPI = new UserAPI(seedUsers)
+
     it("getUsers() returns intitial seed data", () => {
       const actual = userAPI.getUsers()
-      const expected = [...seedUsers]
+      const expected = Object.values(seedUsers)
       expect(actual).toEqual(expected)
     })
   })
   
   describe('addUser()', () => {
+    const userAPI = new UserAPI(seedUsers)
+
     it('addUser() adds new user to the dataset', () => {
       const user = { name: "Sarah", favColor: "Blue", age: 150 } 
       const newUser = userAPI.addUser(user)
-
       const actual = userAPI.getUsers()
-      const expected = [...seedUsers, newUser]
+      const expected = Object.values({...seedUsers, newUser})
       expect(actual).toEqual(expected)
     })
     
     it("addUser() throws error when duplicating user info", () => {
       const userDuplicate = { name: "andy", favColor: "blue", age: 247 }
-
       const actual = () => {userAPI.addUser(userDuplicate)}
       expect(actual).toThrow(Error)
     })
     
     it("addUser() throws error supplied with pre-existing user.id", () => {
-      const userWithId = seedUsers[0]
-
+      const userWithId = seedUsers['1']
       const actual = () => {userAPI.addUser(userWithId)}
       expect(actual).toThrow(Error)
     })
   })
   
   describe('getUserById()', () => {
+    const userAPI = new UserAPI(seedUsers)
+
     it('getUserById() returns expected user', () => {
       const actual = userAPI.getUserById("2")
-      const expected = seedUsers[1]
+      const expected = seedUsers['2']
       expect(actual).toEqual(expected)
     })
   
@@ -59,14 +62,13 @@ describe(UserAPI, () => {
   })
   
   describe('deleteUserById()', () => {
+    const userAPI = new UserAPI(seedUsers)
+
     it('deleteUserById() deletes user with given id', () => {
-      const userAPI = new UserAPI(seedUsers)
       userAPI.deleteUserById("1")
       const actual = userAPI.getUsers()
-      const expected = [
-        { id: "2", name: "Andy",  favColor: "purple", age: 150 },
-        { id: "3", name: "Sarah", favColor: "Blue", age: 200}
-      ]
+      const expected = [ seedUsers['2'], seedUsers['3'] ]
+
       expect(actual).toEqual(expected)
     })
     
@@ -77,12 +79,11 @@ describe(UserAPI, () => {
   })
   
   describe('searchUserbyName()', () => {
+    const userAPI = new UserAPI(seedUsers)
+
     it('searchUserByName() returns all instances of given name, independant of capitals', () => {
       const actual = userAPI.searchUserByName("Andy")
-      const expected: Array<IUser> = [
-        { id: "1", name: "andy", favColor: "blue", age: 247 },
-        { id: "2", name: "Andy",  favColor: "purple", age: 150 }
-      ]
+      const expected: Array<IUser> = [ seedUsers['1'], seedUsers['2'] ]
       expect(actual).toEqual(expected)
     })
     
@@ -93,13 +94,11 @@ describe(UserAPI, () => {
   })
   
   describe('searchUserFavoriteColor()', () => {
+    const userAPI = new UserAPI(seedUsers)
+
     it('searchUserByFavoriteColor() returns all instances users with given fav color, independant of capitals', () => {
-      const userAPI = new UserAPI(seedUsers)
       const actual = userAPI.searchUsersByFavoriteColor("blue")
-      const expected: Array<IUser> = [
-        { id: "1", name: "andy", favColor: "blue", age: 247 },
-        { id: "3", name: "Sarah", favColor: "Blue", age: 200} 
-      ]
+      const expected: Array<IUser> = [ seedUsers['1'], seedUsers['3'] ]
       expect(actual).toEqual(expected)
     })
     

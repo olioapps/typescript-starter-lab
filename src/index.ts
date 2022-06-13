@@ -6,58 +6,61 @@ export interface IUser {
 }
 
 export class UserAPI {
-  private _users: Array<IUser>
+  private _users: Record<string, IUser>
 
-  constructor(seedData: Array<IUser> = []) {
-    this._users = [...seedData]
+  constructor(seedData: Record<string, IUser> = {}) {
+    this._users = {...seedData}
   } 
 
-  addUser(user: IUser) {
+  private _assignId(): string {
+    const id = Date.now().toString() + Math.floor(Math.random()*100)
+    return id
+  }
+  
+  addUser(user: IUser): IUser{
     if (user.id) {
       throw new SyntaxError("Please resubmit without pre-exisitng ID field.")
     } 
-    
-    user.id = Date.now().toString()
-    const result = (this._users).find( ( { name, favColor, age }: IUser) => (name === user.name && favColor === user.favColor && age === user.age))
+    const result = (Object.values(this._users)).some( existingUser => (
+      existingUser.name.toLowerCase() === user.name.toLowerCase() && 
+      existingUser.favColor.toLowerCase() === user.favColor.toLowerCase() && 
+      existingUser.age === user.age
+    ))
     
     if (result) {
       throw new Error("A user with those properties already exists in the database.")
     } 
-    
-    this._users = [...this._users, user]
-    return user
+
+    const newUser = {...user, id: this._assignId()}
+    this._users = {...this._users, [newUser.id]: newUser}
+    return newUser
   }
 
-  getUserById(id: string) {
-    const foundUser = this._users.find( user => user.id === id) 
-    
-    if (foundUser) {
-      return foundUser
+  getUserById(id: string): IUser{
+    if (this._users[id]) {
+      return this._users[id]
     }
     throw new ReferenceError(`No user found with id ${id}.`)
   }
 
-  getUsers() {
+  getUsers(): Array<IUser>{
     if (this._users === null || this._users === undefined) {
       throw new Error(`User Dataset not found`)
     }
-    return this._users
+    return Object.values(this._users)
   }
 
-  deleteUserById(id: string) {
-    const user = this._users.filter( user => user.id === id)
-    
-    if (user.length) {
-      const newUserState = this._users.filter( user => user.id != id)
-      this._users = [...newUserState]
-      return user
-    } else{
-      throw new ReferenceError(`No user found with id ${id}.`)
-    }  
+  deleteUserById(id: string): IUser {
+    if (this._users[id]) {
+      const { [id]: deletedUser, ...rest } = this._users
+      this._users = {...rest}
+      return deletedUser
+    } 
+    throw new ReferenceError(`No user found with id ${id}.`)
   }
 
-  searchUserByName(name: string) {
-    const users = this._users.filter( user => user.name.toLowerCase() === name.toLowerCase())
+  searchUserByName(name: string): Array<IUser>{
+    const users = Object.values(this._users).filter( user => user.name.toLowerCase() === name.toLowerCase())
     
     if (users.length) {
       return users
@@ -65,8 +68,8 @@ export class UserAPI {
     throw new ReferenceError(`No user found with name ${name}`)
   }
 
-  searchUsersByFavoriteColor(color: string) {
-    const users = this._users.filter( user => user.favColor.toLowerCase() === color.toLowerCase())
+  searchUsersByFavoriteColor(color: string): Array<IUser>{
+    const users = Object.values(this._users).filter( user => user.favColor.toLowerCase() === color.toLowerCase())
     if (users.length) {
       return users
     } 
