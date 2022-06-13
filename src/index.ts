@@ -1,19 +1,19 @@
 export interface IUser {
-  id?: string
+  readonly id?: string
   name: string
   favColor: string
   age: number
 }
 
 export class UserAPI {
-  private _users: Record<string, IUser>
+  private _users: Readonly<Record<string, IUser>>
 
   constructor(seedData: Record<string, IUser> = {}) {
     this._users = {...seedData}
   } 
 
   private _assignId(): string {
-    const id = Date.now().toString() + Math.floor(Math.random()*100)
+    const id: Readonly<string> = Date.now().toString() + Math.floor(Math.random()*100)
     return id
   }
   
