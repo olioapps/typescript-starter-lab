@@ -29,3 +29,12 @@ for each over each key
     increase score of key.score based on value in inputArray
 
 return object with keys, sorted by highest score
+or possibly
+return an array of highest scoring EventStream inputs
+
+
+what to test for:
+- should write a test that checks what happens when input array length is less than five
+- that event type is equal to screenshot, newMessage or view
+- expected winners
+- what happens if two sets are same high score? - if different regions have same score, return first
