@@ -30,8 +30,8 @@ Provide a function (or class) that takes an EventStream (see 'Shapes' section be
 And returns the region (subarray) of the original array
 With the highest “score”
 
-The region.length should be 5
-the region represents the highest scoring 'consecutive' events in the given EventStream
+The region.length should be 5 </br>
+The region represents the highest scoring 'consecutive' events in the given EventStream
 
 ## Scoring: (event: value)
  
@@ -45,7 +45,7 @@ __EventStream__: represented by an array of __Event__
 
 __Event__: </br>
 - timestamp: a number </br>
-- eventType: can be “screenshot”, or “new message”, or “view”
+- eventType: can be “screenshot”, or “newMessage”, or “view”
 
 ## Example input:
 
@@ -53,15 +53,15 @@ __Event__: </br>
 [
 	{
 		timestamp: 123123123,
-		eventType: “new message”,
+		eventType: “newMessage”,
 	},
 	{
 		timestamp: 123123124,
-		eventType: “new message”,
+		eventType: “newMessage”,
 	}
 	{
 		timestamp: 123123125,
-		eventType: “new message”,
+		eventType: “newMessage”,
 	}
 	{
 		timestamp: 123123125,
@@ -81,13 +81,13 @@ __Event__: </br>
 	}
 	{
 		timestamp: 123123125,
-		eventType: “message”,
+		eventType: “newMessage”,
 	}
 	…
 	…
 	{
 		timestamp: 123123125,
-		eventType: “message”,
+		eventType: “newMessage”,
 	}
 ]
 ```
