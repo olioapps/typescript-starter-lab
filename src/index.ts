@@ -1,15 +1,15 @@
-interface EventInput {
+export interface EventInput {
   timestamp: number,
   eventType: string
 }
 
-interface Region {
+export interface Region {
   regionId: number,
   score: number,
   inputLocations: Array<number>
 }
 
-class EventStream {
+export class EventStream {
 
   private _scoreTable: Record<string, number> = {
     ["newMessage"]: 1,
@@ -23,10 +23,17 @@ class EventStream {
     this._setSortedWinners()
   }
 
+  getUnsortedScores(): Array<EventInput> {
+    return this._data
+  }
+
   private _setSortedWinners() {
+    if (this._getNumberOfRegions() < 1) {
+      throw "Not enough events to score. Please provide at least five"
+    }
     let regionObjs: Record<number, Region> = {}
     for (let x = 0; x < this._getNumberOfRegions(); x++) {
-      regionObjs[x] = this._calculateRegionScore(x)
+      regionObjs[x] = this._calculateRegion(x)
     }
     this._sortedWinners = Object.values(regionObjs).sort(function (a, b) {
       return b.score - a.score
@@ -37,11 +44,14 @@ class EventStream {
     return 1 + (this._data.length - 5)
   }
 
-  private _calculateRegionScore(regionNum: number): Region {
+  private _calculateRegion(regionNum: number): Region {
     let regionScore = 0
     let regionNumbers: Array<number> = []
     for (let y = regionNum; y < regionNum + 5; y++) {
       regionNumbers.push(y)
+      if (!this._scoreTable[this._data[y].eventType]) {
+        throw `Invalid event type found (event: ${y}, timestamp: ${this._data[y].timestamp}, type: ${this._data[y].eventType})`
+      }
       regionScore += this._scoreTable[this._data[y].eventType]
     }
     return {
@@ -52,63 +62,14 @@ class EventStream {
   }
 
   getSortedScores(): Array<Region> {
-    return Object.values(this._sortedWinners).sort(function (a, b) {
-      return b.score - a.score
-    })
+    return this._sortedWinners
   }
 
   getHighestScoringRegion(): Array<EventInput> {
-    let highestScoringRegion = new Array
-    const current = [...this._data]
+    let highestScoringRegion: Array<EventInput> = []
     this._sortedWinners[0].inputLocations.forEach((eventInRegion: number) => {
-      highestScoringRegion.push(current[eventInRegion])
+      highestScoringRegion.push([...this._data][eventInRegion])
     })
     return highestScoringRegion
   }
 }
-
-
-
-const seedData: Array<EventInput> = [
-  {
-    timestamp: 123123123,
-    eventType: "newMessage"
-  },
-  {
-    timestamp: 123123124,
-    eventType: "newMessage"
-  },
-  {
-    timestamp: 123123125,
-    eventType: "newMessage"
-  },
-  {
-    timestamp: 123123125,
-    eventType: "view"
-  },
-  {
-    timestamp: 123123125,
-    eventType: "view"
-  },
-  {
-    timestamp: 123123125,
-    eventType: "screenshot"
-  },
-  {
-    timestamp: 123123125,
-    eventType: "screenshot"
-  },
-  {
-    timestamp: 123123125,
-    eventType: "newMessage"
-  },
-  {
-    timestamp: 123123125,
-    eventType: "newMessage"
-  }
-]
-
-const eventCheck = new EventStream(seedData);
-console.log(eventCheck.getSortedScores())
-
-console.log("getHighestScoringRegion", eventCheck.getHighestScoringRegion())
