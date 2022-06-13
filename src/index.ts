@@ -1,4 +1,3 @@
-//Define class/functions here
 interface EventInput {
   timestamp: number,
   eventType: string
@@ -12,34 +11,22 @@ interface Region {
 
 class EventStream {
 
-  // private _scoreTable = {
-  //   ["newMessage"]: 1,
-  //   ["view"]: 2,
-  //   ["screenshot"]: 3
-  // }
+  private _scoreTable: Record<string, number> = {
+    ["newMessage"]: 1,
+    ["view"]: 2,
+    ["screenshot"]: 3
+  }
 
   private _sortedWinners: Array<Region> = []
 
   constructor(private _data: Array<EventInput>) {
-    this._setSortedScores()
+    this._setSortedWinners()
   }
 
-  private _setSortedScores() {
+  private _setSortedWinners() {
     let regionObjs: Record<number, Region> = {}
     for (let x = 0; x < this._getNumberOfRegions(); x++) {
-      let regionScore = 0
-      let regionNumbers: Array<number> = []
-      for (let y = x; y < x + 5; y++) {
-        regionNumbers.push(y)
-        if (this._data[y].eventType === "newMessage") {
-          regionScore += 1
-        } else if (this._data[y].eventType === "view") {
-          regionScore += 2
-        } else if (this._data[y].eventType === "screenshot") {
-          regionScore += 3
-        }
-      }
-      regionObjs[x] = { regionId: x, score: regionScore, inputLocations: regionNumbers }
+      regionObjs[x] = this._calculateRegionScore(x)
     }
     this._sortedWinners = Object.values(regionObjs).sort(function (a, b) {
       return b.score - a.score
@@ -50,27 +37,30 @@ class EventStream {
     return 1 + (this._data.length - 5)
   }
 
-  // private _calculateRegionScore(regionNumber: number): number {
-  //   const startNum: number = regionNumber - 1
-  //   let regionScore: number = 0
-  //   for (let x: number = startNum; x < startNum + 5; x++) {
-  //     let test = this._data[x].eventType
-  //     regionScore += this._scoreTable["newMessage"]
-  //   }
+  private _calculateRegionScore(regionNum: number): Region {
+    let regionScore = 0
+    let regionNumbers: Array<number> = []
+    for (let y = regionNum; y < regionNum + 5; y++) {
+      regionNumbers.push(y)
+      regionScore += this._scoreTable[this._data[y].eventType]
+    }
+    return {
+      regionId: regionNum,
+      score: regionScore,
+      inputLocations: regionNumbers
+    }
+  }
 
-  //   return regionScore
-  // }
-
-  getSortedScores(): Array<{}> { //fix the any here
+  getSortedScores(): Array<Region> {
     return Object.values(this._sortedWinners).sort(function (a, b) {
       return b.score - a.score
     })
   }
 
-  getHighestScoringRegion() {
+  getHighestScoringRegion(): Array<EventInput> {
     let highestScoringRegion = new Array
     const current = [...this._data]
-    this._sortedWinners[0].inputLocations.forEach(function (eventInRegion: number) {
+    this._sortedWinners[0].inputLocations.forEach((eventInRegion: number) => {
       highestScoringRegion.push(current[eventInRegion])
     })
     return highestScoringRegion
