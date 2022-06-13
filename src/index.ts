@@ -2,7 +2,7 @@ export interface IUser {
   name: string
   favoriteColor: string
   age: number
-  id?: string
+  readonly id?: string
 }
 
 export class UserAPI {
@@ -12,7 +12,7 @@ export class UserAPI {
   }
 
   addUser(user: IUser): IUser {
-    const id: string = Date.now().toString()
+    const id: Readonly<string> = Date.now().toString()
     if (user.hasOwnProperty("id")) {
       throw new Error("Id incorrectly provided by input user")
     }
@@ -23,12 +23,11 @@ export class UserAPI {
     )) {
       throw new Error("User with these properties already exists")
     }
-    const copyOfAPIUsers = { ...this._users, [id]: { ...user, id: id } }
-    this._users = { ...copyOfAPIUsers }
+    this._users = { ...this._users, [id]: { ...user, id: id } }
     return { ...user, id: id }
   }
 
-  getUserById(id: string): IUser {
+  getUserById(id: string): Readonly<IUser> {
     if (this._users[id]) {
       return { ...this._users[id] }
     } else {
@@ -36,7 +35,7 @@ export class UserAPI {
     }
   }
 
-  getUsers(): Array<IUser> {
+  getUsers(): ReadonlyArray<IUser> {
     if (!this._users) {
       throw new Error("There is an issue with the users object")
     } else {
@@ -54,8 +53,8 @@ export class UserAPI {
     }
   }
 
-  searchUserByName(name: string): Array<IUser> {
-    const userResult: Array<IUser> = Object.values(this._users).filter(x => x["name"].toLowerCase() === name.toLowerCase())
+  searchUserByName(name: string): ReadonlyArray<IUser> {
+    const userResult: ReadonlyArray<IUser> = Object.values(this._users).filter(x => x["name"].toLowerCase() === name.toLowerCase())
     if (userResult.length) {
       return [...userResult]
     } else {
@@ -63,8 +62,8 @@ export class UserAPI {
     }
   }
 
-  searchUsersByFavoriteColor(color: string): Array<IUser> {
-    const userResult = Object.values(this._users).filter(x => x["favoriteColor"].toLowerCase() === color.toLowerCase())
+  searchUsersByFavoriteColor(color: string): ReadonlyArray<IUser> {
+    const userResult: ReadonlyArray<IUser> = Object.values(this._users).filter(x => x["favoriteColor"].toLowerCase() === color.toLowerCase())
     if (userResult.length) {
       return [...userResult]
     } else {
