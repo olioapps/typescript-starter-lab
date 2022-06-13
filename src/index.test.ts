@@ -28,8 +28,8 @@ describe(UserAPI, () => {
     it('addUser() adds new user to the dataset', () => {
       const user: IUser = { name: "Sarah", favColor: "Blue", age: 150 } 
       const newUser: IUser = userAPI.addUser(user)
-      const actual: Readonly<Array<IUser>> = userAPI.getUsers()
-      const expected: Readonly<Array<IUser>> = Object.values({...seedUsers, newUser})
+      const actual: ReadonlyArray<IUser> = userAPI.getUsers()
+      const expected: ReadonlyArray<IUser> = Object.values({...seedUsers, newUser})
       expect(actual).toEqual(expected)
     })
     
@@ -66,8 +66,8 @@ describe(UserAPI, () => {
 
     it('deleteUserById() deletes user with given id', () => {
       userAPI.deleteUserById("1")
-      const actual: Readonly<Array<IUser>> = userAPI.getUsers()
-      const expected: Readonly<Array<IUser>> = [ seedUsers['2'], seedUsers['3'] ]
+      const actual: ReadonlyArray<IUser> = userAPI.getUsers()
+      const expected: ReadonlyArray<IUser> = [ seedUsers['2'], seedUsers['3'] ]
 
       expect(actual).toEqual(expected)
     })
@@ -82,8 +82,8 @@ describe(UserAPI, () => {
     const userAPI = new UserAPI(seedUsers)
 
     it('searchUserByName() returns all instances of given name, independant of capitals', () => {
-      const actual: Readonly<Array<IUser>> = userAPI.searchUserByName("Andy")
-      const expected: Readonly<Array<IUser>>= [ seedUsers['1'], seedUsers['2'] ]
+      const actual: ReadonlyArray<IUser> = userAPI.searchUserByName("Andy")
+      const expected: ReadonlyArray<IUser>= [ seedUsers['1'], seedUsers['2'] ]
       expect(actual).toEqual(expected)
     })
     
@@ -97,8 +97,8 @@ describe(UserAPI, () => {
     const userAPI = new UserAPI(seedUsers)
 
     it('searchUserByFavoriteColor() returns all instances users with given fav color, independant of capitals', () => {
-      const actual: Readonly<Array<IUser>> = userAPI.searchUsersByFavoriteColor("blue")
-      const expected: Readonly<Array<IUser>> = [ seedUsers['1'], seedUsers['3'] ]
+      const actual: ReadonlyArray<IUser> = userAPI.searchUsersByFavoriteColor("blue")
+      const expected: ReadonlyArray<IUser> = [ seedUsers['1'], seedUsers['3'] ]
       expect(actual).toEqual(expected)
     })
     
