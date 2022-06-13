@@ -1,67 +1,60 @@
-interface User {
+export interface IUser {
   name: string
   favoriteColor: string
   age: number
-  id?: string
+  readonly id?: string
 }
 
 export class UserAPI {
-  private _users: Array<User>
 
-  constructor(users: Array<User> = []) {
-    this._users = [...users]
+  constructor(private _users: Record<string, IUser> = {}) {
+
   }
 
-  addUser(user: User) {
-    if (!user.hasOwnProperty("id")) {
-      const existingUser = this._users.find(
-        x => x.name === user.name
-          && x.favoriteColor === user.favoriteColor
-          && x.age === user.age)
-      if (existingUser !== undefined) {
-        throw new Error("User with these properties already exists")
-      }
-      let userToAdd = { ...user }
-      userToAdd.id = Date.now().toString()
-      let newArray = [...this._users, { ...userToAdd }]
-      this._users = [...newArray]
-      return { ...userToAdd }
-    } else {
+  addUser(user: IUser): IUser {
+    const id: Readonly<string> = Date.now().toString()
+    if (user.hasOwnProperty("id")) {
       throw new Error("Id incorrectly provided by input user")
     }
+    if (Object.values(this._users).some(
+      x => x.name.toLowerCase() === user.name.toLowerCase() &&
+        x.favoriteColor.toLowerCase() === x.favoriteColor.toLowerCase() &&
+        x.age === user.age
+    )) {
+      throw new Error("User with these properties already exists")
+    }
+    this._users = { ...this._users, [id]: { ...user, id: id } }
+    return { ...user, id: id }
   }
 
-  getUserById(id: string) {
-    const user = this._users.find(x => x.id === id)
-    if (user !== undefined) {
-      return { ...user }
+  getUserById(id: string): Readonly<IUser> {
+    if (this._users[id]) {
+      return { ...this._users[id] }
     } else {
       throw new Error("User was not found")
     }
   }
 
-  getUsers() {
+  getUsers(): ReadonlyArray<IUser> {
     if (!this._users) {
-      throw new Error("There is an issue with the users array")
+      throw new Error("There is an issue with the users object")
     } else {
-      return [...this._users]
+      return Object.values(this._users)
     }
   }
 
-  deleteUserById(id: string) {
-    const userIndex = this._users.findIndex(x => x.id === id)
-    if (userIndex >= 0) {
-      const userToDelete = { ...this._users[userIndex] }
-      let newArray = [...this._users.filter(x => x.id !== id)]
-      this._users = [...newArray]
-      return { ...userToDelete }
-    } else {
+  deleteUserById(id: string): IUser {
+    if (!this._users[id]) {
       throw new Error("User was not found")
+    } else {
+      const { [id]: userToDelete, ...updatedArray } = this._users
+      this._users = { ...updatedArray }
+      return { ...userToDelete }
     }
   }
 
-  searchUserByName(name: string) {
-    const userResult = this._users.filter(x => x.name.toLowerCase() === name.toLowerCase())
+  searchUserByName(name: string): ReadonlyArray<IUser> {
+    const userResult: ReadonlyArray<IUser> = Object.values(this._users).filter(x => x["name"].toLowerCase() === name.toLowerCase())
     if (userResult.length) {
       return [...userResult]
     } else {
@@ -69,8 +62,8 @@ export class UserAPI {
     }
   }
 
-  searchUsersByFavoriteColor(color: string) {
-    const userResult = this._users.filter(x => x.favoriteColor.toLowerCase() === color.toLowerCase())
+  searchUsersByFavoriteColor(color: string): ReadonlyArray<IUser> {
+    const userResult: ReadonlyArray<IUser> = Object.values(this._users).filter(x => x["favoriteColor"].toLowerCase() === color.toLowerCase())
     if (userResult.length) {
       return [...userResult]
     } else {
