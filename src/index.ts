@@ -7,7 +7,7 @@ export interface IUser {
 
 export class UserAPI {
 
-  constructor(private _users: { [key: string]: IUser } = {}) {
+  constructor(private _users: Record<string, IUser> = {}) {
 
   }
 
@@ -16,7 +16,11 @@ export class UserAPI {
     if (user.hasOwnProperty("id")) {
       throw new Error("Id incorrectly provided by input user")
     }
-    if (Object.values(this._users).some(x => x.name.toLowerCase() === user.name.toLowerCase() && x.favoriteColor.toLowerCase() === x.favoriteColor.toLowerCase() && x.age === user.age)) {
+    if (Object.values(this._users).some(
+      x => x.name.toLowerCase() === user.name.toLowerCase() &&
+        x.favoriteColor.toLowerCase() === x.favoriteColor.toLowerCase() &&
+        x.age === user.age
+    )) {
       throw new Error("User with these properties already exists")
     }
     const copyOfAPIUsers = { ...this._users, [id]: { ...user, id: id } }
