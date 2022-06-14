@@ -38,3 +38,167 @@ what to test for:
 - that event type is equal to screenshot, newMessage or view
 - expected winners
 - what happens if two sets are same high score? - if different regions have same score, return first
+
+## Seed Data
+
+    [
+      {
+        timestamp: 123123123,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123124,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "view"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "view"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "newMessage"
+      }
+    ]
+
+## Highest Scoring Range
+    {
+      timestamp: 123123125,
+      eventType: "newMessage"
+    },
+    {
+      timestamp: 123123125,
+      eventType: "view"
+    },
+    {
+      timestamp: 123123125,
+      eventType: "view"
+    },
+    {
+      timestamp: 123123125,
+      eventType: "screenshot"
+    },
+    {
+      timestamp: 123123125,
+      eventType: "screenshot"
+    }
+
+
+
+## Larger Seed Data
+
+    [
+      {
+        timestamp: 123123123,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123124,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "view"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "view"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123126,
+        eventType: "view"
+      },
+      {
+        timestamp: 123123126,
+        eventType: "view"
+      },
+      {
+        timestamp: 123123125,
+        eventType: "newMessage"
+      },
+      {
+        timestamp: 123123126,
+        eventType: "view"
+      },
+      {
+        timestamp: 123123126,
+        eventType: "view"
+      },
+      {
+        timestamp: 123123126,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123127,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123128,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123129,
+        eventType: "screenshot"
+      }
+    ]
+
+## Highest Range
+      {
+        timestamp: 123123126,
+        eventType: "view"
+      },
+      {
+        timestamp: 123123126,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123127,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123128,
+        eventType: "screenshot"
+      },
+      {
+        timestamp: 123123129,
+        eventType: "screenshot"
+      }
