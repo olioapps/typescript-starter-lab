@@ -1,5 +1,234 @@
 //write tests here
-import { EventStream, Event } from './index'
+// import { EventStream, Event } from './index'
+
+// describe('Class EventStream', () => {
+//   const seedData: ReadonlyArray<Event> = [
+//     {
+//       timestamp: 123123123,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123124,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "view"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "view"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "screenshot"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "screenshot"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "newMessage"
+//     }
+//   ]
+//   const largerSeedData: ReadonlyArray<Event> = [
+//     {
+//       timestamp: 123123123,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123124,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "view"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "view"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "screenshot"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "screenshot"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123126,
+//       eventType: "view"
+//     },
+//     {
+//       timestamp: 123123126,
+//       eventType: "view"
+//     },
+//     {
+//       timestamp: 123123125,
+//       eventType: "newMessage"
+//     },
+//     {
+//       timestamp: 123123126,
+//       eventType: "view"
+//     },
+//     {
+//       timestamp: 123123126,
+//       eventType: "view"
+//     },
+//     {
+//       timestamp: 123123126,
+//       eventType: "screenshot"
+//     },
+//     {
+//       timestamp: 123123127,
+//       eventType: "screenshot"
+//     },
+//     {
+//       timestamp: 123123128,
+//       eventType: "screenshot"
+//     },
+//     {
+//       timestamp: 123123129,
+//       eventType: "screenshot"
+//     }
+//   ]
+//   describe('Class Instantiation of EventStream', () => {
+
+//     it("should confirm eventStream is a EventStream object", () => {
+//       const eventStream = new EventStream([...seedData])
+//       expect(eventStream).toBeInstanceOf(EventStream)
+//     })
+//   })
+
+//   describe('getHighestScoringRegion()', () => {
+//     it("should return the highest scoring region from Seed Data", () => {
+//       const expected: ReadonlyArray<Event> = [
+//         {
+//           timestamp: 123123125,
+//           eventType: "newMessage"
+//         },
+//         {
+//           timestamp: 123123125,
+//           eventType: "view"
+//         },
+//         {
+//           timestamp: 123123125,
+//           eventType: "view"
+//         },
+//         {
+//           timestamp: 123123125,
+//           eventType: "screenshot"
+//         },
+//         {
+//           timestamp: 123123125,
+//           eventType: "screenshot"
+//         }
+//       ]
+//       const eventStream = new EventStream(seedData)
+//       const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
+//       expect(expected).toEqual(actual)
+//     })
+
+//     it("should return the highest scoring region from larger set of Seed Data", () => {
+//       const expected: ReadonlyArray<Event> = [
+//         {
+//           timestamp: 123123126,
+//           eventType: "view"
+//         },
+//         {
+//           timestamp: 123123126,
+//           eventType: "screenshot"
+//         },
+//         {
+//           timestamp: 123123127,
+//           eventType: "screenshot"
+//         },
+//         {
+//           timestamp: 123123128,
+//           eventType: "screenshot"
+//         },
+//         {
+//           timestamp: 123123129,
+//           eventType: "screenshot"
+//         }
+//       ]
+//       const eventStream = new EventStream(largerSeedData)
+//       const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
+//       expect(expected).toEqual(actual)
+//     })
+
+//     it("should return seed data when count < 5", () => {
+//       const expected: ReadonlyArray<Event> = [
+//         {
+//           timestamp: 123123126,
+//           eventType: "view"
+//         },
+//         {
+//           timestamp: 123123126,
+//           eventType: "screenshot"
+//         },
+//         {
+//           timestamp: 123123127,
+//           eventType: "screenshot"
+//         }
+//       ]
+//       const eventStream = new EventStream(expected)
+//       const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
+//       expect(expected).toEqual(actual)
+//     })
+//     it("should return seed data when count == 5", () => {
+//       const expected: ReadonlyArray<Event> = [
+//         {
+//           timestamp: 123123126,
+//           eventType: "view"
+//         },
+//         {
+//           timestamp: 123123126,
+//           eventType: "screenshot"
+//         },
+//         {
+//           timestamp: 123123126,
+//           eventType: "view"
+//         },
+//         {
+//           timestamp: 123123126,
+//           eventType: "screenshot"
+//         },
+//         {
+//           timestamp: 123123127,
+//           eventType: "screenshot"
+//         }
+//       ]
+//       const eventStream = new EventStream(expected)
+//       const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
+//       expect(expected).toEqual(actual)
+//     })
+//   })
+// })
+
+import { getWinningRegion, Event } from './index'
 
 describe('Class EventStream', () => {
   const seedData: ReadonlyArray<Event> = [
@@ -114,44 +343,9 @@ describe('Class EventStream', () => {
       eventType: "screenshot"
     }
   ]
-  describe('Class Instantiation of EventStream', () => {
+  describe('getWinningRegion', () => {
 
-    it("should confirm eventStream is a EventStream object", () => {
-      const eventStream = new EventStream([...seedData])
-      expect(eventStream).toBeInstanceOf(EventStream)
-    })
-  })
-
-  describe('getHighestScoringRegion()', () => {
-    it("should return the highest scoring region from Seed Data", () => {
-      const expected: ReadonlyArray<Event> = [
-        {
-          timestamp: 123123125,
-          eventType: "newMessage"
-        },
-        {
-          timestamp: 123123125,
-          eventType: "view"
-        },
-        {
-          timestamp: 123123125,
-          eventType: "view"
-        },
-        {
-          timestamp: 123123125,
-          eventType: "screenshot"
-        },
-        {
-          timestamp: 123123125,
-          eventType: "screenshot"
-        }
-      ]
-      const eventStream = new EventStream(seedData)
-      const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
-      expect(expected).toEqual(actual)
-    })
-
-    it("should return the highest scoring region from larger set of Seed Data", () => {
+    it("should return expected winning region from larger seed data", () => {
       const expected: ReadonlyArray<Event> = [
         {
           timestamp: 123123126,
@@ -174,30 +368,10 @@ describe('Class EventStream', () => {
           eventType: "screenshot"
         }
       ]
-      const eventStream = new EventStream(largerSeedData)
-      const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
+      const actual: ReadonlyArray<Event> = getWinningRegion(largerSeedData)
       expect(expected).toEqual(actual)
     })
 
-    it("should return seed data when count < 5", () => {
-      const expected: ReadonlyArray<Event> = [
-        {
-          timestamp: 123123126,
-          eventType: "view"
-        },
-        {
-          timestamp: 123123126,
-          eventType: "screenshot"
-        },
-        {
-          timestamp: 123123127,
-          eventType: "screenshot"
-        }
-      ]
-      const eventStream = new EventStream(expected)
-      const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
-      expect(expected).toEqual(actual)
-    })
     it("should return seed data when count == 5", () => {
       const expected: ReadonlyArray<Event> = [
         {
@@ -221,8 +395,26 @@ describe('Class EventStream', () => {
           eventType: "screenshot"
         }
       ]
-      const eventStream = new EventStream(expected)
-      const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
+      const actual: ReadonlyArray<Event> = getWinningRegion([...expected])
+      expect(expected).toEqual(actual)
+    })
+
+    it("should return seed data when count < 5", () => {
+      const expected: ReadonlyArray<Event> = [
+        {
+          timestamp: 123123126,
+          eventType: "view"
+        },
+        {
+          timestamp: 123123126,
+          eventType: "screenshot"
+        },
+        {
+          timestamp: 123123127,
+          eventType: "screenshot"
+        }
+      ]
+      const actual: ReadonlyArray<Event> = getWinningRegion([...expected])
       expect(expected).toEqual(actual)
     })
   })
