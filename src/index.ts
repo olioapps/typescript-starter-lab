@@ -20,6 +20,9 @@ export class EventStream {
   private _sortedWinners: ReadonlyArray<Region> = []
 
   constructor(private _data: ReadonlyArray<EventInput>) {
+    if (!Array.isArray(_data)) {
+      throw `Input of ${typeof _data} was found. Please provide a valid array.`
+    }
     this._setSortedWinners()
   }
 

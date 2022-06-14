@@ -128,6 +128,12 @@ describe('Class EventStream', () => {
       expect(expected).toEqual(actual)
     })
 
+    it("should fail to create EventStream with wrong input data type", () => {
+      // const eventStream = new EventStream({...seedData})
+      const badEventStream: {} = () => new EventStream({ ...seedData })
+      expect(badEventStream).toThrow("Input of object was found. Please provide a valid array.")
+    })
+
     it("should fail with not enough obj provided", () => {
       const badSeedData: ReadonlyArray<EventInput> = [
         {
