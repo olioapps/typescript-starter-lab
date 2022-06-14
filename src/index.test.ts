@@ -123,7 +123,7 @@ describe('Class EventStream', () => {
 
     it("should confirm events get added to eventStream object", () => {
       const eventStream = new EventStream([...seedData])
-      const actual: ReadonlyArray<EventInput> = eventStream.getUnsortedScores()
+      const actual: ReadonlyArray<EventInput> = eventStream.getUnsortedEvents()
       const expected: ReadonlyArray<EventInput> = seedData
       expect(expected).toEqual(actual)
     })
@@ -200,7 +200,7 @@ describe('Class EventStream', () => {
   describe('getUnsortedScores()', () => {
     it("should confirm events get added to eventStream object", () => {
       const eventStream = new EventStream(seedData)
-      const actual: ReadonlyArray<EventInput> = eventStream.getUnsortedScores()
+      const actual: ReadonlyArray<EventInput> = eventStream.getUnsortedEvents()
       const expected: ReadonlyArray<EventInput> = seedData
       expect(expected).toEqual(actual)
     })

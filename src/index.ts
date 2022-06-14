@@ -22,16 +22,18 @@ export class EventStream {
   constructor(private _data: ReadonlyArray<EventInput>) {
     if (!Array.isArray(_data)) {
       throw `Input of ${typeof _data} was found. Please provide a valid array.`
+    } else {
+      _data = [..._data]
     }
     this._setSortedWinners()
   }
 
-  getUnsortedScores(): ReadonlyArray<EventInput> {
+  getUnsortedEvents(): ReadonlyArray<EventInput> {
     return [...this._data]
   }
 
   private _setSortedWinners() {
-    const numOfRegions: number = this._getNumberOfRegions()
+    const numOfRegions: number = 1 + (this._data.length - 5)
     if (numOfRegions < 1) {
       throw "Not enough events to score. Please provide at least five"
     }
@@ -42,10 +44,6 @@ export class EventStream {
     this._sortedWinners = Object.values(regionObjs).sort(function (a, b) {
       return b.score - a.score
     })
-  }
-
-  private _getNumberOfRegions(): number {
-    return 1 + (this._data.length - 5)
   }
 
   private _calculateRegion(regionNum: number): Region {
