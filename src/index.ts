@@ -1,38 +1,39 @@
 export interface EventInput {
-  timestamp: number,
-  eventType: string
+  timestamp: Readonly<number>,
+  eventType: Readonly<string>
 }
 
 export interface Region {
-  regionId: number,
-  score: number,
-  inputLocations: Array<number>
+  regionId: Readonly<number>,
+  score: Readonly<number>,
+  inputLocations: ReadonlyArray<number>
 }
 
 export class EventStream {
 
-  private _scoreTable: Record<string, number> = {
+  private _scoreTable: Record<Readonly<string>, Readonly<number>> = {
     ["newMessage"]: 1,
     ["view"]: 2,
     ["screenshot"]: 3
   }
 
-  private _sortedWinners: Array<Region> = []
+  private _sortedWinners: ReadonlyArray<Region> = []
 
-  constructor(private _data: Array<EventInput>) {
+  constructor(private _data: ReadonlyArray<EventInput>) {
     this._setSortedWinners()
   }
 
-  getUnsortedScores(): Array<EventInput> {
+  getUnsortedScores(): ReadonlyArray<EventInput> {
     return [...this._data]
   }
 
   private _setSortedWinners() {
-    if (this._getNumberOfRegions() < 1) {
+    const numOfRegions: number = this._getNumberOfRegions()
+    if (numOfRegions < 1) {
       throw "Not enough events to score. Please provide at least five"
     }
-    let regionObjs: Record<number, Region> = {}
-    for (let x = 0; x < this._getNumberOfRegions(); x++) {
+    let regionObjs: Record<Readonly<number>, Readonly<Region>> = {}
+    for (let x = 0; x < numOfRegions; x++) {
       regionObjs[x] = this._calculateRegion(x)
     }
     this._sortedWinners = Object.values(regionObjs).sort(function (a, b) {
@@ -45,10 +46,10 @@ export class EventStream {
   }
 
   private _calculateRegion(regionNum: number): Region {
-    let regionScore = 0
+    let regionScore: number = 0
     let regionNumbers: Array<number> = []
     for (let y = regionNum; y < regionNum + 5; y++) {
-      const eventType = this._data[y].eventType
+      const eventType: string = this._data[y].eventType
       if (!this._scoreTable[eventType]) {
         throw `Invalid event type found (event: ${y}, timestamp: ${this._data[y].timestamp}, type: ${eventType})`
       }
@@ -62,7 +63,7 @@ export class EventStream {
     }
   }
 
-  getSortedScores(): Array<Region> {
+  getSortedScores(): ReadonlyArray<Region> {
     return [...this._sortedWinners]
   }
 

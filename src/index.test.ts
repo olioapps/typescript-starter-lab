@@ -2,7 +2,7 @@
 import { EventStream, EventInput, Region } from './index'
 
 describe('Class EventStream', () => {
-  const seedData: Array<EventInput> = [
+  const seedData: ReadonlyArray<EventInput> = [
     {
       timestamp: 123123123,
       eventType: "newMessage"
@@ -40,7 +40,7 @@ describe('Class EventStream', () => {
       eventType: "newMessage"
     }
   ]
-  const largerSeedData: Array<EventInput> = [
+  const largerSeedData: ReadonlyArray<EventInput> = [
     {
       timestamp: 123123123,
       eventType: "newMessage"
@@ -117,19 +117,19 @@ describe('Class EventStream', () => {
   describe('Class Instantiation of EventStream', () => {
 
     it("should confirm eventStream is a EventStream object", () => {
-      const eventStream = new EventStream(seedData)
+      const eventStream = new EventStream([...seedData])
       expect(eventStream).toBeInstanceOf(EventStream)
     })
 
     it("should confirm events get added to eventStream object", () => {
-      const eventStream = new EventStream(seedData)
-      const actual: Array<EventInput> = eventStream.getUnsortedScores()
-      const expected: Array<EventInput> = seedData
+      const eventStream = new EventStream([...seedData])
+      const actual: ReadonlyArray<EventInput> = eventStream.getUnsortedScores()
+      const expected: ReadonlyArray<EventInput> = seedData
       expect(expected).toEqual(actual)
     })
 
     it("should fail with not enough obj provided", () => {
-      const badSeedData: Array<EventInput> = [
+      const badSeedData: ReadonlyArray<EventInput> = [
         {
           timestamp: 123123123,
           eventType: "newMessage"
@@ -147,12 +147,12 @@ describe('Class EventStream', () => {
           eventType: "newMessage"
         }
       ]
-      const badEventStream: {} = () => new EventStream(badSeedData)
+      const badEventStream: {} = () => new EventStream([...badSeedData])
       expect(badEventStream).toThrow("Not enough events to score. Please provide at least five")
     })
 
     it("should fail with if invalid event type provided", () => {
-      const badSeedData: Array<EventInput> = [
+      const badSeedData: ReadonlyArray<EventInput> = [
         {
           timestamp: 123123123,
           eventType: "newMessage"
@@ -186,7 +186,7 @@ describe('Class EventStream', () => {
           eventType: "newMessage"
         }
       ]
-      const badEventStream: {} = () => new EventStream(badSeedData)
+      const badEventStream: {} = () => new EventStream([...badSeedData])
       expect(badEventStream).toThrow(`Invalid event type found (event: 4, timestamp: 123123125, type: porcupine)`)
     })
   })
@@ -194,15 +194,15 @@ describe('Class EventStream', () => {
   describe('getUnsortedScores()', () => {
     it("should confirm events get added to eventStream object", () => {
       const eventStream = new EventStream(seedData)
-      const actual: Array<EventInput> = eventStream.getUnsortedScores()
-      const expected: Array<EventInput> = seedData
+      const actual: ReadonlyArray<EventInput> = eventStream.getUnsortedScores()
+      const expected: ReadonlyArray<EventInput> = seedData
       expect(expected).toEqual(actual)
     })
   })
 
   describe('getHighestScoringRegion()', () => {
     it("should return the highest scoring region from Seed Data", () => {
-      const expected: Array<EventInput> = [
+      const expected: ReadonlyArray<EventInput> = [
         {
           timestamp: 123123125,
           eventType: "newMessage"
@@ -225,12 +225,12 @@ describe('Class EventStream', () => {
         }
       ]
       const eventStream = new EventStream(seedData)
-      const actual: Array<EventInput> = eventStream.getHighestScoringRegion()
+      const actual: ReadonlyArray<EventInput> = eventStream.getHighestScoringRegion()
       expect(expected).toEqual(actual)
     })
 
     it("should return the highest scoring region from larger set of Seed Data", () => {
-      const expected: Array<EventInput> = [
+      const expected: ReadonlyArray<EventInput> = [
         {
           timestamp: 123123126,
           eventType: "view"
@@ -260,7 +260,7 @@ describe('Class EventStream', () => {
 
   describe('getSortedScores()', () => {
     it("should return seed data regions sorted by score", () => {
-      const expected: Array<Region> = [
+      const expected: ReadonlyArray<Region> = [
         { regionId: 2, score: 11, inputLocations: [2, 3, 4, 5, 6] },
         { regionId: 3, score: 11, inputLocations: [3, 4, 5, 6, 7] },
         { regionId: 4, score: 10, inputLocations: [4, 5, 6, 7, 8] },
@@ -268,12 +268,12 @@ describe('Class EventStream', () => {
         { regionId: 0, score: 7, inputLocations: [0, 1, 2, 3, 4] }
       ]
       const eventStream = new EventStream(seedData)
-      const actual: Array<Region> = eventStream.getSortedScores()
+      const actual: ReadonlyArray<Region> = eventStream.getSortedScores()
       expect(expected).toEqual(actual)
     })
 
     it("should return larger seed data regions sorted by score", () => {
-      const expected: Array<Region> = [
+      const expected: ReadonlyArray<Region> = [
         { regionId: 13, score: 14, inputLocations: [13, 14, 15, 16, 17] },
         { regionId: 12, score: 13, inputLocations: [12, 13, 14, 15, 16] },
         { regionId: 2, score: 11, inputLocations: [2, 3, 4, 5, 6] },
@@ -290,7 +290,7 @@ describe('Class EventStream', () => {
         { regionId: 7, score: 7, inputLocations: [7, 8, 9, 10, 11] }
       ]
       const eventStream = new EventStream(largerSeedData)
-      const actual: Array<Region> = eventStream.getSortedScores()
+      const actual: ReadonlyArray<Region> = eventStream.getSortedScores()
       expect(expected).toEqual(actual)
     })
   })
