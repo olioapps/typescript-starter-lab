@@ -19,28 +19,22 @@ export class EventStream {
   private _winningRegion: Region = { regionStartId: 0, score: 0 }
 
   constructor(private _inputData: ReadonlyArray<Event>) {
+    this._inputData = [..._inputData]
     this._setSortedWinners()
   }
 
   private _setSortedWinners() {
     const numOfRegions = 1 + (this._inputData.length - 5)
     if (numOfRegions > 1) {
-      let regionObjs: Array<Region> = []
-      for (let x = 0; x < numOfRegions; x++) {
-        let newRegion: Region = {
-          regionStartId: x,
-          score: 0
-        }
-        for (let y = x; y < x + 5; y++) {
-          newRegion.score += this._scoreTable[this._inputData[y].eventType]
-        }
-        regionObjs.push(newRegion)
-      }
-      this._winningRegion = {
-        ...(regionObjs.sort((a, b) => {
-          return b.score - a.score
-        }))[0]
-      }
+      const regionObjs: Array<Region> = this._inputData.map((ev, index) => {
+        const score = [...this._inputData.slice(index, index + 5)].reduce((runningScore, element) =>
+          runningScore + this._scoreTable[element.eventType], 0
+        )
+        return { regionStartId: index, score: score }
+      })
+      this._winningRegion = ([...regionObjs].sort((a, b) => {
+        return b.score - a.score
+      }))[0]
     }
   }
 

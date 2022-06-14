@@ -1,5 +1,5 @@
 //write tests here
-import { EventStream, Event, Region } from './index'
+import { EventStream, Event } from './index'
 
 describe('Class EventStream', () => {
   const seedData: ReadonlyArray<Event> = [
@@ -179,8 +179,35 @@ describe('Class EventStream', () => {
       expect(expected).toEqual(actual)
     })
 
-    it("should return seed data when count <= 5", () => {
+    it("should return seed data when count < 5", () => {
       const expected: ReadonlyArray<Event> = [
+        {
+          timestamp: 123123126,
+          eventType: "view"
+        },
+        {
+          timestamp: 123123126,
+          eventType: "screenshot"
+        },
+        {
+          timestamp: 123123127,
+          eventType: "screenshot"
+        }
+      ]
+      const eventStream = new EventStream(expected)
+      const actual: Array<Event> = eventStream.getHighestScoringRegion()
+      expect(expected).toEqual(actual)
+    })
+    it("should return seed data when count == 5", () => {
+      const expected: ReadonlyArray<Event> = [
+        {
+          timestamp: 123123126,
+          eventType: "view"
+        },
+        {
+          timestamp: 123123126,
+          eventType: "screenshot"
+        },
         {
           timestamp: 123123126,
           eventType: "view"
