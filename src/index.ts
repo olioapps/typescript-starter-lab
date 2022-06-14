@@ -24,7 +24,7 @@ export class EventStream {
   }
 
   getUnsortedScores(): Array<EventInput> {
-    return this._data
+    return [...this._data]
   }
 
   private _setSortedWinners() {
@@ -48,21 +48,22 @@ export class EventStream {
     let regionScore = 0
     let regionNumbers: Array<number> = []
     for (let y = regionNum; y < regionNum + 5; y++) {
-      regionNumbers.push(y)
-      if (!this._scoreTable[this._data[y].eventType]) {
-        throw `Invalid event type found (event: ${y}, timestamp: ${this._data[y].timestamp}, type: ${this._data[y].eventType})`
+      const eventType = this._data[y].eventType
+      if (!this._scoreTable[eventType]) {
+        throw `Invalid event type found (event: ${y}, timestamp: ${this._data[y].timestamp}, type: ${eventType})`
       }
-      regionScore += this._scoreTable[this._data[y].eventType]
+      regionNumbers.push(y)
+      regionScore += this._scoreTable[eventType]
     }
     return {
       regionId: regionNum,
       score: regionScore,
-      inputLocations: regionNumbers
+      inputLocations: [...regionNumbers]
     }
   }
 
   getSortedScores(): Array<Region> {
-    return this._sortedWinners
+    return [...this._sortedWinners]
   }
 
   getHighestScoringRegion(): Array<EventInput> {
@@ -70,6 +71,6 @@ export class EventStream {
     this._sortedWinners[0].inputLocations.forEach((eventInRegion: number) => {
       highestScoringRegion.push([...this._data][eventInRegion])
     })
-    return highestScoringRegion
+    return [...highestScoringRegion]
   }
 }
