@@ -38,7 +38,7 @@ export class EventStream {
     }
   }
 
-  getHighestScoringRegion(): Array<Event> {
+  getHighestScoringRegion(): ReadonlyArray<Event> {
     return [...this._inputData.slice(this._winningRegion.regionStartId, this._winningRegion.regionStartId + 5)]
   }
 }

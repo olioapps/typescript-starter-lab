@@ -175,7 +175,7 @@ describe('Class EventStream', () => {
         }
       ]
       const eventStream = new EventStream(largerSeedData)
-      const actual: Array<Event> = eventStream.getHighestScoringRegion()
+      const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
       expect(expected).toEqual(actual)
     })
 
@@ -195,7 +195,7 @@ describe('Class EventStream', () => {
         }
       ]
       const eventStream = new EventStream(expected)
-      const actual: Array<Event> = eventStream.getHighestScoringRegion()
+      const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
       expect(expected).toEqual(actual)
     })
     it("should return seed data when count == 5", () => {
@@ -222,7 +222,7 @@ describe('Class EventStream', () => {
         }
       ]
       const eventStream = new EventStream(expected)
-      const actual: Array<Event> = eventStream.getHighestScoringRegion()
+      const actual: ReadonlyArray<Event> = eventStream.getHighestScoringRegion()
       expect(expected).toEqual(actual)
     })
   })
