@@ -1,5 +1,5 @@
-import { testSeed1, testSeed2, testSeed2Expected, testSeed3, testSeed3Expected } from './mockTestData'
-import { IEvent, eventStream, assignPointValue } from '../src/index'
+import { testSeed1, testSeed2, testSeed2Expected, testSeed3, testSeed3Expected, testSeed4 } from './mockTestData'
+import { IEvent, eventStream, assignPointValue, findLastIndexOfRegionWithHighestSum } from '../src/index'
 
 describe('event puzzler solution', () => {
 
@@ -38,6 +38,20 @@ describe('event puzzler solution', () => {
     it('return 3 if passed "screenShot"', () => {
       const actual: number = assignPointValue('screenShot')
       expect(actual).toEqual(3)
+    })
+  })
+
+  describe('findLastIndexOfRegionWithHighestSum()', () => {
+
+    it('should return last index of array if array.length is 5 or less', () => {
+      const actual: number = findLastIndexOfRegionWithHighestSum(testSeed1)
+      const expected = testSeed1.length-1
+      expect(actual).toEqual(expected)
+    })
+
+    it('should return the index corresponding to the last element in a subarray where the subarray length is 5 and has the max cumulative sum of elements values', () => {
+      const actual: number = findLastIndexOfRegionWithHighestSum(testSeed4)
+      expect(actual).toEqual(4)
     })
   })
 })
