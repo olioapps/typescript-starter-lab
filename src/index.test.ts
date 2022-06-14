@@ -1,5 +1,6 @@
-import { UserAPI, IUser } from './index'
-const seedUsers: Readonly<Record<string, IUser>> = {
+import { UserAPI, IUser, IUserRecord } from './index'
+
+const seedUsers: Readonly<IUserRecord> = {
   "1": { id: "1", name: "andy", favColor: "blue", age: 247 },
   "2": { id: "2", name: "Andy",  favColor: "purple", age: 150 },
   "3": { id: "3", name: "Sarah", favColor: "Blue", age: 200} 

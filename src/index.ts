@@ -1,14 +1,16 @@
 export interface IUser {
   readonly id?: string
-  name: string
-  favColor: string
-  age: number
+  readonly name: string
+  readonly favColor: string
+  readonly age: number
 }
 
-export class UserAPI {
-  private _users: Readonly<Record<string, IUser>>
+export type IUserRecord = Record<string, IUser>
 
-  constructor(seedData: Record<string, IUser> = {}) {
+export class UserAPI {
+  private _users: Readonly<IUserRecord>
+
+  constructor(seedData: IUserRecord = {}) {
     this._users = {...seedData}
   } 
 
@@ -17,7 +19,7 @@ export class UserAPI {
     return id
   }
   
-  addUser(user: IUser): IUser{
+  addUser(user: IUser): IUser {
     if (user.id) {
       throw new SyntaxError("Please resubmit without pre-exisitng ID field.")
     } 
@@ -36,14 +38,14 @@ export class UserAPI {
     return newUser
   }
 
-  getUserById(id: string): IUser{
+  getUserById(id: string): IUser {
     if (this._users[id]) {
       return this._users[id]
     }
     throw new ReferenceError(`No user found with id ${id}.`)
   }
 
-  getUsers(): Array<IUser>{
+  getUsers(): Array<IUser> {
     if (this._users === null || this._users === undefined) {
       throw new Error(`User Dataset not found`)
     }
@@ -59,7 +61,7 @@ export class UserAPI {
     throw new ReferenceError(`No user found with id ${id}.`)
   }
 
-  searchUserByName(name: string): Array<IUser>{
+  searchUserByName(name: string): ReadonlyArray<IUser> {
     const users = Object.values(this._users).filter( user => user.name.toLowerCase() === name.toLowerCase())
     
     if (users.length) {
@@ -68,11 +70,12 @@ export class UserAPI {
     throw new ReferenceError(`No user found with name ${name}`)
   }
 
-  searchUsersByFavoriteColor(color: string): Array<IUser>{
+  searchUsersByFavoriteColor(color: string): ReadonlyArray<IUser> {
     const users = Object.values(this._users).filter( user => user.favColor.toLowerCase() === color.toLowerCase())
     if (users.length) {
       return users
     } 
     throw new ReferenceError(`No users favorite color is ${color}`)
+
   }
 }
