@@ -1,6 +1,6 @@
 import { getWinningRegion, Event } from './index'
 
-describe('Class EventStream', () => {
+describe('Index.ts', () => {
   const seedData: ReadonlyArray<Event> = [
     {
       timestamp: 123123123,
@@ -113,7 +113,7 @@ describe('Class EventStream', () => {
       eventType: "screenshot"
     }
   ]
-  describe('getWinningRegion', () => {
+  describe('getWinningRegion()', () => {
     it("should return expected winning region from smaller seed data", () => {
       const expected: ReadonlyArray<Event> = [
         {

@@ -27,6 +27,6 @@ export function getWinningRegion(inputData: ReadonlyArray<Event>): ReadonlyArray
     }))[0]
     return [...inputData.slice(winningRegion.regionStartId, winningRegion.regionStartId + 5)]
   } else {
-    return inputData
+    return [...inputData]
   }
 }
