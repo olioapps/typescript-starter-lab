@@ -1,34 +1,33 @@
-interface IEvent {
-  timestamp: number,
-  eventType: eventTypeState,
+export interface IEvent {
+  readonly timestamp: number,
+  readonly eventType: eventTypeState,
 }
-type eventTypeState = 'newMessage' | 'screenShot' | 'view'
+export type eventTypeState = 'newMessage' | 'screenShot' | 'view'
 
-function eventStream(stream: Array<IEvent>): Array<IEvent> {
+export function eventStream(stream: ReadonlyArray<IEvent>): ReadonlyArray<IEvent> {
   if(stream.length <= 5 ) { return stream }
 
-	const newStream =  [...stream]
+	const newStream: Array<IEvent> =  [...stream]
 	const newStreamValues: Array<number>= []
-	newStream.forEach( e => newStreamValues.push(assignPointValue(e.eventType)));
+	stream.forEach( e => newStreamValues.push(assignPointValue(e.eventType)));
 	
-	let index = 4
+	let index = 4 //Start with the 5th event in the stream becuase the for loop looks backward and ends at the end of the array
 	let highestValue = 0
-	for(let i=4; i<newStreamValues.length; i++) {
+	for(let i=4; i<newStreamValues.length; i++) {  // Same here, Want to start at the 5th event in the array
 		let cumulativeValue = 0
-		for (let j=0; j<=5; j++){
+		for (let j=0; j<=4; j++){  // Looks at the index 'i' itself and 4 places backward to find cumlative point total
 			cumulativeValue += newStreamValues[i-j]		
 		}	
-
 		if (cumulativeValue > highestValue) {
 			highestValue = cumulativeValue
 			index = i
 		}
 	}
-	const region = newStream.splice((index-4), 5)
+	const region: ReadonlyArray<IEvent> = newStream.splice((index-4), 5) 
 	return region
 }
 
-function assignPointValue(eventType: eventTypeState): number {
+export function assignPointValue(eventType: eventTypeState): Readonly<number> {
 	switch (eventType) {
 		case 'newMessage':
 			return 1
@@ -40,44 +39,3 @@ function assignPointValue(eventType: eventTypeState): number {
 			throw new Error("Not a valid eventType")
 	}
 }
-
-const seed: Array<IEvent> = [
-  {
-  timestamp: 123123123,
-	eventType: 'newMessage'
-	},
-	{
-		timestamp: 123123124,
-		eventType: 'newMessage'
-	},
-	{
-		timestamp: 123123125,
-		eventType: 'newMessage'
-	},
-	{
-		timestamp: 123123125,
-		eventType: 'view'
-	},
-	{
-		timestamp: 123123125,
-		eventType: 'view'
-	},
-	{
-		timestamp: 123123125,
-		eventType: 'screenShot'
-	},
-	{
-		timestamp: 123123125,
-		eventType: 'screenShot'
-	},
-	{
-		timestamp: 123123125,
-		eventType: 'newMessage'
-	},
-	{
-		timestamp: 123123125,
-		eventType: 'screenShot'
-	}
-]
-
-console.log('eventstream call:', eventStream(seed))
