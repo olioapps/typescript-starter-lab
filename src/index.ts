@@ -76,6 +76,5 @@ export class UserAPI {
       return users
     } 
     throw new ReferenceError(`No users favorite color is ${color}`)
-
   }
 }
