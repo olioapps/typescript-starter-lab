@@ -147,55 +147,55 @@ export const testSeed3Expected: Array<IEvent> = [
   },
 ]
 
-export const testSeed4: Array<IEvent> = [
-  {
-    timestamp: 123123123,
-    eventType: 'newMessage',
-    value: 1,
-  },
-  {
-    timestamp: 123123124,
-    eventType: 'newMessage',
-    value: 1,
-  },
-  {
-    timestamp: 123123125,
-    eventType: 'newMessage',
-    value: 1,
-  },
-  {
-    timestamp: 123123125,
-    eventType: 'view',
-    value: 2,
-  },
-  {
-    timestamp: 123123125,
-    eventType: 'view',
-    value: 2,
-  },
-  {
-    timestamp: 4587456,
-    eventType: 'newMessage',
-    value: 1,
-  },
-  {
-    timestamp: 46464,
-    eventType: 'newMessage',
-    value: 1,
-  },
-  {
-    timestamp: 46463125,
-    eventType: 'newMessage',
-    value: 1,
-  },
-  {
-    timestamp: 464625,
-    eventType: 'view',
-    value: 2,
-  },
-  {
-    timestamp: 464625,
-    eventType: 'view',
-    value: 2,
-  },
-]
+// export const testSeed4: Array<IEvent> = [
+//   {
+//     timestamp: 123123123,
+//     eventType: 'newMessage',
+//     value: 1,
+//   },
+//   {
+//     timestamp: 123123124,
+//     eventType: 'newMessage',
+//     value: 1,
+//   },
+//   {
+//     timestamp: 123123125,
+//     eventType: 'newMessage',
+//     value: 1,
+//   },
+//   {
+//     timestamp: 123123125,
+//     eventType: 'view',
+//     value: 2,
+//   },
+//   {
+//     timestamp: 123123125,
+//     eventType: 'view',
+//     value: 2,
+//   },
+//   {
+//     timestamp: 4587456,
+//     eventType: 'newMessage',
+//     value: 1,
+//   },
+//   {
+//     timestamp: 46464,
+//     eventType: 'newMessage',
+//     value: 1,
+//   },
+//   {
+//     timestamp: 46463125,
+//     eventType: 'newMessage',
+//     value: 1,
+//   },
+//   {
+//     timestamp: 464625,
+//     eventType: 'view',
+//     value: 2,
+//   },
+//   {
+//     timestamp: 464625,
+//     eventType: 'view',
+//     value: 2,
+//   },
+// ]
