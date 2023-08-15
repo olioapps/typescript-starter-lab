@@ -4,11 +4,11 @@ describe("arrayCopier", () => {
   it("should return an empty array when an empty array is passed", () => {
     // ARRANGE
     const EMPTY_ARRAY: ReadonlyArray<People> = [];
-    const expected: ReadonlyArray<People> = [];
+    const expected: ReadonlyArray<Partial<People>> = [];
     // ACT
     const result = arrayCopier(EMPTY_ARRAY);
     // ASSERT
-    expect(result).toBe(expected);
+    expect(result).toEqual(expected);
   });
 
   it("should return a copy of the array", () => {
