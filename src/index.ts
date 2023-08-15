@@ -10,10 +10,23 @@ interface NewCar {
   carValue: number
 }
 
+export interface UserDB {
+  [key: string]: User
+}
+
+export interface User {
+  id: string,
+  name: string
+}
+
 export const howdyMaker =(num: number) => {
 
 }
 
 export const carMaker = (car: Car) => {
+
+}
+
+export const addNewUser = (db: UserDB, user: User) => {
 
 }
