@@ -4,7 +4,7 @@ export interface People {
 }
 
 export const arrayCopier = (array: ReadonlyArray<People>) => {
-
+  return [...array];
 };
 
 export const ageAdder = (people: ReadonlyArray<Partial<People>>, ages: ReadonlyArray<number>) => {
