@@ -8,7 +8,12 @@ export const arrayCopier = (array: ReadonlyArray<People>) => {
 };
 
 export const ageAdder = (people: ReadonlyArray<Partial<People>>, ages: ReadonlyArray<number>) => {
-
+  const copy = [...people];
+  const addAges = copy.map((person, index) => {
+    person.age = ages[index]
+  });
+  console.log(addAges)
+  return addAges;
 };
 
 export const ageRemover = (people: ReadonlyArray<People>) => {
