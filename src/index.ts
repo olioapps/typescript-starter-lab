@@ -56,5 +56,10 @@ export const idAsName = (people: ReadonlyArray<People>) => {
 }
 
 export const justNames = (people: ReadonlyArray<People>) => {
-
+  const peopleCopy = arrayCopier(people);
+  const namesArray = peopleCopy.map(person => {
+    const { name } = person;
+    return name;
+  });
+  return namesArray;
 }
