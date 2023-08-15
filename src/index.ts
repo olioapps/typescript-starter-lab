@@ -16,7 +16,13 @@ export const ageAdder = (people: ReadonlyArray<Partial<People>>, ages: ReadonlyA
 };
 
 export const ageRemover = (people: ReadonlyArray<People>) => {
-
+  const peopleCopy = arrayCopier(people);
+  const removeAges = peopleCopy.map(person => {
+    return {
+      name: person.name
+    }
+  });
+  return removeAges;
 }
 export const ageRemover2 = (people: ReadonlyArray<People>) => {
 
