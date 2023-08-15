@@ -19,6 +19,11 @@ export interface User {
   name: string
 }
 
+interface UserRepo {
+  items: UserDB,
+  sort: Array<string>
+}
+
 export const howdyMaker =(num: number) => {
 
 }
@@ -28,5 +33,9 @@ export const carMaker = (car: Car) => {
 }
 
 export const addNewUser = (db: UserDB, user: User) => {
+
+}
+
+export const sortUsers = (repo: UserRepo) => {
 
 }
