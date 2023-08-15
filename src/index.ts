@@ -44,7 +44,15 @@ export const ageRemover3 = (people: ReadonlyArray<People>) => {
 }
 
 export const idAsName = (people: ReadonlyArray<People>) => {
-
+  const peopleCopy = arrayCopier(people);
+  const replaceName = peopleCopy.map(person => {
+    const { name: id, age } = person;
+    return {
+      id: id,
+      age: age
+    }
+  });
+  return replaceName;
 }
 
 export const justNames = (people: ReadonlyArray<People>) => {
