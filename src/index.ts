@@ -39,3 +39,7 @@ export const addNewUser = (db: UserDB, user: User) => {
 export const sortUsers = (repo: UserRepo) => {
 
 }
+
+export const addUserToRepo = (repo: UserRepo, user: User) => {
+
+}
