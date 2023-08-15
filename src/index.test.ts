@@ -1,4 +1,4 @@
-import { People, arrayCopier, ageAdder, ageRemover } from ".";
+import { People, arrayCopier, ageAdder, ageRemover, ageRemover2,ageRemover3, idAsName, justNames } from ".";
 
 describe("arrayCopier", () => {
   it("should return an empty array when an empty array is passed", () => {
@@ -86,7 +86,7 @@ describe('ageRemover3', () => {
       { name: "Stormi", age: 24 },
     ];
     const expected = [
-      { "Aron" }, { "Stormi" }
+      { name: "Aron" }, { name: "Stormi" }
     ];
     const result = ageRemover3(PEOPLE_LIST);
     expect(result).toEqual(expected);
@@ -109,13 +109,15 @@ describe('idAsName', () => {
 });
 
 describe('justNames', () => {
-  const PEOPLE_LIST: ReadonlyArray<People> = [
-    { name: "Aron", age: 42 },
-    { name: "Stormi", age: 24 },
-  ];
-  const expected: ReadonlyArray<string>= ["Aron", "Stormi"];
-  const result = justNames(PEOPLE_LIST);
-  expect(result).toEqual(expected);
+  it('should return an array of names', () => {
+    const PEOPLE_LIST: ReadonlyArray<People> = [
+      { name: "Aron", age: 42 },
+      { name: "Stormi", age: 24 },
+    ];
+    const expected: ReadonlyArray<string>= ["Aron", "Stormi"];
+    const result = justNames(PEOPLE_LIST);
+    expect(result).toEqual(expected);
+  })
 });
 
 
