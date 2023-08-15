@@ -25,7 +25,12 @@ export const ageRemover = (people: ReadonlyArray<People>) => {
   return removeAges;
 }
 export const ageRemover2 = (people: ReadonlyArray<People>) => {
-
+  const peopleCopy = arrayCopier(people);
+  const removeAges = peopleCopy.map(person => {
+    const { age, ...rest } = person
+    return rest;
+  });
+  return removeAges;
 }
 export const ageRemover3 = (people: ReadonlyArray<People>) => {
 
