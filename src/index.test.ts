@@ -53,6 +53,7 @@ describe("ageAdder", () => {
     ];
     // ACT
     const result = ageAdder(agelessPeopleList, ages);
+    // ASSERT
     expect(result).toEqual(expected);
   });
 });
