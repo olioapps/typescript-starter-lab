@@ -27,7 +27,7 @@ describe("computedProp", () => {
 describe("carMaker", () => {
   it("should return new car object with new property names", () => {
     // ARRANGE
-    const CAR_OBJECT = {
+    const carObject = {
       car_make: "VW",
       car_model: "Thing",
       car_value: 450,
@@ -39,7 +39,7 @@ describe("carMaker", () => {
     };
 
     // ACT
-    const actual = carMaker(CAR_OBJECT);
+    const actual = carMaker(carObject);
 
     // ASSERT
     expect(actual).toEqual(expected);
@@ -49,7 +49,7 @@ describe("carMaker", () => {
 describe("addNewUser", () => {
   it("should add new user to user database, using user id as user object key", () => {
     // ARRANGE
-    const USER_DATABASE: UserDB = {
+    const userDatabase: UserDB = {
       "123": {
         id: "123",
         name: "Aron",
@@ -59,7 +59,7 @@ describe("addNewUser", () => {
         name: "Stormi",
       },
     };
-    const NEW_USER: User = {
+    const newUser: User = {
       id: "789",
       name: "Scott",
     };
@@ -78,7 +78,7 @@ describe("addNewUser", () => {
       },
     };
     // ACT
-    const actual = addNewUser(USER_DATABASE, NEW_USER);
+    const actual = addNewUser(userDatabase, newUser);
 
     // ASSERT
     expect(actual).toEqual(expected);
@@ -88,7 +88,7 @@ describe("addNewUser", () => {
 describe("sortUsers", () => {
   it("should return an array of users based on user repositorys sort key", () => {
     // ARRANGE
-    const USER_REPO = {
+    const userRepo = {
       items: {
         "123": {
           id: "123",
@@ -120,7 +120,7 @@ describe("sortUsers", () => {
       },
     ];
     // ACT
-    const actual = sortUsers(USER_REPO);
+    const actual = sortUsers(userRepo);
     // ASSERT
     expect(actual).toEqual(expected);
   });
@@ -129,7 +129,7 @@ describe("sortUsers", () => {
 describe("addUserToRepo", () => {
   it("should add newUser to repository items and new user id to repository sort array", () => {
     // ARRANGE
-    const USER_REPO = {
+    const userRepo = {
       items: {
         "A": {
           "id": "A",
@@ -146,7 +146,7 @@ describe("addUserToRepo", () => {
       },
       sort: ["C", "B", "A"],
     }
-    const NEW_USER = {
+    const newUser = {
       "id": "D",
       "name": "Katlin"
     }
@@ -173,7 +173,7 @@ describe("addUserToRepo", () => {
     }
 
     // ACT
-    const actual = addUserToRepo(USER_REPO, NEW_USER);
+    const actual = addUserToRepo(userRepo, newUser);
     // ASSERT
     expect(actual).toEqual(expected);
   });
