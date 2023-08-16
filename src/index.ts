@@ -28,11 +28,6 @@ export const computedProperties = (prop1: string, prop2: string) => {
 export const createNewCar = (car: Readonly<Car>) => {
 
 }
-
-export const newCarNewAttributes = (car: Readonly<Car>) => {
-
-}
-
 export const addUser = (users: Readonly<Users>, user: User) => {
 
 }

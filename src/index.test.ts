@@ -1,56 +1,50 @@
-import { computedProperties, createNewCar, newCarNewAttributes, addUser, reverseSortUsers, addUserAndId, addUserAndIdInRegularOrder } from "./index";
+import { 
+  computedProperties, 
+  createNewCar, 
+  addUser, 
+  reverseSortUsers, 
+  addUserAndId, 
+  addUserAndIdInRegularOrder } from "./index";
 
-//write tests here
-
-describe('computed properties', () => {
+describe('computedProperties', () => {
   it('should return an object whose keys are defined by variables', () => {
 
-    //Arrange
-    const PROP1 = "property1"
-    const PROP2 = "property2"
+    const prop1 = "property1"
+    const prop2 = "property2"
     const expected = { 1: "property1", 2: "property2" };
 
-    //Act
-    const actual = computedProperties(PROP1, PROP2)
+    const actual = computedProperties(prop1, prop2)
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 });
 
-describe('create a new car object', () => {
+describe('createNewCar', () => {
   it('should return the object that is passed to it', () => {
 
-    //Arrange
-    const CAR = { make: "vw", model: "thing", value: 345 }
+    const car = { make: "vw", model: "thing", value: 345 }
     const expected = { make: "vw", model: "thing", value: 345 };
 
-    //Act
-    const actual = createNewCar(CAR);
+    const actual = createNewCar(car);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 
   it('should return an object with different key attributes using the object passed to it', () => {
 
-    //Arrange
-    const CAR = { make: "vw", model: "thing", value: 345 }
+    const car = { make: "vw", model: "thing", value: 345 }
     const expected = { Make: "vw", Model: "thing", Value: 345 }
 
-    //Act
-    const actual = newCarNewAttributes(CAR);
+    const actual = createNewCar(car);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 });
 
-describe('add a new user to the database where the new user key is equal to the id', () => {
+describe('addUser', () => {
   it('it should return an immutable copy of the users object with the new user integrated into it', () => {
 
-    //Arrange
-    const USERS = {
+    const users = {
       "123": {
         "id": "123",
         "name": "Aron"
@@ -61,7 +55,7 @@ describe('add a new user to the database where the new user key is equal to the 
       }
     }
 
-    const NEW_USER = {
+    const new_user = {
       "id": "789",
       "name": "Scott"
     }
@@ -81,19 +75,16 @@ describe('add a new user to the database where the new user key is equal to the 
       }
     }
 
-    //Act
-    const actual = addUser(USERS, NEW_USER);
+    const actual = addUser(users, new_user);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 });
 
-describe('sort users in database in reverse order', () => {
+describe('reverseSortUsers', () => {
   it('should output the users in reverse order of their ids', () => {
 
-    //Arrange
-    const USER_REPOSITORY = {
+    const user_repository = {
       items: {
         "123": {
           "id": "123",
@@ -126,19 +117,16 @@ describe('sort users in database in reverse order', () => {
       }
     ];
 
-    //Act
-    const actual = reverseSortUsers(USER_REPOSITORY);
+    const actual = reverseSortUsers(user_repository);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 });
 
-describe('return immutable copy of repository where new user is added and user id is added to sort array maintaining reverse order', () => {
+describe('addUserAndId', () => {
   it('should return an immutable repository with added user into items and id into sort', () => {
 
-    //Arrage
-    const ORIGINAL_REPOSITORY =
+    const original_repository =
     {
       items: {
         "A": {
@@ -157,7 +145,7 @@ describe('return immutable copy of repository where new user is added and user i
       sort: ["C", "B", "A"],
     }
 
-    const NEW_USER = {
+    const new_user = {
       "D": {
         "id": "D",
         "name": "Katlin"
@@ -186,19 +174,16 @@ describe('return immutable copy of repository where new user is added and user i
       sort: ["D", "C", "B", "A"],
     }
 
-    //Act
-    const actual = addUserAndId(ORIGINAL_REPOSITORY, NEW_USER)
+    const actual = addUserAndId(original_repository, new_user)
 
-    //Assert 
     expect(actual).toEqual(expected);
   });
 });
 
-describe('return immutable copy of repository where new user is added and user id is added to sort array in regular order', () => {
+describe('addUserAndIdInRegularOrder', () => {
   it('should return an immutable repository with added user into items and id into sort', () => {
 
-    //Arrage
-    const ORIGINAL_REPOSITORY =
+    const original_repository =
     {
       items: {
         "A": {
@@ -217,7 +202,7 @@ describe('return immutable copy of repository where new user is added and user i
       sort: ["A", "B", "C"],
     }
 
-    const NEW_USER = {
+    const new_user = {
       "D": {
         "id": "D",
         "name": "Katlin"
@@ -246,10 +231,8 @@ describe('return immutable copy of repository where new user is added and user i
       sort: ["A", "B", "C", "D"],
     }
 
-    //Act
-    const actual = addUserAndIdInRegularOrder(ORIGINAL_REPOSITORY, NEW_USER)
+    const actual = addUserAndIdInRegularOrder(original_repository, new_user)
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 });
