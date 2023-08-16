@@ -3,7 +3,7 @@ import { People, copyPeopleArray, addAge, removeAge, removeAgeWithDestructure, r
 //write tests here
 
 
-describe('copy people array', () => {
+describe('copyPeopleArrary', () => {
   it('should return an empty array', () => {
 
     //Arrange
