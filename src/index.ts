@@ -1,5 +1,3 @@
-//Define class here
-
 export interface People {
   readonly name: string;
   age: number;
