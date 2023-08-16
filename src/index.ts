@@ -50,7 +50,9 @@ export const carMaker = (car: Car) => {
 }
 
 export const addNewUser = (db: UserDB, user: User) => {
-
+  return { ...db, 
+    [user.id]: user
+  }
 }
 
 export const sortUsers = (repo: UserRepo) => {
