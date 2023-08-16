@@ -1,4 +1,4 @@
-import { computedProperties, createNewCar, newCarNewAttributes, addUser, reverseSortUsers, addUserAndId, addUserAndIdInRegularOrder } from ".";
+import { computedProperties, createNewCar, newCarNewAttributes, addUser, reverseSortUsers, addUserAndId, addUserAndIdInRegularOrder } from "./index";
 
 //write tests here
 
@@ -188,6 +188,9 @@ describe('return immutable copy of repository where new user is added and user i
 
     //Act
     const actual = addUserAndId(ORIGINAL_REPOSITORY, NEW_USER)
+
+    //Assert 
+    expect(actual).toEqual(expected);
   });
 });
 
@@ -245,6 +248,9 @@ describe('return immutable copy of repository where new user is added and user i
 
     //Act
     const actual = addUserAndIdInRegularOrder(ORIGINAL_REPOSITORY, NEW_USER)
+
+    //Assert
+    expect(actual).toEqual(expected);
   });
 });
 
