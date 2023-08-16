@@ -93,7 +93,7 @@ describe('removeAgeWithDestructure', () => {
   });
 });
 
-describe('remove age with map, destructuring, and simplified return statement', () => {
+describe('removeAgeSimplifiedReturn', () => {
   it('should return an empty array', () => {
 
     const empty_people_list: ReadonlyArray<People> = [];
@@ -125,7 +125,7 @@ describe('remove age with map, destructuring, and simplified return statement', 
   });
 });
 
-describe('rename name key using destructure aliasing', () => {
+describe('changeNameAlias', () => {
   it('should return an array with name key re-named to id', () => {
 
     const people_list = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
@@ -137,7 +137,7 @@ describe('rename name key using destructure aliasing', () => {
   });
 });
 
-describe('array of strings', () => {
+describe('arrayOfStringNames', () => {
   it('should return an array of strings of people names', () => {
 
     const people_list = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
