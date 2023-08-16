@@ -5,7 +5,7 @@ export interface People {
   readonly age: number;
 }
 
-export const copyPeopleArray = (people: ReadonlyArray<People>) => {
+export const copyPeopleArray = (people: ReadonlyArray<People>): ReadonlyArray<People> => {
 
 }
 
