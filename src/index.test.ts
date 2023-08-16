@@ -1,44 +1,44 @@
-import { People, copyPeopleArray, addAge, removeAge, removeAgeWithDestructure, removeAgeSimplifiedReturn, changeNameAlias, arrayOfStringNames } from "./index";
+import {
+  People,
+  copyPeopleArray,
+  addAge,
+  removeAge,
+  removeAgeWithDestructure,
+  removeAgeSimplifiedReturn,
+  changeNameAlias,
+  arrayOfStringNames
+} from "./index";
 
-//write tests here
-
-
-describe('copy people array', () => {
+describe('copyPeopleArray', () => {
   it('should return an empty array', () => {
 
-    //Arrange
-    const EMPTY_PEOPLE_LIST: ReadonlyArray<People>= [];
+    const empty_people_list: ReadonlyArray<People> = [];
     const expected: ReadonlyArray<People> = [];
 
-    //Act
-    const actual = copyPeopleArray(EMPTY_PEOPLE_LIST);
+    const actual = copyPeopleArray(empty_people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 
   it('should return a copy of the inputted array', () => {
 
-    //Arrange
-    const PEOPLE_LIST: ReadonlyArray<People> = [
-      { name: "Aron", age: 42 }, 
+    const people_list: ReadonlyArray<People> = [
+      { name: "Aron", age: 42 },
       { name: "Stormi", age: 24 }
     ];
 
     const expected = [
-      { name: "Aron", age: 42 }, 
+      { name: "Aron", age: 42 },
       { name: "Stormi", age: 24 }
     ];
 
-    //Act
-    const actual = copyPeopleArray(PEOPLE_LIST);
+    const actual = copyPeopleArray(people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 })
 
-describe('add age to ageless people', () => {
+describe('addAge', () => {
   it('should return an array of objects with added age to each person in the ageless array', () => {
 
     //Arrange
@@ -49,103 +49,81 @@ describe('add age to ageless people', () => {
     //Act
     const actual = addAge(AGELESS_PEOPLE, ages);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 })
 
-describe('remove age with map', () => {
+describe('removeAge', () => {
   it('should return an empty array', () => {
 
-    //Arrange
-    const EMPTY_PEOPLE_LIST: ReadonlyArray<People> = [];
+    const empty_people_list: ReadonlyArray<People> = [];
     const expected: ReadonlyArray<People> = [];
 
-    //Act
-    const actual = removeAge(EMPTY_PEOPLE_LIST);
+    const actual = removeAge(empty_people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 
   it('should return an array of objects with the age key removed', () => {
 
-    //Arrange
-    const PEOPLE_LIST = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
+    const people_list = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
     const expected = [{ name: "Aron" }, { name: "Stormi" }];
 
-    //Act
-    const actual = removeAge(PEOPLE_LIST);
+    const actual = removeAge(people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 });
 
-describe('remove age with map and destructuring', () => {
+describe('removeAgeWithDestructure', () => {
   it('should return an empty array', () => {
 
-    //Arrange
-    const EMPTY_PEOPLE_LIST: ReadonlyArray<People> = [];
+    const empty_people_list: ReadonlyArray<People> = [];
     const expected: ReadonlyArray<People> = [];
 
-    //Act
-    const actual = removeAgeWithDestructure(EMPTY_PEOPLE_LIST);
+    const actual = removeAgeWithDestructure(empty_people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 
   it('should return an array objects without an age key', () => {
-      //Arrange
-      const PEOPLE_LIST = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
-      const expected = [{ name: "Aron" }, { name: "Stormi" }];
-  
-      //Act
-      const actual = removeAgeWithDestructure(PEOPLE_LIST);
+    const people_list = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
+    const expected = [{ name: "Aron" }, { name: "Stormi" }];
 
-      //Assert
-      expect(actual).toEqual(expected);
+    const actual = removeAgeWithDestructure(people_list);
+
+    expect(actual).toEqual(expected);
   });
 });
 
 describe('remove age with map, destructuring, and simplified return statement', () => {
   it('should return an empty array', () => {
 
-    //Arrange
-    const EMPTY_PEOPLE_LIST: ReadonlyArray<People> = [];
+    const empty_people_list: ReadonlyArray<People> = [];
     const expected: ReadonlyArray<People> = [];
 
-    //Act
-    const actual = removeAgeWithDestructure(EMPTY_PEOPLE_LIST);
+    const actual = removeAgeWithDestructure(empty_people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 
   it('should return an array of objects without an age, only the name', () => {
 
-     //Arrange
-    const PEOPLE_LIST = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
+    const people_list = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
     const expected: ReadonlyArray<Partial<People>> = [{ name: "Aron" }, { name: "Stormi" }];
 
-    //Act
-    const actual = removeAgeSimplifiedReturn(PEOPLE_LIST);
+    const actual = removeAgeSimplifiedReturn(people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 
   it('should return an array of objects with a simplified return statement', () => {
-  
-    //Arrange
-    const PEOPLE_LIST = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
+
+    const people_list = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
     const expected = [{ name: "Aron" }, { name: "Stormi" }]
 
-    //Act
-    const actual = removeAgeSimplifiedReturn(PEOPLE_LIST);
+    const actual = removeAgeSimplifiedReturn(people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 });
@@ -153,14 +131,11 @@ describe('remove age with map, destructuring, and simplified return statement', 
 describe('rename name key using destructure aliasing', () => {
   it('should return an array with name key re-named to id', () => {
 
-    //Arrange
-    const PEOPLE_LIST = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
+    const people_list = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
     const expected = [{ id: "Aron", age: 42 }, { id: "Stormi", age: 24 }]
 
-    //Act
-    const actual = changeNameAlias(PEOPLE_LIST);
+    const actual = changeNameAlias(people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 });
@@ -168,14 +143,11 @@ describe('rename name key using destructure aliasing', () => {
 describe('array of strings', () => {
   it('should return an array of strings of people names', () => {
 
-    //Arrange
-    const PEOPLE_LIST = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
+    const people_list = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
     const expected = ["Aron", "Stormi"]
 
-    //Act
-    const actual = arrayOfStringNames(PEOPLE_LIST);
+    const actual = arrayOfStringNames(people_list);
 
-    //Assert
     expect(actual).toEqual(expected);
   });
 });
