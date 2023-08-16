@@ -43,7 +43,7 @@ describe('add age to ageless people', () => {
 
     //Arrange
     const AGELESS_PEOPLE: ReadonlyArray<Partial<People>> = [{ name: "Aron" }, { name: "Stormi" }]
-    const expected = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
+    const expected = [{ name: "Aron", age: 24 }, { name: "Stormi", age: 24 }];
 
     //Act
     const actual = addAge(AGELESS_PEOPLE);
@@ -67,7 +67,7 @@ describe('remove age with map', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should return an array of objects with the age key/value pairs removed', () => {
+  it('should return an array of objects with the age key removed', () => {
 
     //Arrange
     const PEOPLE_LIST = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
