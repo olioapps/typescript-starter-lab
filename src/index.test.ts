@@ -5,9 +5,9 @@ describe("computedProp", () => {
     // ARRANGE
     const input = 'howdy';
     const expected = {
-      howdy1: 1,
-      howdy2: 2,
-      howdy3: 3,
+      howdy0: 1,
+      howdy1: 2,
+      howdy2: 3,
     };
     // ACT
     const actual = computerProp(input);

@@ -25,7 +25,12 @@ interface UserRepo {
 }
 
 export const computerProp =(userInput: string) => {
-
+  let i = 0;
+  return {
+    [`${userInput}${i++}`]: i,
+    [`${userInput}${i++}`]: i,
+    [`${userInput}${i++}`]: i,
+  }
 }
 
 export const carMaker = (car: Car) => {
