@@ -37,13 +37,26 @@ export const removeAgeWithDestructure = (people: ReadonlyArray<People>) => {
 }
 
 export const removeAgeSimplifiedReturn = (people: ReadonlyArray<Partial<People>>) => {
-  
+  const arrayOfNames = people.map(person => {
+    const {name} = person;
+    return {name}
+  })
+  return arrayOfNames;
 }
 
 export const changeNameAlias = (people: ReadonlyArray<People>) => {
-
+  const idArray = people.map(person => {
+    const {name: id} = person;
+    return {id, age: person.age}
+  })
+  return idArray;
 }
 
 export const arrayOfStringNames = (people: ReadonlyArray<People>) => {
-
+  const stringArray = people.map(person => {
+    if (person.name != null) {
+    return person.name;
+    }
+  })
+  return stringArray;
 }
