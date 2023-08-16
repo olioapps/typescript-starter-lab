@@ -42,14 +42,17 @@ describe("ageAdder", () => {
     const agelessPeopleList: ReadonlyArray<Partial<People>> = [
       { name: "Aron" },
       { name: "Stormi" },
-    ];
-    const agesToAddList = [35, 98];
+    ]; 
+    const ages = {
+      aron: 42,
+      stormi: 24,
+    }
     const expected = [
-      { name: "Aron", age: 35 },
-      { name: "Stormi", age: 98 },
+      { name: "Aron", age: 42 },
+      { name: "Stormi", age: 24 },
     ];
     // ACT
-    const result = ageAdder(agelessPeopleList, agesToAddList);
+    const result = ageAdder(agelessPeopleList, ages);
     expect(result).toEqual(expected);
   });
 });
