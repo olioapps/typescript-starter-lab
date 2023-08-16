@@ -8,9 +8,8 @@ export const arrayCopier = (array: ReadonlyArray<People>) => {
 };
 
 export const ageAdder = (people: ReadonlyArray<Partial<People>>, ages: Record<string, number>) => {
-  const copy = [...people];
-  const addAges = copy.map((person) => {
-    const name = person.name?.toLowerCase();
+  const addAges = people.map((person) => {
+    const name: string | undefined = person.name?.toLowerCase();
     if (name != null) {
       return { ...person,
          age: ages[name]}
@@ -20,8 +19,7 @@ export const ageAdder = (people: ReadonlyArray<Partial<People>>, ages: Record<st
 };
 
 export const ageRemover = (people: ReadonlyArray<People>) => {
-  const peopleCopy = arrayCopier(people);
-  const removeAges = peopleCopy.map(person => {
+  const removeAges = people.map(person => {
     return {
       name: person.name
     }
@@ -29,8 +27,7 @@ export const ageRemover = (people: ReadonlyArray<People>) => {
   return removeAges;
 }
 export const ageRemover2 = (people: ReadonlyArray<People>) => {
-  const peopleCopy = arrayCopier(people);
-  const removeAges = peopleCopy.map(person => {
+  const removeAges = people.map(person => {
     const { name } = person
     return {
       name: name
@@ -39,8 +36,7 @@ export const ageRemover2 = (people: ReadonlyArray<People>) => {
   return removeAges;
 }
 export const ageRemover3 = (people: ReadonlyArray<People>) => {
-  const peopleCopy = arrayCopier(people);
-  const removeAges = peopleCopy.map(person => {
+  const removeAges = people.map(person => {
     const { age, ...rest } = person
     return rest;
   });
@@ -48,8 +44,7 @@ export const ageRemover3 = (people: ReadonlyArray<People>) => {
 }
 
 export const idAsName = (people: ReadonlyArray<People>) => {
-  const peopleCopy = arrayCopier(people);
-  const replaceName = peopleCopy.map(person => {
+  const replaceName = people.map(person => {
     const { name: id, age } = person;
     return {
       id: id,
@@ -60,8 +55,7 @@ export const idAsName = (people: ReadonlyArray<People>) => {
 }
 
 export const justNames = (people: ReadonlyArray<People>) => {
-  const peopleCopy = arrayCopier(people);
-  const namesArray = peopleCopy.map(person => {
+  const namesArray = people.map(person => {
     const { name } = person;
     return name;
   });
