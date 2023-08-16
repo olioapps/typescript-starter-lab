@@ -6,7 +6,8 @@ import {
   ageRemover2,
   ageRemover3, 
   idAsName, 
-  justNames, } from ".";
+  justNames, 
+} from ".";
 
 describe("arrayCopier", () => {
   it("should return an empty array when an empty array is passed", () => {
