@@ -24,7 +24,7 @@ interface UserRepo {
   sort: Array<string>
 }
 
-export const howdyMaker =(num: number) => {
+export const computerProp =(userInput: string) => {
 
 }
 

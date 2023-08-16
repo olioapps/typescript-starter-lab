@@ -1,16 +1,16 @@
-import { howdyMaker, carMaker, addNewUser, sortUsers, addUserToRepo, UserDB, User } from ".";
+import { computerProp, carMaker, addNewUser, sortUsers, addUserToRepo, UserDB, User } from ".";
 
-describe("howdyMaker", () => {
+describe("computedProp", () => {
   it("should create a single object with keys defined by variables", () => {
     // ARRANGE
-    let i = 0;
+    const input = 'howdy';
     const expected = {
       howdy1: 1,
       howdy2: 2,
       howdy3: 3,
     };
     // ACT
-    const actual = howdyMaker(i);
+    const actual = computerProp(input);
 
     // ASSERT
     expect(actual).toEqual(expected);
