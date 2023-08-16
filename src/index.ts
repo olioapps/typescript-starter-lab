@@ -10,11 +10,14 @@ export const copyPeopleArray = (people: ReadonlyArray<People>) => {
   return copy;
 }
 
-export const addAge = (people: ReadonlyArray<Partial<People>>) => {
-  const arrayWithAge = people.map(person => ({
-    ...person,
-    age: 24
-  }))
+export const addAge = (people: ReadonlyArray<Partial<People>>, ages: Record<string, number>) => {
+  const arrayWithAge = people.map(person => {
+    const name = person.name?.toLocaleLowerCase();
+    if(name != null) {
+      return {...person, 
+              age: ages[name]}
+    }
+  })
   return arrayWithAge;
 }
 

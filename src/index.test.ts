@@ -43,10 +43,11 @@ describe('add age to ageless people', () => {
 
     //Arrange
     const AGELESS_PEOPLE: ReadonlyArray<Partial<People>> = [{ name: "Aron" }, { name: "Stormi" }]
-    const expected = [{ name: "Aron", age: 24 }, { name: "Stormi", age: 24 }];
+    const ages: Record<string, number> = {aron: 42, stormi: 24}; 
+    const expected = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
 
     //Act
-    const actual = addAge(AGELESS_PEOPLE);
+    const actual = addAge(AGELESS_PEOPLE, ages);
 
     //Assert
     expect(actual).toEqual(expected);
