@@ -5,7 +5,8 @@ import {
   sortUsers, 
   addUserToRepo, 
   UserDB, 
-  User } from ".";
+  User } 
+  from ".";
 
 describe("computedProp", () => {
   it("should create a single object with keys defined by variables", () => {
