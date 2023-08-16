@@ -22,7 +22,11 @@ export interface User_Repository {
 
 
 export const computedProperties = (prop1: string, prop2: string) => {
-
+  const obj = {
+    [prop1]: "panda",
+    [prop2]: "salad"
+  }
+  return obj;
 }
 
 export const createNewCar = (car: Readonly<Car>) => {
