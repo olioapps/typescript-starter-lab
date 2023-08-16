@@ -1,4 +1,12 @@
-import { People, arrayCopier, ageAdder, ageRemover, ageRemover2,ageRemover3, idAsName, justNames } from ".";
+import { 
+  People, 
+  arrayCopier, 
+  ageAdder, 
+  ageRemover, 
+  ageRemover2,
+  ageRemover3, 
+  idAsName, 
+  justNames, } from ".";
 
 describe("arrayCopier", () => {
   it("should return an empty array when an empty array is passed", () => {
