@@ -5,8 +5,8 @@ export interface People {
   readonly age: number;
 }
 
-export const copyPeopleArray = (people: ReadonlyArray<People>) => {
-
+export const copyPeopleArray = (people: ReadonlyArray<People>)=> {
+  
 }
 
 export const addAge = (people: ReadonlyArray<Partial<People>>) => {
