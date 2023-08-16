@@ -11,7 +11,7 @@ describe('computedProperties', () => {
 
     const prop1 = "property1"
     const prop2 = "property2"
-    const expected = { 1: "property1", 2: "property2" };
+    const expected = { "property1": "panda", "property2": "salad" };
 
     const actual = computedProperties(prop1, prop2)
 
