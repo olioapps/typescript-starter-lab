@@ -41,13 +41,11 @@ describe('copyPeopleArray', () => {
 describe('addAge', () => {
   it('should return an array of objects with added age to each person in the ageless array', () => {
 
-    //Arrange
-    const AGELESS_PEOPLE: ReadonlyArray<Partial<People>> = [{ name: "Aron" }, { name: "Stormi" }]
+    const ageless_people: ReadonlyArray<Partial<People>> = [{ name: "Aron" }, { name: "Stormi" }]
     const ages: Record<string, number> = {aron: 42, stormi: 24}; 
     const expected = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }];
 
-    //Act
-    const actual = addAge(AGELESS_PEOPLE, ages);
+    const actual = addAge(ageless_people, ages);
 
     expect(actual).toEqual(expected);
   });
