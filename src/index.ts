@@ -30,6 +30,7 @@ export const removeAgeWithDestructure = (people: ReadonlyArray<People>) => {
     const {name} = person
     name: name;
   })
+  return arrayWithoutAge;
 }
 
 export const removeAgeSimplifiedReturn = (people: ReadonlyArray<Partial<People>>) => {
