@@ -60,7 +60,7 @@ const agelessPeople = [{ name: "Aron" }, { name: "Stormi" }]
 // 5. destructuring, map() :
 // given people array above,
 // return an array of objects without an age, only the name.
-// ALSO: use simplified return statement => { name: name } to simply { name }
+// ALSO: use simplified return statement => ({ name: name }) to simply { name }
 
 // 6. destructuring, map() :
 // given people array above,
