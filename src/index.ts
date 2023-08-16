@@ -12,7 +12,7 @@ export const copyPeopleArray = (people: ReadonlyArray<People>) => {
 
 export const addAge = (people: ReadonlyArray<Partial<People>>, ages: Record<string, number>) => {
   const arrayWithAge = people.map(person => {
-    const name = person.name?.toLocaleLowerCase();
+    const name = person.name?.toLowerCase();
     if(name != null) {
       return {...person, 
               age: ages[name]}
@@ -30,14 +30,14 @@ export const removeAge = (people: ReadonlyArray<People>) => {
 
 export const removeAgeWithDestructure = (people: ReadonlyArray<People>) => {
   const arrayWithoutAge = people.map(person => {
-    const {name} = person
-    name: name;
+    const {name} = person;
+    return {name: name}
   })
   return arrayWithoutAge;
 }
 
 export const removeAgeSimplifiedReturn = (people: ReadonlyArray<Partial<People>>) => {
-
+  
 }
 
 export const changeNameAlias = (people: ReadonlyArray<People>) => {
