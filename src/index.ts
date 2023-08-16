@@ -7,7 +7,7 @@ export const arrayCopier = (array: ReadonlyArray<People>) => {
   return [...array];
 };
 
-export const ageAdder = (people: ReadonlyArray<Partial<People>>, ages: ReadonlyArray<number>) => {
+export const ageAdder = (people: ReadonlyArray<Partial<People>>, ages: Record<string, number>) => {
   const copy = [...people];
   const addAges = copy.map((person, index) => {
     return { ...person, age: ages[index]}
