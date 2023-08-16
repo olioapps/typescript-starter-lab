@@ -16,9 +16,10 @@ export interface Users {
 }
 
 export interface User_Repository {
-  readonly items: object,
-  readonly sort: Array<string>
+  readonly items: Record<string, User>,
+  readonly sort: string[];
 }
+
 
 
 export const computedProperties = (prop1: string, prop2: string) => {
@@ -30,14 +31,28 @@ export const computedProperties = (prop1: string, prop2: string) => {
 }
 
 export const createNewCar = (car: Readonly<Car>) => {
+    const {make: Make, model: Model, value: Value} = car;
+    return {
+      Make, 
+      Model, 
+      Value}
+  }
 
-}
 export const addUser = (users: Readonly<Users>, user: User) => {
-
+  return {
+    ...users,
+    [user.id]: user
+  }
 }
 
 export const reverseSortUsers = (user_repository: Readonly<User_Repository>) => {
-
+  const array = Object.keys(user_repository.items).map(item => {
+    const key = item;
+    return (
+      user_repository.items[key]
+    )
+  })
+  return array;
 }
 
 export const addUserAndId = (user_repository: Readonly<User_Repository>, user: Users) => {

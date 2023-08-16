@@ -20,16 +20,6 @@ describe('computedProperties', () => {
 });
 
 describe('createNewCar', () => {
-  it('should return the object that is passed to it', () => {
-
-    const car = { make: "vw", model: "thing", value: 345 }
-    const expected = { make: "vw", model: "thing", value: 345 };
-
-    const actual = createNewCar(car);
-
-    expect(actual).toEqual(expected);
-  });
-
   it('should return an object with different key attributes using the object passed to it', () => {
 
     const car = { make: "vw", model: "thing", value: 345 }
