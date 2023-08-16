@@ -171,8 +171,4 @@ describe("addUserToRepo", () => {
     expect(actual).toEqual(expected);
   });
 });
-// 1. DONE Computed properties --> single object w/ keys defined as variables
-// 2. DONE Computed properties, Destructuring --> function takes an object { make, model, value } and returns new object with new property names
-// 3. DONE Computed properties, destructuring --> add new user to database, make the users id the key, function(newUserData, userDatabase) => return userDatabase with newUserData (immutable)
-// 4. DONE Function (userRepository) => return sorted array of user objects based on sort key
-// 5. Function (userRepo, userObj) => returns immutable copy of the repo. Repo inserts new object into items + inserts new id into sort array
+
