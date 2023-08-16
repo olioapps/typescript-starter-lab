@@ -1,4 +1,11 @@
-import { computerProp, carMaker, addNewUser, sortUsers, addUserToRepo, UserDB, User } from ".";
+import { 
+  computerProp, 
+  carMaker, 
+  addNewUser, 
+  sortUsers, 
+  addUserToRepo, 
+  UserDB, 
+  User } from ".";
 
 describe("computedProp", () => {
   it("should create a single object with keys defined by variables", () => {
