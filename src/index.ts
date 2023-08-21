@@ -15,3 +15,8 @@ export class UserAPI {
       this.users = initialUsers;
     }
   }
+
+  getAllUsers(): User[] {
+    return this.users;
+  }
+}
