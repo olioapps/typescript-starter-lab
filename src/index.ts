@@ -46,19 +46,36 @@ export const addUser = (users: Readonly<Users>, user: User) => {
 }
 
 export const reverseSortUsers = (user_repository: Readonly<User_Repository>) => {
-  const array = Object.keys(user_repository.items).map(item => {
-    const key = item;
-    return (
-      user_repository.items[key]
-    )
-  })
+  const array = user_repository.sort.map(id => {
+      return (
+        user_repository.items[id]
+      )
+    }
+  )
   return array;
 }
 
-export const addUserAndId = (user_repository: Readonly<User_Repository>, user: Users) => {
-
+export const addUserAndId = (user_repository: Readonly<User_Repository>, user: User) => {
+  console.log(user);
+  return {
+    items: {
+    ...user_repository.items,
+    [user.id]: user
+    },
+    sort: [user.id, ...user_repository.sort],    
+  }
 }
 
-export const addUserAndIdInRegularOrder = (user_repository: Readonly<User_Repository>, user: Users) => {
-
+export const addUserAndIdInRegularOrder = (user_repository: Readonly<User_Repository>, user: User) => {
+  const users = {
+    ...user_repository.items,
+    [user.id]: user
+  }
+  const sort = Object.keys(users).map(id => {
+    return id
+  })
+  return {
+    items: users,
+    sort: sort
+  }
 }

@@ -136,10 +136,8 @@ describe('addUserAndId', () => {
     }
 
     const new_user = {
-      "D": {
         "id": "D",
         "name": "Katlin"
-      }
     };
 
     const expected = {
@@ -193,11 +191,9 @@ describe('addUserAndIdInRegularOrder', () => {
     }
 
     const new_user = {
-      "D": {
-        "id": "D",
-        "name": "Katlin"
-      }
-    };
+      "id": "D",
+      "name": "Katlin"
+  };
 
     const expected = {
       items: {
