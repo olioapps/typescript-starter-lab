@@ -1,5 +1,5 @@
 import { 
-  People, 
+  Person, 
   arrayCopier, 
   ageAdder, 
   ageRemover, 
@@ -12,8 +12,8 @@ import {
 describe("arrayCopier", () => {
   it("should return an empty array when an empty array is passed", () => {
     // ARRANGE
-    const emptyArray: ReadonlyArray<People> = [];
-    const expected: ReadonlyArray<People> = [];
+    const emptyArray: ReadonlyArray<Person> = [];
+    const expected: ReadonlyArray<Person> = [];
     // ACT
     const result = arrayCopier(emptyArray);
     // ASSERT
@@ -22,11 +22,11 @@ describe("arrayCopier", () => {
 
   it("should return a copy of the array", () => {
     // ARRANGE
-    const peopleList: ReadonlyArray<People> = [
+    const peopleList: ReadonlyArray<Person> = [
       { name: "Aron", age: 42 },
       { name: "Stormi", age: 24 },
     ];
-    const expected: ReadonlyArray<People> = [
+    const expected: ReadonlyArray<Person> = [
       { name: "Aron", age: 42 },
       { name: "Stormi", age: 24 },
     ];
@@ -40,7 +40,7 @@ describe("arrayCopier", () => {
 describe("ageAdder", () => {
   it("should add age to each person in agelessPeople array", () => {
     // ARRANGE
-    const agelessPeopleList: ReadonlyArray<Partial<People>> = [
+    const agelessPeopleList: ReadonlyArray<Partial<Person>> = [
       { name: "Aron" },
       { name: "Stormi" },
     ]; 
@@ -62,11 +62,11 @@ describe("ageAdder", () => {
 describe("ageRemover", () => {
   it("should remove the age key from an array of people with ages", () => {
     // ARRANGE
-    const peopleList: ReadonlyArray<People> = [
+    const peopleList: ReadonlyArray<Person> = [
       { name: "Aron", age: 42 },
       { name: "Stormi", age: 24 },
     ];
-    const expected: ReadonlyArray<Partial<People>> = [
+    const expected: ReadonlyArray<Partial<Person>> = [
       { name: "Aron" },
       { name: "Stormi" },
     ];
@@ -80,11 +80,11 @@ describe("ageRemover", () => {
 describe("ageRemover2", () => {
   it("should remove the age key from an array of people with ages", () => {
     // ARRANGE
-    const peopleList: ReadonlyArray<People> = [
+    const peopleList: ReadonlyArray<Person> = [
       { name: "Aron", age: 42 },
       { name: "Stormi", age: 24 },
     ];
-    const expected: ReadonlyArray<Partial<People>> = [
+    const expected: ReadonlyArray<Partial<Person>> = [
       { name: "Aron" },
       { name: "Stormi" },
     ];
@@ -98,11 +98,11 @@ describe("ageRemover2", () => {
 describe('ageRemover3', () => {
   it("should return an array of objects with only string name", () => {
     // ARRANGE
-    const peopleList: ReadonlyArray<People> = [
+    const peopleList: ReadonlyArray<Person> = [
       { name: "Aron", age: 42 },
       { name: "Stormi", age: 24 },
     ];
-    const expected: ReadonlyArray<Partial<People>> = [
+    const expected: ReadonlyArray<Partial<Person>> = [
       { name: "Aron" }, { name: "Stormi" }
     ];
     // ACT
@@ -115,7 +115,7 @@ describe('ageRemover3', () => {
 describe('idAsName', () => {
   it('should return an array of objects with id instead of name key', () => {
     // ARRANGE
-    const peopleList: ReadonlyArray<People> = [
+    const peopleList: ReadonlyArray<Person> = [
       { name: "Aron", age: 42 },
       { name: "Stormi", age: 24 },
     ];
@@ -133,7 +133,7 @@ describe('idAsName', () => {
 describe('justNames', () => {
   it('should return an array of names', () => {
     // ARRANGE
-    const peopleList: ReadonlyArray<People> = [
+    const peopleList: ReadonlyArray<Person> = [
       { name: "Aron", age: 42 },
       { name: "Stormi", age: 24 },
     ];
