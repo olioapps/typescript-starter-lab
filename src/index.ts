@@ -29,9 +29,7 @@ export const ageRemover = (people: ReadonlyArray<Person>) => {
 export const ageRemover2 = (people: ReadonlyArray<Person>) => {
   const removeAges = people.map(person => {
     const { name } = person
-    return {
-      name: name
-    };
+    return { name };
   });
   return removeAges;
 }
