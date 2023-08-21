@@ -1,13 +1,13 @@
-export interface People {
-  name: string;
-  age: number;
+export interface Person {
+  readonly name: string;
+  readonly age: number;
 }
 
-export const arrayCopier = (array: ReadonlyArray<People>) => {
+export const arrayCopier = (array: ReadonlyArray<Person>) => {
   return [...array];
 };
 
-export const ageAdder = (people: ReadonlyArray<Partial<People>>, ages: Record<string, number>) => {
+export const ageAdder = (people: ReadonlyArray<Partial<Person>>, ages: Record<string, number>) => {
   const addAges = people.map((person) => {
     const name: string | undefined = person.name?.toLowerCase();
     if (name != null) {
@@ -18,7 +18,7 @@ export const ageAdder = (people: ReadonlyArray<Partial<People>>, ages: Record<st
   return addAges;
 };
 
-export const ageRemover = (people: ReadonlyArray<People>) => {
+export const ageRemover = (people: ReadonlyArray<Person>) => {
   const removeAges = people.map(person => {
     return {
       name: person.name
@@ -26,7 +26,7 @@ export const ageRemover = (people: ReadonlyArray<People>) => {
   });
   return removeAges;
 }
-export const ageRemover2 = (people: ReadonlyArray<People>) => {
+export const ageRemover2 = (people: ReadonlyArray<Person>) => {
   const removeAges = people.map(person => {
     const { name } = person
     return {
@@ -35,7 +35,7 @@ export const ageRemover2 = (people: ReadonlyArray<People>) => {
   });
   return removeAges;
 }
-export const ageRemover3 = (people: ReadonlyArray<People>) => {
+export const ageRemover3 = (people: ReadonlyArray<Person>) => {
   const removeAges = people.map(person => {
     const { age, ...rest } = person
     return rest;
@@ -43,7 +43,7 @@ export const ageRemover3 = (people: ReadonlyArray<People>) => {
   return removeAges;
 }
 
-export const idAsName = (people: ReadonlyArray<People>) => {
+export const idAsName = (people: ReadonlyArray<Person>) => {
   const replaceName = people.map(person => {
     const { name: id, age } = person;
     return {
@@ -54,7 +54,7 @@ export const idAsName = (people: ReadonlyArray<People>) => {
   return replaceName;
 }
 
-export const justNames = (people: ReadonlyArray<People>) => {
+export const justNames = (people: ReadonlyArray<Person>) => {
   const namesArray = people.map(person => {
     const { name } = person;
     return name;
