@@ -19,9 +19,16 @@
 // UserAPI has array of Users
 // UserApi has method that returns this array
 
+interface User {
+  name: string,
+  age: number,
+  favColor: string,
+  id: string,
+}
+
 export class UserAPI {
   users: {};
-  constructor(users = {}) {
+  constructor(users: Record<string, User> = {}) {
     this.users = users
   }
 }
