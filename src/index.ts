@@ -33,7 +33,7 @@ export class UserAPI {
   }
 
   getAllUsers() {
-    return
+    return [...this.users.values()];
   }
 }
 
