@@ -10,7 +10,7 @@ export const arrayCopier = (array: ReadonlyArray<Person>) => {
 export const ageAdder = (people: ReadonlyArray<Partial<Person>>, ages: Record<string, number>) => {
   const addAges = people.map((person) => {
     const name: string | undefined = person.name?.toLowerCase();
-    if (name != null) {
+    if (name) {
       return { ...person,
          age: ages[name]}
     }
