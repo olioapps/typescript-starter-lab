@@ -6,7 +6,7 @@ export interface User {
 }
 
 export class UserAPI {
-  users: Record<string, User>;
+  private users: Record<string, User>;
   constructor(users: Record<string, User> = {}) {
     this.users = users
   }
