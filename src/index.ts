@@ -47,8 +47,8 @@ export const idAsName = (people: ReadonlyArray<Person>) => {
   const replaceName = people.map(person => {
     const { name: id, age } = person;
     return {
-      id: id,
-      age: age
+      id,
+      age
     }
   });
   return replaceName;
