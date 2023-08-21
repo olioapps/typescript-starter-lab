@@ -15,6 +15,3 @@ export class UserAPI {
     return [...Object.values(this.users)];
   }
 }
-
-// test the objects methods, make sure the data is private
-// mock data file
