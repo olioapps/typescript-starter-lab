@@ -4,12 +4,6 @@ interface Car {
   car_value: number
 }
 
-interface NewCar {
-  carMake: string,
-  carModel: string,
-  carValue: number
-}
-
 export interface UserDB {
   [key: string]: User
 }
@@ -36,9 +30,9 @@ export const computerProp =(userInput: string) => {
 export const carMaker = (car: Car) => {
   const { car_make: carMake, car_model: carModel, car_value: carValue } = car
   return {
-    carMake: carMake,
-    carModel: carModel,
-    carValue: carValue
+    carMake,
+    carModel,
+    carValue
   }
 }
 
