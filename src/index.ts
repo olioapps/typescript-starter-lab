@@ -19,17 +19,17 @@
 // UserAPI has array of Users
 // UserApi has method that returns this array
 
-interface User {
-  name: string,
-  age: number,
-  favColor: string,
-  id: string,
+export interface User {
+  readonly name: string,
+  readonly age: number,
+  readonly favColor: string,
+  readonly id: string,
 }
 
 export class UserAPI {
-  users: {};
-  constructor(users: Record<string, User> = {}) {
-    this.users = users
+  users: ReadonlyMap<string, User>;
+  constructor(users: User[] = []) {
+    this.users = new Map(users.map(user => [user.id, user]))
   }
 }
 
