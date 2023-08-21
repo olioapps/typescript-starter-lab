@@ -20,6 +20,6 @@
 // UserApi has method that returns this array
 
 export class UserAPI {
-  users = undefined
+  users = {}
 }
 
