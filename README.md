@@ -1,125 +1,102 @@
-# typescript-starter-lab
-* Directions will be given after getting this envrionment set up
+# Typescript-Starter-Lab
+### TDD Workshop
+
+An exploration of array methods and ES6 syntax using the principles of test driven development (TDD)
+
+## Environment Setup
 
 ### Testing
 tsc and jest should be run in different terminal windows
-```T1
-yarn tsc --watch
-```
-```T2
-yarn jest --coverage --watch
-```
-* While not set up in this repo, it is possible to run two child processes in the same terminal with a package like concurrently: https://github.com/open-cli-tools/concurrently#readme
 
-* This will allow both tsc and jest to watch for file changes and run tests when changes are detected.
+```
+$ yarn tsc --watch
+```
 
-* It is not necessary to run nodemon while running tests with jest in this case, as we are not using a server. However, if you are making changes to your typescript file, it is necessary to run tsc to compile on file changes.
+```
+$ yarn jest --coverage --watch
+```
+While not set up in this repo, it is possible to run two child processes in the same terminal with a package like concurrently: https://github.com/open-cli-tools/concurrently#readme
+
+This will allow both tsc and jest to watch for file changes and run tests when changes are detected.
+
+It is not necessary to run nodemon while running tests with jest in this case, as we are not using a server. However, if you are making changes to your typescript file, it is necessary to run tsc to compile on file changes.
 ### Dev
-```T1
-yarn tsc --watch
 ```
-```T2
-yarn nodemon -w dist dist/ts_playground.js
+$ yarn tsc --watch
 ```
-* Running these two commands in terminals will let tsc watch for changes to any file, and then nodemon will restart and run any compiled code from ts_playground.js
+```
+$ yarn nodemon -w dist dist/ts_playground.js
+```
+Running these two commands in terminals will let tsc watch for changes to any file, and then nodemon will restart and run any compiled code from ts_playground.js
 
 
-### TDD Workshop / Array Methods Exploration
+## TDD Workshop Instructions
 
 * All workshop users should fork a branch from `tdd-workshop` as `{name}-tdd-workshop`
 * Using the principles of TDD, write stub functions and tests for each problem BEFORE resolving the function bodies.
-* The stub functions and failing tests should be committed in a new branch, and PR'd into the users working branch for review.
+* The stub functions and failing tests should be committed in a *new* branch, and PR'd into the users working branch for review.
 * After the failing tests have been reviewed, tests may be solved and submitted together in a single PR.
 * Use of Google or AI should be limited.  If assistance is needed take note of what was searched.
 * Complete `LESSON ONE` (all tests passing) before moving on to `LESSON TWO`
 
+### LESSON ONE
+####
+
+Practice the manipulation of array and objects using `array.map`, the spread operator, and destructuring
+
+#### Test Data:
 ```javascript
-// _________________________LESSON ONE_________________________
-
-// Examples of manipulating an array of objects
-// using map(), the spread operator, and destructuring
-
-// simple arrays of people objects
 const people = [{ name: "Aron", age: 42 }, { name: "Stormi", age: 24 }]
 const agelessPeople = [{ name: "Aron" }, { name: "Stormi" }]
+```
+ #### Exercises:
 
-// 1. spread operator :
-// use the spread operator to make a copy of an existing array
+###### 1. Return a copy of an array:
+Use the spread operator to make a copy of `people`
 
-// 2. map(), the spread operator :
-// add age to each person in agelessPeople
+###### 2. Add an 'age' to agelessPeople
+Use the `array.map` method and the spread operator to add `age` to each person in agelessPeople
 
-// 3. map() :
-// given people array above,
-// return an array of objects without an age key
+###### 3. Remove ages from people objects:
+Use the `people` array and `array.map` to return an array of objects without an 'age' key.  Be sure to use destructuring syntax inside of the map function.
 
-// 4. destructuring, map() :
-// given people array above,
-// return an array of objects without an age key
 
-// 5. destructuring, map() :
-// given people array above,
-// return an array of objects without an age, only the name.
-// ALSO: use simplified return statement => { name: name } to simply { name }
+###### 6. Add a new property to objects:
+Given the `people` array above, return an array of objects whose `id` key/value is the `name` key/value from the original person
 
-// 6. destructuring, map() :
-// given people array above,
-// return an array of objects whose `id` key/value is the `name` key/value from the original person
-// hint: use destructure aliasing
+*Hint*: use destructure aliasing
 
-// 7. destructuring, map() :
-// given people array above,
-// return an array of strings of the people's names,
-// ALSO: use destructure aliasing to return the `name` as `id`
+###### 7. Return a list of names
+Given the `people` array above, return an array of strings where each value is the name of a person.
 
-//_________________________LESSON Two_______________________________________
-/*
-  Computed properties,
-  syntactic sugar for declaring object literals.
-  Dynamically creating properties of objects.
-*/
+Use of destructuring syntax is required.
 
-//
-// (1) Computed properties: declare an object with simple computed properties
-// - create a single object where the keys are defined by variables.
-// const property1 = "propertyName1"
-// const property2 = "propertyName2"
+### LESSON TWO
+
+###### 1. Declare an object with simple computed properties
+Create a single object where the keys are defined by variables.
+
+```js
+const property1 = "propertyName1"
+const property2 = "propertyName2"
 // ...
-/* {
-    ..... <--- computed properties go in here
+return {
+    ..... //computed properties go in here
    }
-*/
-// bonus: dynamically define the computed property names
-// "property1" ... "propertyn" <-- and use this in the single object declaration
+```
+**BONUS**: dynamically define the computed property names
 
-//
-// (2) Computed properties, Destructoring: simple
-// - declare a function that will create a car object with make, model, value
-// function is going to take in an object with make, model, and value properties
-// function is going to manufacture a new object based on the the properties destructured from the
-// incoming parameter
-//
-// f(CAROBJECT) -> NEWCAROBJECT
-//
-// make the attributes of NEWCAROBJECT manufactured by this function be named differently
-// from the original incoming CAROBJECT
-// for example:
-/*
-{
-  first_name: "aron"
-}
-->
-{
-  firstName: "aron"
-}
-*/
+EG: pass your function an array of numbers.  Map over this list, parsing them into strings and adding an `id` prefix so that ```1 => "id1"``` .  Use these values in the single object declaration
 
-// (3) Computed properties, Destructoring: less simple
-// add A new User to the Database where the new user's key is equal to the id
-//database of current users.
 
-// A. given a datastructure such as:
-  const users = {
+---
+The following exercises will be working on the following data-structures:
+
+```js
+// UserRepository
+
+const userRepository = {
+  items: {
     "123": {
       "id": "123",
       "name": "Aron"
@@ -127,16 +104,32 @@ const agelessPeople = [{ name: "Aron" }, { name: "Stormi" }]
     "456": {
       "id": "456",
       "name": "Stormi"
+    },
+    "789": {
+      "id": "789",
+      "name": "Scott"
     }
-  }
+  },
+  sort: ["789", "456", "123"],
+}
+```
 
-// B. create a function that has the above as a incoming parameter, that takes in the following user shape as
-// second parameter:
+```js
+// User
 
 const newUser = {
       "id": "789",
       "name": "Scott"
 }
+```
+
+# WIP TODO:  update LESSON TWO problems from here on, so that they use the models defined above in way that makes sense
+###### 2. Add a new user to the userRepository where the new user's key is equal to the id
+
+Create a function that takes two parameters:
+-  a `userRepository`
+- a `user`
+
 
 // ... and outputs an *immutable* copy of the original users object, with the  new user integrated into it:
 
@@ -251,4 +244,3 @@ const updatedRepository = {
 
 // (d) BONUS: pass in a sorting function that handles the sorting for you so you can use
 // the same base function to handle both (b) and (c)
-```
