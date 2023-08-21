@@ -31,5 +31,9 @@ export class UserAPI {
   constructor(users: User[] = []) {
     this.users = new Map(users.map(user => [user.id, user]))
   }
+
+  getAllUsers() {
+    return
+  }
 }
 
