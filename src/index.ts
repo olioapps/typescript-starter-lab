@@ -1,22 +1,18 @@
-export class User {
-  constructor(
-    public name: string, 
-    public age: number,
-    public favColor: string,
-    private id: number
-  ){}
+type User =  {
+  name: string, 
+  age: number,
+  favColor: string,
+  id: number
 }
 
 export class UserAPI {
-  public users: User[] = [];
+  private users: Record<string, User> = {};
 
-  constructor(initialUsers?: User[]) {
-    if(initialUsers) {
-      this.users = initialUsers;
-    }
+  constructor(initial_users: Record<string, User> = {}) {
+    this.users = initial_users;
   }
 
-  getAllUsers(): User[] {
+  getAllUsers(): Record<string, User> {
     return this.users;
   }
 }
