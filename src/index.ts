@@ -6,13 +6,15 @@ export interface User {
 }
 
 export class UserAPI {
-  users: ReadonlyMap<string, User>;
-  constructor(users: User[] = []) {
-    this.users = new Map(users.map(user => [user.id, user]))
+  users: Record<string, User>;
+  constructor(users: Record<string, User> = {}) {
+    this.users = users
   }
 
   getAllUsers() {
-    return [...this.users.values()];
+    return [...Object.values(this.users)];
   }
 }
 
+// test the objects methods, make sure the data is private
+// mock data file
