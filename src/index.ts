@@ -54,8 +54,8 @@ export const idAsName = (people: ReadonlyArray<Person>) => {
 
 export const justNames = (people: ReadonlyArray<Person>) => {
   const namesArray = people.map(person => {
-    const { name } = person;
-    return name;
+    const { name: id } = person;
+    return id;
   });
   return namesArray;
 }
