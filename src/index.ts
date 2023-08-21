@@ -20,6 +20,9 @@
 // UserApi has method that returns this array
 
 export class UserAPI {
-  users = {}
+  users: {};
+  constructor(users = {}) {
+    this.users = users
+  }
 }
 
