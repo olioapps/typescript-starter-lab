@@ -1,3 +1,5 @@
+import { User, UserAPI } from './index'
+
 describe('getAllUsers', () => {
   it('should return the array of users', () => {
     const user1 = new User("Scorpo Fangoria", 16, "puce", 1);
