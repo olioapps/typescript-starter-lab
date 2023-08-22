@@ -34,12 +34,18 @@ describe("UserAPI.addUser", () => {
     const actual = newUserApi.getAllUsers().length;
     expect(actual).toEqual(expected);
   });
-
   it("should generate an id for a new user when added to the UserAPI repo", () => {
     const newUserApi = new UserAPI();
     newUserApi.addUser(newUser);
     expect(newUserApi.getAllUsers()[0].id).toBeTruthy();
   });
+  it("should append new user to existing repo", () => {
+    const newUserApi = new UserAPI(userRepo);
+    newUserApi.addUser(newUser);
+    const expected = 4;
+    const actual = newUserApi.getAllUsers().length;
+    expect(actual).toEqual(expected);
+  })
 });
 
 describe("UserAPI.getUserById", () => {
@@ -55,6 +61,11 @@ describe("UserAPI.getUserById", () => {
     newUserApi.addUser(newUser);
     const actual = newUserApi.getUserById("2");
     expect(actual).toBeFalsy();
-  })
+  });
 });
 
+describe("UserAPI.deleteUserById", () => {
+  it("should remove user at a given id string", () => {
+
+  })
+})
