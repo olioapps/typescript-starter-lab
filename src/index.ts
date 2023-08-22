@@ -29,7 +29,7 @@ export class UserAPI {
   }
 
   deleteUserAtId(id: string) {
-
+    delete this.users[id];
   }
 
   assignId() {
