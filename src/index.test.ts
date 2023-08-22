@@ -1,5 +1,5 @@
 import { UserAPI, User } from ".";
-import userRepo from "./mockdata";
+import { userRepo, newUser } from "./mockdata";
 
 describe("UserAPI constructor", () => {
   it("should instantiate an instance of UserAPI without user repository", () => {
@@ -22,6 +22,16 @@ describe("UserAPI.getAllUsers", () => {
     const newUserApi = new UserAPI(userRepo);
     const expected = Object.values(userRepo);
     const actual = newUserApi.getAllUsers();
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("UserAPI.addUser", () => {
+  it("should add uninitialized user to the UserAPI repo", () => {
+    const newUserApi = new UserAPI();
+    newUserApi.addUser(newUser);
+    const expected = 1;
+    const actual = newUserApi.getAllUsers().length;
     expect(actual).toEqual(expected);
   });
 });
