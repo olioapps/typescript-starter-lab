@@ -7,6 +7,7 @@ export interface User {
 
 export class UserAPI {
   private users: Record<string, User>;
+  private currentId: number = 0
   constructor(users: Record<string, User> = {}) {
     this.users = users
   }
@@ -16,7 +17,16 @@ export class UserAPI {
   }
 
   addUser(user: User) {
-    this.users[1] = user
+    const newId = this.assignId();
+    this.users[newId] = {
+      ...user,
+      id: newId.toString(),
+    }
+  }
+
+  assignId() {
+    this.currentId +=1;
+    return this.currentId;
   }
 }
 
