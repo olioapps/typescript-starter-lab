@@ -25,7 +25,7 @@ export class UserAPI {
   }
 
   getUserById(id: string) {
-    
+    return this.getAllUsers().filter(user => user.id == id)[0]
   }
 
   assignId() {
