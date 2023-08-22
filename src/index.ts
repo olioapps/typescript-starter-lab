@@ -16,7 +16,7 @@ export class UserAPI {
   }
 
   addUser(user: User) {
-
+    this.users[1] = user
   }
 }
 

@@ -34,4 +34,10 @@ describe("UserAPI.addUser", () => {
     const actual = newUserApi.getAllUsers().length;
     expect(actual).toEqual(expected);
   });
+
+  it("should generate an id for a new user when added to the UserAPI repo", () => {
+    const newUserApi = new UserAPI();
+    newUserApi.addUser(newUser);
+    expect(newUserApi.getAllUsers()[0].id).toBeTruthy();
+  });
 });
