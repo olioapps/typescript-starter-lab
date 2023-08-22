@@ -28,6 +28,10 @@ export class UserAPI {
     return this.getAllUsers().filter((user) => user.id == id)[0];
   }
 
+  deleteUserAtId(id: string) {
+
+  }
+
   assignId() {
     this.currentId += 1;
     return this.currentId;
