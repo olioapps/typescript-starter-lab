@@ -1,8 +1,8 @@
 export interface User {
-  readonly name: string;
-  readonly age: number;
-  readonly favColor: string;
-  readonly id?: string;
+  name: string;
+  age: number;
+  favColor: string;
+  id?: string;
 }
 
 export class UserAPI {
