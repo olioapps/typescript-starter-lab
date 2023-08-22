@@ -24,6 +24,10 @@ export class UserAPI {
     }
   }
 
+  getUserById(id: string) {
+    
+  }
+
   assignId() {
     this.currentId +=1;
     return this.currentId;

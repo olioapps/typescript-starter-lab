@@ -41,3 +41,13 @@ describe("UserAPI.addUser", () => {
     expect(newUserApi.getAllUsers()[0].id).toBeTruthy();
   });
 });
+
+describe("UserAPI.getUserById", () => {
+  it("should return a single user object when matching id string is passed as an argument", () => {
+    const newUserApi = new UserAPI();
+    newUserApi.addUser(newUser);
+    const expected = { ...newUser, id: '1'}
+    const actual = newUserApi.getUserById('1');
+    expect(actual).toEqual(expected);
+  })
+})
