@@ -2,7 +2,7 @@ export interface User {
   name: string,
   age: number,
   favColor: string,
-  id: string,
+  readonly id: string,
 }
 
 export class UserAPI {
