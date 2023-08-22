@@ -1,8 +1,10 @@
+import { v4 } from 'uuid';
+
 type User =  {
   name: string, 
   age: number,
   favColor: string,
-  id: number
+  id?: number
 }
 
 export class UserAPI {
@@ -14,5 +16,15 @@ export class UserAPI {
 
   getAllUsers(): Record<string, User> {
     return this.users;
+  }
+
+  addUser(userObj: User) {
+    return {
+      ...this.users,
+      [v4] : {
+        ...userObj,
+        id: [v4]
+      }
+    }
   }
 }
