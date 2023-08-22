@@ -46,8 +46,15 @@ describe("UserAPI.getUserById", () => {
   it("should return a single user object when matching id string is passed as an argument", () => {
     const newUserApi = new UserAPI();
     newUserApi.addUser(newUser);
-    const expected = { ...newUser, id: '1'}
-    const actual = newUserApi.getUserById('1');
+    const expected = { ...newUser, id: "1" };
+    const actual = newUserApi.getUserById("1");
     expect(actual).toEqual(expected);
+  });
+  it("should return falsy if no id matches a user", () => {
+    const newUserApi = new UserAPI();
+    newUserApi.addUser(newUser);
+    const actual = newUserApi.getUserById("2");
+    expect(actual).toBeFalsy();
   })
-})
+});
+

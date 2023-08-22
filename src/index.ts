@@ -1,15 +1,15 @@
 export interface User {
-  readonly name: string,
-  readonly age: number,
-  readonly favColor: string,
-  readonly id?: string,
+  readonly name: string;
+  readonly age: number;
+  readonly favColor: string;
+  readonly id?: string;
 }
 
 export class UserAPI {
   private users: Record<string, User>;
-  private currentId: number = 0
+  private currentId: number = 0;
   constructor(users: Record<string, User> = {}) {
-    this.users = users
+    this.users = users;
   }
 
   getAllUsers() {
@@ -21,15 +21,15 @@ export class UserAPI {
     this.users[newId] = {
       ...user,
       id: newId.toString(),
-    }
+    };
   }
 
   getUserById(id: string) {
-    return this.getAllUsers().filter(user => user.id == id)[0]
+    return this.getAllUsers().filter((user) => user.id == id)[0];
   }
 
   assignId() {
-    this.currentId +=1;
+    this.currentId += 1;
     return this.currentId;
   }
 }
