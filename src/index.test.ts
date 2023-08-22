@@ -75,8 +75,8 @@ describe("UserAPI.deleteUserById", () => {
   });
   it("should remove a user from a larger repo when given an id string", () => {
     const newUserApi = new UserAPI(userRepo);
+    const expected = newUserApi.getAllUsers().length - 1
     newUserApi.deleteUserAtId("721");
-    const expected = Object.keys(userRepo).length - 1;
     const actual = newUserApi.getAllUsers().length;
     expect(actual).toEqual(expected);
   });
