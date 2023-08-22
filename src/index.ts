@@ -1,10 +1,8 @@
-import { v4 } from 'uuid';
-
 type User =  {
   name: string, 
   age: number,
   favColor: string,
-  id?: number
+  id?: string
 }
 
 export class UserAPI {
@@ -19,12 +17,30 @@ export class UserAPI {
   }
 
   addUser(userObj: User) {
+    const newUserId = (Math.floor(Math.random() * 900)).toString();
+    // const newUserId = v4();
+    const new_user = {
+      ...userObj,
+      id: newUserId
+    }
     return {
       ...this.users,
-      [v4] : {
-        ...userObj,
-        id: [v4]
-      }
+      [newUserId]: new_user
+    }
+  }
+
+  getUserById(id: string) {
+    return (
+      this.users[id]
+    )
+  }
+
+  deleteUserById(id: string) {
+    delete this.users[id];
+    if(this.users[id]) {
+      return this.users[id]
+    } else {
+      return null
     }
   }
 }
