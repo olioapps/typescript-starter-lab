@@ -1,5 +1,3 @@
-import { getHeader } from "openai/core";
-
 type User =  {
   name: string, 
   age: number,
