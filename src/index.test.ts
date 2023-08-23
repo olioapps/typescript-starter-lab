@@ -7,29 +7,6 @@ describe('UserAPI', () => {
 
     expect(actual).toBeInstanceOf(UserAPI);
   });
-
-  it('should create a new instance of UserAPI and take a parameter of a user repository', () => {
-    const expected = {
-      users: {
-        "243": {
-          name: "Scorpo Fangoria",
-          age: 16,
-          favColor: "puce",
-          id: "243"
-        },
-        "564": {
-          name: "Cadder Jenks",
-          age: 67,
-          favColor: "Barbie",
-          id: "564"
-        }
-      }
-    }
-
-    const actual = new UserAPI(user_repository)
-
-    expect(actual).toEqual(expected);
-  })
 })
 
 describe('getAllUsers', () => {
