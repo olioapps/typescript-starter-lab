@@ -12,7 +12,8 @@ export class UserAPI {
     this.users = initial_users;
   }
 
-  getAllUsers(): Record<string, User> {
-    return this.users;
+  getAllUsers(): ReadonlyArray<User> {
+    const users_array = Object.values(this.users);
+    return users_array;
   }
 }
