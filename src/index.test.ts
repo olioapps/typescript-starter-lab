@@ -76,4 +76,9 @@ describe("UserAPI.deleteUserById", () => {
     const actual = newUserApi.deleteUserAtId("342");
     expect(actual).toEqual(expected);
   });
+  it("should throw an error if invalid user id was passed", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const error = () => newUserApi.deleteUserAtId("");
+    expect(error).toThrow("Unable to delete user");
+  });
 });
