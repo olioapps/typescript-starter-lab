@@ -106,5 +106,4 @@ describe('deleteUserById', () => {
 
     expect(actual).toEqual(expected);
   })
-
 })
