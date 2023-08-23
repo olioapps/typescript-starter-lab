@@ -39,8 +39,9 @@ export class UserAPI {
   }
 
   addUser(userObj: User): void {
+    const newUserArr = {...this.users}
     const id_user = this.assignUniqueId(userObj);
-      this.users[id_user.id] = id_user;
+    newUserArr[id_user.id] = id_user;
   }
 
   getUserById(id: string): User {
@@ -50,6 +51,7 @@ export class UserAPI {
   }
 
   deleteUserById(id: string): void {
-    delete this.users[id];
+    const newUserArr = {...this.users};
+    delete newUserArr[id];
   }
 }
