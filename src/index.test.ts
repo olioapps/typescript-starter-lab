@@ -55,11 +55,10 @@ describe("UserAPI.getUserById", () => {
     const actual = newUserApi.getUserById("342");
     expect(actual).toEqual(expected);
   });
-  it("should return falsy if no id matches a user", () => {
-    const newUserApi = new UserAPI();
-    newUserApi.addUser(newUser);
-    const actual = newUserApi.getUserById("2");
-    expect(actual).toEqual({});
+  it("should throw an error if no id matches a user", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const error = () => newUserApi.getUserById("");
+    expect(error).toThrowError("User not found");
   });
 });
 
