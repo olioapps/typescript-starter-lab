@@ -16,12 +16,12 @@ type IUser = {
 export class UserAPI {
   private users: Record<string, IUser> = {};
 
-  private generateId() {
+  private getUId() {
     return (Math.floor(Math.random() * 900)).toString();
   }
 
   private assignUniqueId(user: User): IUser {
-    const newId = this.generateId();
+    const newId = this.getUId();
     if(this.users[newId]) {
       return this.assignUniqueId(user);
     }

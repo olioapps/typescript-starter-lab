@@ -60,22 +60,12 @@ describe('getAllUsers', () => {
 describe('addUser', () => {
   it('should create a unique id for an inputted user object and assign the id to the key of the user object in the users map', () => {
     const userApi = new UserAPI();
+    const expected = userApi.getAllUsers().length + 1;
     userApi.addUser(new_user);
-    console.log(userApi)
 
-    const actual = userApi
+    const actual = userApi.getAllUsers().length;
 
-    // console.log(actual);
-    // const expected = (Object.keys(actual)[0])
-
-    // expect(new_user).toBeTruthy;
-  })
-
-  it('should add the new user, with unique id, to the users object', () => {
-    const userApi = new UserAPI(user_repository);
-    const actual = userApi.addUser(new_user);
-    
-    expect(actual).toBeTruthy;
+    expect(actual).toEqual(expected);
   })
 })
 
