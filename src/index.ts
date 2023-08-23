@@ -43,18 +43,13 @@ export class UserAPI {
       this.users[id_user.id] = id_user;
   }
 
-  getUserById(id: string) {
+  getUserById(id: string): User {
     return (
       this.users[id]
     )
   }
 
-  deleteUserById(id: string) {
+  deleteUserById(id: string): void {
     delete this.users[id];
-    if(this.users[id]) {
-      return this.users[id]
-    } else {
-      return null
-    }
   }
 }

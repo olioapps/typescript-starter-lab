@@ -37,7 +37,7 @@ describe('getAllUsers', () => {
 
     const userAPI = new UserAPI(user_repository);
     const expected = [
-      { 
+      {
         name: "Scorpo Fangoria",
         age: 16,
         favColor: "puce",
@@ -54,7 +54,7 @@ describe('getAllUsers', () => {
     const actual = userAPI.getAllUsers();
 
     expect(actual).toEqual(expected);
-})
+  })
 })
 
 describe('addUser', () => {
@@ -90,19 +90,10 @@ describe('deleteUserById', () => {
   it('should remove the user at the inputted id from the users object', () => {
     const userAPI = new UserAPI(user_repository);
     const id = "564";
-    const expected = null;
+    const expected = userAPI.getAllUsers().length - 1;
 
-    const actual = userAPI.deleteUserById(id);
-
-    expect(actual).toEqual(expected);
-  })
-
-  it('should return null if the user at the inputted id does not exist', () => {
-    const userAPI = new UserAPI(user_repository);
-    const id = "123";
-    const expected = null;
-
-    const actual = userAPI.deleteUserById(id);
+    userAPI.deleteUserById(id);
+    const actual = userAPI.getAllUsers().length;
 
     expect(actual).toEqual(expected);
   })
