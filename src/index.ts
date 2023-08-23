@@ -1,14 +1,37 @@
+import { getHeader } from "openai/core";
+
 type User =  {
   name: string, 
   age: number,
   favColor: string,
-  readonly id?: string
+}
+
+type IUser = {
+  name: string, 
+  age: number,
+  favColor: string,
+  readonly id: string
 }
 
 export class UserAPI {
-  private users: Record<string, User> = {};
+  private users: Record<string, IUser> = {};
 
-  constructor(initial_users: Record<string, User> = {}) {
+  private generateId() {
+    return (Math.floor(Math.random() * 900)).toString();
+  }
+
+  private assignUniqueId(user: User): IUser {
+    const newId = this.generateId();
+    if(this.users[newId]) {
+      return this.assignUniqueId(user);
+    }
+    return {
+      ...user,
+      id: newId
+    }
+  }
+
+  constructor(initial_users: Record<string, IUser> = {}) {
     this.users = initial_users;
   }
 
@@ -17,17 +40,9 @@ export class UserAPI {
     return user_array;
   }
 
-  addUser(userObj: User) {
-    const newUserId = (Math.floor(Math.random() * 900)).toString();
-    // const newUserId = v4();
-    const new_user = {
-      ...userObj,
-      id: newUserId
-    }
-    return {
-      ...this.users,
-      [newUserId]: new_user
-    }
+  addUser(userObj: User): void {
+    const id_user = this.assignUniqueId(userObj);
+      this.users[id_user.id] = id_user;
   }
 
   getUserById(id: string) {
