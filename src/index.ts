@@ -27,7 +27,11 @@ export class UserAPI {
   }
 
   getUserById(id: string): IdAwareUser {
-    return {...this.users[id]};
+    if (!this.users[id]) {
+      throw new Error('User not found')
+    } else {
+      return {...this.users[id]};
+    }
   }
 
   deleteUserAtId(id: string): IdAwareUser {
