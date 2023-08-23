@@ -84,6 +84,15 @@ describe('getUserById', () => {
 
     expect(actual).toEqual(expected);
   })
+
+  it('should throw an error message if user at inputted id does not exist', () => {
+    const userAPI = new UserAPI(user_repository);
+    const id = "123";
+    
+    const actual = () => userAPI.getUserById(id);
+
+    expect(actual).toThrow("User does not exist");
+  })
 })
 
 describe('deleteUserById', () => {
@@ -96,5 +105,25 @@ describe('deleteUserById', () => {
     const actual = userAPI.getAllUsers().length;
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should return a message stating that the user was successfully deleted', () => {
+    const userAPI = new UserAPI(user_repository);
+    const id = "564";
+    const expected = "User successfully deleted";
+
+    const actual = userAPI.deleteUserById(id);
+
+    expect(actual).toEqual(expected);
+  })
+
+  it('should throw an error if the user at the inputted id does not exist', () => {
+    const userAPI = new UserAPI(user_repository);
+    const id = "998";
+
+    const actual = () => userAPI.deleteUserById(id);
+    console.log(actual)
+
+    expect(actual).toThrow("This user does not exist");
   })
 })

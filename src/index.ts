@@ -1,11 +1,11 @@
-type User =  {
-  name: string, 
+type User = {
+  name: string,
   age: number,
   favColor: string,
 }
 
 type IUser = {
-  name: string, 
+  name: string,
   age: number,
   favColor: string,
   readonly id: string
@@ -20,7 +20,7 @@ export class UserAPI {
 
   private assignUniqueId(user: User): IUser {
     const newId = this.getUId();
-    if(this.users[newId]) {
+    if (this.users[newId]) {
       return this.assignUniqueId(user);
     }
     return {
@@ -39,19 +39,30 @@ export class UserAPI {
   }
 
   addUser(userObj: User): void {
-    const newUserArr = {...this.users}
+    const newUserArr = { ...this.users }
     const id_user = this.assignUniqueId(userObj);
     newUserArr[id_user.id] = id_user;
+    this.users = newUserArr;
   }
 
   getUserById(id: string): User {
-    return (
-      this.users[id]
-    )
+    if (!this.users[id]) {
+      throw new Error("User does not exist");
+    } else {
+      return (
+        this.users[id]
+      )
+    }
   }
 
-  deleteUserById(id: string): void {
-    const newUserArr = {...this.users};
-    delete newUserArr[id];
+  deleteUserById(id: string): string {
+    if (!this.users[id]) {
+      throw new Error("This user does not exist")
+    } else {
+      const newUserArr = { ...this.users };
+      delete newUserArr[id];
+      this.users = newUserArr;
+      return "User successfully deleted";
+    }
   }
 }
