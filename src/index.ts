@@ -35,11 +35,15 @@ export class UserAPI {
   }
 
   deleteUserAtId(id: string): IdAwareUser {
-    const updatedUsers = { ...this.users };
-    const toBeDeletedUser = { ...updatedUsers[id] };
-    delete updatedUsers[id];
-    this.users = updatedUsers;
-    return { ...toBeDeletedUser };
+    if (!this.users[id]) {
+      throw new Error("Unable to delete user")
+    } else {
+      const updatedUsers = { ...this.users };
+      const toBeDeletedUser = { ...updatedUsers[id] };
+      delete updatedUsers[id];
+      this.users = updatedUsers;
+      return { ...toBeDeletedUser };
+    }
   }
 
   private generateUid(): string {
