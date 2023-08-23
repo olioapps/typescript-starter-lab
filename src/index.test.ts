@@ -15,13 +15,13 @@ describe('UserAPI', () => {
           name: "Scorpo Fangoria",
           age: 16,
           favColor: "puce",
-          id: 243
+          id: "243"
         },
         "564": {
           name: "Cadder Jenks",
           age: 67,
           favColor: "Barbie",
-          id: 564
+          id: "564"
         }
       }
     }
@@ -33,7 +33,7 @@ describe('UserAPI', () => {
 })
 
 describe('getAllUsers', () => {
-  it('should return the map of users', () => {
+  it('should return the array of users', () => {
 
     const userAPI = new UserAPI(user_repository);
     const expected = [

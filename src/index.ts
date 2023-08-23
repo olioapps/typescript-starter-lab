@@ -2,7 +2,7 @@ type User =  {
   name: string, 
   age: number,
   favColor: string,
-  readonly id: number
+  readonly id?: string
 }
 
 export class UserAPI {
@@ -12,8 +12,9 @@ export class UserAPI {
     this.users = initial_users;
   }
 
-  getAllUsers(): Record<string, User> {
-    return this.users;
+  getAllUsers(): ReadonlyArray<User> {
+    const user_array = Object.values(this.users);
+    return user_array;
   }
 
   addUser(userObj: User) {
