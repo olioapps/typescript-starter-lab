@@ -2,7 +2,7 @@ type User =  {
   name: string, 
   age: number,
   favColor: string,
-  id: number
+  readonly id: number
 }
 
 export class UserAPI {
