@@ -1,21 +1,24 @@
-export interface User {
+type User = {
   name: string;
   age: number;
   favColor: string;
-  id?: string;
+}
+
+interface IdAwareUser extends User {
+  readonly id: string
 }
 
 export class UserAPI {
-  private users: Record<string, User>;
-  constructor(users: Record<string, User> = {}) {
+  private users: Record<string, IdAwareUser>;
+  constructor(users: Record<string, IdAwareUser> = {}) {
     this.users = { ...users };
   }
 
-  getAllUsers() {
+  getAllUsers(): ReadonlyArray<IdAwareUser> {
     return [...Object.values(this.users)];
   }
 
-  addUser(user: User) {
+  addUser(user: User): void {
     const newId = this.generateUid();
     this.users[newId] = {
       ...user,
@@ -23,11 +26,11 @@ export class UserAPI {
     };
   }
 
-  getUserById(id: string) {
-    return this.users[id];
+  getUserById(id: string): IdAwareUser {
+    return {...this.users[id]};
   }
 
-  deleteUserAtId(id: string) {
+  deleteUserAtId(id: string): IdAwareUser {
     const updatedUsers = { ...this.users };
     const toBeDeletedUser = { ...updatedUsers[id] };
     delete updatedUsers[id];
@@ -35,7 +38,7 @@ export class UserAPI {
     return { ...toBeDeletedUser };
   }
 
-  private generateUid() {
+  private generateUid(): string {
     return Date.now().toString();
   }
 }
