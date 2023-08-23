@@ -58,7 +58,7 @@ describe("UserAPI.getUserById", () => {
   it("should throw an error if no id matches a user", () => {
     const newUserApi = new UserAPI(userRepo);
     const error = () => newUserApi.getUserById("");
-    expect(error).toThrowError("User not found");
+    expect(error).toThrow("User not found");
   });
 });
 
