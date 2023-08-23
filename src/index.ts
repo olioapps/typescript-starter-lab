@@ -7,7 +7,6 @@ export interface User {
 
 export class UserAPI {
   private users: Record<string, User>;
-  private currentId: number = 0;
   constructor(users: Record<string, User> = {}) {
     this.users = { ...users };
   }
@@ -17,23 +16,26 @@ export class UserAPI {
   }
 
   addUser(user: User) {
-    const newId = this.assignId();
+    const newId = this.generateUid();
     this.users[newId] = {
       ...user,
-      id: newId.toString(),
+      id: newId,
     };
   }
 
   getUserById(id: string) {
-    return this.getAllUsers().filter((user) => user.id == id)[0];
+    return this.users[id];
   }
 
   deleteUserAtId(id: string) {
-    delete this.users[id];
+    const updatedUsers = { ...this.users };
+    const toBeDeletedUser = { ...updatedUsers[id] };
+    delete updatedUsers[id];
+    this.users = updatedUsers;
+    return { ...toBeDeletedUser };
   }
 
   private generateUid() {
-    this.currentId += 1;
-    return this.currentId;
+    return Date.now().toString();
   }
 }
