@@ -50,10 +50,9 @@ describe("UserAPI.addUser", () => {
 
 describe("UserAPI.getUserById", () => {
   it("should return a single user object when matching id string is passed as an argument", () => {
-    const newUserApi = new UserAPI();
-    newUserApi.addUser(newUser);
-    const expected = { ...newUser, id: "1" };
-    const actual = newUserApi.getUserById("1");
+    const newUserApi = new UserAPI(userRepo);
+    const expected = newUserApi.getAllUsers()[0];
+    const actual = newUserApi.getUserById("342");
     expect(actual).toEqual(expected);
   });
   it("should return falsy if no id matches a user", () => {
@@ -65,19 +64,17 @@ describe("UserAPI.getUserById", () => {
 });
 
 describe("UserAPI.deleteUserById", () => {
-  it("should remove user at a given id string", () => {
-    const newUserApi = new UserAPI();
-    newUserApi.addUser(newUser);
-    newUserApi.deleteUserAtId("1");
-    const expected = 0;
+  it("should remove a user from a larger repo when given an id string", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const expected = newUserApi.getAllUsers().length - 1;
+    newUserApi.deleteUserAtId("721");
     const actual = newUserApi.getAllUsers().length;
     expect(actual).toEqual(expected);
   });
-  it("should remove a user from a larger repo when given an id string", () => {
+  it("should return the deleted user", () => {
     const newUserApi = new UserAPI(userRepo);
-    const expected = newUserApi.getAllUsers().length - 1
-    newUserApi.deleteUserAtId("721");
-    const actual = newUserApi.getAllUsers().length;
+    const expected = newUserApi.getUserById("342");
+    const actual = newUserApi.deleteUserAtId("342");
     expect(actual).toEqual(expected);
   });
 });
