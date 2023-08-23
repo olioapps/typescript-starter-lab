@@ -59,7 +59,7 @@ describe("UserAPI.getUserById", () => {
     const newUserApi = new UserAPI();
     newUserApi.addUser(newUser);
     const actual = newUserApi.getUserById("2");
-    expect(actual).toBeFalsy();
+    expect(actual).toEqual({});
   });
 });
 
