@@ -32,7 +32,7 @@ export class UserAPI {
     delete this.users[id];
   }
 
-  assignId() {
+  private assignId() {
     this.currentId += 1;
     return this.currentId;
   }
