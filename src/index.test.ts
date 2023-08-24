@@ -1,5 +1,5 @@
 import { UserAPI } from './index'
-import { users as user_repository, new_user } from './test_data';
+import { users as user_repository, new_user, duplicate_user } from './test_data';
 
 describe('UserAPI', () => {
   it('should create a new instance of UserAPI without taking any parameters', () => {
@@ -52,6 +52,14 @@ describe('addUser', () => {
     const actual = userApi.addUser(new_user);
 
     expect(actual).toEqual(expected);
+  })
+
+  it('should return an error message if the inputted user has the same name as an existing user', () => {
+    const userAPI = new UserAPI(user_repository);
+
+    const actual = () => userAPI.addUser(duplicate_user)
+
+    expect(actual).toThrow("A user with this name already exists");
   })
 })
 
@@ -108,7 +116,6 @@ describe('deleteUserById', () => {
     const id = "998";
 
     const actual = () => userAPI.deleteUserById(id);
-    console.log(actual)
 
     expect(actual).toThrow("This user does not exist");
   })

@@ -17,3 +17,10 @@ export const new_user = {
   age: 54,
   favColor: "Pickle",
 }
+
+export const duplicate_user = {
+  name: "Cadder Jenks",
+  age: 67,
+  favColor: "Barbie",
+  id: "564"
+}

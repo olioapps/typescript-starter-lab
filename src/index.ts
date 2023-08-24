@@ -28,6 +28,10 @@ export class UserAPI {
     }
   }
 
+  private doesUserNameExist(users: IUser[], name: string): boolean {
+    return users.some(user => user.name === name)
+  }
+
   constructor(initial_users: Record<string, IUser> = {}) {
     this.users = initial_users;
   }
@@ -38,11 +42,20 @@ export class UserAPI {
   }
 
   addUser(userObj: User): string {
-    const newUserArr = { ...this.users }
-    const id_user = this.assignUniqueId(userObj);
-    newUserArr[id_user.id] = id_user;
-    this.users = newUserArr;
-    return "User successfully added";
+    const { name } = userObj;
+    console.log(name)
+    const existing_users = Object.values(this.users);
+    const duplicate = this.doesUserNameExist(existing_users, name);
+    console.log(duplicate);
+    if(duplicate) {
+      throw new Error("A user with this name already exists");
+    } else {
+      const newUserArr = { ...this.users }
+      const id_user = this.assignUniqueId(userObj);
+      newUserArr[id_user.id] = id_user;
+      this.users = newUserArr;
+      return "User successfully added";
+    }
   }
 
   getUserById(id: string): User {
