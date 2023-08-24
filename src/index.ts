@@ -36,13 +36,11 @@ export class UserAPI {
 
   deleteUserAtId(id: string): IdAwareUser {
     if (!this.users[id]) {
-      throw new Error("Unable to delete user")
+      throw new Error("User not found")
     } else {
-      const updatedUsers = { ...this.users };
-      const toBeDeletedUser = { ...updatedUsers[id] };
-      delete updatedUsers[id];
-      this.users = updatedUsers;
-      return { ...toBeDeletedUser };
+      const { [id]: userToBeDeleted, ...rest } = this.users
+      this.users = rest;
+      return userToBeDeleted;
     }
   }
 
