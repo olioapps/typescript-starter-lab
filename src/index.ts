@@ -8,8 +8,11 @@ type Score = {
   score: number,
 }
 
-const eventStream = (events: Array<EventObject) => {
-
+const eventStream = (events: Array<EventObject>, regionLength: number = 5): Array<Score> => {
+  return [{
+    subregion: [],
+    score: 0
+  }]
 }
 
 export { eventStream, EventObject };
