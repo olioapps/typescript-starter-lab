@@ -39,4 +39,4 @@ const eventData: Array<EventObject> = [
   },
 ];
 
-export { eventData }
+export { eventData };
