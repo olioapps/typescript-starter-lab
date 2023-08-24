@@ -1,3 +1,5 @@
+import { new_user } from "./test_data";
+
 type User = {
   name: string,
   age: number,
@@ -43,10 +45,8 @@ export class UserAPI {
 
   addUser(userObj: User): IUser {
     const { name } = userObj;
-    console.log(name)
     const existing_users = Object.values(this.users);
     const duplicate = this.doesUserNameExist(existing_users, name);
-    console.log(duplicate);
     if(duplicate) {
       throw new Error("A user with this name already exists");
     } else {
@@ -73,9 +73,11 @@ export class UserAPI {
       throw new Error("This user does not exist")
     } else {
       const newUserArr = { ...this.users };
+      const userToDelete = newUserArr[id];
       delete newUserArr[id];
       this.users = newUserArr;
-      return newUserArr[id];
+      console.log(userToDelete);
+      return userToDelete;
     }
   }
 }

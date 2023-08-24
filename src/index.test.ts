@@ -98,14 +98,13 @@ describe('deleteUserById', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should return a message stating that the user was successfully deleted', () => {
+  it('should return the deleted user', () => {
     const userAPI = new UserAPI(user_repository);
     const id = "564";
-    const expected = "User successfully deleted";
 
     const actual = userAPI.deleteUserById(id);
 
-    expect(actual).toEqual(expected);
+    expect(actual.id).toEqual(id);
   })
 
   it('should throw an error if the user at the inputted id does not exist', () => {
