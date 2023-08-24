@@ -1,12 +1,4 @@
-type event = {
-  timestamp: number,
-  eventType: string
-}
-
-type highest_score = {
-  events: ReadonlyArray<event>,
-  score: number
-}
+import { event, highest_score } from './models'
 
 export function scoreEventStream(eventStream: ReadonlyArray<event>): highest_score {
   return {
