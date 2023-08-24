@@ -36,10 +36,10 @@ describe("eventScore", () => {
     expect(actual).toEqual(expected);
   });
 
-  it("should throw an error if the array length is greater than the region length", () => {
-    const expected = "Region is larger than the list of events";
-    const error = () => eventScore(eventData, 12);
+  it("should return the cumulative score of all events if region length given is larger than events array length", () => {
+    const expected = 15;
+    const actual = eventScore(eventData, 12).score;
 
-    expect(error).toThrow(expected);
+    expect(actual).toEqual(expected);
   });
 });
