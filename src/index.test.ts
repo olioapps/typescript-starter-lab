@@ -82,3 +82,9 @@ describe("UserAPI.deleteUserById", () => {
     expect(error).toThrow("User not found");
   });
 });
+
+describe("UserAPI.updateUser", () => {
+  it("should update a user at a given id with the user object passed", () => {
+
+  })
+})
