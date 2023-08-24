@@ -13,7 +13,7 @@ describe('scoreEventStream', () => {
 
     expect(actual).toHaveProperty("score");
   })
-  
+
   it('successfully assess the length of the inputted array', () => {
     const expected = 5;
 
