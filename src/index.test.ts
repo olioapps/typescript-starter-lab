@@ -1,4 +1,4 @@
-import { eventData } from "./mock_data";
+import { eventData, mistypedEventData } from "./mock_data";
 import { eventScore } from ".";
 
 describe("eventScore", () => {
@@ -39,7 +39,14 @@ describe("eventScore", () => {
   it("should throw an error if the array length is greater than the region length", () => {
     const expected = "Region is larger than the list of events";
     const error = () => eventScore(eventData, 12);
-    
+
+    expect(error).toThrow(expected);
+  });
+
+  it("should throw an error if eventType in array does not exist in eventTypeScores", () => {
+    const expected = "Unrecognized event type";
+    const error = () => eventScore(mistypedEventData);
+
     expect(error).toThrow(expected);
   });
 });
