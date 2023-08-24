@@ -44,6 +44,15 @@ describe('addUser', () => {
 
     expect(actual).toEqual(expected);
   })
+
+  it('should return a string if the user is added successfully', () => {
+    const userApi = new UserAPI();
+    const expected = "User successfully added";
+
+    const actual = userApi.addUser(new_user);
+
+    expect(actual).toEqual(expected);
+  })
 })
 
 describe('getUserById', () => {
