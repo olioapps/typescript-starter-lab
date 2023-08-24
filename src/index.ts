@@ -46,23 +46,15 @@ export class UserAPI {
   }
 
   getUserById(id: string): User {
-    if (!this.users[id]) {
-      throw new Error("User does not exist");
-    } else {
-      return (
-        this.users[id]
-      )
-    }
+    return (
+      this.users[id]
+    )
   }
 
   deleteUserById(id: string): string {
-    if (!this.users[id]) {
-      throw new Error("This user does not exist")
-    } else {
-      const newUserArr = { ...this.users };
-      delete newUserArr[id];
-      this.users = newUserArr;
-      return "User successfully deleted";
-    }
+    const newUserArr = { ...this.users };
+    delete newUserArr[id];
+    this.users = newUserArr;
+    return "User successfully deleted";
   }
 }
