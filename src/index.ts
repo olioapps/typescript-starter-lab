@@ -1,14 +1,14 @@
-type EventObject = {
+type Event = {
   timestamp: number;
   eventType: string;
 };
 
 type Score = {
-  subregion: Array<EventObject>;
+  events: Array<Event>;
   score: number;
 };
 
-const addScore = (subregion: Array<EventObject>) => {
+const addScore = (subregion: Array<Event>) => {
   let total = 0;
   subregion.forEach((event) => {
     switch (event.eventType) {
@@ -22,16 +22,13 @@ const addScore = (subregion: Array<EventObject>) => {
         total += 3;
         break;
       default:
-        throw new Error("Unrecognized event type");
+        break;
     }
   });
   return total;
 };
 
-const eventScore = (
-  events: Array<EventObject>,
-  regionLength: number = 5
-): Score => {
+const eventScore = (events: Array<Event>, regionLength: number = 5): Score => {
   if (events.length < regionLength) {
     throw new Error("Region is larger than the list of events");
   } else {
@@ -40,7 +37,7 @@ const eventScore = (
       const subregion = events.slice(i, i + regionLength);
       const score = addScore(subregion);
       results[score] = {
-        subregion: subregion,
+        events: subregion,
         score: score,
       };
     }
@@ -50,4 +47,4 @@ const eventScore = (
   }
 };
 
-export { eventScore, EventObject };
+export { eventScore, Event };

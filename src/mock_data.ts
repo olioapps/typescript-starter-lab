@@ -1,6 +1,6 @@
-import { EventObject } from ".";
+import { Event } from ".";
 
-const eventData: Array<EventObject> = [
+const eventData: Array<Event> = [
   {
     timestamp: 123123123,
     eventType: "newMessage",
@@ -39,27 +39,4 @@ const eventData: Array<EventObject> = [
   },
 ];
 
-const mistypedEventData: Array<EventObject> = [
-  {
-    timestamp: 123123125,
-    eventType: "screenshot",
-  },
-  {
-    timestamp: 123123125,
-    eventType: "screenshot",
-  },
-  {
-    timestamp: 123123125,
-    eventType: "stoplight",
-  },
-  {
-    timestamp: 123123125,
-    eventType: "newMessage",
-  },
-  {
-    timestamp: 123123125,
-    eventType: "view",
-  },
-];
-
-export { eventData, mistypedEventData };
+export { eventData };
