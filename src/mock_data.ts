@@ -1,6 +1,6 @@
-import { EventObject } from ".";
+import { Event } from ".";
 
-const eventData: Array<EventObject> = [
+const eventData: Array<Event> = [
   {
     timestamp: 123123123,
     eventType: "newMessage",
@@ -39,9 +39,4 @@ const eventData: Array<EventObject> = [
   },
 ];
 
-const mistypedEvent: EventObject = {
-  timestamp: 123456779,
-  eventType: "trashcan",
-};
-
-export { eventData, mistypedEvent };
+export default eventData;
