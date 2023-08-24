@@ -12,7 +12,6 @@ export const users = {
     id: "564"
   }
 }
-
 export const new_user = {
   name: "Kid Rock",
   age: 54,

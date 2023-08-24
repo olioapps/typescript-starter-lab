@@ -44,6 +44,15 @@ describe('addUser', () => {
 
     expect(actual).toEqual(expected);
   })
+
+  it('should return a string if the user is added successfully', () => {
+    const userApi = new UserAPI();
+    const expected = "User successfully added";
+
+    const actual = userApi.addUser(new_user);
+
+    expect(actual).toEqual(expected);
+  })
 })
 
 describe('getUserById', () => {
@@ -68,7 +77,7 @@ describe('getUserById', () => {
     
     const actual = () => userAPI.getUserById(id);
 
-    expect(actual).toThrow("User not found");
+    expect(actual).toThrow("User does not exist");
   })
 })
 
@@ -101,6 +110,6 @@ describe('deleteUserById', () => {
     const actual = () => userAPI.deleteUserById(id);
     console.log(actual)
 
-    expect(actual).toThrow("User not found");
+    expect(actual).toThrow("This user does not exist");
   })
 })
