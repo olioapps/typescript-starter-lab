@@ -13,10 +13,20 @@ describe("eventScore", () => {
     expect(actual).toEqual(expected);
   });
   it("should return the correct length of the subregion when region length is given", () => {
-    const expected = 3
+    const expected = 3;
     const actual = eventScore(eventData, 3).subregion.length;
-    expect(actual).toEqual(expected)
-  })
+    expect(actual).toEqual(expected);
+  });
+  it("should return the highest score from the mock data and default region length", () => {
+    const expected = 11;
+    const actual = eventScore(eventData).score;
+    expect(actual).toEqual(expected);
+  });
+  it("should return the highest score from the mock data and an input region length of 3", () => {
+    const expected = 8;
+    const actual = eventScore(eventData, 3).score;
+    expect(actual).toEqual(expected);
+  });
   it("should throw an error if the array length is greater than the region length", () => {
     const expected = "Region is larger than the list of events";
     const error = () => eventScore(eventData, 12);
