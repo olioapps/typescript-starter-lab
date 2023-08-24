@@ -1,4 +1,6 @@
-const eventData = [
+import { EventObject } from ".";
+
+const eventData: Array<EventObject> = [
   {
     timestamp: 123123123,
     eventType: "newMessage",
