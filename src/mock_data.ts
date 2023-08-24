@@ -39,27 +39,9 @@ const eventData: Array<EventObject> = [
   },
 ];
 
-const mistypedEventData: Array<EventObject> = [
-  {
-    timestamp: 123123125,
-    eventType: "screenshot",
-  },
-  {
-    timestamp: 123123125,
-    eventType: "screenshot",
-  },
-  {
-    timestamp: 123123125,
-    eventType: "stoplight",
-  },
-  {
-    timestamp: 123123125,
-    eventType: "newMessage",
-  },
-  {
-    timestamp: 123123125,
-    eventType: "view",
-  },
-];
+const mistypedEvent: EventObject = {
+  timestamp: 123456779,
+  eventType: "trashcan",
+};
 
-export { eventData, mistypedEventData };
+export { eventData, mistypedEvent };

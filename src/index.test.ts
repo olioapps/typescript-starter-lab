@@ -1,4 +1,4 @@
-import { eventData, mistypedEventData } from "./mock_data";
+import { eventData, mistypedEvent } from "./mock_data";
 import { eventScore } from ".";
 
 describe("eventScore", () => {
@@ -44,6 +44,8 @@ describe("eventScore", () => {
   });
 
   it("should throw an error if eventType in array does not exist in eventTypeScores", () => {
+    const mistypedEventData = [ ...eventData, mistypedEvent ]
+
     const expected = "Unrecognized event type";
     const error = () => eventScore(mistypedEventData);
 
