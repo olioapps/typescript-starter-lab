@@ -1,21 +1,21 @@
-type EventObject = {
+type Event = {
   timestamp: number;
-  eventType: string;
+  eventType: "newMessage" | "view" | "screenshot";
 };
 
 type Score = {
-  subregion: Array<EventObject>;
+  events: Array<Event>;
   score: number;
 };
 
 const eventScore = (
-  events: Array<EventObject>,
+  events: Array<Event>,
   regionLength: number = 5
 ): Score => {
   return {
-    subregion: [],
+    events: [],
     score: 0,
   };
 };
 
-export { eventScore, EventObject };
+export { eventScore, Event };
