@@ -4,7 +4,7 @@ type User = {
   favColor: string,
 }
 
-type IUser = User & {
+export type IUser = User & {
   readonly id: string
 }
 
@@ -37,12 +37,12 @@ export class UserAPI {
     return user_array;
   }
 
-  addUser(userObj: User): string {
+  addUser(userObj: User): IUser {
     const newUserArr = { ...this.users }
     const id_user = this.assignUniqueId(userObj);
     newUserArr[id_user.id] = id_user;
     this.users = newUserArr;
-    return "User successfully added";
+    return id_user;
   }
 
   getUserById(id: string): User {
@@ -51,10 +51,10 @@ export class UserAPI {
     )
   }
 
-  deleteUserById(id: string): string {
+  deleteUserById(id: string): IUser {
     const newUserArr = { ...this.users };
     delete newUserArr[id];
     this.users = newUserArr;
-    return "User successfully deleted";
+    return newUserArr[id];
   }
 }
