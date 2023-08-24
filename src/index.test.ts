@@ -1,15 +1,15 @@
 import { eventData } from "./mock_data";
-import { eventStream } from ".";
+import { eventScore } from ".";
 
-describe("eventStream", () => {
-  it("should return an array of scores", () => {
-    const expected = 9;
-    const actual = eventStream(eventData, 1);
+describe("eventScore", () => {
+  it("should return a scored event object", () => {
+    const expected = 'object'
+    const actual = typeof eventScore(eventData);
     expect(actual).toEqual(expected);
   });
-  it("should have a default regionLength of 5 if no region length is given", () => {
+  it("should have a default region length of 5 if no region length is given", () => {
     const expected = 5;
-    const actual = eventStream(eventData)[0].subregion.length;
+    const actual = eventScore(eventData).subregion.length;
     expect(actual).toEqual(expected);
-  })
+  });
 });
