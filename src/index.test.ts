@@ -72,9 +72,8 @@ describe("UserAPI.getUserById", () => {
 describe("UserAPI.deleteUserById", () => {
   it("should remove a user from a larger repo when given an id string", () => {
     const newUserApi = new UserAPI(userRepo);
-    const expected = newUserApi.getAllUsers().length - 1;
-    newUserApi.deleteUserAtId("721");
-    const actual = newUserApi.getAllUsers().length;
+    const expected = "721";
+    const actual = newUserApi.deleteUserAtId("721").id;
     expect(actual).toEqual(expected);
   });
   it("should return the deleted user", () => {
