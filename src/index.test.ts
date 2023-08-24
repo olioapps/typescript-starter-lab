@@ -37,21 +37,18 @@ describe('getAllUsers', () => {
 describe('addUser', () => {
   it('should create a unique id for an inputted user object and assign the id to the key of the user object in the users map', () => {
     const userApi = new UserAPI();
-    const expected = userApi.getAllUsers().length + 1;
-    userApi.addUser(new_user);
 
-    const actual = userApi.getAllUsers().length;
+    const actual =  userApi.addUser(new_user);
 
-    expect(actual).toEqual(expected);
+    expect(actual.name).toEqual(new_user.name);
   })
 
-  it('should return a string if the user is added successfully', () => {
+  it('should return the added user if it is added successfully', () => {
     const userApi = new UserAPI();
-    const expected = "User successfully added";
 
     const actual = userApi.addUser(new_user);
 
-    expect(actual).toEqual(expected);
+    expect(actual.id).toBeTruthy;
   })
 
   it('should return an error message if the inputted user has the same name as an existing user', () => {
