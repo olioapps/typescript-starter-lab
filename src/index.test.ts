@@ -1,7 +1,8 @@
-//write tests here
+import { eventData } from "./mock_data"
+import eventStream from "."
 
-describe('Tests will go here!', () => {
-  it('should pass', () => {
-    expect(true).toBeTruthy()
+describe('eventStream', () => {
+  it('should return an array of scores', () => {
+    expect().toEqual()
   })
 })
