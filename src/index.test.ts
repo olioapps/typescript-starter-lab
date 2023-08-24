@@ -46,6 +46,13 @@ describe("UserAPI.addUser", () => {
     const actual = newUserApi.getAllUsers().length;
     expect(actual).toEqual(expected);
   });
+  it("should return the new user", () => {
+    const newUserApi = new UserAPI();
+    newUserApi.addUser(newUser);
+    const expected = newUser.name;
+    const actual = newUserApi.addUser(newUser).name
+    expect(actual).toEqual(expected);
+  })
 });
 
 describe("UserAPI.getUserById", () => {
