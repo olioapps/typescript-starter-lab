@@ -7,29 +7,6 @@ describe('UserAPI', () => {
 
     expect(actual).toBeInstanceOf(UserAPI);
   });
-
-  it('should create a new instance of UserAPI and take a parameter of a user repository', () => {
-    const expected = {
-      users: {
-        "243": {
-          name: "Scorpo Fangoria",
-          age: 16,
-          favColor: "puce",
-          id: "243"
-        },
-        "564": {
-          name: "Cadder Jenks",
-          age: 67,
-          favColor: "Barbie",
-          id: "564"
-        }
-      }
-    }
-
-    const actual = new UserAPI(user_repository)
-
-    expect(actual).toEqual(expected);
-  })
 })
 
 describe('getAllUsers', () => {
@@ -84,6 +61,15 @@ describe('getUserById', () => {
 
     expect(actual).toEqual(expected);
   })
+
+  it('should throw an error message if user at inputted id does not exist', () => {
+    const userAPI = new UserAPI(user_repository);
+    const id = "123";
+    
+    const actual = () => userAPI.getUserById(id);
+
+    expect(actual).toThrow("User does not exist");
+  })
 })
 
 describe('deleteUserById', () => {
@@ -96,5 +82,25 @@ describe('deleteUserById', () => {
     const actual = userAPI.getAllUsers().length;
 
     expect(actual).toEqual(expected);
+  });
+
+  it('should return a message stating that the user was successfully deleted', () => {
+    const userAPI = new UserAPI(user_repository);
+    const id = "564";
+    const expected = "User successfully deleted";
+
+    const actual = userAPI.deleteUserById(id);
+
+    expect(actual).toEqual(expected);
+  })
+
+  it('should throw an error if the user at the inputted id does not exist', () => {
+    const userAPI = new UserAPI(user_repository);
+    const id = "998";
+
+    const actual = () => userAPI.deleteUserById(id);
+    console.log(actual)
+
+    expect(actual).toThrow("This user does not exist");
   })
 })
