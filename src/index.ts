@@ -21,16 +21,20 @@ const addScore = (subregion: Array<Event>) => {
       case "screenshot":
         total += 3;
         break;
-      default:
-        break;
     }
   });
   return total;
 };
 
-const scoreEventStream = (events: Array<Event>, regionLength: number = 5): Score => {
-  if (events.length < regionLength) {
-    throw new Error("Region is larger than the list of events");
+const scoreEventStream = (
+  events: Array<Event>,
+  regionLength: number = 5
+): Score => {
+  if (regionLength >= events.length) {
+    return {
+      events: events,
+      score: addScore(events),
+    };
   } else {
     const results: Record<number, Score> = {};
     for (let i = 0; i < events.length - regionLength; i++) {
