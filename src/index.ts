@@ -26,28 +26,25 @@ const addScore = (subregion: Array<Event>) => {
   return total;
 };
 
-const scoreEventStream = (
-  events: Array<Event>,
-  regionLength: number = 5
-): Score => {
+const scoreEventStream = (events: Array<Event>, regionLength: number = 5) => {
   if (regionLength >= events.length) {
     return {
       events: events,
       score: addScore(events),
     };
   } else {
-    const results: Record<number, Score> = {};
+    const result: Score = {
+      events: [],
+      score: 0,
+    };
     for (let i = 0; i < events.length - regionLength; i++) {
       const subregion = events.slice(i, i + regionLength);
       const score = addScore(subregion);
-      results[score] = {
-        events: subregion,
-        score: score,
-      };
+      if (score >= result.score || !result.score) {
+        (result.events = subregion), (result.score = score);
+      }
     }
-    const scoreKey = Object.keys(results).map((score) => parseInt(score));
-    const max = Math.max(...scoreKey);
-    return results[max];
+    return result
   }
 };
 
