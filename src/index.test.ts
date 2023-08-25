@@ -50,9 +50,9 @@ describe("UserAPI.addUser", () => {
     const newUserApi = new UserAPI();
     newUserApi.addUser(newUser);
     const expected = newUser.name;
-    const actual = newUserApi.addUser(newUser).name
+    const actual = newUserApi.addUser(newUser).name;
     expect(actual).toEqual(expected);
-  })
+  });
 });
 
 describe("UserAPI.getUserById", () => {
@@ -85,12 +85,23 @@ describe("UserAPI.deleteUserById", () => {
   it("should throw an error if invalid user id was passed", () => {
     const newUserApi = new UserAPI(userRepo);
     const error = () => newUserApi.deleteUserById("");
-    expect(error).toThrow("Unable to delete user");
+    expect(error).toThrow("User not found");
   });
 });
 
 describe("UserAPI.updateUser", () => {
   it("should update a user at a given id with the user object passed", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const updateUserInfo = {
+      name: "Sandle",
+      age: 15,
+      favColor: "grey",
+    };
+    const expected = "Sandle";
 
-  })
-})
+    const updatedUser = newUserApi.updateUserById("342", updateUserInfo);
+    const actual = updatedUser.name;
+
+    expect(actual).toEqual(expected);
+  });
+});
