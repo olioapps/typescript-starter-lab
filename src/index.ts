@@ -52,7 +52,6 @@ function createScoresArray(eventStreamWithScores: ReadonlyArray<scored_region> |
 }
 
 export function scoreEventStream(eventStream: ReadonlyArray<event>, subRegionLength: number = 5) {
-
   if (eventStream.length <= subRegionLength) {
     const eventsWithScores = addScoresToEvents(eventStream);
     console.log(eventsWithScores);
@@ -62,20 +61,11 @@ export function scoreEventStream(eventStream: ReadonlyArray<event>, subRegionLen
       score: score
     }
   } else {
-
-    //map through array and add scores
     const eventsWithScores = addScoresToEvents(eventStream);
-    console.log(eventsWithScores)
-
-
-    //loop through array with scores and separate out subregions, save those into an object
     const container = separateSubRegions(eventsWithScores, subRegionLength);
-    //create array of scores, and loop through to find the highest score
     const scores = createScoresArray(container);
     const highest_score = findHighestSCore(scores);
-
     const subRegionWithHighestScore = container.filter(e => e.score === highest_score)[0];
-
     return subRegionWithHighestScore;
   }
 }
