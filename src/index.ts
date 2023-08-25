@@ -18,12 +18,16 @@ export class UserAPI {
     return [...Object.values(this.users)];
   }
 
-  addUser(user: User): void {
+  addUser(user: User): IdAwareUser {
     const newId = this.generateUid();
-    this.users[newId] = {
+    const newUser = {
       ...user,
-      id: newId,
+      id: newId
+    }
+    this.users[newId] = {
+      ...newUser
     };
+    return newUser;
   }
 
   getUserById(id: string): IdAwareUser {
@@ -34,7 +38,7 @@ export class UserAPI {
     }
   }
 
-  deleteUserAtId(id: string): IdAwareUser {
+  deleteUserById(id: string): IdAwareUser {
     if (!this.users[id]) {
       throw new Error("User not found")
     } else {
