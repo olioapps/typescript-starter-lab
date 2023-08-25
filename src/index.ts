@@ -2,10 +2,10 @@ type User = {
   name: string;
   age: number;
   favColor: string;
-}
+};
 
 interface IdAwareUser extends User {
-  readonly id: string
+  readonly id: string;
 }
 
 export class UserAPI {
@@ -22,30 +22,38 @@ export class UserAPI {
     const newId = this.generateUid();
     const newUser = {
       ...user,
-      id: newId
-    }
+      id: newId,
+    };
     this.users[newId] = {
-      ...newUser
+      ...newUser,
     };
     return newUser;
   }
 
   getUserById(id: string): IdAwareUser {
     if (!this.users[id]) {
-      throw new Error('User not found')
+      throw new Error("User not found");
     } else {
-      return {...this.users[id]};
+      return { ...this.users[id] };
     }
   }
 
   deleteUserById(id: string): IdAwareUser {
     if (!this.users[id]) {
-      throw new Error("User not found")
+      throw new Error("User not found");
     } else {
-      const { [id]: userToBeDeleted, ...rest } = this.users
+      const { [id]: userToBeDeleted, ...rest } = this.users;
       this.users = rest;
       return userToBeDeleted;
     }
+  }
+
+  updateUserById(id: string, user: User) {
+    this.users[id] = {
+      ...user,
+      id: id,
+    };
+    return { ...this.users[id] };
   }
 
   private generateUid(): string {
