@@ -60,6 +60,12 @@ export class UserAPI {
     }
   }
 
+  searchUsersByName(name: string) {
+    const regex = new RegExp(`${name}`, "gi");
+    const userKeys = Object.keys(this.users)
+    return userKeys.filter(id => regex.test(this.users[id].name))
+  }
+
   private generateUid(): string {
     return Date.now().toString();
   }
