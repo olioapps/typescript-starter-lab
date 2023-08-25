@@ -111,3 +111,21 @@ describe("UserAPI.updateUser", () => {
     expect(error).toThrow("User not found");
   });
 });
+
+describe("UserAPI.searchUsersByName", () => {
+  it("should return an array of users with matching names", () => {
+    const newUserApi = new UserAPI(userRepo);
+
+    const actual = newUserApi.searchUsersByName("P");
+    const expected = [
+      {
+        name: "Pi",
+        age: 15,
+        favColor: "grey",
+        id: "342",
+      },
+    ];
+
+    expect(actual).toEqual(expected);
+  });
+});
