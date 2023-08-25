@@ -9,13 +9,7 @@ type Score = {
 };
 
 const getScore = (eventType: string) => {
-  return eventType == "newMessage"
-    ? 1
-    : eventType == "view"
-    ? 2
-    : eventType == "screenshot"
-    ? 3
-    : 0;
+  return eventType == "newMessage" ? 1 : eventType == "view" ? 2 : 3;
 };
 
 const addScore = (subregion: Array<Event>) => {
