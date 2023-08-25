@@ -18,7 +18,7 @@ const scoreTable: Record<EventType, number> = {
   screenshot: 3,
 };
 
-const addScore = (subregion: EventStream) => {
+const eventStreamScore = (subregion: EventStream) => {
   let total = 0;
   subregion.forEach((event) => {
     total += scoreTable[event.eventType];
@@ -26,18 +26,18 @@ const addScore = (subregion: EventStream) => {
   return total;
 };
 
-const scoreEventStream = (events: EventStream, regionLength: number = 5) => {
+const handleEventStreamScoring = (events: EventStream, regionLength: number = 5) => {
   const result: Score = {
     events: [],
     score: 0,
   };
   if (regionLength >= events.length) {
     result.events = events;
-    result.score = addScore(events);
+    result.score = eventStreamScore(events);
   } else {
     for (let i = 0; i < events.length - regionLength; i++) {
       const subregion = events.slice(i, i + regionLength);
-      const score = addScore(subregion);
+      const score = eventStreamScore(subregion);
       if (score >= result.score) {
         result.events = subregion;
         result.score = score;
@@ -47,4 +47,4 @@ const scoreEventStream = (events: EventStream, regionLength: number = 5) => {
   return result;
 };
 
-export { scoreEventStream, Event };
+export { handleEventStreamScoring, Event };
