@@ -46,6 +46,13 @@ describe("UserAPI.addUser", () => {
     const actual = newUserApi.getAllUsers().length;
     expect(actual).toEqual(expected);
   });
+  it("should return the new user", () => {
+    const newUserApi = new UserAPI();
+    newUserApi.addUser(newUser);
+    const expected = newUser.name;
+    const actual = newUserApi.addUser(newUser).name
+    expect(actual).toEqual(expected);
+  })
 });
 
 describe("UserAPI.getUserById", () => {
@@ -65,20 +72,19 @@ describe("UserAPI.getUserById", () => {
 describe("UserAPI.deleteUserById", () => {
   it("should remove a user from a larger repo when given an id string", () => {
     const newUserApi = new UserAPI(userRepo);
-    const expected = newUserApi.getAllUsers().length - 1;
-    newUserApi.deleteUserAtId("721");
-    const actual = newUserApi.getAllUsers().length;
+    const expected = "721";
+    const actual = newUserApi.deleteUserById("721").id;
     expect(actual).toEqual(expected);
   });
   it("should return the deleted user", () => {
     const newUserApi = new UserAPI(userRepo);
     const expected = newUserApi.getUserById("342");
-    const actual = newUserApi.deleteUserAtId("342");
+    const actual = newUserApi.deleteUserById("342");
     expect(actual).toEqual(expected);
   });
   it("should throw an error if invalid user id was passed", () => {
     const newUserApi = new UserAPI(userRepo);
-    const error = () => newUserApi.deleteUserAtId("");
-    expect(error).toThrow("User not found");
+    const error = () => newUserApi.deleteUserById("");
+    expect(error).toThrow("Unable to delete user");
   });
 });

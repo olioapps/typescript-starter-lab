@@ -1,28 +1,28 @@
 const userRepo = {
   342: {
-    name: 'Pi',
+    name: "Pi",
     age: 15,
-    favColor: 'grey',
-    id: '342',
+    favColor: "grey",
+    id: "342",
   },
   465: {
-    name: 'Buckets',
+    name: "Buckets",
     age: 2,
-    favColor: 'pink',
-    id: '465',
+    favColor: "pink",
+    id: "465",
   },
   721: {
-    name: 'Opal',
+    name: "Opal",
     age: 4,
-    favColor: 'teal',
-    id: "721"
-  }
-}
+    favColor: "teal",
+    id: "721",
+  },
+};
 
 const newUser = {
-  name: 'Pete',
+  name: "Pete",
   age: 1,
-  favColor: 'blue',
-}
+  favColor: "blue",
+};
 
 export { userRepo, newUser };
