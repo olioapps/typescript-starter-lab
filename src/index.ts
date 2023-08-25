@@ -41,10 +41,11 @@ const scoreEventStream = (events: Array<Event>, regionLength: number = 5) => {
       const subregion = events.slice(i, i + regionLength);
       const score = addScore(subregion);
       if (score >= result.score) {
-        (result.events = subregion), (result.score = score);
+        result.events = subregion;
+        result.score = score;
       }
     }
-    return result
+    return result;
   }
 };
 
