@@ -38,7 +38,7 @@ export class UserAPI {
     }
   }
 
-  deleteUserAtId(id: string): IdAwareUser {
+  deleteUserById(id: string): IdAwareUser {
     if (!this.users[id]) {
       throw new Error("Unable to delete user")
     } else {
