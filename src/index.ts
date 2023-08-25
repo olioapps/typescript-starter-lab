@@ -1,6 +1,6 @@
 type Event = {
   timestamp: number;
-  eventType: "newMessage" | "view" | "screenshot";
+  eventType: EventType;
 };
 
 type Score = {
@@ -8,14 +8,18 @@ type Score = {
   score: number;
 };
 
-const getScore = (eventType: string) => {
-  return eventType == "newMessage" ? 1 : eventType == "view" ? 2 : 3;
+type EventType = "newMessage" | "view" | "screenshot";
+
+const scoreTable: Record<EventType, number> = {
+  newMessage: 1,
+  view: 2,
+  screenshot: 3,
 };
 
 const addScore = (subregion: Array<Event>) => {
   let total = 0;
   subregion.forEach((event) => {
-    total += getScore(event.eventType);
+    total += scoreTable[event.eventType];
   });
   return total;
 };
