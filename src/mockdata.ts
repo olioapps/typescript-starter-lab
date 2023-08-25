@@ -19,4 +19,10 @@ const userRepo = {
   },
 };
 
-export default userRepo;
+const newUser = {
+  name: "Pete",
+  age: 1,
+  favColor: "blue",
+};
+
+export { userRepo, newUser };
