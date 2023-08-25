@@ -49,11 +49,15 @@ export class UserAPI {
   }
 
   updateUserById(id: string, user: User) {
-    this.users[id] = {
-      ...user,
-      id: id,
-    };
-    return { ...this.users[id] };
+    if (!this.users[id]) {
+      throw new Error("User not found");
+    } else {
+      this.users[id] = {
+        ...user,
+        id: id,
+      };
+      return { ...this.users[id] };
+    }
   }
 
   private generateUid(): string {
