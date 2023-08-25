@@ -6,12 +6,12 @@ type User = {
   favColor: string,
 }
 
-export type IUser = User & {
+export type IDAwareUser = User & {
   readonly id: string
 }
 
 export class UserAPI {
-  private users: Record<string, IUser> = {};
+  private users: Record<string, IDAwareUser> = {};
 
   private getUId(): string {
     const id = (Math.floor(Math.random() * 900)).toString();
@@ -22,7 +22,7 @@ export class UserAPI {
     }
   }
 
-  private assignUniqueId(user: User): IUser {
+  private assignUniqueId(user: User): IDAwareUser {
     const newId = this.getUId();
     return {
       ...user,
@@ -30,11 +30,11 @@ export class UserAPI {
     }
   }
 
-  private doesUserNameExist(users: IUser[], name: string): boolean {
+  private doesUserNameExist(users: IDAwareUser[], name: string): boolean {
     return users.some(user => user.name === name)
   }
 
-  constructor(initial_users: Record<string, IUser> = {}) {
+  constructor(initial_users: Record<string, IDAwareUser> = {}) {
     this.users = initial_users;
   }
 
@@ -43,7 +43,7 @@ export class UserAPI {
     return user_array;
   }
 
-  addUser(userObj: User): IUser {
+  addUser(userObj: User): IDAwareUser {
     const { name } = userObj;
     const existing_users = Object.values(this.users);
     const duplicate = this.doesUserNameExist(existing_users, name);
@@ -68,16 +68,10 @@ export class UserAPI {
     }
   }
 
-  deleteUserById(id: string): IUser {
-    if (!this.users[id]) {
-      throw new Error("This user does not exist")
-    } else {
-      const newUserArr = { ...this.users };
-      const userToDelete = newUserArr[id];
-      delete newUserArr[id];
-      this.users = newUserArr;
-      console.log(userToDelete);
-      return userToDelete;
-    }
+  deleteUserById(id: string): IDAwareUser {
+    const newUserArr = { ...this.users };
+    delete newUserArr[id];
+    this.users = newUserArr;
+    return newUserArr[id];
   }
 }
