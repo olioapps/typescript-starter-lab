@@ -69,9 +69,14 @@ export class UserAPI {
   }
 
   deleteUserById(id: string): IDAwareUser {
-    const newUserArr = { ...this.users };
-    delete newUserArr[id];
-    this.users = newUserArr;
-    return newUserArr[id];
+    const deletedUser = this.users[id];
+    if(!this.users[id]) {
+      throw new Error("This user does not exist")
+    }else {
+      const newUserArr = { ...this.users };
+      delete newUserArr[id];
+      this.users = newUserArr;
+      return deletedUser;
+    }
   }
 }
