@@ -7,6 +7,12 @@ describe("scoreEventStream expected shape", () => {
     const actual = typeof scoreEventStream(eventData);
     expect(actual).toEqual(expected);
   });
+  it("should return the correct array of event objects", () => {
+    const expected = eventData.slice(2, 6);
+    const actual = scoreEventStream(eventData).events;
+
+    expect(actual).toEqual(expected);
+  });
 });
 
 describe("scoreEventStream expected subarray lengths", () => {
