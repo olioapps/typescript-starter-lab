@@ -8,20 +8,20 @@ type Score = {
   score: number;
 };
 
+const getScore = (eventType: string) => {
+  return eventType == "newMessage"
+    ? 1
+    : eventType == "view"
+    ? 2
+    : eventType == "screenshot"
+    ? 3
+    : 0;
+};
+
 const addScore = (subregion: Array<Event>) => {
   let total = 0;
   subregion.forEach((event) => {
-    switch (event.eventType) {
-      case "newMessage":
-        total += 1;
-        break;
-      case "view":
-        total += 2;
-        break;
-      case "screenshot":
-        total += 3;
-        break;
-    }
+    total += getScore(event.eventType);
   });
   return total;
 };
