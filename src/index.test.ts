@@ -104,4 +104,10 @@ describe("UserAPI.updateUser", () => {
 
     expect(actual).toEqual(expected);
   });
+  it("should throw an error if invalid user id was passed", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const error = () => newUserApi.updateUserById("", newUser);
+
+    expect(error).toThrow("User not found");
+  });
 });
