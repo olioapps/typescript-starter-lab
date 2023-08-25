@@ -61,9 +61,14 @@ export class UserAPI {
   }
 
   searchUsersByName(name: string) {
-    const regex = new RegExp(`${name}`, "gi");
-    const userKeys = Object.keys(this.users)
-    return userKeys.filter(id => regex.test(this.users[id].name))
+    const regex = new RegExp(`${name}`, "i");
+    const foundUsers = [];
+    for (const key in this.users) {
+      if (regex.test(this.users[key].name)) {
+        foundUsers.push(this.users[key]);
+      }
+    }
+    return foundUsers;
   }
 
   private generateUid(): string {

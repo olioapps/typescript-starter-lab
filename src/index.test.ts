@@ -116,7 +116,7 @@ describe("UserAPI.searchUsersByName", () => {
   it("should return an array of users with matching names", () => {
     const newUserApi = new UserAPI(userRepo);
 
-    const actual = newUserApi.searchUsersByName("P");
+    const actual = newUserApi.searchUsersByName("Pi");
     const expected = [
       {
         name: "Pi",
@@ -125,6 +125,15 @@ describe("UserAPI.searchUsersByName", () => {
         id: "342",
       },
     ];
+
+    expect(actual).toEqual(expected);
+  });
+
+  it("should return an array of all users with matching letters in the name", () => {
+    const newUserApi = new UserAPI(userRepo);
+
+    const actual = newUserApi.searchUsersByName("p");
+    const expected = [{ ...userRepo[342] }, { ...userRepo[721] }];
 
     expect(actual).toEqual(expected);
   });
