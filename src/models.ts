@@ -3,7 +3,11 @@ export interface event {
   eventType: string
 }
 
-export interface highest_score {
+export interface eventWithScore extends event {
+  score: number
+}
+
+export interface scored_region {
   events: ReadonlyArray<event>,
   score: number
 }

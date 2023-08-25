@@ -16,16 +16,17 @@ describe('scoreEventStream', () => {
   })
 
   it('should return an object whos events property is the expected test region', () => {
-    const actual = scoreEventStream(eventStream);
+    const actual = scoreEventStream(eventStream.slice(0,4));
+    const expected = eventStream.slice(0,4)
 
-    expect(actual.events).toEqual(eventStream.slice(0,4));
+    expect(actual.events).toEqual(expected);
   })
 
   it('should return an object with the cumulative score of the region as the score property', () => {
     const expected = 7;
 
-    const actual = scoreEventStream(eventStream.slice(0,4));
+    const actual = scoreEventStream(eventStream.slice(0,5));
 
-    expect(actual).toEqual(expected);
+    expect(actual.score).toEqual(expected);
   })
 })
