@@ -4,12 +4,12 @@ type User = {
   favColor: string,
 }
 
-export type IUser = User & {
+export type IDAwareUser = User & {
   readonly id: string
 }
 
 export class UserAPI {
-  private users: Record<string, IUser> = {};
+  private users: Record<string, IDAwareUser> = {};
 
   private getUId(): string {
     const id = (Math.floor(Math.random() * 900)).toString();
@@ -20,7 +20,7 @@ export class UserAPI {
     }
   }
 
-  private assignUniqueId(user: User): IUser {
+  private assignUniqueId(user: User): IDAwareUser {
     const newId = this.getUId();
     return {
       ...user,
@@ -28,7 +28,7 @@ export class UserAPI {
     }
   }
 
-  constructor(initial_users: Record<string, IUser> = {}) {
+  constructor(initial_users: Record<string, IDAwareUser> = {}) {
     this.users = initial_users;
   }
 
@@ -37,7 +37,7 @@ export class UserAPI {
     return user_array;
   }
 
-  addUser(userObj: User): IUser {
+  addUser(userObj: User): IDAwareUser {
     const newUserArr = { ...this.users }
     const id_user = this.assignUniqueId(userObj);
     newUserArr[id_user.id] = id_user;
@@ -51,10 +51,11 @@ export class UserAPI {
     )
   }
 
-  deleteUserById(id: string): IUser {
+  deleteUserById(id: string): IDAwareUser {
     const newUserArr = { ...this.users };
+    const deletedUser = this.users[id]
     delete newUserArr[id];
     this.users = newUserArr;
-    return newUserArr[id];
+    return deletedUser;
   }
 }
