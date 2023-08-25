@@ -4,14 +4,14 @@ type Event = {
 };
 
 type Score = {
-  events: Array<Event>;
+  events: EventStream;
   score: number;
 };
 
-// rename to scoreEventStream
+type EventStream = Array<Event>;
 
 const scoreEventStream = (
-  events: Array<Event>,
+  events: EventStream,
   regionLength: number = 5
 ): Score => {
   return {

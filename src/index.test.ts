@@ -1,13 +1,15 @@
 import eventData from "./mock_data";
 import { scoreEventStream } from ".";
 
-describe("scoreEventStream", () => {
+describe("scoreEventStream expected shape", () => {
   it("should return a scored event object", () => {
     const expected = "object";
     const actual = typeof scoreEventStream(eventData);
     expect(actual).toEqual(expected);
   });
+});
 
+describe("scoreEventStream expected subarray lengths", () => {
   it("should have a default region length of 5 if no region length is given", () => {
     const expected = 5;
     const actual = scoreEventStream(eventData).events.length;
@@ -21,7 +23,9 @@ describe("scoreEventStream", () => {
 
     expect(actual).toEqual(expected);
   });
+});
 
+describe("scoreEventStream expected scores", () => {
   it("should return the highest score from the mock data and default region length", () => {
     const expected = 11;
     const actual = scoreEventStream(eventData).score;
