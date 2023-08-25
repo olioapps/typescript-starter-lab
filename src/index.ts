@@ -8,7 +8,9 @@ type Score = {
   score: number;
 };
 
-const eventScore = (
+// rename to scoreEventStream
+
+const scoreEventStream = (
   events: Array<Event>,
   regionLength: number = 5
 ): Score => {
@@ -18,4 +20,4 @@ const eventScore = (
   };
 };
 
-export { eventScore, Event };
+export { scoreEventStream, Event };
