@@ -1,6 +1,6 @@
 type Event = {
   timestamp: number;
-  eventType: string;
+  eventType: "newMessage" | "view" | "screenshot";
 };
 
 type Score = {
@@ -28,7 +28,7 @@ const addScore = (subregion: Array<Event>) => {
   return total;
 };
 
-const eventScore = (events: Array<Event>, regionLength: number = 5): Score => {
+const scoreEventStream = (events: Array<Event>, regionLength: number = 5): Score => {
   if (events.length < regionLength) {
     throw new Error("Region is larger than the list of events");
   } else {
@@ -47,4 +47,4 @@ const eventScore = (events: Array<Event>, regionLength: number = 5): Score => {
   }
 };
 
-export { eventScore, Event };
+export { scoreEventStream, Event };
