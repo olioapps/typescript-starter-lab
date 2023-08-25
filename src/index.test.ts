@@ -61,7 +61,7 @@ describe('getUserById', () => {
 })
 
 describe('deleteUserById', () => {
-  it('should remove the user at the inputted id from the users object', () => {
+  it('should remove expected IDAwareUser', () => {
     const userAPI = new UserAPI(user_repository);
     const expected = {
       name: "Cadder Jenks",
