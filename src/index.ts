@@ -4,9 +4,11 @@ type Event = {
 };
 
 type Score = {
-  events: Array<Event>;
+  events: EventStream;
   score: number;
 };
+
+type EventStream = Array<Event>;
 
 type EventType = "newMessage" | "view" | "screenshot";
 
@@ -24,7 +26,8 @@ const addScore = (subregion: Array<Event>) => {
   return total;
 };
 
-const scoreEventStream = (events: Array<Event>, regionLength: number = 5) => {
+
+const scoreEventStream = (events: EventStream, regionLength: number = 5) => {
   if (regionLength >= events.length) {
     return {
       events: events,
