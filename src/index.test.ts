@@ -138,3 +138,14 @@ describe("UserAPI.searchUsersByName", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe("UserAPI.searchUsersByFavColor", () => {
+  it("should return an array of users with matching favorite colors", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const expected = [{ ...userRepo[465] }];
+
+    const actual = newUserApi.searchUsersByFavColor("pink");
+
+    expect(actual).toEqual(expected);
+  });
+});
