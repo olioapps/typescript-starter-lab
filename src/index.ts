@@ -71,6 +71,17 @@ export class UserAPI {
     return foundUsers;
   }
 
+  searchUsersByFavColor(color: string) {
+    const regex = new RegExp(`${color}`, "i");
+    const foundUsers = [];
+    for (const key in this.users) {
+      if (regex.test(this.users[key].favColor)) {
+        foundUsers.push(this.users[key]);
+      }
+    }
+    return foundUsers;
+  }
+
   private generateUid(): string {
     return Date.now().toString();
   }
