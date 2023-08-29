@@ -40,6 +40,19 @@ Ticket #80: [Ai UserAPI Tech Design](https://github.com/olioapps/typescript-star
 - Since we are unfamiliar with FileSystem and how that creates persistent data in a browser we are asking ChatGPT to be more specific and link resources in the tech spike.
 - We also want a tech spike on Express.js for RESTful API Developement which we've asked ChatGPT to include. Since we asked for more specifics for the FileSystem tech spike, ChatGPT followed the previous format and included links to resources.
 - We are also using CoPilot to assist in formatting the markdown document as well as editing based on CoPilot suggestions.
+- We both used ChatGPT and then CoPilot to write the tech design document and tech spikes. After we made our own versions we peer reviewed each others work and merged our work into the feature branch `ai-userAPI-techdesign`
+
+## Writing Tickets with ChatGPT + CoPilot
+
+### Overview
+1. Write initial tickets based on tech design document using ChatGPT
+2. Write out tickets in markdown format using CoPilot
+3. Review CoPilot suggestions to refine tickets
+
+### Resources
+
+### Notes
+- With our tech design document finalized, we'll write out the tickets using ChatGPT for initial information and CoPilot to format the markdown.
 
 ## Utilizing ChatGPT to create tickets
 
