@@ -50,9 +50,9 @@ describe("UserAPI.addUser", () => {
     const newUserApi = new UserAPI();
     newUserApi.addUser(newUser);
     const expected = newUser.name;
-    const actual = newUserApi.addUser(newUser).name
+    const actual = newUserApi.addUser(newUser).name;
     expect(actual).toEqual(expected);
-  })
+  });
 });
 
 describe("UserAPI.getUserById", () => {
@@ -85,6 +85,76 @@ describe("UserAPI.deleteUserById", () => {
   it("should throw an error if invalid user id was passed", () => {
     const newUserApi = new UserAPI(userRepo);
     const error = () => newUserApi.deleteUserById("");
-    expect(error).toThrow("Unable to delete user");
+    expect(error).toThrow("User not found");
   });
+});
+
+describe("UserAPI.updateUser", () => {
+  it("should update a user at a given id with the user object passed", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const updateUserInfo = {
+      name: "Sandle",
+      age: 15,
+      favColor: "grey",
+    };
+    const expected = "Sandle";
+
+    const updatedUser = newUserApi.updateUserById("342", updateUserInfo);
+    const actual = updatedUser.name;
+
+    expect(actual).toEqual(expected);
+  });
+  it("should throw an error if invalid user id was passed", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const error = () => newUserApi.updateUserById("", newUser);
+
+    expect(error).toThrow("User not found");
+  });
+});
+
+describe("UserAPI.searchUsersByName", () => {
+  it("should return an array of users with matching names", () => {
+    const newUserApi = new UserAPI(userRepo);
+
+    const actual = newUserApi.searchUsersByName("Pi");
+    const expected = [
+      {
+        name: "Pi",
+        age: 15,
+        favColor: "grey",
+        id: "342",
+      },
+    ];
+
+    expect(actual).toEqual(expected);
+  });
+
+  it("should return an array of all users with matching letters in the name", () => {
+    const newUserApi = new UserAPI(userRepo);
+
+    const actual = newUserApi.searchUsersByName("p");
+    const expected = [{ ...userRepo[342] }, { ...userRepo[721] }];
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("UserAPI.searchUsersByFavColor", () => {
+  it("should return an array of users with matching favorite colors", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const expected = [{ ...userRepo[465] }];
+
+    const actual = newUserApi.searchUsersByFavColor("pink");
+
+    expect(actual).toEqual(expected);
+  });
+
+  it("should return an array of all users with matching letters in favColor", () => {
+    const newUserApi = new UserAPI(userRepo);
+    const expected = [{ ...userRepo[342] }, { ...userRepo[721] }];
+
+    const actual = newUserApi.searchUsersByFavColor("e");
+
+    expect(actual).toEqual(expected);
+  })
 });
