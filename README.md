@@ -30,13 +30,10 @@ Ticket #80: [Ai UserAPI Tech Design](https://github.com/olioapps/typescript-star
 2. Based on the answer, we will refine the sections and include tech spikes where necessary as well as any additional resources.
 3. We also want to test out CoPilot's ability to suggest markdown formatting and Tech Design doc suggestions
 
-### Media
-
 ### Resources
 [ChatGPT conversation to generate Tech Design Document](https://chat.openai.com/share/49f6d11b-8b83-4944-976d-1b740b481552)
 
 ### Notes
-
 - In the initial query we forgot to clarify that we wanted to use FileSystem, and ChatGPT used MongoDB instead.
 - The next query we wanted to write the same document but include FileSystem.
 - We want to include tech spikes, so we are asking ChatGPT to include a tech spike in our resources section for using FileSystem to create and store persistent data.
@@ -44,9 +41,21 @@ Ticket #80: [Ai UserAPI Tech Design](https://github.com/olioapps/typescript-star
 - We also want a tech spike on Express.js for RESTful API Developement which we've asked ChatGPT to include. Since we asked for more specifics for the FileSystem tech spike, ChatGPT followed the previous format and included links to resources.
 - We are also using CoPilot to assist in formatting the markdown document as well as editing based on CoPilot suggestions.
 
-## CoPilot to set up Express.js
-
-Ticket #81: [Ai UserAPI Express.js]()
+## Utilizing ChatGPT to create tickets
 
 ### Overview
-1. Using comments to set up Express.js with CoPilot
+We are going to use ChatGPT to create tickets for the steps listed in the approach section of the tech design document. We will ask ChatGPT to create a ticket for each step and then refine the ticket to include more information.
+
+### Resources
+[ChatGPT conversation to generate Tech Design Document](https://chat.openai.com/share/49f6d11b-8b83-4944-976d-1b740b481552)
+
+### Notes
+- Query: Write tickets for the listed steps under the Approach section of the tech design document. Give information on what the ticket should include and how it should be formatted.
+  - Response: Created tickets for each section in the approach section, content is a bit vague but a good place to start
+- Query: For tickets using middle ware, could you be more specific on what technology should be used in the acceptance criteria and add specificity for using FileSystem
+  - Response: added more information about what the middleware function should do
+- Query: ask it to create a ticket for setting up the FileSystem module
+  - It did not create the requested ticket
+- Asked more directly to create a ticket for FileSystem and that worked
+
+Overall, the tickets created were a good starting point but needed more information and specificity. 
