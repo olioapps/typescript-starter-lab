@@ -1,45 +1,162 @@
-# Tickets for AI UserAPI
+# Tickets
 
-## Install & Config Express
+## Basic Express Server Setup
 ### What this is
-Set up the Express.js framework in the project to create a foundation for building the UserAPI.
+This task is to set up a basic Express server.
 
 ### Context
-Up to this point, our API has focused solely on the method logic for CRUD operations. However, for a comprehensive and production-ready API, we need to build out the infrastructure that enables routing, HTTP request handling, and middleware support. Express.js, being a widely-used framework for building web applications and APIs, will provide the necessary tools to achieve this transition seamlessly.
+The Express server needs to be configured to listen to incoming requests and respond with the appropriate data.
 
 ### Acceptance Criteria
-* Express.js is installed as a dependency in the project.
-* The existing method logic is refactored to fit within the Express.js application structure.
-* Endpoints for a basic test route are defined, returning a response to confirm the server's correct operation
-* The API responds to HTTP requests and is ready to accomodate the routing and middleware required for a complete UserAPI implentation.
+* An Express server instance is created and initialized.
+* The server is listening on port 3000.
 
-## Define Routes for CRUD Operations
+## Implement Basic Route for Create User
 ### What this is
-Create route definitions for each CRUD operation following RESTful principles.
+This task is to implement a basic route for creating a user.
 
 ### Context
-The UserAPI will be a RESTful API, meaning that it will follow the REST architectural style. REST is an acronym for REpresentational State Transfer. RESTful APIs are characterized by the following properties:
-* Client-Server Architecture: The client and server are independent of each other. The client is not concerned with data storage and the server is not concerned with the user interface.
-* Stateless: Each request from the client to the server must contain all of the information necessary to understand the request. The server cannot store information about the client's state.
-* Cacheable: The server must indicate whether the response can be cached or not.
-* Uniform Interface: The interface between the client and the server must be uniform. This constraint is further broken down into the following sub-constraints:
-  * Resource-Based: The client and server communicate using resources. A resource is any information that can be named. A resource is accessed via a unique identifier (e.g. URI).
-  * Manipulation of Resources Through Representations: A representation is data that represents a resource. The client sends a representation of the resource to the server and the server sends a representation of the resource to the client.
-  * Self-Descriptive Messages: Each message from the client to the server must contain enough information to describe how the message should be processed.
-  * Hypermedia as the Engine of Application State (HATEOAS): The server sends hypermedia links to the client in the response. The client uses these links to dynamically navigate the API.
+The API needs a route to handle user creation requests.
 
-### Acceptance Criteria
-* Routes are defined for creating, reading, updating, and deleting users.
-* RESTful conventions are followed, using appropriate HTTP methods (POST, GET, PUT, DELETE) and status codes (200, 201, 400, 404, 500).
-* Each route is associated with the corresponding function to handle the operation.
-
-## Implement CRUD Functions Using FileSystem
+## Update UserAPI Methods with FileSystem Integration
 ### What this is
-Implement the CRUD functions using the FileSystem module to read and write to the data file.
+This task is to update the UserAPI methods to integrate with the FileSystem module.
 
 ### Context
-The UserAPI will use the FileSystem module to read and write to the data file. The FileSystem module is a core module in Node.js and does not need to be installed via npm. It provides an API for interacting with the file system. The API is asynchronous and uses callback functions. The following functions will be used to implement the CRUD functions:
-* `fs.readFile()`: Read the data file
-* `fs.writeFile()`: Write to the data file
+The projects UserAPI methods (getAllUsers, getUserById, addUser, updateUserById, deleteUserById) need to be updated to integrate with the FileSystem module for reading and writing user data files.
 
 ### Acceptance Criteria
+* getAllUsers Method:
+  1. Read all user data files from the "data" directory using the FileSystem module.
+  2. Convert the read JSON data into an array of user objects.
+  3. Return the array of user in the response.
+* getUserById Method:
+  1. Read the user data file with the provided ID from the "data" directory using the FileSystem module.
+  2. Convert the read JSON data into a user object.
+  3. Return the user object in the response.
+* addUser Method:
+  1. Generate a unique ID for the user.
+  2. Write the new user data to a new JSON file with the generated ID in the "data" directory using the FileSystem module.
+  3. Reutnr the fenerated ID in the response.
+* updateUserById Method:
+  1. Read the user data file with the provided ID from the "data" directory using the FileSystem module.
+  2. Update the user data with the provided data.
+  3. Write the updated user data back to the JSON file.
+  Return the updated user object in the response.
+* deleteUserById Method:
+  1. Delete the user data file with the provided ID from the "data" directory using the FileSystem module.
+  2. Return a success message in the response.
+
+## Implement Basic Route for Create User
+### What this is
+This task is to implement a basic route for creating a user using Express routing.
+
+### Context
+The API needs a route to handle user creation requests.
+
+### Acceptance Criteria
+* A POST route `/users` is created.
+* The route accepts JSON data in the request body.
+* On request, the user data is extracted from the request body.
+* A success response is sent to the client.
+
+## Implement Basic Route for Get All Users
+### What this is
+This task is to implement a basic route for getting all users using Express routing.
+
+### Context
+The API should allow clients to retrieve a list of all stored user data.
+
+### Acceptance Criteria
+* A GET route `/users` is created.
+* On request, the user data is read from the "data" directory using the FileSystem module.
+* The API sends a JSON array containing all user data in the response.
+
+## Implement Basic Route for Get User by ID
+### What this is
+This task is to implement a basic route for getting a user by ID using Express routing.
+
+### Context
+The API should allow clients to retrieve a specific user by ID.
+
+### Acceptance Criteria
+* A GET route `/users/:id` is created.
+* On request, the user data is read from the "data" directory using the FileSystem module.
+* The API sends a JSON object containing the user data in the response.
+
+## Implement Basic Route for Update User by ID
+### What this is
+This task is to implement a basic route for updating a user by ID using Express routing.
+
+### Context
+Clients should be able to update existing user data.
+
+### Acceptance Criteria
+* A PUT route `/users/:id` is created.
+* On request, the user data is read from the "data" directory using the FileSystem module.
+* The API updates the user data with the new data from the request body.
+* The updated user data is written back to the "data" directory using the FileSystem module.
+* The API sends a JSON object containing the updated user data in the response.
+
+## Implement Basic Route for Delete User by ID
+### What this is
+This task is to implement a basic route for deleting a user by ID using Express routing.
+
+### Context
+Clients should be able to delete existing user data.
+
+### Acceptance Criteria
+* A DELETE route `/users/:id` is created.
+* On request, the user data is read from the "data" directory using the FileSystem module.
+* The API removes the user JSON file.
+* The API sends a success message in the response.
+
+## Implement Data Validation Middleware
+### What this is
+This task is to implement a middleware function to validate incoming user data.
+
+### Context
+Incoming data needs to be validated to ensure it is in the correct format.
+
+### Acceptance Criteria
+* A middleware function using `express-validator` is created.
+* The middleware checks for required fields in the request body.
+* If required fields are missing, the middleware sends an error response.
+
+## Implement Error Handling Middleware
+### What this is
+This task is to implement a middleware function to handle errors.
+
+### Context
+Errors should be handled to provide a consistent response to clients.
+
+### Acceptance Criteria
+* A middleware function is created to handle errors in route handlers.
+* The middleware catches erros thrown during route processing.
+* It sends an appropriate error response to the client, including the error message and status code.
+
+## Write Unit Tests for Routes and Middleware
+### What this is
+This task is to write unit tests for the Express routes and middleware.
+
+### Context
+Unit tests ensure that the implemented functionality behaves as expected.
+
+### Acceptance Criteria
+* Unit tests are written for each route handler using Jest.
+* Unit tests are written for each middleware function using Jest.
+Tests verify that the correct response is sent for each route.
+Tests cover different scenarios, including successful and error cases.
+
+## Document API Using cURLs
+### What this is
+This task is to document the API using cURLs.
+
+### Context
+The API needs to be documented so that clients can use it.
+
+### Acceptance Criteria
+* A markdown file is created to document the API.
+* The file contains cURLs for each route.
+* The cURLs include example requests and responses.
+* The cURLs include error cases.
