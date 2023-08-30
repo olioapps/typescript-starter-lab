@@ -87,3 +87,12 @@ Our understanding of the problem set has changed based on feedback from Dustin. 
 **Query to create subtickets for FileSystem**
 ![create subtickets](./assets/img/newTickets.png)
 ![response](./assets/img/newTicketResponse.png)
+
+
+## Ticket #96: Implement FileSystemService Setup
+
+### Overview
+I had ChatGPT create a series of tickets for implementing file system service setup. I then refined the tickets to include more information and specificity. Then, I copy and pasted the context and acceptance criteria into the fileSystemService.ts file as comments. I then used CoPilot to write the code for the fileSystemService.ts file based on those tickets.
+
+### Media
+![code produced with copilot + comments](./assets/img/copilotFSSample.png)
