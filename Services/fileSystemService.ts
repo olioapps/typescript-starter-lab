@@ -78,5 +78,15 @@ export class FileSystemService {
     });
   }
 
-  deleteUserDataFile() {}
+  deleteUserDataFile(userId: string) {
+    return new Promise((resolve, reject) => {
+      fs.unlink(`./data/${userId}.json`, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(userId);
+        }
+      });
+    });
+  }
 }

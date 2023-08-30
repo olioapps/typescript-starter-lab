@@ -105,10 +105,16 @@ Our understanding of the problem set has changed based on feedback from Dustin. 
 ![response](./assets/img/newTicketResponse.png)
 
 
-## Ticket #96: Implement FileSystemService Setup
+## Implementing FileSystemService Strategy
 
 ### Overview
 I had ChatGPT create a series of tickets for implementing file system service setup. I then refined the tickets to include more information and specificity. Then, I copy and pasted the context and acceptance criteria into the fileSystemService.ts file as comments. I then used CoPilot to write the code for the fileSystemService.ts file based on those tickets.
 
 ### Media
 ![code produced with copilot + comments](./assets/img/copilotFSSample.png)
+
+### Notes
+- I copy and paste the acceptance criteria that ChatGPT generated into the fileSystemService.ts file as comments
+- I accept the suggestions from CoPilot to write the code for the fileSystemService.ts file
+- I make small edits based on what I think will work.
+- I want to see how much of the code I can write using CoPilot and how much I need to write myself. I will go back and edit this file to make it work with the rest of the application once I have a better sense of what is working and what isn't since this tech/architecture is pretty new to me.
