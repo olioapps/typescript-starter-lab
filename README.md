@@ -11,7 +11,7 @@ This project will wrap the UserAPI in an Express application so it is queryable 
 The purpose of this project is to document the junior developers approach to using AI tools with the intent of assisting future onboarding, interns, and developer training. We will use AI to write our technical design and tickets according to the approach listed therein. Tickets will include an overview of the approach to be applied to the problem set and the AI tools to be used.
 
 ## Table of Contents
-1. [Utliizing ChatGPT to create Technical Design Document](#utilizing-chatgpt-to-create-technical-design-document)
+1. [Utilizing ChatGPT to create Technical Design Document](#utilizing-chatgpt-to-create-technical-design-document)
   * [Overview](#overview)
   * [Media](#media)
   * [Resources](#resources)
@@ -82,8 +82,6 @@ Overall, the tickets created were a good starting point but needed more informat
 
 ### Overview
 Our understanding of the problem set has changed based on feedback from Dustin. We are going to regenerate the tickets for FileSystem to reflect the new understanding of the layers of the application.
-
-### Media
 
 ### Media
 **Query to create subtickets for FileSystem**
