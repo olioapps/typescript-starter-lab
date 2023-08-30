@@ -1,4 +1,4 @@
-import { UserAPI } from ".";
+import { UserAPI } from "../../Services/UserAPI";
 import { userRepo, newUser } from "./mockdata";
 
 describe("UserAPI constructor", () => {
