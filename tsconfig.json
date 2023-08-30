@@ -5,13 +5,15 @@
     "outDir": "dist",
     "sourceMap": true,
     "strict": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    // "esModuleInterop": true,
+    // "types": ["express"]
   },
   "include": [
     "src/**/*.ts",
-    "tests/UserAPI_tests/index.test.ts",
+    "tests/UserAPI_tests/userAPI.test.ts",
     "tests/UserAPI_tests/mockdata.ts",
-    "Controllers/server.ts",
+    "Controllers/UserController.ts",
     "Services/userAPIService.ts"
   ],
   "exclude": [

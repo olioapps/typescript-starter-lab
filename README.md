@@ -125,3 +125,7 @@ We are going to use ChatGPT to learn about cURLs to test our API endpoints.
 ### Notes
 - Query: What are cURLs and how will we use them with express and FileSystem?
   - Response: cURL is a command line tool for transferring data with URL syntax. It is not a core module and must be installed via npm.
+
+### Media
+![cURLs](./assets/img/cURL.png)
+![passing cURL tests](./assets/img/curl_tests.png)
