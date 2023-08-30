@@ -149,3 +149,16 @@ I continued my conversation with ChatGPT to write a new ticket to now link my Fi
 - The process involved putting in the acceptance criteria as comments and seeing what CoPilot would suggest. Since the integration wasn't working how I expected, I decided to start a new conversation with ChatGPT outside the context of the tech design document. This way I felt I could get example code while getting a better understanding of what I was trying to do.
 - Once I worked out what that integration looked like i.e. how I was going to have the constructor take the fileServiceSystem as a parameter and how users were then stored in the UserAPIService, working with coPilot to integrate the code was much easier, as it already had the context of the FSService functions and the userAPIService functions.
 
+## Create UserProvider
+
+### Overview
+I used ChatGPT to create a ticket for creating a UserProvider class. I then used CoPilot to write the code for the UserProvider class.
+
+### Resources
+[ChatGPT conversation to create UserProvider](https://chat.openai.com/share/12249f85-ce16-455c-9619-4c8f6b561a6c/continue)
+
+### Notes
+- We were very unsure of how to implement the architecnture of Controller/Provider/Services so we asked ChatGPT and were able to create a UserProvider file with the information given from ChatGPT and the help of coPilot.
+
+### Media
+![UserProvider](./assets/img/UserProvider.png)
