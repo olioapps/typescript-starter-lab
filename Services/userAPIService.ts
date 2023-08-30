@@ -1,5 +1,3 @@
-import { fileSystemService } from "./fileSystemService";
-
 //  Update the getUser method to use the FileSystemService's readFile function for retrieving user data by ID.
 // Update the createUser method to use the FileSystemService's writeFile function for adding new user data.
 // Update the updateUser method to use the FileSystemService's updateFile function for modifying user data.
@@ -20,14 +18,14 @@ export interface IdAwareUser extends User {
 interface FileSystemService {
   readAllUserDataFiles(): Promise<Record<string, User>>;
   readUserDataFile(userId: string): Promise<User>;
-  writeUserDataFile(user: User, userId: string): Promise<User>;
+  writeUserDataFile(user: IdAwareUser): Promise<IdAwareUser>;
   updateUserDataFile(userId: string, updatedUserData: any): Promise<User>;
   deleteUserDataFile(userId: string): Promise<string>;
 }
 
 export class UserAPI {
   // constructor should now take the fileSystemService as a parameter
-  private fileSystemService: FileSystemService
+  private fileSystemService: FileSystemService;
   private users: IdAwareUser[];
   constructor(fileSystemService: FileSystemService) {
     this.fileSystemService = fileSystemService;
@@ -44,23 +42,26 @@ export class UserAPI {
       }));
     } catch (error) {
       console.error(error);
-    }    
+    }
   }
 
   getAllUsers(): ReadonlyArray<IdAwareUser> {
-    return [...Object.values(this.users)];
+    return [...this.users];
   }
 
-  addUser(user: User): IdAwareUser {
+  async addUser(user: User) {
     const newId = this.generateUid();
     const newUser = {
       ...user,
       id: newId,
     };
-    this.users[newId] = {
-      ...newUser,
-    };
-    return newUser;
+    this.users.push(newUser);
+    try {
+      await this.fileSystemService.writeUserDataFile(newUser);
+      return newUser;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   getUserById(id: string): IdAwareUser {
