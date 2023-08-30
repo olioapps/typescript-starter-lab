@@ -72,13 +72,17 @@ export class UserAPI {
     }
   }
 
-  deleteUserById(id: string): IdAwareUser {
-    if (!this.users[id]) {
-      throw new Error("User not found");
-    } else {
-      const { [id]: userToBeDeleted, ...rest } = this.users;
-      this.users = rest;
-      return userToBeDeleted;
+  deleteUserById(id: string) {
+    const index = this.users.findIndex((user) => user.id === id);
+    if (index !== -1) {
+      const deletedUser = this.users[index];
+      this.users.splice(index, 1);
+      try {
+        this.fileSystemService.deleteUserDataFile(id);
+      } catch (error) {
+        console.error(error);
+      }
+      return deletedUser;
     }
   }
 
@@ -94,27 +98,27 @@ export class UserAPI {
     }
   }
 
-  searchUsersByName(name: string) {
-    const regex = new RegExp(`${name}`, "i");
-    const foundUsers = [];
-    for (const key in this.users) {
-      if (regex.test(this.users[key].name)) {
-        foundUsers.push(this.users[key]);
-      }
-    }
-    return foundUsers;
-  }
+  // searchUsersByName(name: string) {
+  //   const regex = new RegExp(`${name}`, "i");
+  //   const foundUsers = [];
+  //   for (const key in this.users) {
+  //     if (regex.test(this.users[key].name)) {
+  //       foundUsers.push(this.users[key]);
+  //     }
+  //   }
+  //   return foundUsers;
+  // }
 
-  searchUsersByFavColor(color: string) {
-    const regex = new RegExp(`${color}`, "i");
-    const foundUsers = [];
-    for (const key in this.users) {
-      if (regex.test(this.users[key].favColor)) {
-        foundUsers.push(this.users[key]);
-      }
-    }
-    return foundUsers;
-  }
+  // searchUsersByFavColor(color: string) {
+  //   const regex = new RegExp(`${color}`, "i");
+  //   const foundUsers = [];
+  //   for (const key in this.users) {
+  //     if (regex.test(this.users[key].favColor)) {
+  //       foundUsers.push(this.users[key]);
+  //     }
+  //   }
+  //   return foundUsers;
+  // }
 
   private generateUid(): string {
     return Date.now().toString();
