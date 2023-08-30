@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { User } from "./userAPIService";
+import { IdAwareUser, User } from "./userAPIService";
 
 const readAllUserDataFiles = () => {
   return new Promise((resolve, reject) => {
@@ -34,9 +34,9 @@ const readUserDataFile = (userId: string) => {
   });
 };
 
-const writeUserDataFile = (user: User, userId: string) => {
+const writeUserDataFile = (user: IdAwareUser) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(`./data/${userId}.json`, JSON.stringify(user), (err) => {
+    fs.writeFile(`./data/${user.id}.json`, JSON.stringify(user), (err) => {
       if (err) {
         reject(err);
       } else {
