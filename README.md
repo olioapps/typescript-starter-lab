@@ -16,8 +16,13 @@ The purpose of this project is to document the junior developers approach to usi
   * [Media](#media)
   * [Resources](#resources)
   * [Notes](#notes)
-2. [CoPilot to set up Express.js](#copilot-to-set-up-expressjs)
+2. [Utilizing ChatGPT to create tickets](#utilizing-chatgpt-to-create-tickets)
   * [Overview](#overview-1)
+  * [Resources](#resources-1)
+  * [Notes](#notes-1)
+3. [Regenerating new tickets for FileSystem](#regenerating-new-tickets-for-filesystem)
+  * [Overview](#overview-2)
+  * [Media](#media-1)
   
 
 ## Utilizing ChatGPT to create Technical Design Document
@@ -33,6 +38,16 @@ Ticket #80: [Ai UserAPI Tech Design](https://github.com/olioapps/typescript-star
 ### Resources
 [ChatGPT conversation to generate Tech Design Document](https://chat.openai.com/share/49f6d11b-8b83-4944-976d-1b740b481552)
 [ChatGPT architecture generation](https://chat.openai.com/share/12249f85-ce16-455c-9619-4c8f6b561a6c)
+
+### Media
+**Query to update architecture**
+![update architecture](./assets/img/updateArchitecture.png)
+![response](./assets/img/reponseArchitecture.png)
+
+**Query to update approach based on new architecture**
+![update approach](./assets/img/updateApproach.png)
+![response](./assets/img/updatedApproach.png)
+
 
 ### Notes
 - In the initial query we forgot to clarify that we wanted to use FileSystem, and ChatGPT used MongoDB instead.
@@ -59,6 +74,7 @@ We are going to use ChatGPT to create tickets for the steps listed in the approa
 - Query: ask it to create a ticket for setting up the FileSystem module
   - It did not create the requested ticket
 - Asked more directly to create a ticket for FileSystem and that worked
+- Updated architecture section to include more information about the layers of the application, queried to have new tickets reflect the FileSystem services section.
 
 Overall, the tickets created were a good starting point but needed more information and specificity. 
 
@@ -67,6 +83,9 @@ Overall, the tickets created were a good starting point but needed more informat
 ### Overview
 Our understanding of the problem set has changed based on feedback from Dustin. We are going to regenerate the tickets for FileSystem to reflect the new understanding of the layers of the application.
 
-### Resources
+### Media
 
-### Notes
+### Media
+**Query to create subtickets for FileSystem**
+![create subtickets](./assets/img/newTickets.png)
+![response](./assets/img/newTicketResponse.png)
