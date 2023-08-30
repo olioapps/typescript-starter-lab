@@ -105,13 +105,14 @@ Our understanding of the problem set has changed based on feedback from Dustin. 
 ![response](./assets/img/newTicketResponse.png)
 
 
-## Ticket #96: Implement FileSystemService Setup
+## Implementing FileSystemService Strategy
 
 ### Overview
 I had ChatGPT create a series of tickets for implementing file system service setup. I then refined the tickets to include more information and specificity. Then, I copy and pasted the context and acceptance criteria into the fileSystemService.ts file as comments. I then used CoPilot to write the code for the fileSystemService.ts file based on those tickets.
 
 ### Media
 ![code produced with copilot + comments](./assets/img/copilotFSSample.png)
+
 
 ## Ticket #105: Test Express Routes
 [#105](https://github.com/orgs/olioapps/projects/11/views/1?pane=issue&itemId=37289264)
@@ -129,3 +130,22 @@ We are going to use ChatGPT to learn about cURLs to test our API endpoints.
 ### Media
 ![cURLs](./assets/img/cURL.png)
 ![passing cURL tests](./assets/img/curl_tests.png)
+=======
+### Notes
+- I copy and paste the acceptance criteria that ChatGPT generated into the fileSystemService.ts file as comments
+- I accept the suggestions from CoPilot to write the code for the fileSystemService.ts file
+- I make small edits based on what I think will work.
+- I want to see how much of the code I can write using CoPilot and how much I need to write myself. I will go back and edit this file to make it work with the rest of the application once I have a better sense of what is working and what isn't since this tech/architecture is pretty new to me.
+
+## Integrating FileSystemService with UserAPIService
+
+### Overview
+I continued my conversation with ChatGPT to write a new ticket to now link my FileSystemService with my UserAPIService. I decided to keep this integration as one ticket. Then I tried using just coPilot to write the integrated code, realized I needed more context and queried chatGPT.
+
+### Resources 
+[Conversation on how to integrate filesystem with userAPI](https://chat.openai.com/share/57ed51c8-e426-4e1b-beab-5dc47a35a8be)
+
+### Notes
+- The process involved putting in the acceptance criteria as comments and seeing what CoPilot would suggest. Since the integration wasn't working how I expected, I decided to start a new conversation with ChatGPT outside the context of the tech design document. This way I felt I could get example code while getting a better understanding of what I was trying to do.
+- Once I worked out what that integration looked like i.e. how I was going to have the constructor take the fileServiceSystem as a parameter and how users were then stored in the UserAPIService, working with coPilot to integrate the code was much easier, as it already had the context of the FSService functions and the userAPIService functions.
+
