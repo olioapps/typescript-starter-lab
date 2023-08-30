@@ -34,7 +34,21 @@ export class FileSystemService {
     });
   }
 
-  writeUserDataFile() {}
+  writeUserDataFile(user) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(
+        `./data/${user.id}.json`,
+        JSON.stringify(user),
+        (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(user);
+          }
+        }
+      );
+    });
+  }
 
   updateUserDataFile() {}
 
