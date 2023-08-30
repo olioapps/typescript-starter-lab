@@ -8,7 +8,10 @@
     "strictNullChecks": true
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "tests/UserAPI_tests/index.test.ts",
+    "tests/UserAPI_tests/mockdata.ts",
+    "Services/UserAPI.ts"
   ],
   "exclude": [
     "node_modules"
