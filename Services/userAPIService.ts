@@ -87,14 +87,19 @@ export class UserAPI {
   }
 
   updateUserById(id: string, user: User) {
-    if (!this.users[id]) {
-      throw new Error("User not found");
-    } else {
-      this.users[id] = {
+    const index = this.users.findIndex((user) => user.id === id);
+    if (index !== -1) {
+      const updatedUser = {
+        ...this.users[index],
         ...user,
-        id: id,
       };
-      return { ...this.users[id] };
+      this.users[index] = updatedUser;
+      try {
+        this.fileSystemService.updateUserDataFile(id, updatedUser);
+      } catch (error) {
+        console.error(error);
+      }
+      return updatedUser;
     }
   }
 
