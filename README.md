@@ -113,6 +113,24 @@ I had ChatGPT create a series of tickets for implementing file system service se
 ### Media
 ![code produced with copilot + comments](./assets/img/copilotFSSample.png)
 
+
+## Ticket #105: Test Express Routes
+[#105](https://github.com/orgs/olioapps/projects/11/views/1?pane=issue&itemId=37289264)
+
+## Overview
+We are going to use ChatGPT to learn about cURLs to test our API endpoints.
+
+### Resources
+[ChatGPT conversation to learn about cURLs](https://chat.openai.com/share/e235ae52-ae55-40a2-a304-031b0ff15d3a/continue)
+
+### Notes
+- Query: What are cURLs and how will we use them with express and FileSystem?
+  - Response: cURL is a command line tool for transferring data with URL syntax. It is not a core module and must be installed via npm.
+
+### Media
+![cURLs](./assets/img/cURL.png)
+![passing cURL tests](./assets/img/curl_tests.png)
+=======
 ### Notes
 - I copy and paste the acceptance criteria that ChatGPT generated into the fileSystemService.ts file as comments
 - I accept the suggestions from CoPilot to write the code for the fileSystemService.ts file
@@ -130,3 +148,4 @@ I continued my conversation with ChatGPT to write a new ticket to now link my Fi
 ### Notes
 - The process involved putting in the acceptance criteria as comments and seeing what CoPilot would suggest. Since the integration wasn't working how I expected, I decided to start a new conversation with ChatGPT outside the context of the tech design document. This way I felt I could get example code while getting a better understanding of what I was trying to do.
 - Once I worked out what that integration looked like i.e. how I was going to have the constructor take the fileServiceSystem as a parameter and how users were then stored in the UserAPIService, working with coPilot to integrate the code was much easier, as it already had the context of the FSService functions and the userAPIService functions.
+
