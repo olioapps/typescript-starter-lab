@@ -1,10 +1,10 @@
-type User = {
+export type User = {
   name: string;
   age: number;
   favColor: string;
 };
 
-interface IdAwareUser extends User {
+export interface IdAwareUser extends User {
   readonly id: string;
 }
 
