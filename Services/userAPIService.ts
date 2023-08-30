@@ -1,10 +1,3 @@
-//  Update the getUser method to use the FileSystemService's readFile function for retrieving user data by ID.
-// Update the createUser method to use the FileSystemService's writeFile function for adding new user data.
-// Update the updateUser method to use the FileSystemService's updateFile function for modifying user data.
-// Update the deleteUser method to use the FileSystemService's deleteFile function for removing user data files.
-// Ensure that the UserAPIService methods remain modular and error handling is appropriately managed.
-// Verify that the methods return the expected results after integrating with the FileSystemService.
-
 export type User = {
   name: string;
   age: number;
@@ -24,7 +17,6 @@ interface FileSystemService {
 }
 
 export class UserAPI {
-  // constructor should now take the fileSystemService as a parameter
   private fileSystemService: FileSystemService;
   private users: IdAwareUser[];
   constructor(fileSystemService: FileSystemService) {
