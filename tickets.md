@@ -18,6 +18,14 @@ This task is to implement a basic route for creating a user.
 ### Context
 The API needs a route to handle user creation requests.
 
+### Acceptance Criteria
+* A POST route `/users` is created.
+* The route accepts JSON data in the request body.
+* On request, the user data is extracted from the request body.
+* User data is written to  JSON file using the FileSystem module.
+* A success response is sent to the client.
+
+
 ## Update UserAPI Methods with FileSystem Integration
 ### What this is
 This task is to update the UserAPI methods to integrate with the FileSystem module.
@@ -47,18 +55,6 @@ The projects UserAPI methods (getAllUsers, getUserById, addUser, updateUserById,
   1. Delete the user data file with the provided ID from the "data" directory using the FileSystem module.
   2. Return a success message in the response.
 
-## Implement Basic Route for Create User
-### What this is
-This task is to implement a basic route for creating a user using Express routing.
-
-### Context
-The API needs a route to handle user creation requests.
-
-### Acceptance Criteria
-* A POST route `/users` is created.
-* The route accepts JSON data in the request body.
-* On request, the user data is extracted from the request body.
-* A success response is sent to the client.
 
 ## Implement Basic Route for Get All Users
 ### What this is
