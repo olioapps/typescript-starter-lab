@@ -11,9 +11,7 @@
     "src/**/*.ts",
     "tests/UserAPI_tests/index.test.ts",
     "tests/UserAPI_tests/mockdata.ts",
-
-
-, "Controllers/server.ts"  ],
+    "Controllers/server.ts",
     "Services/userAPIService.ts"
   ],
   "exclude": [
