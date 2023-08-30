@@ -118,3 +118,9 @@ I had ChatGPT create a series of tickets for implementing file system service se
 - I accept the suggestions from CoPilot to write the code for the fileSystemService.ts file
 - I make small edits based on what I think will work.
 - I want to see how much of the code I can write using CoPilot and how much I need to write myself. I will go back and edit this file to make it work with the rest of the application once I have a better sense of what is working and what isn't since this tech/architecture is pretty new to me.
+
+## Generating new ticket to integrate FileSystemService with UserAPIService
+
+### Overview
+I continued my conversation with ChatGPT to write a new ticket to now link my FileSystemService with my UserAPIService. I decided to keep this integration as one ticket.
+
