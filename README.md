@@ -32,6 +32,7 @@ Ticket #80: [Ai UserAPI Tech Design](https://github.com/olioapps/typescript-star
 
 ### Resources
 [ChatGPT conversation to generate Tech Design Document](https://chat.openai.com/share/49f6d11b-8b83-4944-976d-1b740b481552)
+[ChatGPT architecture generation](https://chat.openai.com/share/12249f85-ce16-455c-9619-4c8f6b561a6c)
 
 ### Notes
 - In the initial query we forgot to clarify that we wanted to use FileSystem, and ChatGPT used MongoDB instead.
@@ -40,6 +41,7 @@ Ticket #80: [Ai UserAPI Tech Design](https://github.com/olioapps/typescript-star
 - Since we are unfamiliar with FileSystem and how that creates persistent data in a browser we are asking ChatGPT to be more specific and link resources in the tech spike.
 - We also want a tech spike on Express.js for RESTful API Developement which we've asked ChatGPT to include. Since we asked for more specifics for the FileSystem tech spike, ChatGPT followed the previous format and included links to resources.
 - We are also using CoPilot to assist in formatting the markdown document as well as editing based on CoPilot suggestions.
+- Updated the tech design to include a section on architecture based on conversation with human Dustin, using ChatGPT to define architecture and CoPilot to format the markdown.
 
 ## Utilizing ChatGPT to create tickets
 
@@ -59,3 +61,12 @@ We are going to use ChatGPT to create tickets for the steps listed in the approa
 - Asked more directly to create a ticket for FileSystem and that worked
 
 Overall, the tickets created were a good starting point but needed more information and specificity. 
+
+## Regenerating new tickets for FileSystem
+
+### Overview
+Our understanding of the problem set has changed based on feedback from Dustin. We are going to regenerate the tickets for FileSystem to reflect the new understanding of the layers of the application.
+
+### Resources
+
+### Notes
