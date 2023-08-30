@@ -148,10 +148,58 @@ The API will be built using Express and will interact with the FileSystem module
 
 
 ## Approach
-1. Install and configure Express
-2. Define routes for each CRUD operation following RESTful principles.
-3. Define functions for each route that will perform the CRUD operation using the FileSystem module.
-4. Define functions for each route that will handle errors and invalid requests.
-5. Use the FileSystem module to read and write to the data file.
-6. Write unit tests for each route.
-7. Document the API using cURLs.
+1. **Directory Structure**:
+   Organize your project using the following directory structure:
+   ```
+   project-root/
+   ├── controllers/
+   │   └── userController.js
+   ├── providers/
+   │   └── userProvider.js
+   ├── services/
+   │   ├── userAPIService.js
+   │   └── fileSystemService.js
+   ├── data/
+   ├── app.js
+   └── ...
+   ```
+
+2. **Express Server Setup**:
+   - In `app.js`, set up the basic Express server:
+     ```javascript
+     const express = require('express');
+     const app = express();
+     const PORT = process.env.PORT || 3000;
+
+     app.listen(PORT, () => {
+       console.log(`Server is running on port ${PORT}`);
+     });
+     ```
+
+3. **FileSystemService**:
+   - Implement functions in `fileSystemService.js` to read and write JSON files using the FileSystem module.
+   - These functions will handle CRUD operations on user data files.
+
+4. **UserAPIService**:
+   - In `userAPIService.js`, create functions that interact with the FileSystemService for data access.
+   - Implement functions to handle CRUD operations for user data.
+
+5. **UserProvider**:
+   - Implement functions in `userProvider.js` that handle requests from the userController.
+   - Use the UserAPIService to perform data operations.
+
+6. **UserController**:
+   - In `userController.js`, define Express routes and route handlers.
+   - Utilize the UserProvider to process incoming requests.
+
+7. **Middleware and Error Handling**:
+   - Implement middleware functions for JSON parsing, CORS, and error handling.
+   - Apply middleware functions globally using `app.use`.
+
+8. **Testing**:
+   - Write unit tests for each layer: UserAPIService, FileSystemService, UserProvider, and UserController.
+   - Use testing libraries such as Mocha, Chai, and Supertest to ensure functionality and integration.
+
+9. **Documentation**:
+   - Document your API endpoints using tools like Swagger or Postman.
+   - Provide clear documentation for your architectural layers and how they interact.
