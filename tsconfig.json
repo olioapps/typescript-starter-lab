@@ -12,7 +12,7 @@
     "tests/UserAPI_tests/index.test.ts",
     "tests/UserAPI_tests/mockdata.ts",
     "Services/UserAPI.ts"
-  ],
+, "Controllers/server.ts"  ],
   "exclude": [
     "node_modules"
   ]
