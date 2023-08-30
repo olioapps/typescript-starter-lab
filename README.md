@@ -112,3 +112,16 @@ I had ChatGPT create a series of tickets for implementing file system service se
 
 ### Media
 ![code produced with copilot + comments](./assets/img/copilotFSSample.png)
+
+## Ticket #105: Test Express Routes
+[#105](https://github.com/orgs/olioapps/projects/11/views/1?pane=issue&itemId=37289264)
+
+## Overview
+We are going to use ChatGPT to learn about cURLs to test our API endpoints.
+
+### Resources
+[ChatGPT conversation to learn about cURLs](https://chat.openai.com/share/e235ae52-ae55-40a2-a304-031b0ff15d3a/continue)
+
+### Notes
+- Query: What are cURLs and how will we use them with express and FileSystem?
+  - Response: cURL is a command line tool for transferring data with URL syntax. It is not a core module and must be installed via npm.
