@@ -1,5 +1,7 @@
-const userAPIService = require("./userAPIService");
-import { User } from "../Services/userAPIService";
+import { User, UserAPI } from "../Services/userAPIService";
+import { fileSystemService } from "../Services/fileSystemService";
+
+const userAPIService = new UserAPI(fileSystemService);
 
 export class UserProvider {
   static async getAllUsers() {
@@ -49,7 +51,7 @@ export class UserProvider {
       throw err;
     }
   }
-  
+
   // static async getUserByName(name: string) {
   //   try {
   //     const user = await userAPIService.getUserByName(name);
