@@ -11,18 +11,6 @@ export class UserProvider {
     }
   }
 
-  static async createUser(user: User) {
-    try {
-      if (!user.name) {
-        throw new Error("Name is required");
-      }
-      const createdUser = await userAPIService.createUser(user);
-      return { message: "User Created", user: createdUser };
-    } catch (err) {
-      throw err;
-    }
-  }
-
   static async getUserById(id: string) {
     try {
       const user = await userAPIService.getUserById(id);
@@ -32,39 +20,51 @@ export class UserProvider {
     }
   }
 
-  static async getUserByName(name: string) {
+  static async addUser(user: User) {
     try {
-      const user = await userAPIService.getUserByName(name);
-      return { message: "User Found", user };
+      if (!user.name) {
+        throw new Error("Name is required");
+      }
+      const createdUser = await userAPIService.addUser(user);
+      return { message: "User Created", user: createdUser };
     } catch (err) {
       throw err;
     }
   }
 
-  static async getUserByFavColor(favColor: string) {
+  static async deleteUserById(id: string) {
     try {
-      const user = await userAPIService.getUserByFavColor(favColor);
-      return { message: "User Found", user };
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  static async deleteUser(id: string) {
-    try {
-      const deletedUser = await userAPIService.deleteUser(id);
+      const deletedUser = await userAPIService.deleteUserById(id);
       return { message: "User Deleted", user: deletedUser };
     } catch (err) {
       throw err;
     }
   }
 
-  static async updateUser(id: string, updatedUser: User) {
+  static async updateUserById(id: string, updatedUser: User) {
     try {
-      const user = await userAPIService.updateUser(id, updatedUser);
+      const user = await userAPIService.updateUserById(id, updatedUser);
       return { message: "User Updated", user };
     } catch (err) {
       throw err;
     }
   }
+  
+  // static async getUserByName(name: string) {
+  //   try {
+  //     const user = await userAPIService.getUserByName(name);
+  //     return { message: "User Found", user };
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
+
+  // static async getUserByFavColor(favColor: string) {
+  //   try {
+  //     const user = await userAPIService.getUserByFavColor(favColor);
+  //     return { message: "User Found", user };
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 }
