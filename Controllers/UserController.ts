@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 const express = require('express');
+const UserProvider = require('../Providers/UserProvider');
+
 const app = express();
 
 app.get('/', (req: Request, res: Response) => {
@@ -8,45 +10,73 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.post('/users', (req: Request, res: Response) => {
-  const newUser = req.body;
-  console.log("Received New User", newUser);
-  return res.status(201).json({ message: "User Created" });
+  try {
+    const user = req.body;
+    const createdUser = UserProvider.createUser(user);
+    return res.status(200).json(createdUser);
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
+  }
 });
 
 app.get('/users', (req: Request, res: Response) => {
-  return res.status(200).json({ message: "All users" });
+  try {
+    const users = UserProvider.getAllUsers();
+    return res.status(200).json(users);
+  } catch (err: any) {
+    return res.status(400).json({ message: err.message });
+  }
 });
 
 app.get('/users/:id', (req: Request, res: Response) => {
-  const id = req.params.id;
-  console.log("Received User ID", id);
-  return res.status(200).json({ message: "User Found" });
+  try {
+    const id = req.params.id;
+    const user = UserProvider.getUserById(id);
+    return res.status(200).json(user);
+  } catch (err: any) {
+    return res.status(400).json({ message: err.message });
+  }
 });
 
 app.get('/users/:name', (req: Request, res: Response) => {
-  const name = req.params.name;
-  console.log("Received User Name", name);
-  return res.status(200).json({ message: "User Found" });
+  try {
+    const name = req.params.name;
+    const user = UserProvider.getUserByName(name);
+    return res.status(200).json(user);
+  } catch (err: any) {
+    return res.status(400).json({ message: err.message });
+  }
 });
 
 app.get('/users/:favColor', (req: Request, res: Response) => {
-  const favColor = req.params.favColor;
-  console.log("Received User FavColor", favColor);
-  return res.status(200).json({ message: "User Found" });
+  try {
+    const favColor = req.params.favColor;
+    const user = UserProvider.getUserByFavColor(favColor);
+    return res.status(200).json(user);
+  } catch (err: any) {
+    return res.status(400).json({ message: err.message });
+  }
 });
 
 app.delete('/users/:id', (req: Request, res: Response) => {
-  const id = req.params.id;
-  console.log("Received User ID", id);
-  return res.status(200).json({ message: "User Deleted" });
+  try {
+    const id = req.params.id;
+    const deletedUser = UserProvider.deleteUser(id);
+    return res.status(200).json(deletedUser);
+  } catch (err: any) {
+    return res.status(400).json({ message: err.message });
+  }
 });
 
 app.put('/users/:id', (req: Request, res: Response) => {
-  const id = req.params.id;
-  const updatedUser = req.body;
-  console.log("Received User ID", id);
-  console.log("Received Updated User", updatedUser);
-  return res.status(200).json({ message: "User Updated" });
+  try {
+    const id = req.params.id;
+    const user = req.body;
+    const updatedUser = UserProvider.updateUser(id, user);
+    return res.status(200).json(updatedUser);
+  } catch (err: any) {
+    return res.status(400).json({ message: err.message });
+  }
 });
 
 app.listen(3000, () => {
