@@ -40,7 +40,20 @@ export class UserAPI {
   getAllUsers(): ReadonlyArray<IdAwareUser> {
     return [...this.users];
   }
-
+  
+  
+  async getUserById(id: string) {
+    try {
+      const user = await this.fileSystemService.readUserDataFile(id);
+      return {
+        ...user,
+        id,
+      };
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   async addUser(user: User) {
     const newId = this.generateUid();
     const newUser = {
@@ -53,14 +66,6 @@ export class UserAPI {
       return newUser;
     } catch (error) {
       console.error(error);
-    }
-  }
-
-  getUserById(id: string): IdAwareUser {
-    if (!this.users[id]) {
-      throw new Error("User not found");
-    } else {
-      return { ...this.users[id] };
     }
   }
 

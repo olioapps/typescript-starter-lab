@@ -162,3 +162,24 @@ I used ChatGPT to create a ticket for creating a UserProvider class. I then used
 
 ### Media
 ![UserProvider](./assets/img/UserProvider.png)
+
+## #112 Connect Express to UserProvider
+
+### Overview
+Now that we have a UserProvider class, we need to connect it to our Express app so that the CRUD functions will work. 
+
+### Resources
+[ChatGPT conversation](https://chat.openai.com/share/4bbfa4dc-ada1-4e0a-b2a7-6bd02c180fc7)
+[#112](https://github.com/orgs/olioapps/projects/11/views/1?pane=issue&itemId=37296257)
+Used co-pilot 
+
+### Media
+
+![connect controller to provider](./assets/img/connect_controller_provider.png)
+
+### Notes
+-Used copilot to write the code for the UserProvider class
+-used copilot to refactor UserController to use providers
+-using cURL to test endpoints now that the controller uses the providers but running into an issue of needing to instantiate UserAPI, asking chatGPT for help
+
+

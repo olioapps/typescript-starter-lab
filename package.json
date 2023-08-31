@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch & nodemon dist",
-    "dev2": "tsc -w & nodemon -w dist dist/Controllers/server.js",
+    "dev2": "tsc -w & nodemon -w dist dist/Controllers/UserController.js",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "lint": "eslint src --ext ts",
