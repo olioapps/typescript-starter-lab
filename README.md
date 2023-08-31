@@ -12,17 +12,15 @@ The purpose of this project is to document the junior developers approach to usi
 
 ## Table of Contents
 1. [Utilizing ChatGPT to create Technical Design Document](#utilizing-chatgpt-to-create-technical-design-document)
-  * [Overview](#overview)
-  * [Media](#media)
-  * [Resources](#resources)
-  * [Notes](#notes)
 2. [Utilizing ChatGPT to create tickets](#utilizing-chatgpt-to-create-tickets)
-  * [Overview](#overview-1)
-  * [Resources](#resources-1)
-  * [Notes](#notes-1)
 3. [Regenerating new tickets for FileSystem](#regenerating-new-tickets-for-filesystem)
-  * [Overview](#overview-2)
-  * [Media](#media-1)
+4. [Implementing FileSystemService Strategy](#implementing-filesystemservice-strategy)
+5. [Ticket #105: Test Express Routes](#ticket-105-test-express-routes)
+6. [Integrating FileSystemService with UserAPIService](#integrating-filesystemservice-with-userapiservice)
+7. [Create UserProvider](#create-userprovider)
+8. [#112 Connect Express to UserProvider](#112-connect-express-to-userprovider)
+9. [Understanding FileSystemService](#understanding-filesystemservice)
+10. [Overall Thoughts on Using AI](#overall-thoughts-on-using-ai)
   
 
 ## Utilizing ChatGPT to create Technical Design Document
@@ -182,4 +180,30 @@ Used co-pilot
 -used copilot to refactor UserController to use providers
 -using cURL to test endpoints now that the controller uses the providers but running into an issue of needing to instantiate UserAPI, asking chatGPT for help
 
+## Understanding FileSystemService
 
+### Overview
+`fileSystemService.ts` was written by using the ticket acceptance criteria that ChatGPT wrote and plugging them in as comments for Copilot to write the actual code. However, this means that as junior devs we don't necessarily understand what the code is doing since we haven't used File System before. This section is to figure out what the specific code does by querying ChatGPT
+
+### Resources
+1. [Out of context ChatGPT convo](https://chat.openai.com/share/ca9e7070-1ea1-40a8-b897-8d4d7a49bf76)  
+2. [Asking how to implement testing in context](https://chat.openai.com/share/1194e074-9466-4978-9833-d54151c80935)
+
+### Notes
+- Two different query strategies: Sarah is asking for more information on the functions within the context of our larger ongoing conversation (the one with the tech doc) and Emma is asking outside of the larger context in a new conversation.
+- Sarah's 1st query: please explain in great detail what the function readAllUserDataFiles does
+- Sarah's 2nd query: what ultimately gets returned from this function
+
+
+## Media
+Results of Sarah's 1st Query:
+![line by line explanation of readAllUserDataFiles](./assets/img/readAllUserDataFiles_explanation.png)
+
+Results of Sarah's 2nd Query:
+![what gets returned from readAllUserDataFiles](./assets/img/readAllUserDataFiles_return.png)
+
+# Overall Thoughts on Using AI
+
+- We noticed that giving chatGPT the high level assignment, it scaffolded an architecture that was a helpful jumping off point but that we ultimately strayed from. We had it write out the initial tickets and then over time realized that many of the tickets were not helpful and we did not use them. As we got further and further into the project, we started writing our own tickets and creating our own direction. 
+- It it more helpful to use chatGPT for smaller, more pointed questions.
+- It was, however, helpful to have a running conversation with chatGPT where it had an understanding of the context of the project and could answer questions based on that context.

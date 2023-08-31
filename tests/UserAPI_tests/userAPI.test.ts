@@ -1,6 +1,11 @@
-// import { UserAPI } from "../../Services/userAPIService";
+import { UserAPI } from "../../Services/userAPIService";
 // import { userRepo, newUser } from "./mockdata";
 
+describe("UserAPI constructor", () => {
+  it("should ", () => {
+    expect(true).toBeTruthy();
+  });
+});
 // describe("UserAPI constructor", () => {
 //   it("should instantiate an instance of UserAPI without user repository", () => {
 //     const newUserApi = new UserAPI();
