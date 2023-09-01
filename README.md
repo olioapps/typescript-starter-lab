@@ -233,13 +233,28 @@ Used co-pilot
 - We were trying to implement a mock implementation of the filesystemservice, but that was very confusing for us, so we queried chatGPT to help us create a setup and tear down that went directly to the data file.
 - Copilot surprisingly did not totally understand the context of the User shape, and in retrospect we didn't give a lot of comments beside the acceptance criteria.
 
-## Media
+### Media
 
 Results of Sarah's 1st Query:
 ![line by line explanation of readAllUserDataFiles](./assets/img/readAllUserDataFiles_explanation.png)
 
 Results of Sarah's 2nd Query:
 ![what gets returned from readAllUserDataFiles](./assets/img/readAllUserDataFiles_return.png)
+
+## Testing FileSystemService with AI
+
+### Overview
+We moved forward with writing tests for FileSystemService using combination of ChatGPT and Copilot
+
+### Resources
+[out of context testing query](https://chat.openai.com/share/e1181cce-54ba-4da2-a0df-4428cd699b32)
+[contextual testing query](https://chat.openai.com/share/c783a0a8-8ff3-4c6f-a704-3c0d1da1b05d)
+
+### Notes
+- Overall process was to go between ChatGPT and Copilot. ChatGPT would write a ticket, we would copy and paste the acceptance criteria into the test file as comments, and then Copilot would write the test. The tests Copilot wrote did not work, so we queried ChatGPT further, adjusting the code with each iteration.
+- Once a working iteration for a test for write user data was written, it was very straight forward for coPilot to write passing tests for the other functions, so the rest of the methods were written and tested very rapidly (in about 10 minutes for all other tests).
+
+### Notes
 
 # Overall Thoughts on Using AI
 
