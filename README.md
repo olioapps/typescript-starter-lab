@@ -267,6 +267,7 @@ We moved forward with writing tests for FileSystemService using combination of C
 - Overall process was to go between ChatGPT and Copilot. ChatGPT would write a ticket, we would copy and paste the acceptance criteria into the test file as comments, and then Copilot would write the test. The tests Copilot wrote did not work, so we queried ChatGPT further, adjusting the code with each iteration.
 - Once a working iteration for a test for write user data was written, it was very straight forward for coPilot to write passing tests for the other functions, so the rest of the methods were written and tested very rapidly (in about 10 minutes for all other tests).
 
+
 ## Writing tests for UserAPIService with AI
 
 ### Overview
