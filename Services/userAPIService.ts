@@ -8,7 +8,7 @@ export interface IdAwareUser extends User {
   readonly id: string;
 }
 
-interface FileSystemService {
+export interface FileSystemService {
   readAllUserDataFiles(): Promise<Record<string, User>>;
   readUserDataFile(userId: string): Promise<User>;
   writeUserDataFile(user: IdAwareUser): Promise<IdAwareUser>;
