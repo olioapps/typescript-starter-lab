@@ -23,7 +23,8 @@ The purpose of this project is to document the junior developers approach to usi
 9. [Understanding FileSystemService](#understanding-filesystemservice)
 10. [Writing further tests with ChatGPT](#writing-further-tests-with-chatgpt)
 11. [Testing FileSystemService with AI](#testing-filesystemservice-with-ai)
-12. [Overall Thoughts on Using AI](#overall-thoughts-on-using-ai)
+12. [Writing tests for UserAPIService with AI](#writing-tests-for-userapiservice-with-ai)
+13. [Overall Thoughts on Using AI](#overall-thoughts-on-using-ai)
 
 ## Utilizing ChatGPT to create Technical Design Document
 
