@@ -100,4 +100,31 @@ describe("fileSystemService.updateUserDataFile", () => {
   });
 });
 
+describe("fileSystemService.deleteUserDataFile", () => {
+  const dataDir = path.join(__dirname, "../../data");
+
+  beforeEach(async () => {
+    await fs.writeFile(
+      path.join(dataDir, "snale.json"),
+      JSON.stringify({ name: "test1", age: 34, favColor: "vole", id: "snale" }),
+      () => {}
+    );
+  });
+
+  afterEach(async () => {
+    await fs.unlink(path.join(dataDir, "snale.json"), () => {});
+  });
+
+  it("should delete a file in the data directory", async () => {
+    const user = await fileSystemService.deleteUserDataFile("snale");
+    expect(user).toEqual("snale");
+  });
+
+  it("should throw an error if the file does not exist", async () => {
+    await expect(
+      fileSystemService.deleteUserDataFile("snail")
+    ).rejects.toThrow();
+  });
+});
+
 
