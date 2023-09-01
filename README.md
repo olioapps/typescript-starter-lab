@@ -241,8 +241,22 @@ Results of Sarah's 1st Query:
 Results of Sarah's 2nd Query:
 ![what gets returned from readAllUserDataFiles](./assets/img/readAllUserDataFiles_return.png)
 
+## Writing further tests with ChatGPT
+
+### Overview
+After spending all afternoon using co-pilot and chatGPT to write the first test for fileSystemService, it went much smoother to write the rest of the tests. I was able to understand the generated code much better than the first go-around
+
+### Resources
+[Conversationg with chatGPT](https://chat.openai.com/share/fc90871e-baeb-42eb-8b42-6a9b25d32cfd)
+
+### Notes
+- Once again, generated some tickets with chatGPT and then copy and pasted the acceptance criteria into the test file as comments. 
+- Then I had co-pilot generate the rest of the tests
+
 # Overall Thoughts on Using AI
 
 - We noticed that giving chatGPT the high level assignment, it scaffolded an architecture that was a helpful jumping off point but that we ultimately strayed from. We had it write out the initial tickets and then over time realized that many of the tickets were not helpful and we did not use them. As we got further and further into the project, we started writing our own tickets and creating our own direction.
 - It it more helpful to use chatGPT for smaller, more pointed questions.
 - It was, however, helpful to have a running conversation with chatGPT where it had an understanding of the context of the project and could answer questions based on that context.
+
+
