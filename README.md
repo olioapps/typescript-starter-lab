@@ -21,7 +21,9 @@ The purpose of this project is to document the junior developers approach to usi
 7. [Create UserProvider](#create-userprovider)
 8. [#112 Connect Express to UserProvider](#112-connect-express-to-userprovider)
 9. [Understanding FileSystemService](#understanding-filesystemservice)
-10. [Overall Thoughts on Using AI](#overall-thoughts-on-using-ai)
+10. [Writing further tests with ChatGPT](#writing-further-tests-with-chatgpt)
+11. [Testing FileSystemService with AI](#testing-filesystemservice-with-ai)
+12. [Overall Thoughts on Using AI](#overall-thoughts-on-using-ai)
 
 ## Utilizing ChatGPT to create Technical Design Document
 
