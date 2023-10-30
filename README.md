@@ -1,6 +1,7 @@
-# typescript-starter-lab
-* Directions will be given after getting this envrionment set up
+# User API: Enhanced
+###### A Typescript Starter Lab Project
 
+## Environment / Setup
 ### Testing
 tsc and jest should be run in different terminal windows
 ```T1
@@ -22,3 +23,41 @@ yarn tsc --watch
 yarn nodemon -w dist dist/ts_playground.js
 ```
 * Running these two commands in terminals will let tsc watch for changes to any file, and then nodemon will restart and run any compiled code from ts_playground.js
+
+## Lab Overview:
+Use Chat GPT and/or other AI tools to implement a basic 'User' CRUD API.
+
+How and when to leverage AI during different development stages is TBD at the time this project is assigned
+
+---
+
+## Technical/Functional Requirements
+
+The API should include the following architectural features:
+### Express server
+The server will provide required routes and handlers for CRUD requests
+
+### UserApi Class object
+A UserApi class object will instantiated to handle CRUD operations.
+
+Required methods:
+- addUser
+- deleteUserById
+- updateUserById
+- getUserById
+
+The 'User' object should contain types for fist name, last name, age, and favorite color (optional)
+
+### Persistent Data
+Use File System to create, update, and delete persisted User resources.
+
+### Data Access Layer
+The 'UserApi' must interact with a data access layer (DAL).
+
+### Route 'Provider' architecture
+Express route handlers should delegate their responsibilities to a library of 'provider' or 'handler' functions.
+
+These functions directly invoke the UserApi to perform requested actions
+
+### Tests (Jest)
+The testing framework should include tests for all architectural layer, excluding the router
