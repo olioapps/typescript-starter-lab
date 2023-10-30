@@ -33,31 +33,4 @@ How and when to leverage AI during different development stages is TBD at the ti
 
 ## Technical/Functional Requirements
 
-The API should include the following architectural features:
-### Express server
-The server will provide required routes and handlers for CRUD requests
-
-### UserApi Class object
-A UserApi class object will instantiated to handle CRUD operations.
-
-Required methods:
-- addUser
-- deleteUserById
-- updateUserById
-- getUserById
-
-The 'User' object should contain types for fist name, last name, age, and favorite color (optional)
-
-### Persistent Data
-Use File System to create, update, and delete persisted User resources.
-
-### Data Access Layer
-The 'UserApi' must interact with a data access layer (DAL).
-
-### Route 'Provider' architecture
-Express route handlers should delegate their responsibilities to a library of 'provider' or 'handler' functions.
-
-These functions directly invoke the UserApi to perform requested actions
-
-### Tests (Jest)
-The testing framework should include tests for all architectural layer, excluding the router
+{TO BE SUPPLIED BY DEV}
